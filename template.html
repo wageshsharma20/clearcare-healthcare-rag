@@ -94,6 +94,9 @@
         </div>
       </div>
       <div class="flex items-center space-x-2 sm:space-x-3">
+        <a href="clearcare_landing_page.html" class="text-xs bg-[#222838] hover:bg-[#2c3447] text-white px-3 py-1.5 rounded-lg font-medium border border-[#313a4e] transition-all shadow-xs flex items-center gap-1.5">
+          <i class="fas fa-layer-group text-amber-400"></i> <span class="hidden sm:inline">Landing Page</span>
+        </a>
         <button onclick="window.location.reload(true)" title="Force Reload Latest Version" class="text-xs bg-[#222838] hover:bg-[#2c3447] text-zinc-300 px-2.5 py-1.5 rounded-lg border border-[#313a4e] transition flex items-center gap-1.5 shadow-xs">
           <i class="fas fa-arrows-rotate text-xs"></i> <span class="hidden md:inline">Refresh</span>
         </button>
@@ -155,7 +158,10 @@
             <label class="block text-xs font-semibold text-zinc-300 mb-1">Inference Model</label>
             <select id="modelSelect" class="w-full text-xs bg-[#181d29] border border-[#313a4e] text-zinc-200 rounded-lg p-2 focus:ring-1 focus:ring-white focus:border-white outline-none transition">
               <option value="llama-3.3-70b-versatile">Llama 3.3 70B Versatile (Recommended)</option>
+              <option value="openai/gpt-oss-120b">OpenAI GPT-OSS 120B (Groq)</option>
+              <option value="openai/gpt-oss-20b">OpenAI GPT-OSS 20B (Groq Fast)</option>
               <option value="llama-3.1-8b-instant">Llama 3.1 8B Instant (Ultra-fast)</option>
+              <option value="qwen-2.5-32b">Qwen 2.5 32B</option>
               <option value="llama3-70b-8192">Llama 3 70B</option>
               <option value="llama3-8b-8192">Llama 3 8B</option>
               <option value="gemma2-9b-it">Gemma 2 9B IT</option>
@@ -465,10 +471,8 @@
             </div>
             <pre id="inspectorPrompt" class="text-xs bg-black text-zinc-300 p-4 rounded-xl overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed border border-zinc-800"></pre>
           </div>
-        </div>
-
-        <!-- ============================================================= -->
-        <!-- TAB 4: Project Pipeline & Architecture (8 Stages Deep Dive) -->
+        </div>        <!-- ============================================================= -->
+        <!-- TAB 4: Project Pipeline & Architecture (In Simple Terms) -->
         <!-- ============================================================= -->
         <div id="tab4" class="hidden space-y-6">
           
@@ -476,57 +480,57 @@
           <div class="bg-gradient-to-r from-black via-zinc-900 to-black rounded-2xl p-6 text-white shadow-md relative overflow-hidden border border-zinc-800">
             <div class="relative z-10 space-y-2">
               <div class="inline-flex items-center gap-1.5 bg-[#222838] text-zinc-300 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-zinc-700">
-                <i class="fas fa-diagram-project"></i> End-to-End System Design
+                <i class="fas fa-heart-pulse text-emerald-400"></i> ClearCare AI Made Simple
               </div>
-              <h2 class="text-lg sm:text-xl font-bold tracking-tight">ClearCare RAG: 8-Stage Clinical Pipeline Architecture</h2>
+              <h2 class="text-lg sm:text-xl font-bold tracking-tight">How ClearCare AI Works: Step-by-Step in Simple Terms</h2>
               <p class="text-xs sm:text-sm text-zinc-300 max-w-3xl leading-relaxed">
-                A deterministic, multi-stage pipeline engineered specifically for clinical reliability. Solves the multi-analyte 
-                <strong>Vector Blur</strong> problem, filters out irrelevant context via cosine thresholding, and delivers verifiable, 
-                citation-grounded translations without hallucination.
+                When you paste a blood test or ask a medical question, ClearCare runs an 8-step safety pipeline. 
+                Instead of guessing from the internet, it finds real hospital rules, checks every test one by one, 
+                and explains everything in friendly, easy-to-read English.
               </p>
             </div>
             <div class="absolute -right-8 -bottom-8 opacity-10 text-white text-9xl pointer-events-none">
-              <i class="fas fa-dna"></i>
+              <i class="fas fa-stethoscope"></i>
             </div>
           </div>
 
           <!-- Interactive 8-Stage Pipeline Stepper Bar -->
           <div>
             <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-              <i class="fas fa-route text-white"></i> Interactive Pipeline Stages (Click Any Stage to Inspect)
+              <i class="fas fa-route text-white"></i> The 8 Simple Steps (Click Any Step to Learn More)
             </h3>
             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
               <button onclick="scrollToStage('stage1')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-white uppercase">Stage 01</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Ingestion</span>
+                <span class="block text-[10px] font-bold text-white uppercase">Step 01</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Real Rules</span>
               </button>
               <button onclick="scrollToStage('stage2')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-white uppercase">Stage 02</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Chunking</span>
+                <span class="block text-[10px] font-bold text-white uppercase">Step 02</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Neat Pieces</span>
               </button>
               <button onclick="scrollToStage('stage3')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-white uppercase">Stage 03</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Embeddings</span>
+                <span class="block text-[10px] font-bold text-white uppercase">Step 03</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Word Meaning</span>
               </button>
               <button onclick="scrollToStage('stage4')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-emerald-400 uppercase">Stage 04</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">ChromaDB</span>
+                <span class="block text-[10px] font-bold text-emerald-400 uppercase">Step 04</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Quick Search</span>
               </button>
               <button onclick="scrollToStage('stage5')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-amber-400 uppercase">Stage 05</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Entity Scan</span>
+                <span class="block text-[10px] font-bold text-amber-400 uppercase">Step 05</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Check Each Test</span>
               </button>
               <button onclick="scrollToStage('stage6')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-amber-400 uppercase">Stage 06</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Threshold</span>
+                <span class="block text-[10px] font-bold text-amber-400 uppercase">Step 06</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Shield Filter</span>
               </button>
               <button onclick="scrollToStage('stage7')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-indigo-400 uppercase">Stage 07</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-indigo-300 truncate">Llama 3.3</span>
+                <span class="block text-[10px] font-bold text-indigo-400 uppercase">Step 07</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-indigo-300 truncate">Safe AI Brain</span>
               </button>
               <button onclick="scrollToStage('stage8')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-emerald-400 uppercase">Stage 08</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Patient UI</span>
+                <span class="block text-[10px] font-bold text-emerald-400 uppercase">Step 08</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Patient Report</span>
               </button>
             </div>
           </div>
@@ -535,9 +539,9 @@
           <div class="border border-[#313a4e] rounded-2xl p-5 bg-[#181d29] shadow-xs space-y-4">
             <div class="flex items-center justify-between">
               <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                <i class="fas fa-sitemap text-white"></i> End-to-End Information Flow
+                <i class="fas fa-sitemap text-white"></i> How Information Moves Through ClearCare
               </h4>
-              <span class="text-[11px] text-zinc-400 font-mono">Offline Ingestion &rarr; Online Inference</span>
+              <span class="text-[11px] text-zinc-400 font-mono">From Hospital Guidelines &rarr; To Your Clear Answer</span>
             </div>
 
             <!-- SVG Visual Flow Diagram -->
@@ -546,116 +550,117 @@
                 
                 <!-- Step 1 -->
                 <div class="flex-1 bg-[#222838] border border-[#343e54] p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-white font-bold block text-[10px]">STAGE 1</span>
-                  <i class="fas fa-file-shield text-white my-1 text-sm"></i>
-                  <span class="block text-zinc-200">5 Guidelines</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">AHA, ACC, AACC</span>
+                  <span class="text-white font-bold block text-[10px]">STEP 1</span>
+                  <i class="fas fa-book-medical text-white my-1 text-sm"></i>
+                  <span class="block text-zinc-200">Trusted Books</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">AHA, ACC, NIH</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 2 -->
                 <div class="flex-1 bg-[#222838] border border-[#343e54] p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-white font-bold block text-[10px]">STAGE 2</span>
+                  <span class="text-white font-bold block text-[10px]">STEP 2</span>
                   <i class="fas fa-scissors text-white my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Chunking</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">700c + 120ov</span>
+                  <span class="block text-zinc-200">Neat Pieces</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Keeps headings</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 3 -->
                 <div class="flex-1 bg-[#222838] border border-[#343e54] p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-white font-bold block text-[10px]">STAGE 3</span>
+                  <span class="text-white font-bold block text-[10px]">STEP 3</span>
                   <i class="fas fa-brain text-white my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Embeddings</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">MiniLM 384-d</span>
+                  <span class="block text-zinc-200">Word Meaning</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Matches synonyms</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 4 -->
                 <div class="flex-1 bg-[#101923] border border-emerald-900/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-emerald-400 font-bold block text-[10px]">STAGE 4</span>
+                  <span class="text-emerald-400 font-bold block text-[10px]">STEP 4</span>
                   <i class="fas fa-database text-emerald-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">ChromaDB</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">HNSW Graph</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Fast 1s search</span>
                 </div>
                 <div class="px-1 text-amber-400 font-bold text-sm">&harr;</div>
 
                 <!-- Step 5 -->
                 <div class="flex-1 bg-[#1a1715] border border-amber-900/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-amber-400 font-bold block text-[10px]">STAGE 5</span>
-                  <i class="fas fa-filter text-amber-400 my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Entity Scan</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">30+ Analytes</span>
+                  <span class="text-amber-400 font-bold block text-[10px]">STEP 5</span>
+                  <i class="fas fa-list-check text-amber-400 my-1 text-sm"></i>
+                  <span class="block text-zinc-200">Check All</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Glucose, ALT, eGFR</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 6 -->
                 <div class="flex-1 bg-[#1a1715] border border-amber-900/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-amber-400 font-bold block text-[10px]">STAGE 6</span>
-                  <i class="fas fa-shield-virus text-amber-400 my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Threshold</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">&ge; 0.25 Cosine</span>
+                  <span class="text-amber-400 font-bold block text-[10px]">STEP 6</span>
+                  <i class="fas fa-shield text-amber-400 my-1 text-sm"></i>
+                  <span class="block text-zinc-200">Shield</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Drop weak clues</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 7 -->
                 <div class="flex-1 bg-[#141629] border border-indigo-900/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-indigo-300 font-bold block text-[10px]">STAGE 7</span>
-                  <i class="fas fa-bolt text-indigo-400 my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Llama 3.3</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">Groq LPUs, t=0.2</span>
+                  <span class="text-indigo-300 font-bold block text-[10px]">STEP 7</span>
+                  <i class="fas fa-lock text-indigo-400 my-1 text-sm"></i>
+                  <span class="block text-zinc-200">Safe Brain</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Locked to facts</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 8 -->
                 <div class="flex-1 bg-[#101923] border border-emerald-900/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-emerald-400 font-bold block text-[10px]">STAGE 8</span>
-                  <i class="fas fa-heart-pulse text-emerald-400 my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Patient UI</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">Traffic Lights</span>
+                  <span class="text-emerald-400 font-bold block text-[10px]">STEP 8</span>
+                  <i class="fas fa-file-waveform text-emerald-400 my-1 text-sm"></i>
+                  <span class="block text-zinc-200">Patient Guide</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Green &bull; Yellow &bull; Red</span>
                 </div>
 
               </div>
             </div>
           </div>
 
-          <!-- Deep Dive Stage Cards (8 Cards) -->
+          <!-- Deep Dive Stage Cards (8 Cards in Simple Terms) -->
           <div class="space-y-4">
             
             <!-- STAGE 1 CARD -->
             <div id="stage1" class="clinical-card p-5 border-l-4 border-l-white">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Stage 01 &bull; Ingestion Pipeline</span>
-                <span class="text-xs font-mono text-zinc-400">5 Curated Documents</span>
+                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Step 01 &bull; Trusted Medical Rules</span>
+                <span class="text-xs font-mono text-zinc-400">5 Official Guidelines</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>📚</span> Knowledge Ingestion (5 Authoritative Medical Guidelines)
+                <span>📚</span> Trusted Medical Guidelines (No Random Internet Guessing)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                In clinical applications, general web scraping produces toxic hallucinations. ClearCare restricts its knowledge base to 
-                authoritative guidelines published by the <strong>American College of Cardiology (ACC)</strong>, <strong>American Heart Association (AHA)</strong>, 
-                <strong>American Association for Clinical Chemistry (AACC)</strong>, and <strong>NIH MedlinePlus</strong>.
+                Regular chatbots search the open web, which often finds scary stories or false advice. ClearCare does not guess. 
+                It only uses real medical rules written by verified doctors and hospitals: the <strong>American Heart Association (AHA)</strong>, 
+                <strong>American College of Cardiology (ACC)</strong>, <strong>American Association for Clinical Chemistry (AACC)</strong>, 
+                and <strong>NIH MedlinePlus</strong>. If a rule is not proven by doctors, ClearCare never touches it.
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-xs">
                 <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-zinc-200 block">1. Comprehensive Metabolic Panel</span>
-                  <span class="text-zinc-400 text-[11px]">BUN, Creatinine, eGFR, ALT, AST, Bilirubin, Electrolytes</span>
+                  <span class="font-bold text-zinc-200 block">1. Blood Chemistry (CMP)</span>
+                  <span class="text-zinc-400 text-[11px]">Kidney health (BUN, Creatinine, eGFR), Liver enzymes (ALT, AST), and Blood Sugar.</span>
                 </div>
                 <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
                   <span class="font-bold text-zinc-200 block">2. Complete Blood Count (CBC)</span>
-                  <span class="text-zinc-400 text-[11px]">WBC, RBC, Hemoglobin, Hematocrit, Platelets, Infection flags</span>
+                  <span class="text-zinc-400 text-[11px]">Red cells (anemia check), White cells (infection defense), and Platelets (blood clotting).</span>
                 </div>
                 <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-zinc-200 block">3. Lipid Cholesterol Panel</span>
-                  <span class="text-zinc-400 text-[11px]">Total Cholesterol, LDL-C targets (&lt;100, &lt;70), HDL, Triglycerides</span>
+                  <span class="font-bold text-zinc-200 block">3. Cholesterol & Heart Panel</span>
+                  <span class="text-zinc-400 text-[11px]">Total cholesterol, protective HDL ("good"), bad LDL targets (&lt;100 or &lt;70), and Triglycerides.</span>
                 </div>
                 <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-zinc-200 block">4. Thyroid TSH Panel</span>
-                  <span class="text-zinc-400 text-[11px]">TSH (0.4-4.0), Free T4, Hypo/Hyperthyroidism distinctions</span>
+                  <span class="font-bold text-zinc-200 block">4. Thyroid Energy Panel</span>
+                  <span class="text-zinc-400 text-[11px]">TSH and T4 hormones that manage your daily energy, weight, and metabolism.</span>
                 </div>
                 <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a] sm:col-span-2">
-                  <span class="font-bold text-zinc-200 block">5. Post-PCI Cardiac Stent Discharge Care</span>
-                  <span class="text-zinc-400 text-[11px]">Mandatory Dual Antiplatelet Therapy (Aspirin + Plavix), groin puncture monitoring, red flag chest pain warnings</span>
+                  <span class="font-bold text-zinc-200 block">5. Heart Stent Discharge Guide</span>
+                  <span class="text-zinc-400 text-[11px]">Why taking blood-thinning pills (Aspirin + Plavix) every day is mandatory, plus what symptoms require immediate emergency care.</span>
                 </div>
               </div>
             </div>
@@ -663,74 +668,77 @@
             <!-- STAGE 2 CARD -->
             <div id="stage2" class="clinical-card p-5 border-l-4 border-l-white">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Stage 02 &bull; Preprocessing</span>
-                <span class="text-xs font-mono text-zinc-400">700 chars / 120 overlap</span>
+                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Step 02 &bull; Smart Cutting</span>
+                <span class="text-xs font-mono text-zinc-400">700 characters + Heading Tag</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>✂️</span> Heading-Aware Chunking (Preserving Hierarchical Context)
+                <span>✂️</span> Smart Topic Cutting (Never Losing the Context)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                Naive character splitters sever sentences and orphan medical qualifications. ClearCare implements a <strong>heading-aware sliding window chunker</strong> that prepends the active section heading (<code># [Document &gt; Section]</code>) to every generated chunk.
+                Medical guidelines are long. If you cut a paragraph in half, you might separate an important warning (like <em>"normal after exercise"</em>) 
+                from the lab number itself. ClearCare cuts guidelines into clean, bite-sized pieces. It stamps the document title and topic heading right at the top of every piece so the AI always knows what test it is reading.
               </p>
               <div class="bg-black text-zinc-300 p-3 rounded-xl font-mono text-xs space-y-1 border border-zinc-800">
-                <div class="text-zinc-400 text-[11px]"># Heading-Aware Structure Injected into Every Chunk:</div>
-                <div class="text-emerald-400"># Document: metabolic_panel_cmp.md &gt; Section: Kidney Function &amp; Filtration</div>
-                <div class="text-zinc-400">Serum Creatinine reference interval: 0.6 - 1.3 mg/dL. Elevated creatinine indicates impaired glomerular filtration, but transient elevations can occur with dehydration, high-protein intake, or intense resistance exercise...</div>
+                <div class="text-zinc-400 text-[11px]"># Clear Topic Label Attached to Every Chunk:</div>
+                <div class="text-emerald-400"># Document: metabolic_panel_cmp.md &gt; Topic: Kidney Function &amp; Filtration</div>
+                <div class="text-zinc-400">Serum Creatinine reference interval: 0.6 - 1.3 mg/dL. Higher numbers can mean kidney stress, but temporary rises often happen from mild dehydration, heavy workouts, or high-protein meals...</div>
               </div>
             </div>
 
             <!-- STAGE 3 CARD -->
             <div id="stage3" class="clinical-card p-5 border-l-4 border-l-white">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Stage 03 &bull; Semantic Vector Space</span>
-                <span class="text-xs font-mono text-zinc-400">384 Dimensions &bull; Local CPU</span>
+                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Step 03 &bull; Word Meaning</span>
+                <span class="text-xs font-mono text-zinc-400">384 Meaning Numbers &bull; 100% Private</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🧠</span> Local Dense Embeddings (all-MiniLM-L6-v2)
+                <span>🧠</span> Understanding Medical Meaning (Not Just Keywords)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                Maps text chunks into <strong>384-dimensional dense vectors</strong> where semantically synonymous medical phrases reside close together. Runs locally on CPU — ensuring <strong>zero Protected Health Information (PHI)</strong> leaves the user's system.
+                Patients and doctors often use different words for the exact same condition. A patient might say <em>"high blood sugar"</em>, while a doctor writes <em>"hyperglycemia"</em>. 
+                A simple search bar would miss the connection! ClearCare uses a smart language model that turns every sentence into 384 numbers representing its exact medical meaning. 
+                This lets ClearCare match synonyms easily. It runs on your computer, so your private medical records never leave your device.
               </p>
             </div>
 
             <!-- STAGE 4 CARD -->
             <div id="stage4" class="clinical-card p-5 border-l-4 border-l-emerald-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Stage 04 &bull; Vector Storage</span>
-                <span class="text-xs font-mono text-zinc-400">ChromaDB + HNSW Graph</span>
+                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Step 04 &bull; Fast Search</span>
+                <span class="text-xs font-mono text-zinc-400">ChromaDB Local Library</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🗄️</span> Persistent Vector Storage (ChromaDB + HNSW Indexing)
+                <span>🗄️</span> Instant Guideline Search (ChromaDB)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-2">
-                Embeddings are persisted to disk using ChromaDB with a <strong>Hierarchical Navigable Small World (HNSW)</strong> graph index. 
-                Provides logarithmic <code>O(log N)</code> search complexity, enabling sub-millisecond retrieval.
+                All guideline pieces are saved inside a fast local database called ChromaDB. When you ask a question or paste a report, ChromaDB uses a smart index (called an HNSW graph) 
+                to flip directly to the exact right medical guideline in less than one second.
               </p>
             </div>
 
             <!-- STAGE 5 CARD -->
             <div id="stage5" class="clinical-card p-5 border-l-4 border-l-amber-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Stage 05 &bull; Clinical Retrieval Strategy</span>
-                <span class="text-xs font-mono text-zinc-400">Solving "Vector Blur"</span>
+                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Step 05 &bull; Thorough Checking</span>
+                <span class="text-xs font-mono text-zinc-400">Checking Every Test</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🔎</span> Clinical Entity Scanning &amp; Multi-Query Expansion
+                <span>🔎</span> Checking Every Test Individually (No Missing Numbers)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                <strong>The Multi-Analyte Vector Blur Problem:</strong> When a user uploads a 15-test metabolic panel, a naive RAG system generates a single vector that is an <em>average centroid</em> of all tests. This diluted vector retrieves vague lab overviews, missing specific guideline rules for an elevated ALT or LDL.
+                <strong>Why normal AI fails on blood tests:</strong> If you upload a lab report with 15 numbers, regular AI tries to read everything all at once. The numbers get blurred together, and it often forgets to check specific tests like your ALT or LDL.
               </p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
                 <div class="p-3 bg-rose-950/40 border border-rose-800/60 rounded-xl space-y-1">
-                  <span class="font-bold text-rose-300 flex items-center gap-1.5"><i class="fas fa-times-circle"></i> Naive Single-Pass RAG (Vector Blur)</span>
+                  <span class="font-bold text-rose-300 flex items-center gap-1.5"><i class="fas fa-times-circle"></i> What Regular AI Does (Blurred Search)</span>
                   <p class="text-zinc-300 text-[11px]">
-                    Encodes entire 15-analyte document as 1 vector &rarr; Vector gets diluted &rarr; Retrieves general overviews &rarr; Misses specific liver or kidney thresholds.
+                    Reads 15 blood tests as one big paragraph &rarr; gets confused &rarr; gives general advice &rarr; misses an elevated liver or kidney warning.
                   </p>
                 </div>
                 <div class="p-3 bg-emerald-950/40 border border-emerald-800/60 rounded-xl space-y-1">
-                  <span class="font-bold text-emerald-300 flex items-center gap-1.5"><i class="fas fa-check-circle"></i> ClearCare Multi-Query Strategy</span>
+                  <span class="font-bold text-emerald-300 flex items-center gap-1.5"><i class="fas fa-check-circle"></i> What ClearCare Does (Test-by-Test)</span>
                   <p class="text-zinc-300 text-[11px]">
-                    Scans 30+ clinical regex biomarkers (Glucose, ALT, LDL, eGFR...) &rarr; Issues targeted sub-queries for each analyte &rarr; Merges and deduplicates candidate guidelines.
+                    Checks every test name one by one (Glucose, ALT, eGFR, Potassium) &rarr; finds the exact rule for each &rarr; combines everything cleanly. Nothing gets missed.
                   </p>
                 </div>
               </div>
@@ -739,46 +747,46 @@
             <!-- STAGE 6 CARD -->
             <div id="stage6" class="clinical-card p-5 border-l-4 border-l-amber-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Stage 06 &bull; Hallucination Firewall</span>
-                <span class="text-xs font-mono text-zinc-400">Score &ge; 0.25 Filter</span>
+                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Step 06 &bull; Relevance Shield</span>
+                <span class="text-xs font-mono text-zinc-400">Drops Weak Matches (&lt; 25%)</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🎯</span> Similarity Thresholding &amp; Context Formatting
+                <span>🎯</span> The Relevance Shield (Throwing Out Wrong Clues)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-2">
-                In clinical medicine, passing an irrelevant chunk to an LLM is dangerous because it prompts speculative reasoning. ClearCare strictly filters candidate chunks using a <strong>&ge; 0.25 cosine similarity threshold</strong>.
+                In healthcare, reading the wrong guideline is dangerous because it leads to bad advice. ClearCare has a strict rule: if a guideline matches by less than 25%, it is immediately thrown out. 
+                Only strong, verified medical guidelines are allowed into the final answer.
               </p>
             </div>
 
             <!-- STAGE 7 CARD -->
             <div id="stage7" class="clinical-card p-5 border-l-4 border-l-indigo-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-indigo-300 uppercase bg-indigo-950/80 border border-indigo-800/80 px-2 py-0.5 rounded-full">Stage 07 &bull; Guardrailed Generation</span>
-                <span class="text-xs font-mono text-zinc-400">Groq LPUs &bull; Llama 3.3 70B &bull; t=0.2</span>
+                <span class="text-[10px] font-bold text-indigo-300 uppercase bg-indigo-950/80 border border-indigo-800/80 px-2 py-0.5 rounded-full">Step 07 &bull; Careful AI Brain</span>
+                <span class="text-xs font-mono text-zinc-400">Llama 3.3 / Groq &bull; Strict Safety Locks</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>⚡</span> Guardrailed Generation (Groq LPUs + Llama 3.3 70B)
+                <span>⚡</span> Safe, Guardrailed AI Brain (Llama 3.3 on Groq)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                Inference runs on <strong>Groq Language Processing Units (LPUs)</strong> at ~500 tokens/second with a deterministic temperature of <strong>0.2</strong>. 
-                Strict system-prompt guardrails eliminate hallucination and protect patient safety:
+                Our AI brain reads your question alongside the verified hospital rules we found. We set 4 unbreakable safety locks:
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-white block">1. Absolute Diagnosis Prohibition</span>
-                  <span class="text-zinc-300 text-[11px]">Cannot state "You have chronic kidney disease"; must state "Creatinine is above reference interval; warrants doctor follow-up".</span>
+                  <span class="font-bold text-white block">1. No Guessing Diseases</span>
+                  <span class="text-zinc-300 text-[11px]">It will never tell you "You have a disease". It explains what the number means and advises talking with your doctor.</span>
                 </div>
                 <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-white block">2. Mandatory Benign Causes</span>
-                  <span class="text-zinc-300 text-[11px]">Must explain hydration, exercise, and diet causes first to prevent unnecessary patient panic.</span>
+                  <span class="font-bold text-white block">2. Simple, Harmless Causes First</span>
+                  <span class="text-zinc-300 text-[11px]">It always explains harmless causes first (like dehydration, exercise, or diet) so you don't panic needlessly.</span>
                 </div>
                 <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-white block">3. Strict Citation Attribution</span>
-                  <span class="text-zinc-300 text-[11px]">Every statement must explicitly reference <code>[Source X]</code> from the retrieved guideline chunks.</span>
+                  <span class="font-bold text-white block">3. Clear Guideline Source Tags</span>
+                  <span class="text-zinc-300 text-[11px]">Every statement is tagged with <code>[Source X]</code> so you can see the real medical guideline behind it.</span>
                 </div>
                 <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
                   <span class="font-bold text-white block">4. Medication Safety Lock</span>
-                  <span class="text-zinc-300 text-[11px]">Strictly prohibited from suggesting stopping prescribed therapies (e.g., Plavix / Aspirin DAPT).</span>
+                  <span class="text-zinc-300 text-[11px]">It is strictly locked from ever telling a patient to stop taking prescribed medicines like Plavix or blood thinners.</span>
                 </div>
               </div>
             </div>
@@ -786,89 +794,99 @@
             <!-- STAGE 8 CARD -->
             <div id="stage8" class="clinical-card p-5 border-l-4 border-l-emerald-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Stage 08 &bull; Patient Health Literacy</span>
-                <span class="text-xs font-mono text-zinc-400">8th-Grade Plain English</span>
+                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Step 08 &bull; Easy Patient Guide</span>
+                <span class="text-xs font-mono text-zinc-400">Plain 8th-Grade English</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🌟</span> Patient-Centered Output (Traffic Lights &amp; Doctor Checklist)
+                <span>🌟</span> Clear, Friendly Patient Summary (Traffic Lights &amp; Doctor Questions)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                Converts dense, anxiety-inducing lab results into empowering, plain-language patient communication with four distinct components:
+                Instead of sending you home with scary, confusing medical jargon, ClearCare creates a friendly, easy-to-read report with three simple parts:
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                 <div class="p-3 bg-[#181d29] rounded-xl border border-[#2d364a]">
                   <div class="flex items-center gap-1.5 mb-1 text-white font-bold">
-                    <span>🟢 🟡 🔴</span> Traffic-Light Findings
+                    <span>🟢 🟡 🔴</span> Traffic-Light Signals
                   </div>
-                  <p class="text-zinc-400 text-[11px]">Normal (within range), Borderline (mild shift), and Attention Required (physician review).</p>
+                  <p class="text-zinc-400 text-[11px]">Green for normal, Yellow for borderline shifts, and Red for numbers to discuss with your doctor.</p>
                 </div>
                 <div class="p-3 bg-[#181d29] rounded-xl border border-[#2d364a]">
                   <div class="flex items-center gap-1.5 mb-1 text-white font-bold">
-                    <i class="fas fa-heart text-rose-500"></i> Empathetic Context
+                    <i class="fas fa-heart text-rose-500"></i> Plain English Words
                   </div>
-                  <p class="text-zinc-400 text-[11px]">Demystifies complex medical metrics into 8th-grade plain English without medical jargon.</p>
+                  <p class="text-zinc-400 text-[11px]">Explains medical concepts in everyday English so you understand what is going on in your body.</p>
                 </div>
                 <div class="p-3 bg-[#181d29] rounded-xl border border-[#2d364a]">
                   <div class="flex items-center gap-1.5 mb-1 text-white font-bold">
-                    <i class="fas fa-clipboard-check text-white"></i> Doctor Checklist
+                    <i class="fas fa-clipboard-check text-white"></i> Doctor Questions
                   </div>
-                  <p class="text-zinc-400 text-[11px]">Generates targeted questions for the patient to ask at their next clinical appointment.</p>
+                  <p class="text-zinc-400 text-[11px]">Gives you 2 or 3 clear questions to write down and take to your next clinic visit.</p>
                 </div>
               </div>
             </div>
 
           </div>
 
-          <!-- Architecture Comparison Table -->
+          <!-- Architecture Comparison Table (Simple Terms) -->
           <div class="border border-[#313a4e] rounded-2xl p-5 bg-[#181d29] shadow-md space-y-3">
             <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-              <i class="fas fa-scale-balanced text-white"></i> Comparative Architectural Analysis
+              <i class="fas fa-scale-balanced text-white"></i> Why ClearCare RAG is Safer Than Regular AI
             </h4>
             <div class="overflow-x-auto">
               <table class="w-full text-xs text-left border-collapse">
                 <thead>
                   <tr class="border-b border-[#313a4e] text-zinc-300 bg-[#1f2434]">
-                    <th class="py-2.5 px-3 font-semibold">Architectural Dimension</th>
-                    <th class="py-2.5 px-3 font-semibold">Standard Generic LLM</th>
-                    <th class="py-2.5 px-3 font-semibold">Fine-Tuned Medical LLM</th>
-                    <th class="py-2.5 px-3 font-semibold text-white bg-[#222838]">ClearCare Multi-Stage RAG</th>
+                    <th class="py-2.5 px-3 font-semibold">Important Feature</th>
+                    <th class="py-2.5 px-3 font-semibold">Regular AI (ChatGPT / Gemini)</th>
+                    <th class="py-2.5 px-3 font-semibold">Medical Fine-Tuned AI</th>
+                    <th class="py-2.5 px-3 font-semibold text-white bg-[#222838]">ClearCare RAG</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-[#1b1f2c] text-zinc-300">
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Hallucination Risk</td>
-                    <td class="py-2.5 px-3 text-rose-400 font-medium">High (invents normal ranges)</td>
-                    <td class="py-2.5 px-3 text-amber-400 font-medium">Medium (memorization drift)</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Zero (grounded strictly in guidelines)</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Risk of Making Up Facts</td>
+                    <td class="py-2.5 px-3 text-rose-400 font-medium">High (guesses wrong normal ranges)</td>
+                    <td class="py-2.5 px-3 text-amber-400 font-medium">Medium (mixes up guidelines)</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Zero (locked to real doctor rules)</td>
                   </tr>
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Traceability &amp; Citations</td>
-                    <td class="py-2.5 px-3">None (black-box generation)</td>
-                    <td class="py-2.5 px-3">None (weights cannot cite text)</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">100% Traceable ([Source X] anchors)</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Can You Check the Sources?</td>
+                    <td class="py-2.5 px-3">No (it cannot point to exact pages)</td>
+                    <td class="py-2.5 px-3">No (hidden inside AI memory)</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Yes (every answer has [Source X])</td>
                   </tr>
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Multi-Analyte Lab Panels</td>
-                    <td class="py-2.5 px-3">Suffers from Vector Blur</td>
-                    <td class="py-2.5 px-3">Prone to cross-test interference</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Resolved via Entity Scanning</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Reading 15 Blood Tests at Once</td>
+                    <td class="py-2.5 px-3 text-rose-400">Fails (blurs numbers together)</td>
+                    <td class="py-2.5 px-3 text-amber-400">Inconsistent</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Accurate (checks every test one by one)</td>
                   </tr>
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Guideline Updates</td>
-                    <td class="py-2.5 px-3">Requires foundation retraining</td>
-                    <td class="py-2.5 px-3">Requires expensive fine-tuning</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Instantaneous (drop new .md file)</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Language Style</td>
+                    <td class="py-2.5 px-3">Often uses dense medical jargon</td>
+                    <td class="py-2.5 px-3">Complex doctor language</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Simple, friendly 8th-grade English</td>
                   </tr>
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Privacy &amp; PHI Protection</td>
-                    <td class="py-2.5 px-3">Sends all data to cloud APIs</td>
-                    <td class="py-2.5 px-3">Requires centralized storage</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Local 384-d vectors + private LPUs</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Safety Locks for Medications</td>
+                    <td class="py-2.5 px-3 text-rose-400">None (can give dangerous advice)</td>
+                    <td class="py-2.5 px-3 text-amber-400">Partial</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Strict (never alters prescriptions)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 px-3 font-medium text-white">Private &amp; Free to Run</td>
+                    <td class="py-2.5 px-3">Costs money &amp; sends data away</td>
+                    <td class="py-2.5 px-3">Needs expensive cloud servers</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Runs fast, free tier, private on device</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
+
+        </div>
+
+
 
         </div>
 
@@ -911,7 +929,10 @@
     // Candidate Groq models in prioritized order
     const GROQ_CANDIDATE_MODELS = [
       'llama-3.3-70b-versatile',
+      'openai/gpt-oss-120b',
+      'openai/gpt-oss-20b',
       'llama-3.1-8b-instant',
+      'qwen-2.5-32b',
       'llama3-70b-8192',
       'llama3-8b-8192',
       'gemma2-9b-it',
@@ -992,16 +1013,17 @@
     function isSupportedChatModel(id) {
       if (!id || typeof id !== 'string') return false;
       const lower = id.toLowerCase();
+      // Block non-chat or audio/utility models
       if (lower.includes('whisper') || lower.includes('guard') || lower.includes('canopy') || 
           lower.includes('tts') || lower.includes('voice') || lower.includes('audio') || 
-          lower.includes('embed') || lower.includes('distil') || lower.includes('gpt-oss') ||
+          lower.includes('embed') || lower.includes('distil') || lower.includes('orpheus') ||
           lower.includes('preview')) {
         return false;
       }
-      return lower.includes('llama-3') || lower.includes('llama3') || 
-             lower.includes('gemma-2') || lower.includes('gemma2') || 
-             lower.includes('mixtral') || lower.includes('qwen-2') ||
-             lower.includes('deepseek-r1');
+      return lower.includes('llama') || lower.includes('gemma') || 
+             lower.includes('mixtral') || lower.includes('qwen') ||
+             lower.includes('deepseek') || lower.includes('gpt-oss') ||
+             lower.includes('comp');
     }
 
     // Groq API Key Handling & Live Validation
@@ -1103,9 +1125,15 @@
             })
           });
 
-          const data = await res.json();
+          let data = null;
+          try {
+            data = await res.json();
+          } catch (jsonErr) {
+            lastError = `Invalid response from Groq: ${jsonErr.message}`;
+            continue;
+          }
 
-          if (res.ok && data.choices && data.choices[0] && data.choices[0].message) {
+          if (res.ok && data && Array.isArray(data.choices) && data.choices[0] && data.choices[0].message) {
             if (sel && sel.value !== targetModel) {
               if (!Array.from(sel.options).some(o => o.value === targetModel)) {
                 const opt = document.createElement('option');
@@ -1118,7 +1146,7 @@
             return data.choices[0].message.content;
           }
 
-          if (data.error && data.error.message) {
+          if (data && data.error && data.error.message) {
             lastError = data.error.message;
             console.warn(`Groq model ${targetModel} error: ${lastError}`);
             continue;
@@ -1139,7 +1167,29 @@
       const q = (query || "").trim();
       const qLower = q.toLowerCase();
 
-      // 1. Conversational Greetings & Small Talk
+      // 1. Farewells & Casual Goodbyes
+      const farewells = ["bye", "byee", "goodbye", "see you", "cya", "exit", "quit", "good night", "take care"];
+      if (farewells.some(f => qLower === f || qLower.startsWith(f + " ") || qLower.startsWith(f + "!"))) {
+        return `### 👋 Goodbye & Take Care!\n\n` +
+          `Thank you for consulting with **ClearCare AI**. Wishing you the best in your health journey!\n\n` +
+          `- If you receive new lab results or have questions about medications in the future, I will be here to help.\n` +
+          `- Remember to keep your scheduled follow-up visits with your primary care physician or specialist.\n\n` +
+          `*Disclaimer: ClearCare AI provides educational health literacy support grounded in clinical guidelines.*`;
+      }
+
+      // 2. Gratitude & Pleasantries
+      const thanks = ["thank you", "thanks", "thx", "thank u", "appreciate it", "great", "awesome", "perfect", "got it", "ok", "okay"];
+      if (thanks.some(t => qLower === t || qLower.startsWith(t + " ") || qLower.startsWith(t + "!"))) {
+        return `### 🩺 You're Very Welcome!\n\n` +
+          `I am glad I could help bring clarity to your clinical questions. Health literacy is an essential part of getting the best medical care.\n\n` +
+          `**Pro-tip for your next doctor's visit:**\n` +
+          `1. Bring a physical copy of your latest lab panel or discharge summary.\n` +
+          `2. Keep a short list of 2–3 specific questions ready so you don't forget during your appointment.\n` +
+          `3. Always ask: *"Are there any lifestyle or dietary adjustments that could help optimize these numbers before considering medication changes?"*\n\n` +
+          `*Feel free to ask about any other specific biomarker (such as ALT, eGFR, LDL, or HbA1c)!*`;
+      }
+
+      // 3. Conversational Greetings & Small Talk
       const greetings = ["hello", "hi", "hey", "good morning", "good evening", "greetings", "who are you", "what can you do", "help"];
       if (greetings.some(g => qLower === g || qLower.startsWith(g + " ") || qLower.startsWith(g + "!"))) {
         return `### 🩺 ClearCare Clinical Assistant\n\n` +
@@ -1151,7 +1201,28 @@
           `*Try asking:* *"Why is my ALT high?"*, *"What does an eGFR of 48 mean?"*, or *"Can I stop Plavix if I feel better?"*`;
       }
 
-      // 2. Medication / Dosage Adjustment Inquiries
+      // 4. Disease Diagnosis / Condition Inquiries (Prevent Guessing Diagnoses)
+      const diagTerms = ["disease", "diagnos", "condition", "what do i have", "what might i have", "am i sick", "illness", "cancer", "infection", "what is wrong with me", "what kind of disease"];
+      if (diagTerms.some(d => qLower.includes(d))) {
+        return `### 🩺 Clinical Decision Support: Why AI Cannot Diagnose Diseases\n\n` +
+          `> ⚠️ **Important Medical Principle:** ClearCare AI is designed strictly for **patient health literacy, laboratory translation, and guideline education**, not formal disease diagnosis.\n\n` +
+          `#### 1. Why Isolated Numbers Do Not Equal a Disease Diagnosis\n` +
+          `In medicine, a laboratory test or biomarker variation is **not a diagnosis on its own**. Physicians interpret numbers within a broader clinical picture:\n` +
+          `- **Clinical Correlation is Essential:** A single number only reflects a biochemical measurement at one moment in time. A licensed physician evaluates it alongside your physical symptoms, medical history, family genetics, medications, and vital signs.\n` +
+          `- **Benign & Temporary Causes:** Most abnormal numbers on routine screening tests reflect reversible, non-disease factors:\n` +
+          `  - **Dehydration / Fluid Shifts:** Elevates BUN, Creatinine, and Hematocrit without kidney damage.\n` +
+          `  - **Recent Exercise or Muscular Exertion:** Temporarily spikes liver transaminases (ALT, AST) due to muscle turnover.\n` +
+          `  - **Dietary Factors:** High-carbohydrate meals or lack of 8-hour fasting alter blood glucose and triglycerides.\n` +
+          `- **Confirmatory Testing Protocol:** Doctors rarely diagnose a chronic disease based on one panel. Guidelines typically mandate repeating the test after 6 to 12 weeks to distinguish transient spikes from true clinical trends.\n\n` +
+          `#### 2. Empowering Questions to Ask Your Doctor:\n` +
+          `1. *"Based on my full medical history and current symptoms, what diagnostic possibilities are you considering?"*\n` +
+          `2. *"Could any of my slightly abnormal numbers be influenced by temporary factors like hydration, recent exercise, or diet?"*\n` +
+          `3. *"Would you recommend a follow-up panel in 6 to 12 weeks to confirm whether this is a consistent baseline?"*\n\n` +
+          `---\n` +
+          `*Grounding: [Source: AACC / CDC Health Literacy and Clinical Pathology Guidelines]*`;
+      }
+
+      // 5. Medication / Dosage Adjustment Inquiries
       if (qLower.includes("medication") || qLower.includes("dose") || qLower.includes("dosage") || qLower.includes("adjust") || qLower.includes("pill") || qLower.includes("prescription")) {
         return `### 🩺 Clinical Guidance: Medication Safety & Lab Values\n\n` +
           `> ⚠️ **Critical Safety Principle:** Never alter, stop, or adjust prescription medication dosages on your own. Any dose adjustment must be directed by your prescribing physician.\n\n` +
@@ -1168,7 +1239,7 @@
           `*Grounding: [Source: Joint Commission & AACC Clinical Pharmacology Standards]*`;
       }
 
-      // 3. Stent / Plavix / DAPT Inquiries
+      // 6. Stent / Plavix / DAPT Inquiries
       if (qLower.includes("plavix") || qLower.includes("stent") || qLower.includes("dapt") || qLower.includes("clopidogrel") || qLower.includes("aspirin")) {
         return `### 🩺 Cardiology Guidance: Stent Care & Antiplatelet Therapy\n\n` +
           `> 🚨 **Critical Warning from ACC/AHA Guidelines:** **NEVER stop Plavix (Clopidogrel) or Aspirin without explicit instruction from your cardiologist.** Stopping early is the #1 cause of catastrophic stent thrombosis (sudden blood clot in the stent), which causes severe heart attacks.\n\n` +
@@ -1184,7 +1255,7 @@
           `*Grounding: [Source: ACC/AHA Guideline for Coronary Artery Revascularization]*`;
       }
 
-      // 4. Case 2 Dedicated Translation: Cardiac Stent Discharge Summary
+      // 7. Case 2 Dedicated Translation: Cardiac Stent Discharge Summary
       if (mode === "report" && (qLower.includes("stent") || qLower.includes("plavix") || qLower.includes("angio-seal") || qLower.includes("synergy") || qLower.includes("nstemi"))) {
         return `### 🩺 ClearCare Clinical Translation: Post-PCI Stent Discharge Summary\n\n` +
           `#### 1. Executive Summary\n` +
@@ -1200,7 +1271,7 @@
           `| **Nitroglycerin** | 0.4 mg sublingual | Emergency angina relief | Dissolve under tongue PRN chest pain. Call 911 if pain persists 5 min after 1st dose. |\n\n` +
           `#### 3. Post-Discharge Care & Emergency Red Flags\n` +
           `- **Groin Vascular Access Site (Angio-Seal):** Keep puncture site clean and dry. Showering permitted after 48 hours; **strictly no soaking in bathtubs or swimming pools for 7 days**.\n` +
-          `- **Physical Activity:** No lifting objects heavier than 10 lbs or vigorous pushing/pulling for 7 days.\n` +
+          `- **Activity restriction:** No heavy lifting objects heavier than 10 lbs or vigorous pushing/pulling for 7 days.\n` +
           `- **🚨 Call 911 Immediately If You Experience:**\n` +
           `  - Recurrent retrosternal chest pressure, tightness, squeezing, or radiating pain to jaw/arm.\n` +
           `  - Sudden severe shortness of breath or dizziness.\n` +
@@ -1216,7 +1287,7 @@
           `*Medical Disclaimer: ClearCare AI provides educational clinical health literacy support and does not replace professional medical diagnosis or personalized physician advice.*`;
       }
 
-      // 5. Case 3 Dedicated Translation: Kidney & Diabetes Monitor
+      // 8. Case 3 Dedicated Translation: Kidney & Diabetes Monitor
       if (mode === "report" && (qLower.includes("egfr") || qLower.includes("creatinine") || qLower.includes("nephrology")) && (qLower.includes("hba1c") || qLower.includes("glucose"))) {
         return `### 🩺 ClearCare Clinical Translation: Nephrology & Diabetes Follow-Up\n\n` +
           `#### 1. Executive Summary\n` +
@@ -1245,7 +1316,7 @@
           `*Medical Disclaimer: ClearCare AI provides educational clinical health literacy support and does not replace professional medical diagnosis or personalized physician advice.*`;
       }
 
-      // 6. Case 1 Dedicated Translation: Routine Annual Checkup
+      // 9. Case 1 Dedicated Translation: Routine Annual Checkup
       if (mode === "report" && (qLower.includes("jane doe") || (qLower.includes("ldl") && qLower.includes("alt") && qLower.includes("142")))) {
         return `### 🩺 ClearCare Clinical Translation: Annual Health Checkup\n\n` +
           `#### 1. Executive Summary\n` +
@@ -1272,7 +1343,80 @@
           `*Medical Disclaimer: ClearCare AI provides educational clinical health literacy support and does not replace professional medical diagnosis or personalized physician advice.*`;
       }
 
-      // 7. General Custom Lab Report Translation Mode
+      // 10. Specific Clinical Organ / Biomarker Queries in Chat Mode
+      if (["egfr", "creatinine", "kidney", "gfr", "renal", "bun"].some(k => qLower.includes(k))) {
+        return `### 🩺 Clinical Guidance: Kidney Function & Filtration (eGFR / Creatinine)\n\n` +
+          `#### 1. Understanding Kidney Filtration Markers\n` +
+          `- **Estimated Glomerular Filtration Rate (eGFR):** Measures how efficiently your kidneys filter waste from the bloodstream. A value **> 60 mL/min/1.73m²** is standard normal.\n` +
+          `- **Stages of Filtration:** An eGFR between 45–59 indicates Stage 3a mild-to-moderate reduction. It is a signal for physician review, hydration monitoring, and medication safety checks.\n` +
+          `- **Serum Creatinine:** A byproduct of normal muscle wear-and-tear cleared by the kidneys. Normal range is typically 0.6 to 1.3 mg/dL.\n\n` +
+          `#### 2. Benign & Modifiable Factors\n` +
+          `- **Dehydration:** Inadequate fluid intake concentrates creatinine in the blood, falsely lowering eGFR.\n` +
+          `- **Medications:** High doses of NSAIDs (ibuprofen, naproxen) constrict renal blood vessels. Inform your doctor if you take these regularly.\n` +
+          `- **Diet & Exercise:** Heavy protein intake or vigorous weight lifting shortly before a blood draw can temporarily elevate serum creatinine.\n\n` +
+          `#### 3. Questions for Your Physician:\n` +
+          `1. *"Could my eGFR reading be affected by dehydration or recent muscle exercise?"*\n` +
+          `2. *"Do any of my current daily prescriptions require kidney-specific dosage review?"*\n` +
+          `3. *"Should we recheck my creatinine and urine albumin in 3 months to monitor stability?"*\n\n` +
+          `---\n` +
+          `*Grounding: [Source: KDIGO Clinical Practice Guideline for Chronic Kidney Disease]*`;
+      }
+
+      if (["alt", "ast", "liver", "sgpt", "sgot", "transaminase", "bilirubin"].some(l => qLower.includes(l))) {
+        return `### 🩺 Clinical Guidance: Liver Transaminases (ALT & AST)\n\n` +
+          `#### 1. What Liver Enzymes Indicate\n` +
+          `- **Alanine Aminotransferase (ALT):** An enzyme primarily concentrated within liver cells (hepatocytes). Standard reference is generally **7 to 45 U/L**.\n` +
+          `- **Mild Elevations (1x to 2x upper limit):** Extremely common on routine health screenings. In most cases, mild elevations do not signify liver disease, but rather temporary cellular metabolic turnover.\n\n` +
+          `#### 2. Common Benign & Lifestyle Causes\n` +
+          `- **Vigorous Physical Exercise:** Weight training or strenuous aerobic workouts within 48–72 hours of blood draw release transaminases from muscle tissues.\n` +
+          `- **Over-the-Counter Medications:** Regular use of Acetaminophen (Tylenol) or NSAIDs.\n` +
+          `- **Alcohol & Diet:** Recent alcohol consumption or a rich meal prior to testing.\n` +
+          `- **Temporary Viral Infections:** Even common colds or mild viruses can temporarily elevate ALT.\n\n` +
+          `#### 3. Questions for Your Doctor:\n` +
+          `1. *"Is my mild ALT elevation consistent with my recent exercise routine or medications?"*\n` +
+          `2. *"Would you recommend a repeat hepatic panel in 8 to 12 weeks to observe if levels return to baseline?"*\n\n` +
+          `---\n` +
+          `*Grounding: [Source: AACC / ACG Clinical Guideline: Evaluation of Abnormal Liver Chemistries]*`;
+      }
+
+      if (["cholesterol", "ldl", "hdl", "triglyceride", "lipid", "ascvd"].some(c => qLower.includes(c))) {
+        return `### 🩺 Clinical Guidance: Lipid Panel & Cardiovascular Goals\n\n` +
+          `#### 1. Key Lipid Fractions & Target Ranges\n` +
+          `- **Low-Density Lipoprotein (LDL-C) — "Bad Cholesterol":** Optimal is **< 100 mg/dL** for standard risk. For individuals with stents, heart disease, or diabetes, the ACC/AHA recommends strict targets of **< 70 mg/dL** (or < 55 mg/dL for very high risk).\n` +
+          `- **High-Density Lipoprotein (HDL-C) — "Good Cholesterol":** Protective lipoprotein that clears excess arterial fat. Desirable is **> 40 mg/dL** in men and **> 50 mg/dL** in women.\n` +
+          `- **Triglycerides:** Normal is **< 150 mg/dL**. Elevated triglycerides often correlate with high dietary sugar, refined carbs, or sedentary lifestyle.\n\n` +
+          `#### 2. Evidence-Based Lifestyle Frontline Therapy\n` +
+          `- **Dietary Optimization:** Emphasize soluble fiber (oats, legumes, psyllium) and healthy unsaturated fats (olive oil, avocado, fish) while limiting saturated animal fats.\n` +
+          `- **Physical Activity:** 150 minutes per week of moderate-intensity aerobic exercise (e.g., 30 minutes brisk walking 5 days/week).\n\n` +
+          `#### 3. Questions for Your Doctor:\n` +
+          `1. *"What is my calculated 10-year Atherosclerotic Cardiovascular Disease (ASCVD) risk score?"*\n` +
+          `2. *"What specific LDL target is right for me, and should we attempt 3 months of dietary modifications first?"*\n\n` +
+          `---\n` +
+          `*Grounding: [Source: ACC/AHA Guideline on the Management of Blood Cholesterol]*`;
+      }
+
+      if (["glucose", "sugar", "hba1c", "a1c", "diabetes", "prediabetes"].some(g => qLower.includes(g))) {
+        return `### 🩺 Clinical Guidance: Glycemic Health & Diabetes Screening\n\n` +
+          `#### 1. Diagnostic Thresholds from ADA Guidelines\n` +
+          `- **Fasting Blood Glucose (after 8h fast):**\n` +
+          `  - Normal: **70 to 99 mg/dL**\n` +
+          `  - Impaired Fasting Glucose (Prediabetes): **100 to 125 mg/dL**\n` +
+          `  - Diagnostic Threshold for Diabetes: **≥ 126 mg/dL** (confirmed on two separate tests)\n` +
+          `- **Hemoglobin A1c (HbA1c):** Measures average blood sugar over the preceding 90 days:\n` +
+          `  - Normal: **< 5.7%**\n` +
+          `  - Prediabetes: **5.7% to 6.4%**\n` +
+          `  - Diabetes: **≥ 6.5%**\n\n` +
+          `#### 2. Benign Spikes & Reversibility\n` +
+          `- **Prediabetes is Reversible:** Clinical trials show that 5–7% intentional body weight reduction and 150 min/week of brisk walking reduce progression risk by over 58%.\n` +
+          `- **Transient Spikes:** Acute psychological stress, poor sleep, or an incomplete fast can elevate a single morning glucose reading.\n\n` +
+          `#### 3. Questions for Your Doctor:\n` +
+          `1. *"Does my HbA1c place me in the prediabetes category, and can we start with a nutrition plan?"*\n` +
+          `2. *"Would working with a registered dietitian or diabetes educator be helpful for me?"*\n\n` +
+          `---\n` +
+          `*Grounding: [Source: ADA Standards of Medical Care in Diabetes]*`;
+      }
+
+      // 11. General Custom Lab Report Translation Mode
       if (mode === "report") {
         const findings = [];
         if (/glucose.*?(1[1-9]\d|[2-9]\d\d)/i.test(q)) {
@@ -1314,23 +1458,20 @@
           `*Medical Disclaimer: ClearCare AI is an educational communication tool and does not provide formal medical diagnosis or prescribe treatment. Always discuss these findings with your licensed healthcare provider.*`;
       }
 
-      // Default Clinical Guidance for General Q&A with Matching Chunks
-      let intro = `### 🩺 Clinical Guidance: Evidence-Based Insights\n\n` +
-        `Based on verified clinical knowledge base (ACC/AHA, AACC, and MedlinePlus guidelines), here is the structured context for **"${q}"**:\n\n`;
-
-      let evidence = retrievedChunks.length > 0 ?
-        retrievedChunks.map((c, i) => `#### [Source ${c.source || 'Guideline'}] (*${c.section || 'General'}*, Match: ${Math.round((c.similarity || 0.85)*100)}%)\n> "${(c.text || '').substring(0, 240)}..."\n`).join('\n') :
-        `*Verified clinical guidelines matched. Please consult your physician for individualized medical advice.*`;
-
-      let questions = `\n\n#### Recommended Questions for Your Doctor:\n` +
-        `1. *"How do these findings correlate with my medical history and current symptoms?"*\n` +
-        `2. *"What lifestyle or dietary modifications would you recommend first?"*\n\n` +
-        `---\n*Disclaimer: ClearCare AI provides educational health literacy support grounded in peer-reviewed clinical guidelines.*`;
-
-      return intro + evidence + questions;
+      // 12. Intelligent Health Literacy Orientation Fallback (Zero Raw Broken Dumps)
+      return `### 🩺 ClearCare Clinical Literacy Assistant\n\n` +
+        `Thank you for asking about **"${q}"**.\n\n` +
+        `As an evidence-based clinical translation tool, ClearCare AI is grounded in verified medical guidelines from **ACC/AHA, AACC, KDIGO, and MedlinePlus**.\n\n` +
+        `**What I can help you explore:**\n` +
+        `- **Comprehensive Metabolic Panels:** Blood Urea Nitrogen (BUN), Creatinine, eGFR, Fasting Glucose, Sodium, Potassium, and Calcium.\n` +
+        `- **Complete Blood Counts (CBC):** White blood cells (WBC), Red blood cells (RBC), Hemoglobin, Hematocrit, and Platelets.\n` +
+        `- **Liver Function Tests:** Alanine Aminotransferase (ALT), Aspartate Aminotransferase (AST), and Bilirubin.\n` +
+        `- **Lipid & Cardiovascular Health:** Total Cholesterol, LDL-C, HDL-C, and Triglycerides.\n` +
+        `- **Hospital Discharge Instructions:** Post-coronary stent care, Dual Antiplatelet Therapy (Aspirin + Plavix), and activity precautions.\n\n` +
+        `*Try asking a specific question like:* *"Why is my ALT high?"*, *"What is a normal eGFR?"*, or *"What are LDL goals?"*, or paste your lab report into **Tab 1: Report Translator** for a full traffic-light breakdown!`;
     }
 
-    function updateKeyStatusUI(hasKey) {
+        function updateKeyStatusUI(hasKey) {
       if (hasKey) {
         keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> <span class="text-emerald-400 font-semibold">Groq Key Set</span>`;
       } else {

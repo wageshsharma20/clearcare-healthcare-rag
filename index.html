@@ -94,6 +94,9 @@
         </div>
       </div>
       <div class="flex items-center space-x-2 sm:space-x-3">
+        <a href="clearcare_landing_page.html" class="text-xs bg-[#222838] hover:bg-[#2c3447] text-white px-3 py-1.5 rounded-lg font-medium border border-[#313a4e] transition-all shadow-xs flex items-center gap-1.5">
+          <i class="fas fa-layer-group text-amber-400"></i> <span class="hidden sm:inline">Landing Page</span>
+        </a>
         <button onclick="window.location.reload(true)" title="Force Reload Latest Version" class="text-xs bg-[#222838] hover:bg-[#2c3447] text-zinc-300 px-2.5 py-1.5 rounded-lg border border-[#313a4e] transition flex items-center gap-1.5 shadow-xs">
           <i class="fas fa-arrows-rotate text-xs"></i> <span class="hidden md:inline">Refresh</span>
         </button>
@@ -155,7 +158,10 @@
             <label class="block text-xs font-semibold text-zinc-300 mb-1">Inference Model</label>
             <select id="modelSelect" class="w-full text-xs bg-[#181d29] border border-[#313a4e] text-zinc-200 rounded-lg p-2 focus:ring-1 focus:ring-white focus:border-white outline-none transition">
               <option value="llama-3.3-70b-versatile">Llama 3.3 70B Versatile (Recommended)</option>
+              <option value="openai/gpt-oss-120b">OpenAI GPT-OSS 120B (Groq)</option>
+              <option value="openai/gpt-oss-20b">OpenAI GPT-OSS 20B (Groq Fast)</option>
               <option value="llama-3.1-8b-instant">Llama 3.1 8B Instant (Ultra-fast)</option>
+              <option value="qwen-2.5-32b">Qwen 2.5 32B</option>
               <option value="llama3-70b-8192">Llama 3 70B</option>
               <option value="llama3-8b-8192">Llama 3 8B</option>
               <option value="gemma2-9b-it">Gemma 2 9B IT</option>
@@ -465,10 +471,8 @@
             </div>
             <pre id="inspectorPrompt" class="text-xs bg-black text-zinc-300 p-4 rounded-xl overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed border border-zinc-800"></pre>
           </div>
-        </div>
-
-        <!-- ============================================================= -->
-        <!-- TAB 4: Project Pipeline & Architecture (8 Stages Deep Dive) -->
+        </div>        <!-- ============================================================= -->
+        <!-- TAB 4: Project Pipeline & Architecture (In Simple Terms) -->
         <!-- ============================================================= -->
         <div id="tab4" class="hidden space-y-6">
           
@@ -476,57 +480,57 @@
           <div class="bg-gradient-to-r from-black via-zinc-900 to-black rounded-2xl p-6 text-white shadow-md relative overflow-hidden border border-zinc-800">
             <div class="relative z-10 space-y-2">
               <div class="inline-flex items-center gap-1.5 bg-[#222838] text-zinc-300 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-zinc-700">
-                <i class="fas fa-diagram-project"></i> End-to-End System Design
+                <i class="fas fa-heart-pulse text-emerald-400"></i> ClearCare AI Made Simple
               </div>
-              <h2 class="text-lg sm:text-xl font-bold tracking-tight">ClearCare RAG: 8-Stage Clinical Pipeline Architecture</h2>
+              <h2 class="text-lg sm:text-xl font-bold tracking-tight">How ClearCare AI Works: Step-by-Step in Simple Terms</h2>
               <p class="text-xs sm:text-sm text-zinc-300 max-w-3xl leading-relaxed">
-                A deterministic, multi-stage pipeline engineered specifically for clinical reliability. Solves the multi-analyte 
-                <strong>Vector Blur</strong> problem, filters out irrelevant context via cosine thresholding, and delivers verifiable, 
-                citation-grounded translations without hallucination.
+                When you paste a blood test or ask a medical question, ClearCare runs an 8-step safety pipeline. 
+                Instead of guessing from the internet, it finds real hospital rules, checks every test one by one, 
+                and explains everything in friendly, easy-to-read English.
               </p>
             </div>
             <div class="absolute -right-8 -bottom-8 opacity-10 text-white text-9xl pointer-events-none">
-              <i class="fas fa-dna"></i>
+              <i class="fas fa-stethoscope"></i>
             </div>
           </div>
 
           <!-- Interactive 8-Stage Pipeline Stepper Bar -->
           <div>
             <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-              <i class="fas fa-route text-white"></i> Interactive Pipeline Stages (Click Any Stage to Inspect)
+              <i class="fas fa-route text-white"></i> The 8 Simple Steps (Click Any Step to Learn More)
             </h3>
             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
               <button onclick="scrollToStage('stage1')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-white uppercase">Stage 01</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Ingestion</span>
+                <span class="block text-[10px] font-bold text-white uppercase">Step 01</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Real Rules</span>
               </button>
               <button onclick="scrollToStage('stage2')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-white uppercase">Stage 02</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Chunking</span>
+                <span class="block text-[10px] font-bold text-white uppercase">Step 02</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Neat Pieces</span>
               </button>
               <button onclick="scrollToStage('stage3')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-white uppercase">Stage 03</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Embeddings</span>
+                <span class="block text-[10px] font-bold text-white uppercase">Step 03</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Word Meaning</span>
               </button>
               <button onclick="scrollToStage('stage4')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-emerald-400 uppercase">Stage 04</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">ChromaDB</span>
+                <span class="block text-[10px] font-bold text-emerald-400 uppercase">Step 04</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Quick Search</span>
               </button>
               <button onclick="scrollToStage('stage5')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-amber-400 uppercase">Stage 05</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Entity Scan</span>
+                <span class="block text-[10px] font-bold text-amber-400 uppercase">Step 05</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Check Each Test</span>
               </button>
               <button onclick="scrollToStage('stage6')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-amber-400 uppercase">Stage 06</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Threshold</span>
+                <span class="block text-[10px] font-bold text-amber-400 uppercase">Step 06</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Shield Filter</span>
               </button>
               <button onclick="scrollToStage('stage7')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-indigo-400 uppercase">Stage 07</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-indigo-300 truncate">Llama 3.3</span>
+                <span class="block text-[10px] font-bold text-indigo-400 uppercase">Step 07</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-indigo-300 truncate">Safe AI Brain</span>
               </button>
               <button onclick="scrollToStage('stage8')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-emerald-400 uppercase">Stage 08</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Patient UI</span>
+                <span class="block text-[10px] font-bold text-emerald-400 uppercase">Step 08</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Patient Report</span>
               </button>
             </div>
           </div>
@@ -535,9 +539,9 @@
           <div class="border border-[#313a4e] rounded-2xl p-5 bg-[#181d29] shadow-xs space-y-4">
             <div class="flex items-center justify-between">
               <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                <i class="fas fa-sitemap text-white"></i> End-to-End Information Flow
+                <i class="fas fa-sitemap text-white"></i> How Information Moves Through ClearCare
               </h4>
-              <span class="text-[11px] text-zinc-400 font-mono">Offline Ingestion &rarr; Online Inference</span>
+              <span class="text-[11px] text-zinc-400 font-mono">From Hospital Guidelines &rarr; To Your Clear Answer</span>
             </div>
 
             <!-- SVG Visual Flow Diagram -->
@@ -546,116 +550,117 @@
                 
                 <!-- Step 1 -->
                 <div class="flex-1 bg-[#222838] border border-[#343e54] p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-white font-bold block text-[10px]">STAGE 1</span>
-                  <i class="fas fa-file-shield text-white my-1 text-sm"></i>
-                  <span class="block text-zinc-200">5 Guidelines</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">AHA, ACC, AACC</span>
+                  <span class="text-white font-bold block text-[10px]">STEP 1</span>
+                  <i class="fas fa-book-medical text-white my-1 text-sm"></i>
+                  <span class="block text-zinc-200">Trusted Books</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">AHA, ACC, NIH</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 2 -->
                 <div class="flex-1 bg-[#222838] border border-[#343e54] p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-white font-bold block text-[10px]">STAGE 2</span>
+                  <span class="text-white font-bold block text-[10px]">STEP 2</span>
                   <i class="fas fa-scissors text-white my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Chunking</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">700c + 120ov</span>
+                  <span class="block text-zinc-200">Neat Pieces</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Keeps headings</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 3 -->
                 <div class="flex-1 bg-[#222838] border border-[#343e54] p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-white font-bold block text-[10px]">STAGE 3</span>
+                  <span class="text-white font-bold block text-[10px]">STEP 3</span>
                   <i class="fas fa-brain text-white my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Embeddings</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">MiniLM 384-d</span>
+                  <span class="block text-zinc-200">Word Meaning</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Matches synonyms</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 4 -->
                 <div class="flex-1 bg-[#101923] border border-emerald-900/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-emerald-400 font-bold block text-[10px]">STAGE 4</span>
+                  <span class="text-emerald-400 font-bold block text-[10px]">STEP 4</span>
                   <i class="fas fa-database text-emerald-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">ChromaDB</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">HNSW Graph</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Fast 1s search</span>
                 </div>
                 <div class="px-1 text-amber-400 font-bold text-sm">&harr;</div>
 
                 <!-- Step 5 -->
                 <div class="flex-1 bg-[#1a1715] border border-amber-900/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-amber-400 font-bold block text-[10px]">STAGE 5</span>
-                  <i class="fas fa-filter text-amber-400 my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Entity Scan</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">30+ Analytes</span>
+                  <span class="text-amber-400 font-bold block text-[10px]">STEP 5</span>
+                  <i class="fas fa-list-check text-amber-400 my-1 text-sm"></i>
+                  <span class="block text-zinc-200">Check All</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Glucose, ALT, eGFR</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 6 -->
                 <div class="flex-1 bg-[#1a1715] border border-amber-900/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-amber-400 font-bold block text-[10px]">STAGE 6</span>
-                  <i class="fas fa-shield-virus text-amber-400 my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Threshold</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">&ge; 0.25 Cosine</span>
+                  <span class="text-amber-400 font-bold block text-[10px]">STEP 6</span>
+                  <i class="fas fa-shield text-amber-400 my-1 text-sm"></i>
+                  <span class="block text-zinc-200">Shield</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Drop weak clues</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 7 -->
                 <div class="flex-1 bg-[#141629] border border-indigo-900/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-indigo-300 font-bold block text-[10px]">STAGE 7</span>
-                  <i class="fas fa-bolt text-indigo-400 my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Llama 3.3</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">Groq LPUs, t=0.2</span>
+                  <span class="text-indigo-300 font-bold block text-[10px]">STEP 7</span>
+                  <i class="fas fa-lock text-indigo-400 my-1 text-sm"></i>
+                  <span class="block text-zinc-200">Safe Brain</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Locked to facts</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 8 -->
                 <div class="flex-1 bg-[#101923] border border-emerald-900/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-emerald-400 font-bold block text-[10px]">STAGE 8</span>
-                  <i class="fas fa-heart-pulse text-emerald-400 my-1 text-sm"></i>
-                  <span class="block text-zinc-200">Patient UI</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">Traffic Lights</span>
+                  <span class="text-emerald-400 font-bold block text-[10px]">STEP 8</span>
+                  <i class="fas fa-file-waveform text-emerald-400 my-1 text-sm"></i>
+                  <span class="block text-zinc-200">Patient Guide</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">Green &bull; Yellow &bull; Red</span>
                 </div>
 
               </div>
             </div>
           </div>
 
-          <!-- Deep Dive Stage Cards (8 Cards) -->
+          <!-- Deep Dive Stage Cards (8 Cards in Simple Terms) -->
           <div class="space-y-4">
             
             <!-- STAGE 1 CARD -->
             <div id="stage1" class="clinical-card p-5 border-l-4 border-l-white">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Stage 01 &bull; Ingestion Pipeline</span>
-                <span class="text-xs font-mono text-zinc-400">5 Curated Documents</span>
+                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Step 01 &bull; Trusted Medical Rules</span>
+                <span class="text-xs font-mono text-zinc-400">5 Official Guidelines</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>📚</span> Knowledge Ingestion (5 Authoritative Medical Guidelines)
+                <span>📚</span> Trusted Medical Guidelines (No Random Internet Guessing)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                In clinical applications, general web scraping produces toxic hallucinations. ClearCare restricts its knowledge base to 
-                authoritative guidelines published by the <strong>American College of Cardiology (ACC)</strong>, <strong>American Heart Association (AHA)</strong>, 
-                <strong>American Association for Clinical Chemistry (AACC)</strong>, and <strong>NIH MedlinePlus</strong>.
+                Regular chatbots search the open web, which often finds scary stories or false advice. ClearCare does not guess. 
+                It only uses real medical rules written by verified doctors and hospitals: the <strong>American Heart Association (AHA)</strong>, 
+                <strong>American College of Cardiology (ACC)</strong>, <strong>American Association for Clinical Chemistry (AACC)</strong>, 
+                and <strong>NIH MedlinePlus</strong>. If a rule is not proven by doctors, ClearCare never touches it.
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-xs">
                 <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-zinc-200 block">1. Comprehensive Metabolic Panel</span>
-                  <span class="text-zinc-400 text-[11px]">BUN, Creatinine, eGFR, ALT, AST, Bilirubin, Electrolytes</span>
+                  <span class="font-bold text-zinc-200 block">1. Blood Chemistry (CMP)</span>
+                  <span class="text-zinc-400 text-[11px]">Kidney health (BUN, Creatinine, eGFR), Liver enzymes (ALT, AST), and Blood Sugar.</span>
                 </div>
                 <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
                   <span class="font-bold text-zinc-200 block">2. Complete Blood Count (CBC)</span>
-                  <span class="text-zinc-400 text-[11px]">WBC, RBC, Hemoglobin, Hematocrit, Platelets, Infection flags</span>
+                  <span class="text-zinc-400 text-[11px]">Red cells (anemia check), White cells (infection defense), and Platelets (blood clotting).</span>
                 </div>
                 <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-zinc-200 block">3. Lipid Cholesterol Panel</span>
-                  <span class="text-zinc-400 text-[11px]">Total Cholesterol, LDL-C targets (&lt;100, &lt;70), HDL, Triglycerides</span>
+                  <span class="font-bold text-zinc-200 block">3. Cholesterol & Heart Panel</span>
+                  <span class="text-zinc-400 text-[11px]">Total cholesterol, protective HDL ("good"), bad LDL targets (&lt;100 or &lt;70), and Triglycerides.</span>
                 </div>
                 <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-zinc-200 block">4. Thyroid TSH Panel</span>
-                  <span class="text-zinc-400 text-[11px]">TSH (0.4-4.0), Free T4, Hypo/Hyperthyroidism distinctions</span>
+                  <span class="font-bold text-zinc-200 block">4. Thyroid Energy Panel</span>
+                  <span class="text-zinc-400 text-[11px]">TSH and T4 hormones that manage your daily energy, weight, and metabolism.</span>
                 </div>
                 <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a] sm:col-span-2">
-                  <span class="font-bold text-zinc-200 block">5. Post-PCI Cardiac Stent Discharge Care</span>
-                  <span class="text-zinc-400 text-[11px]">Mandatory Dual Antiplatelet Therapy (Aspirin + Plavix), groin puncture monitoring, red flag chest pain warnings</span>
+                  <span class="font-bold text-zinc-200 block">5. Heart Stent Discharge Guide</span>
+                  <span class="text-zinc-400 text-[11px]">Why taking blood-thinning pills (Aspirin + Plavix) every day is mandatory, plus what symptoms require immediate emergency care.</span>
                 </div>
               </div>
             </div>
@@ -663,74 +668,77 @@
             <!-- STAGE 2 CARD -->
             <div id="stage2" class="clinical-card p-5 border-l-4 border-l-white">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Stage 02 &bull; Preprocessing</span>
-                <span class="text-xs font-mono text-zinc-400">700 chars / 120 overlap</span>
+                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Step 02 &bull; Smart Cutting</span>
+                <span class="text-xs font-mono text-zinc-400">700 characters + Heading Tag</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>✂️</span> Heading-Aware Chunking (Preserving Hierarchical Context)
+                <span>✂️</span> Smart Topic Cutting (Never Losing the Context)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                Naive character splitters sever sentences and orphan medical qualifications. ClearCare implements a <strong>heading-aware sliding window chunker</strong> that prepends the active section heading (<code># [Document &gt; Section]</code>) to every generated chunk.
+                Medical guidelines are long. If you cut a paragraph in half, you might separate an important warning (like <em>"normal after exercise"</em>) 
+                from the lab number itself. ClearCare cuts guidelines into clean, bite-sized pieces. It stamps the document title and topic heading right at the top of every piece so the AI always knows what test it is reading.
               </p>
               <div class="bg-black text-zinc-300 p-3 rounded-xl font-mono text-xs space-y-1 border border-zinc-800">
-                <div class="text-zinc-400 text-[11px]"># Heading-Aware Structure Injected into Every Chunk:</div>
-                <div class="text-emerald-400"># Document: metabolic_panel_cmp.md &gt; Section: Kidney Function &amp; Filtration</div>
-                <div class="text-zinc-400">Serum Creatinine reference interval: 0.6 - 1.3 mg/dL. Elevated creatinine indicates impaired glomerular filtration, but transient elevations can occur with dehydration, high-protein intake, or intense resistance exercise...</div>
+                <div class="text-zinc-400 text-[11px]"># Clear Topic Label Attached to Every Chunk:</div>
+                <div class="text-emerald-400"># Document: metabolic_panel_cmp.md &gt; Topic: Kidney Function &amp; Filtration</div>
+                <div class="text-zinc-400">Serum Creatinine reference interval: 0.6 - 1.3 mg/dL. Higher numbers can mean kidney stress, but temporary rises often happen from mild dehydration, heavy workouts, or high-protein meals...</div>
               </div>
             </div>
 
             <!-- STAGE 3 CARD -->
             <div id="stage3" class="clinical-card p-5 border-l-4 border-l-white">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Stage 03 &bull; Semantic Vector Space</span>
-                <span class="text-xs font-mono text-zinc-400">384 Dimensions &bull; Local CPU</span>
+                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Step 03 &bull; Word Meaning</span>
+                <span class="text-xs font-mono text-zinc-400">384 Meaning Numbers &bull; 100% Private</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🧠</span> Local Dense Embeddings (all-MiniLM-L6-v2)
+                <span>🧠</span> Understanding Medical Meaning (Not Just Keywords)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                Maps text chunks into <strong>384-dimensional dense vectors</strong> where semantically synonymous medical phrases reside close together. Runs locally on CPU — ensuring <strong>zero Protected Health Information (PHI)</strong> leaves the user's system.
+                Patients and doctors often use different words for the exact same condition. A patient might say <em>"high blood sugar"</em>, while a doctor writes <em>"hyperglycemia"</em>. 
+                A simple search bar would miss the connection! ClearCare uses a smart language model that turns every sentence into 384 numbers representing its exact medical meaning. 
+                This lets ClearCare match synonyms easily. It runs on your computer, so your private medical records never leave your device.
               </p>
             </div>
 
             <!-- STAGE 4 CARD -->
             <div id="stage4" class="clinical-card p-5 border-l-4 border-l-emerald-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Stage 04 &bull; Vector Storage</span>
-                <span class="text-xs font-mono text-zinc-400">ChromaDB + HNSW Graph</span>
+                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Step 04 &bull; Fast Search</span>
+                <span class="text-xs font-mono text-zinc-400">ChromaDB Local Library</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🗄️</span> Persistent Vector Storage (ChromaDB + HNSW Indexing)
+                <span>🗄️</span> Instant Guideline Search (ChromaDB)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-2">
-                Embeddings are persisted to disk using ChromaDB with a <strong>Hierarchical Navigable Small World (HNSW)</strong> graph index. 
-                Provides logarithmic <code>O(log N)</code> search complexity, enabling sub-millisecond retrieval.
+                All guideline pieces are saved inside a fast local database called ChromaDB. When you ask a question or paste a report, ChromaDB uses a smart index (called an HNSW graph) 
+                to flip directly to the exact right medical guideline in less than one second.
               </p>
             </div>
 
             <!-- STAGE 5 CARD -->
             <div id="stage5" class="clinical-card p-5 border-l-4 border-l-amber-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Stage 05 &bull; Clinical Retrieval Strategy</span>
-                <span class="text-xs font-mono text-zinc-400">Solving "Vector Blur"</span>
+                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Step 05 &bull; Thorough Checking</span>
+                <span class="text-xs font-mono text-zinc-400">Checking Every Test</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🔎</span> Clinical Entity Scanning &amp; Multi-Query Expansion
+                <span>🔎</span> Checking Every Test Individually (No Missing Numbers)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                <strong>The Multi-Analyte Vector Blur Problem:</strong> When a user uploads a 15-test metabolic panel, a naive RAG system generates a single vector that is an <em>average centroid</em> of all tests. This diluted vector retrieves vague lab overviews, missing specific guideline rules for an elevated ALT or LDL.
+                <strong>Why normal AI fails on blood tests:</strong> If you upload a lab report with 15 numbers, regular AI tries to read everything all at once. The numbers get blurred together, and it often forgets to check specific tests like your ALT or LDL.
               </p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
                 <div class="p-3 bg-rose-950/40 border border-rose-800/60 rounded-xl space-y-1">
-                  <span class="font-bold text-rose-300 flex items-center gap-1.5"><i class="fas fa-times-circle"></i> Naive Single-Pass RAG (Vector Blur)</span>
+                  <span class="font-bold text-rose-300 flex items-center gap-1.5"><i class="fas fa-times-circle"></i> What Regular AI Does (Blurred Search)</span>
                   <p class="text-zinc-300 text-[11px]">
-                    Encodes entire 15-analyte document as 1 vector &rarr; Vector gets diluted &rarr; Retrieves general overviews &rarr; Misses specific liver or kidney thresholds.
+                    Reads 15 blood tests as one big paragraph &rarr; gets confused &rarr; gives general advice &rarr; misses an elevated liver or kidney warning.
                   </p>
                 </div>
                 <div class="p-3 bg-emerald-950/40 border border-emerald-800/60 rounded-xl space-y-1">
-                  <span class="font-bold text-emerald-300 flex items-center gap-1.5"><i class="fas fa-check-circle"></i> ClearCare Multi-Query Strategy</span>
+                  <span class="font-bold text-emerald-300 flex items-center gap-1.5"><i class="fas fa-check-circle"></i> What ClearCare Does (Test-by-Test)</span>
                   <p class="text-zinc-300 text-[11px]">
-                    Scans 30+ clinical regex biomarkers (Glucose, ALT, LDL, eGFR...) &rarr; Issues targeted sub-queries for each analyte &rarr; Merges and deduplicates candidate guidelines.
+                    Checks every test name one by one (Glucose, ALT, eGFR, Potassium) &rarr; finds the exact rule for each &rarr; combines everything cleanly. Nothing gets missed.
                   </p>
                 </div>
               </div>
@@ -739,46 +747,46 @@
             <!-- STAGE 6 CARD -->
             <div id="stage6" class="clinical-card p-5 border-l-4 border-l-amber-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Stage 06 &bull; Hallucination Firewall</span>
-                <span class="text-xs font-mono text-zinc-400">Score &ge; 0.25 Filter</span>
+                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Step 06 &bull; Relevance Shield</span>
+                <span class="text-xs font-mono text-zinc-400">Drops Weak Matches (&lt; 25%)</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🎯</span> Similarity Thresholding &amp; Context Formatting
+                <span>🎯</span> The Relevance Shield (Throwing Out Wrong Clues)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-2">
-                In clinical medicine, passing an irrelevant chunk to an LLM is dangerous because it prompts speculative reasoning. ClearCare strictly filters candidate chunks using a <strong>&ge; 0.25 cosine similarity threshold</strong>.
+                In healthcare, reading the wrong guideline is dangerous because it leads to bad advice. ClearCare has a strict rule: if a guideline matches by less than 25%, it is immediately thrown out. 
+                Only strong, verified medical guidelines are allowed into the final answer.
               </p>
             </div>
 
             <!-- STAGE 7 CARD -->
             <div id="stage7" class="clinical-card p-5 border-l-4 border-l-indigo-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-indigo-300 uppercase bg-indigo-950/80 border border-indigo-800/80 px-2 py-0.5 rounded-full">Stage 07 &bull; Guardrailed Generation</span>
-                <span class="text-xs font-mono text-zinc-400">Groq LPUs &bull; Llama 3.3 70B &bull; t=0.2</span>
+                <span class="text-[10px] font-bold text-indigo-300 uppercase bg-indigo-950/80 border border-indigo-800/80 px-2 py-0.5 rounded-full">Step 07 &bull; Careful AI Brain</span>
+                <span class="text-xs font-mono text-zinc-400">Llama 3.3 / Groq &bull; Strict Safety Locks</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>⚡</span> Guardrailed Generation (Groq LPUs + Llama 3.3 70B)
+                <span>⚡</span> Safe, Guardrailed AI Brain (Llama 3.3 on Groq)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                Inference runs on <strong>Groq Language Processing Units (LPUs)</strong> at ~500 tokens/second with a deterministic temperature of <strong>0.2</strong>. 
-                Strict system-prompt guardrails eliminate hallucination and protect patient safety:
+                Our AI brain reads your question alongside the verified hospital rules we found. We set 4 unbreakable safety locks:
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-white block">1. Absolute Diagnosis Prohibition</span>
-                  <span class="text-zinc-300 text-[11px]">Cannot state "You have chronic kidney disease"; must state "Creatinine is above reference interval; warrants doctor follow-up".</span>
+                  <span class="font-bold text-white block">1. No Guessing Diseases</span>
+                  <span class="text-zinc-300 text-[11px]">It will never tell you "You have a disease". It explains what the number means and advises talking with your doctor.</span>
                 </div>
                 <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-white block">2. Mandatory Benign Causes</span>
-                  <span class="text-zinc-300 text-[11px]">Must explain hydration, exercise, and diet causes first to prevent unnecessary patient panic.</span>
+                  <span class="font-bold text-white block">2. Simple, Harmless Causes First</span>
+                  <span class="text-zinc-300 text-[11px]">It always explains harmless causes first (like dehydration, exercise, or diet) so you don't panic needlessly.</span>
                 </div>
                 <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
-                  <span class="font-bold text-white block">3. Strict Citation Attribution</span>
-                  <span class="text-zinc-300 text-[11px]">Every statement must explicitly reference <code>[Source X]</code> from the retrieved guideline chunks.</span>
+                  <span class="font-bold text-white block">3. Clear Guideline Source Tags</span>
+                  <span class="text-zinc-300 text-[11px]">Every statement is tagged with <code>[Source X]</code> so you can see the real medical guideline behind it.</span>
                 </div>
                 <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
                   <span class="font-bold text-white block">4. Medication Safety Lock</span>
-                  <span class="text-zinc-300 text-[11px]">Strictly prohibited from suggesting stopping prescribed therapies (e.g., Plavix / Aspirin DAPT).</span>
+                  <span class="text-zinc-300 text-[11px]">It is strictly locked from ever telling a patient to stop taking prescribed medicines like Plavix or blood thinners.</span>
                 </div>
               </div>
             </div>
@@ -786,89 +794,99 @@
             <!-- STAGE 8 CARD -->
             <div id="stage8" class="clinical-card p-5 border-l-4 border-l-emerald-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Stage 08 &bull; Patient Health Literacy</span>
-                <span class="text-xs font-mono text-zinc-400">8th-Grade Plain English</span>
+                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Step 08 &bull; Easy Patient Guide</span>
+                <span class="text-xs font-mono text-zinc-400">Plain 8th-Grade English</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🌟</span> Patient-Centered Output (Traffic Lights &amp; Doctor Checklist)
+                <span>🌟</span> Clear, Friendly Patient Summary (Traffic Lights &amp; Doctor Questions)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                Converts dense, anxiety-inducing lab results into empowering, plain-language patient communication with four distinct components:
+                Instead of sending you home with scary, confusing medical jargon, ClearCare creates a friendly, easy-to-read report with three simple parts:
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                 <div class="p-3 bg-[#181d29] rounded-xl border border-[#2d364a]">
                   <div class="flex items-center gap-1.5 mb-1 text-white font-bold">
-                    <span>🟢 🟡 🔴</span> Traffic-Light Findings
+                    <span>🟢 🟡 🔴</span> Traffic-Light Signals
                   </div>
-                  <p class="text-zinc-400 text-[11px]">Normal (within range), Borderline (mild shift), and Attention Required (physician review).</p>
+                  <p class="text-zinc-400 text-[11px]">Green for normal, Yellow for borderline shifts, and Red for numbers to discuss with your doctor.</p>
                 </div>
                 <div class="p-3 bg-[#181d29] rounded-xl border border-[#2d364a]">
                   <div class="flex items-center gap-1.5 mb-1 text-white font-bold">
-                    <i class="fas fa-heart text-rose-500"></i> Empathetic Context
+                    <i class="fas fa-heart text-rose-500"></i> Plain English Words
                   </div>
-                  <p class="text-zinc-400 text-[11px]">Demystifies complex medical metrics into 8th-grade plain English without medical jargon.</p>
+                  <p class="text-zinc-400 text-[11px]">Explains medical concepts in everyday English so you understand what is going on in your body.</p>
                 </div>
                 <div class="p-3 bg-[#181d29] rounded-xl border border-[#2d364a]">
                   <div class="flex items-center gap-1.5 mb-1 text-white font-bold">
-                    <i class="fas fa-clipboard-check text-white"></i> Doctor Checklist
+                    <i class="fas fa-clipboard-check text-white"></i> Doctor Questions
                   </div>
-                  <p class="text-zinc-400 text-[11px]">Generates targeted questions for the patient to ask at their next clinical appointment.</p>
+                  <p class="text-zinc-400 text-[11px]">Gives you 2 or 3 clear questions to write down and take to your next clinic visit.</p>
                 </div>
               </div>
             </div>
 
           </div>
 
-          <!-- Architecture Comparison Table -->
+          <!-- Architecture Comparison Table (Simple Terms) -->
           <div class="border border-[#313a4e] rounded-2xl p-5 bg-[#181d29] shadow-md space-y-3">
             <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-              <i class="fas fa-scale-balanced text-white"></i> Comparative Architectural Analysis
+              <i class="fas fa-scale-balanced text-white"></i> Why ClearCare RAG is Safer Than Regular AI
             </h4>
             <div class="overflow-x-auto">
               <table class="w-full text-xs text-left border-collapse">
                 <thead>
                   <tr class="border-b border-[#313a4e] text-zinc-300 bg-[#1f2434]">
-                    <th class="py-2.5 px-3 font-semibold">Architectural Dimension</th>
-                    <th class="py-2.5 px-3 font-semibold">Standard Generic LLM</th>
-                    <th class="py-2.5 px-3 font-semibold">Fine-Tuned Medical LLM</th>
-                    <th class="py-2.5 px-3 font-semibold text-white bg-[#222838]">ClearCare Multi-Stage RAG</th>
+                    <th class="py-2.5 px-3 font-semibold">Important Feature</th>
+                    <th class="py-2.5 px-3 font-semibold">Regular AI (ChatGPT / Gemini)</th>
+                    <th class="py-2.5 px-3 font-semibold">Medical Fine-Tuned AI</th>
+                    <th class="py-2.5 px-3 font-semibold text-white bg-[#222838]">ClearCare RAG</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-[#1b1f2c] text-zinc-300">
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Hallucination Risk</td>
-                    <td class="py-2.5 px-3 text-rose-400 font-medium">High (invents normal ranges)</td>
-                    <td class="py-2.5 px-3 text-amber-400 font-medium">Medium (memorization drift)</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Zero (grounded strictly in guidelines)</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Risk of Making Up Facts</td>
+                    <td class="py-2.5 px-3 text-rose-400 font-medium">High (guesses wrong normal ranges)</td>
+                    <td class="py-2.5 px-3 text-amber-400 font-medium">Medium (mixes up guidelines)</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Zero (locked to real doctor rules)</td>
                   </tr>
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Traceability &amp; Citations</td>
-                    <td class="py-2.5 px-3">None (black-box generation)</td>
-                    <td class="py-2.5 px-3">None (weights cannot cite text)</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">100% Traceable ([Source X] anchors)</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Can You Check the Sources?</td>
+                    <td class="py-2.5 px-3">No (it cannot point to exact pages)</td>
+                    <td class="py-2.5 px-3">No (hidden inside AI memory)</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Yes (every answer has [Source X])</td>
                   </tr>
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Multi-Analyte Lab Panels</td>
-                    <td class="py-2.5 px-3">Suffers from Vector Blur</td>
-                    <td class="py-2.5 px-3">Prone to cross-test interference</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Resolved via Entity Scanning</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Reading 15 Blood Tests at Once</td>
+                    <td class="py-2.5 px-3 text-rose-400">Fails (blurs numbers together)</td>
+                    <td class="py-2.5 px-3 text-amber-400">Inconsistent</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Accurate (checks every test one by one)</td>
                   </tr>
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Guideline Updates</td>
-                    <td class="py-2.5 px-3">Requires foundation retraining</td>
-                    <td class="py-2.5 px-3">Requires expensive fine-tuning</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Instantaneous (drop new .md file)</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Language Style</td>
+                    <td class="py-2.5 px-3">Often uses dense medical jargon</td>
+                    <td class="py-2.5 px-3">Complex doctor language</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Simple, friendly 8th-grade English</td>
                   </tr>
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Privacy &amp; PHI Protection</td>
-                    <td class="py-2.5 px-3">Sends all data to cloud APIs</td>
-                    <td class="py-2.5 px-3">Requires centralized storage</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Local 384-d vectors + private LPUs</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Safety Locks for Medications</td>
+                    <td class="py-2.5 px-3 text-rose-400">None (can give dangerous advice)</td>
+                    <td class="py-2.5 px-3 text-amber-400">Partial</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Strict (never alters prescriptions)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 px-3 font-medium text-white">Private &amp; Free to Run</td>
+                    <td class="py-2.5 px-3">Costs money &amp; sends data away</td>
+                    <td class="py-2.5 px-3">Needs expensive cloud servers</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Runs fast, free tier, private on device</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
+
+        </div>
+
+
 
         </div>
 
@@ -885,7 +903,7 @@
 
   <!-- Embedded Pre-Indexed Clinical Knowledge Base & RAG Logic -->
   <script>
-    const EMBEDDED_KNOWLEDGE_BASE = [{"id": "lipid_cholesterol_panel_chunk_0", "text": "# Clinical Reference Guide: Lipid Panel & Cardiovascular Health Markers\n*Source: American College of Cardiology (ACC) / American Heart Association (AHA) Multisociety Guideline on the Management of Blood Cholesterol*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Lipid Panel\nThe Lipid Panel is a blood screening test that measures concentrations of fat molecules (lipids) in the bloodstream to calculate cardiovascular risk for heart attack, atherosclerosis, and stroke.\n\n---\n\n## 2. Cholesterol Fractions & Diagnostic Targets\n\n### Total Cholesterol\n- **Desirable:** Less than 200 mg/dL\n- **Borderline High:** 200 to 239 mg/dL\n- **High:** 240 mg/dL or higher", "source": "lipid_cholesterol_panel.md", "section": "Total Cholesterol", "char_count": 699}, {"id": "lipid_cholesterol_panel_chunk_1", "text": "Cholesterol\n- **Desirable:** Less than 200 mg/dL\n- **Borderline High:** 200 to 239 mg/dL\n- **High:** 240 mg/dL or higher\n- **Clinical Note:** Total cholesterol reflects LDL + HDL + 20% of Triglycerides. High total cholesterol alone is not an absolute disease diagnosis, but a signal to calculate composite 10-year atherosclerotic cardiovascular disease (ASCVD) risk.\n\n### Low-Density Lipoprotein (LDL-C) \u2014 \"Bad Cholesterol\"\n- **Optimal:** Less than 100 mg/dL\n- **Optimal for High-Risk Individuals (History of CAD, Stents, Diabetes):** Less than 70 mg/dL (or < 55 mg/dL for very high risk)\n- **Near Optimal / Above Optimal:** 100 to 129 mg/dL\n- **Borderline High:** 130 to 159 mg/dL", "source": "lipid_cholesterol_panel.md", "section": "Low-Density Lipoprotein (LDL-C) \u2014 \"Bad Cholesterol\"", "char_count": 681}, {"id": "lipid_cholesterol_panel_chunk_2", "text": "5 mg/dL for very high risk)\n- **Near Optimal / Above Optimal:** 100 to 129 mg/dL\n- **Borderline High:** 130 to 159 mg/dL\n- **High:** 160 to 189 mg/dL\n- **Very High:** 190 mg/dL or higher (Often flags familial hypercholesterolemia genetic screening)\n- **Pathophysiology:** Excess LDL particles deposit into coronary and carotid arterial walls, forming inflammatory plaques that can rupture and cause myocardial infarction (heart attack) or ischemic stroke.\n\n### High-Density Lipoprotein (HDL-C) \u2014 \"Good Cholesterol\"\n- **Desirable (Protective):**\n  - Adult Males: Greater than 40 mg/dL (preferably > 50 mg/dL)\n  - Adult Females: Greater than 50 mg/dL (preferably > 60 mg/dL)", "source": "lipid_cholesterol_panel.md", "section": "High-Density Lipoprotein (HDL-C) \u2014 \"Good Cholesterol\"", "char_count": 672}, {"id": "lipid_cholesterol_panel_chunk_3", "text": "lt Males: Greater than 40 mg/dL (preferably > 50 mg/dL)\n  - Adult Females: Greater than 50 mg/dL (preferably > 60 mg/dL)\n- **Low HDL (< 40 mg/dL):** An independent risk factor for coronary artery disease.\n- **How to raise HDL:** Aerobic exercise, quitting smoking, consuming healthy monounsaturated fats (olive oil, avocados, nuts).\n\n### Triglycerides\n- **Normal:** Less than 150 mg/dL\n- **Borderline High:** 150 to 199 mg/dL\n- **High:** 200 to 499 mg/dL\n- **Very High (Severe Hypertriglyceridemia):** 500 mg/dL or higher\n- **Critical Risk:** Levels above 500-1000 mg/dL increase risk of acute pancreatitis.", "source": "lipid_cholesterol_panel.md", "section": "Triglycerides", "char_count": 607}, {"id": "lipid_cholesterol_panel_chunk_4", "text": "yceridemia):** 500 mg/dL or higher\n- **Critical Risk:** Levels above 500-1000 mg/dL increase risk of acute pancreatitis.\n- **Common Lifestyle Drivers:** Excessive refined sugar/simple carbohydrates, alcohol intake, obesity, untreated hypothyroidism, or uncontrolled diabetes.\n\n---\n\n## 3. Glycated Hemoglobin (HbA1c) \u2014 Diabetic Marker\n- **Normal (Non-Diabetic):** Below 5.7%\n- **Prediabetes:** 5.7% to 6.4%\n- **Diabetes Diagnostic Threshold:** 6.5% or higher\n- **Clinical Action for Prediabetes:** 5-7% intentional body weight loss, 150 minutes/week of moderate physical activity (brisk walking), reduction of sugar-sweetened beverages.", "source": "lipid_cholesterol_panel.md", "section": "3. Glycated Hemoglobin (HbA1c) \u2014 Diabetic Marker", "char_count": 635}, {"id": "thyroid_tsh_panel_chunk_0", "text": "# Clinical Reference Guide: Thyroid Function Panel & Endocrine Markers\n*Source: American Thyroid Association (ATA) & Endocrine Society Guidelines*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Thyroid Panel\nThe thyroid is a butterfly-shaped gland located in the lower front of the neck. It produces hormones that regulate metabolism, heart rate, body temperature, and energy consumption throughout the body.\n\n---\n\n## 2. Primary Thyroid Biomarkers\n\n### Thyroid Stimulating Hormone (TSH)\n- **Standard Reference Range:** 0.45 to 4.50 mIU/L (uIU/mL)", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 588}, {"id": "thyroid_tsh_panel_chunk_1", "text": "ry Thyroid Biomarkers\n\n### Thyroid Stimulating Hormone (TSH)\n- **Standard Reference Range:** 0.45 to 4.50 mIU/L (uIU/mL)\n- **What it measures:** A pituitary hormone that tells the thyroid gland how much thyroid hormone to produce. TSH has an *inverse* relationship with thyroid activity (like a thermostat).\n- **High TSH (> 4.50 mIU/L) \u2014 Underactive Thyroid (Hypothyroidism):**\n  - The pituitary is shouting at the thyroid because circulating thyroid hormone is too low.\n  - **Common Symptoms:** Chronic fatigue, weight gain despite normal diet, cold intolerance, constipation, brain fog, brittle nails, hair thinning, depression.", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 630}, {"id": "thyroid_tsh_panel_chunk_2", "text": "e, weight gain despite normal diet, cold intolerance, constipation, brain fog, brittle nails, hair thinning, depression.\n  - **Most Common Cause:** Hashimoto's thyroiditis (autoimmune destruction of thyroid tissue).\n  - **Subclinical Hypothyroidism:** TSH is mildly elevated (4.5 - 10.0 mIU/L) while Free T4 remains in normal range. Often monitored unless symptomatic or pregnant.\n- **Low TSH (< 0.40 mIU/L) \u2014 Overactive Thyroid (Hyperthyroidism):**\n  - The pituitary stops signaling because the body is flooded with excess thyroid hormone.\n  - **Common Symptoms:** Rapid heart rate (tachycardia), anxiety, tremors, heat intolerance, unexplained weight loss, diarrhea, insomnia.", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 678}, {"id": "thyroid_tsh_panel_chunk_3", "text": "toms:** Rapid heart rate (tachycardia), anxiety, tremors, heat intolerance, unexplained weight loss, diarrhea, insomnia.\n  - **Most Common Cause:** Graves' disease or toxic multinodular goiter.\n\n### Free Thyroxine (Free T4)\n- **Standard Reference Range:** 0.8 to 1.8 ng/dL\n- **Significance:** The active, unbound form of T4 circulating in the blood. Free T4 directly reflects the hormone available to body tissues.\n- **Low Free T4 + High TSH:** Confirms overt primary hypothyroidism. Treatment typically involves oral Levothyroxine (Synthroid), taken on an empty stomach 30-60 minutes before breakfast with a full glass of water.\n\n### Free Triiodothyronine (Free T3)", "source": "thyroid_tsh_panel.md", "section": "Free Triiodothyronine (Free T3)", "char_count": 666}, {"id": "thyroid_tsh_panel_chunk_4", "text": "aken on an empty stomach 30-60 minutes before breakfast with a full glass of water.\n\n### Free Triiodothyronine (Free T3)\n- **Standard Reference Range:** 2.3 to 4.2 pg/mL\n- **Significance:** The most biologically potent active thyroid hormone, largely converted from T4 in peripheral tissues (liver and kidneys).", "source": "thyroid_tsh_panel.md", "section": "Free Triiodothyronine (Free T3)", "char_count": 311}, {"id": "discharge_care_protocols_chunk_0", "text": "# Clinical Reference Guide: Hospital Discharge Protocols & Patient Recovery Instructions\n*Source: Joint Commission Hospital Quality & Patient Safety Measures, CMS Discharge Guidelines*\n*Target Audience: Post-Hospitalization Patient Guidance & Nursing Review*\n\n## 1. General Post-Discharge Recovery Principles\nHospital discharge represents a vulnerable transition period. Adverse events occur in approximately 20% of patients within 30 days of leaving the hospital, with medication discrepancies and unrecognized infection being the leading causes.\n\n---\n\n## 2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "source": "discharge_care_protocols.md", "section": "2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "char_count": 634}, {"id": "discharge_care_protocols_chunk_1", "text": "fection being the leading causes.\n\n---\n\n## 2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)\nPatients and caregivers must immediately seek emergency evaluation if any of the following occur:\n- **Cardiovascular / Pulmonary:**\n  - Sudden, crushing chest pain or pressure radiating to the jaw, neck, left arm, or back.\n  - Acute severe shortness of breath or sudden inability to speak in full sentences.\n  - Coughing up pink frothy sputum or frank blood.\n  - Sudden fainting (syncope) or loss of consciousness.\n- **Neurological (Signs of Stroke - FAST):**\n  - Sudden facial droop, arm weakness or numbness, or slurred/incomprehensible speech.", "source": "discharge_care_protocols.md", "section": "2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "char_count": 667}, {"id": "discharge_care_protocols_chunk_2", "text": "gical (Signs of Stroke - FAST):**\n  - Sudden facial droop, arm weakness or numbness, or slurred/incomprehensible speech.\n  - Sudden severe \"thunderclap\" headache unlike any previous headache.\n- **Thromboembolic (Blood Clot / DVT / PE):**\n  - Asymmetric swelling, intense warmth, redness, and tenderness in one calf or thigh.\n\n---\n\n## 3. Urgent Warning Signs Requiring Same-Day Clinic Contact\n- **Infection Markers:**\n  - Temperature >= 100.4\u00b0F (38.0\u00b0C) or chills.\n  - Surgical incision showing expanding erythema (redness spreading > 1 inch from incision edge), warmth, increased swelling, or purulent (yellow/green/foul-smelling) drainage.\n- **Fluid & Gastrointestinal:**", "source": "discharge_care_protocols.md", "section": "3. Urgent Warning Signs Requiring Same-Day Clinic Contact", "char_count": 672}, {"id": "discharge_care_protocols_chunk_3", "text": "on edge), warmth, increased swelling, or purulent (yellow/green/foul-smelling) drainage.\n- **Fluid & Gastrointestinal:**\n  - Inability to keep fluids down for > 24 hours due to nausea or vomiting.\n  - Rapid unexplained weight gain (> 3 lbs in 24 hours or 5 lbs in 1 week), especially in heart failure patients (flags fluid retention).\n  - Dark, tarry, black stools (melena) or bright red rectal bleeding.\n\n---\n\n## 4. Medication Reconciliation & Safe Administration Rules\n- **Dual Antiplatelet Therapy (DAPT) Post-Cardiac Stent:**", "source": "discharge_care_protocols.md", "section": "4. Medication Reconciliation & Safe Administration Rules", "char_count": 529}, {"id": "discharge_care_protocols_chunk_4", "text": "## 4. Medication Reconciliation & Safe Administration Rules\n- **Dual Antiplatelet Therapy (DAPT) Post-Cardiac Stent:**\n  - If a coronary stent was placed, medications like Aspirin plus Clopidogrel (Plavix), Ticagrelor (Brilinta), or Prasugrel MUST NEVER be stopped abruptly without consulting the interventional cardiologist. Abrupt cessation carries a high risk of catastrophic acute stent thrombosis.\n- **Pain Management (Opioids vs. NSAIDs):**\n  - Do not exceed 3,000 mg of Acetaminophen (Tylenol) in 24 hours from all sources combined (many prescription opioid combination pills, such as Norco or Percocet, already contain 325 mg of Acetaminophen).", "source": "discharge_care_protocols.md", "section": "4. Medication Reconciliation & Safe Administration Rules", "char_count": 652}, {"id": "discharge_care_protocols_chunk_5", "text": "mbined (many prescription opioid combination pills, such as Norco or Percocet, already contain 325 mg of Acetaminophen).\n  - Avoid NSAIDs (Ibuprofen, Naproxen) if patient has kidney disease, history of stomach ulcers, or is taking blood thinners.\n- **Antibiotic Stewardship:**\n  - Complete the full prescribed course of antibiotics even if feeling 100% improved, unless instructed otherwise by a physician.\n\n---\n\n## 5. Activity Restrictions & Wound Care\n- **Lifting Restrictions:** No lifting objects heavier than 10 lbs (roughly a gallon of milk) for 2 to 4 weeks post-abdominal or cardiac surgery.", "source": "discharge_care_protocols.md", "section": "5. Activity Restrictions & Wound Care", "char_count": 599}, {"id": "discharge_care_protocols_chunk_6", "text": "** No lifting objects heavier than 10 lbs (roughly a gallon of milk) for 2 to 4 weeks post-abdominal or cardiac surgery.\n- **Showering vs. Bathing:** Showering with mild soap and gentle patting dry is generally permitted after 48 hours; do NOT submerge incision in baths, pools, or hot tubs until cleared by the surgeon.", "source": "discharge_care_protocols.md", "section": "5. Activity Restrictions & Wound Care", "char_count": 320}, {"id": "cbc_blood_count_chunk_0", "text": "# Clinical Reference Guide: Complete Blood Count (CBC) with Differential\n*Source: NIH National Heart, Lung, and Blood Institute (NHLBI) & CDC Reference Lab*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Complete Blood Count\nThe Complete Blood Count (CBC) evaluates cellular components circulating in blood: Red Blood Cells (oxygen transport), White Blood Cells (immune defense), and Platelets (blood clotting).\n\n---\n\n## 2. Red Blood Cell Indices (Anemia & Oxygen Delivery)\n\n### Red Blood Cell Count (RBC)\n- **Standard Reference Range:**\n  - Adult Males: 4.35 to 5.65 million cells/mcL\n  - Adult Females: 3.92 to 5.13 million cells/mcL", "source": "cbc_blood_count.md", "section": "Red Blood Cell Count (RBC)", "char_count": 677}, {"id": "cbc_blood_count_chunk_1", "text": "ard Reference Range:**\n  - Adult Males: 4.35 to 5.65 million cells/mcL\n  - Adult Females: 3.92 to 5.13 million cells/mcL\n- **Low Count:** Anemia, active blood loss, bone marrow suppression, nutritional deficiencies (Iron, B12, Folate).\n- **High Count (Erythrocytosis):** Chronic low oxygen (smoking, COPD, sleep apnea), high altitude, polycythemia vera, or hemoconcentration due to dehydration.\n\n### Hemoglobin (Hgb)\n- **Standard Reference Range:**\n  - Adult Males: 13.2 to 16.6 g/dL\n  - Adult Females: 11.6 to 15.0 g/dL\n- **Mild Anemia (10.0 - 11.5 g/dL):** May cause mild fatigue, pale skin, slight shortness of breath with strenuous exertion.", "source": "cbc_blood_count.md", "section": "Hemoglobin (Hgb)", "char_count": 645}, {"id": "cbc_blood_count_chunk_2", "text": "Mild Anemia (10.0 - 11.5 g/dL):** May cause mild fatigue, pale skin, slight shortness of breath with strenuous exertion.\n- **Moderate to Severe Anemia (< 8.0 g/dL):** Palpitations, dizziness, resting shortness of breath. Requires physician evaluation.\n- **Critical Threshold (< 7.0 g/dL):** Typically warrants hospital admission and packed red blood cell transfusion evaluation.\n\n### Hematocrit (Hct)\n- **Standard Reference Range:**\n  - Adult Males: 38.3% to 48.6%\n  - Adult Females: 35.5% to 44.9%\n- **Definition:** The percentage of total blood volume made up of red blood cells (typically ~3 times the hemoglobin level).\n\n### Mean Corpuscular Volume (MCV)", "source": "cbc_blood_count.md", "section": "Mean Corpuscular Volume (MCV)", "char_count": 658}, {"id": "cbc_blood_count_chunk_3", "text": "al blood volume made up of red blood cells (typically ~3 times the hemoglobin level).\n\n### Mean Corpuscular Volume (MCV)\n- **Standard Reference Range:** 80 to 96 fL (femtoliters)\n- **Microcytic (MCV < 80 fL):** Small red cells. Primary causes: Iron deficiency anemia, Thalassemia trait, Anemia of chronic disease.\n- **Normocytic (MCV 80 - 96 fL):** Acute blood loss, kidney failure, early nutritional deficiency.\n- **Macrocytic (MCV > 100 fL):** Large red cells. Primary causes: Vitamin B12 deficiency, Folate deficiency, alcoholism, liver disease, hypothyroid state, certain chemotherapies.\n\n---\n\n## 3. White Blood Cells & Differential (Immune System)\n\n### Total White Blood Cell Count (WBC)", "source": "cbc_blood_count.md", "section": "Total White Blood Cell Count (WBC)", "char_count": 692}, {"id": "cbc_blood_count_chunk_4", "text": "ain chemotherapies.\n\n---\n\n## 3. White Blood Cells & Differential (Immune System)\n\n### Total White Blood Cell Count (WBC)\n- **Standard Reference Range:** 4,000 to 11,000 cells/mcL (4.0 - 11.0 x 10^3 / mcL)\n- **Leukocytosis (WBC > 11,000):** Bacterial infection, acute viral infection, systemic inflammation, severe physical/emotional stress, steroid medication (e.g. Prednisone). Mild elevation (11,000 - 14,000) during or right after an upper respiratory infection or dental work is common and reactive.\n- **Leukopenia (WBC < 4,000):** Viral infections (such as influenza, COVID-19, HIV), autoimmune diseases (lupus), bone marrow disorders, or drug side effects.", "source": "cbc_blood_count.md", "section": "Total White Blood Cell Count (WBC)", "char_count": 662}, {"id": "cbc_blood_count_chunk_5", "text": "infections (such as influenza, COVID-19, HIV), autoimmune diseases (lupus), bone marrow disorders, or drug side effects.\n- **Critical Threshold (< 1,500):** Substantial risk of opportunistic infection; requires isolation precautions.\n\n### Neutrophils (Absolute & Percentage)\n- **Standard Reference Range:** 40% to 70% (1,500 - 7,500 cells/mcL)\n- **Role:** First responders against bacterial infections. \"Left shift\" or presence of immature bands suggests acute bacterial response.\n\n### Lymphocytes\n- **Standard Reference Range:** 20% to 40% (1,000 - 4,800 cells/mcL)", "source": "cbc_blood_count.md", "section": "Lymphocytes", "char_count": 566}, {"id": "cbc_blood_count_chunk_6", "text": "suggests acute bacterial response.\n\n### Lymphocytes\n- **Standard Reference Range:** 20% to 40% (1,000 - 4,800 cells/mcL)\n- **Role:** Combat viral pathogens (T cells, B cells, NK cells). Elevated during mononucleosis, viral illnesses, or chronic lymphocytic conditions.\n\n### Eosinophils\n- **Standard Reference Range:** 1% to 4% (50 - 500 cells/mcL)\n- **Elevated in:** Allergic conditions (asthma, eczema, hay fever), parasitic infections, eosinophilic esophagitis, or drug reactions.\n\n---\n\n## 4. Platelets (Coagulation & Clotting)\n\n### Platelet Count\n- **Standard Reference Range:** 150,000 to 450,000 cells/mcL\n- **Thrombocytopenia (Low Platelets < 150,000):**", "source": "cbc_blood_count.md", "section": "Platelet Count", "char_count": 660}, {"id": "cbc_blood_count_chunk_7", "text": "let Count\n- **Standard Reference Range:** 150,000 to 450,000 cells/mcL\n- **Thrombocytopenia (Low Platelets < 150,000):**\n  - **100,000 - 149,000:** Mild; often asymptomatic, common in viral recovery or gestational thrombocytopenia.\n  - **50,000 - 99,000:** Moderate; minor bruising, petechiae, prolonged bleeding from cuts.\n  - **< 20,000:** Severe; high risk of spontaneous mucosal or intracranial bleeding. Urgent medical management needed.\n- **Thrombocytosis (High Platelets > 450,000):** Reactive (post-infection, iron deficiency, post-splenectomy) or primary essential thrombocythemia.", "source": "cbc_blood_count.md", "section": "Platelet Count", "char_count": 590}, {"id": "metabolic_panel_cmp_chunk_0", "text": "# Clinical Reference Guide: Comprehensive Metabolic Panel (CMP)\n*Source: NIH MedlinePlus & Clinical Chemistry Reference Standards (AACC)*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Comprehensive Metabolic Panel\nThe Comprehensive Metabolic Panel (CMP) is a blood test consisting of 14 separate measurements. It evaluates kidney function, liver function, blood sugar levels, electrolyte balance, and acid/base balance in the blood.\n\n---\n\n## 2. Kidney Function Biomarkers\n\n### Blood Urea Nitrogen (BUN)\n- **Standard Reference Range:** 7 to 20 mg/dL", "source": "metabolic_panel_cmp.md", "section": "Blood Urea Nitrogen (BUN)", "char_count": 591}, {"id": "metabolic_panel_cmp_chunk_1", "text": "ood.\n\n---\n\n## 2. Kidney Function Biomarkers\n\n### Blood Urea Nitrogen (BUN)\n- **Standard Reference Range:** 7 to 20 mg/dL\n- **What it measures:** The amount of nitrogen in the blood that comes from the waste product urea, produced in the liver and eliminated by the kidneys.\n- **High Levels (Azotemia):** May indicate impaired renal filtration, acute kidney injury, congestive heart failure, high protein intake, gastrointestinal bleeding, or severe dehydration. Dehydration is the most frequent benign cause of mildly elevated BUN with a normal creatinine.\n- **Low Levels:** Seen in severe liver disease, malnutrition, low-protein diets, or overhydration.\n\n### Serum Creatinine", "source": "metabolic_panel_cmp.md", "section": "Serum Creatinine", "char_count": 677}, {"id": "metabolic_panel_cmp_chunk_2", "text": "- **Low Levels:** Seen in severe liver disease, malnutrition, low-protein diets, or overhydration.\n\n### Serum Creatinine\n- **Standard Reference Range:** 0.6 to 1.3 mg/dL (adult males: 0.7 - 1.3 mg/dL; adult females: 0.5 - 1.1 mg/dL)\n- **What it measures:** A breakdown byproduct of creatine phosphate in skeletal muscle tissue. Because healthy kidneys filter creatinine at a constant rate, it is the primary direct indicator of renal filtering capability.\n- **High Levels:** Indicates reduced glomerular filtration, intrinsic kidney disease, urinary tract obstruction, or intense strenuous weightlifting (temporary).\n- **Low Levels:** Decreased muscle mass, myasthenia gravis, or advanced age.", "source": "metabolic_panel_cmp.md", "section": "Estimated Glomerular Filtration Rate (eGFR)", "char_count": 693}, {"id": "metabolic_panel_cmp_chunk_3", "text": "tense strenuous weightlifting (temporary).\n- **Low Levels:** Decreased muscle mass, myasthenia gravis, or advanced age.\n\n### Estimated Glomerular Filtration Rate (eGFR)\n- **Standard Reference Range:** Greater than 60 mL/min/1.73 m\u00b2 (Normal baseline: 90 - 120 mL/min/1.73 m\u00b2)\n- **Interpretation:**\n  - **> 90 mL/min:** Normal kidney function.\n  - **60 - 89 mL/min:** Mildly decreased kidney filtration; common with normal aging if no protein is in the urine.\n  - **45 - 59 mL/min (Stage 3a CKD):** Moderate reduction in kidney function. Requires physician review, medication adjustments, and hydration assessment.", "source": "metabolic_panel_cmp.md", "section": "Estimated Glomerular Filtration Rate (eGFR)", "char_count": 612}, {"id": "metabolic_panel_cmp_chunk_4", "text": "):** Moderate reduction in kidney function. Requires physician review, medication adjustments, and hydration assessment.\n  - **15 - 29 mL/min (Stage 4 CKD):** Severe kidney impairment. Immediate nephrology referral required.\n  - **< 15 mL/min:** Kidney failure.\n\n---\n\n## 3. Electrolytes & Fluid Balance\n\n### Sodium (Na+)\n- **Standard Reference Range:** 135 to 145 mEq/L\n- **High (Hypernatremia):** Inadequate water intake, excessive sweating, diuretic therapy, diabetes insipidus.", "source": "metabolic_panel_cmp.md", "section": "Sodium (Na+)", "char_count": 480}, {"id": "metabolic_panel_cmp_chunk_5", "text": "145 mEq/L\n- **High (Hypernatremia):** Inadequate water intake, excessive sweating, diuretic therapy, diabetes insipidus.\n- **Low (Hyponatremia):** Excess water retention, heart failure, cirrhosis, SIADH, vomiting/diarrhea. Mild hyponatremia (130-134 mEq/L) often presents with mild fatigue, nausea, or headache. Severe drops (< 125 mEq/L) are medical emergencies.\n\n### Potassium (K+)\n- **Standard Reference Range:** 3.5 to 5.2 mEq/L\n- **High (Hyperkalemia):** Kidney dysfunction, ACE inhibitors, ARBs, potassium-sparing diuretics, tissue trauma. Levels above 6.0 mEq/L can cause fatal cardiac arrhythmias and require urgent attention.", "source": "metabolic_panel_cmp.md", "section": "Potassium (K+)", "char_count": 634}, {"id": "metabolic_panel_cmp_chunk_6", "text": "aring diuretics, tissue trauma. Levels above 6.0 mEq/L can cause fatal cardiac arrhythmias and require urgent attention.\n- **Low (Hypokalemia):** Diuretics (\"water pills\"), prolonged vomiting, diarrhea, insufficient dietary intake. Can cause muscle cramps, weakness, and cardiac palpitations.\n\n### Carbon Dioxide / Bicarbonate (CO2)\n- **Standard Reference Range:** 22 to 29 mEq/L\n- **What it measures:** The buffering capacity of blood and metabolic acid-base status.\n\n### Calcium\n- **Standard Reference Range:** 8.5 to 10.2 mg/dL\n- **Clinical Significance:** Crucial for bone health, neuromuscular transmission, and cardiac contractility. Regulated by parathyroid hormone (PTH) and Vitamin D.\n\n---", "source": "metabolic_panel_cmp.md", "section": "4. Blood Sugar / Glycemic Marker", "char_count": 698}, {"id": "metabolic_panel_cmp_chunk_7", "text": "alth, neuromuscular transmission, and cardiac contractility. Regulated by parathyroid hormone (PTH) and Vitamin D.\n\n---\n\n## 4. Blood Sugar / Glycemic Marker\n\n### Fasting Blood Glucose\n- **Standard Reference Range:** 70 to 99 mg/dL (after an 8-hour overnight fast)\n- **Impaired Fasting Glucose (Prediabetes):** 100 to 125 mg/dL\n- **Diabetes Diagnostic Threshold:** 126 mg/dL or higher on two separate occasions\n- **Hypoglycemia (< 70 mg/dL):** Causes shakiness, sweating, anxiety, confusion. Immediate carbohydrate ingestion required.\n\n---\n\n## 5. Liver Function & Protein Biomarkers\n\n### Alanine Aminotransferase (ALT)\n- **Standard Reference Range:** 7 to 56 U/L", "source": "metabolic_panel_cmp.md", "section": "Alanine Aminotransferase (ALT)", "char_count": 661}, {"id": "metabolic_panel_cmp_chunk_8", "text": "# 5. Liver Function & Protein Biomarkers\n\n### Alanine Aminotransferase (ALT)\n- **Standard Reference Range:** 7 to 56 U/L\n- **Significance:** Enzyme primarily found in liver cells (hepatocytes). Released into the bloodstream during liver inflammation or injury.\n- **Mild Elevation (1x to 3x normal):** Non-alcoholic fatty liver disease (NAFLD), alcohol consumption, vigorous unaccustomed exercise, statin medications, or acetaminophen use.\n- **Marked Elevation (> 10x normal):** Acute viral hepatitis, ischemic liver injury, or toxin ingestion.\n\n### Aspartate Aminotransferase (AST)\n- **Standard Reference Range:** 10 to 40 U/L", "source": "metabolic_panel_cmp.md", "section": "Aspartate Aminotransferase (AST)", "char_count": 626}, {"id": "metabolic_panel_cmp_chunk_9", "text": "mic liver injury, or toxin ingestion.\n\n### Aspartate Aminotransferase (AST)\n- **Standard Reference Range:** 10 to 40 U/L\n- **Significance:** Found in liver, heart, and skeletal muscle. An AST/ALT ratio > 2.0 often suggests alcohol-induced liver stress.\n\n### Alkaline Phosphatase (ALP)\n- **Standard Reference Range:** 44 to 147 U/L\n- **Significance:** Found in bile ducts and bone. High ALP with elevated GGT indicates biliary blockage; high ALP with normal GGT suggests bone remodeling/growth.\n\n### Total Bilirubin\n- **Standard Reference Range:** 0.2 to 1.2 mg/dL", "source": "metabolic_panel_cmp.md", "section": "Total Bilirubin", "char_count": 563}, {"id": "metabolic_panel_cmp_chunk_10", "text": "P with normal GGT suggests bone remodeling/growth.\n\n### Total Bilirubin\n- **Standard Reference Range:** 0.2 to 1.2 mg/dL\n- **Significance:** Byproduct of red blood cell breakdown. Levels > 2.5 mg/dL cause jaundice (yellowing of eyes and skin). Mild isolated elevation (1.3 - 2.0 mg/dL) with normal liver enzymes is commonly Gilbert's syndrome, a benign genetic trait.\n\n### Albumin & Total Protein\n- **Albumin Reference Range:** 3.4 to 5.4 g/dL\n- **Significance:** Main protein produced by the liver, maintains oncotic pressure. Low albumin may reflect chronic illness, malnutrition, nephrotic syndrome, or chronic liver disease.", "source": "metabolic_panel_cmp.md", "section": "Albumin & Total Protein", "char_count": 628}];
+    const EMBEDDED_KNOWLEDGE_BASE = [{"id": "lipid_cholesterol_panel_chunk_0", "text": "# Clinical Reference Guide: Lipid Panel & Cardiovascular Health Markers\n*Source: American College of Cardiology (ACC) / American Heart Association (AHA) Multisociety Guideline on the Management of Blood Cholesterol*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Lipid Panel\nThe Lipid Panel is a blood screening test that measures concentrations of fat molecules (lipids) in the bloodstream to calculate cardiovascular risk for heart attack, atherosclerosis, and stroke.\n\n---\n\n## 2. Cholesterol Fractions & Diagnostic Targets\n\n### Total Cholesterol\n- **Desirable:** Less than 200 mg/dL\n- **Borderline High:** 200 to 239 mg/dL\n- **High:** 240 mg/dL or higher", "source": "lipid_cholesterol_panel.md", "section": "Total Cholesterol", "char_count": 699}, {"id": "lipid_cholesterol_panel_chunk_1", "text": "Cholesterol\n- **Desirable:** Less than 200 mg/dL\n- **Borderline High:** 200 to 239 mg/dL\n- **High:** 240 mg/dL or higher\n- **Clinical Note:** Total cholesterol reflects LDL + HDL + 20% of Triglycerides. High total cholesterol alone is not an absolute disease diagnosis, but a signal to calculate composite 10-year atherosclerotic cardiovascular disease (ASCVD) risk.\n\n### Low-Density Lipoprotein (LDL-C) \u2014 \"Bad Cholesterol\"\n- **Optimal:** Less than 100 mg/dL\n- **Optimal for High-Risk Individuals (History of CAD, Stents, Diabetes):** Less than 70 mg/dL (or < 55 mg/dL for very high risk)\n- **Near Optimal / Above Optimal:** 100 to 129 mg/dL\n- **Borderline High:** 130 to 159 mg/dL", "source": "lipid_cholesterol_panel.md", "section": "Low-Density Lipoprotein (LDL-C) \u2014 \"Bad Cholesterol\"", "char_count": 681}, {"id": "lipid_cholesterol_panel_chunk_2", "text": "5 mg/dL for very high risk)\n- **Near Optimal / Above Optimal:** 100 to 129 mg/dL\n- **Borderline High:** 130 to 159 mg/dL\n- **High:** 160 to 189 mg/dL\n- **Very High:** 190 mg/dL or higher (Often flags familial hypercholesterolemia genetic screening)\n- **Pathophysiology:** Excess LDL particles deposit into coronary and carotid arterial walls, forming inflammatory plaques that can rupture and cause myocardial infarction (heart attack) or ischemic stroke.\n\n### High-Density Lipoprotein (HDL-C) \u2014 \"Good Cholesterol\"\n- **Desirable (Protective):**\n  - Adult Males: Greater than 40 mg/dL (preferably > 50 mg/dL)\n  - Adult Females: Greater than 50 mg/dL (preferably > 60 mg/dL)", "source": "lipid_cholesterol_panel.md", "section": "High-Density Lipoprotein (HDL-C) \u2014 \"Good Cholesterol\"", "char_count": 672}, {"id": "lipid_cholesterol_panel_chunk_3", "text": "lt Males: Greater than 40 mg/dL (preferably > 50 mg/dL)\n  - Adult Females: Greater than 50 mg/dL (preferably > 60 mg/dL)\n- **Low HDL (< 40 mg/dL):** An independent risk factor for coronary artery disease.\n- **How to raise HDL:** Aerobic exercise, quitting smoking, consuming healthy monounsaturated fats (olive oil, avocados, nuts).\n\n### Triglycerides\n- **Normal:** Less than 150 mg/dL\n- **Borderline High:** 150 to 199 mg/dL\n- **High:** 200 to 499 mg/dL\n- **Very High (Severe Hypertriglyceridemia):** 500 mg/dL or higher\n- **Critical Risk:** Levels above 500-1000 mg/dL increase risk of acute pancreatitis.", "source": "lipid_cholesterol_panel.md", "section": "Triglycerides", "char_count": 607}, {"id": "lipid_cholesterol_panel_chunk_4", "text": "yceridemia):** 500 mg/dL or higher\n- **Critical Risk:** Levels above 500-1000 mg/dL increase risk of acute pancreatitis.\n- **Common Lifestyle Drivers:** Excessive refined sugar/simple carbohydrates, alcohol intake, obesity, untreated hypothyroidism, or uncontrolled diabetes.\n\n---\n\n## 3. Glycated Hemoglobin (HbA1c) \u2014 Diabetic Marker\n- **Normal (Non-Diabetic):** Below 5.7%\n- **Prediabetes:** 5.7% to 6.4%\n- **Diabetes Diagnostic Threshold:** 6.5% or higher\n- **Clinical Action for Prediabetes:** 5-7% intentional body weight loss, 150 minutes/week of moderate physical activity (brisk walking), reduction of sugar-sweetened beverages.", "source": "lipid_cholesterol_panel.md", "section": "3. Glycated Hemoglobin (HbA1c) \u2014 Diabetic Marker", "char_count": 635}, {"id": "thyroid_tsh_panel_chunk_0", "text": "# Clinical Reference Guide: Thyroid Function Panel & Endocrine Markers\n*Source: American Thyroid Association (ATA) & Endocrine Society Guidelines*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Thyroid Panel\nThe thyroid is a butterfly-shaped gland located in the lower front of the neck. It produces hormones that regulate metabolism, heart rate, body temperature, and energy consumption throughout the body.\n\n---\n\n## 2. Primary Thyroid Biomarkers\n\n### Thyroid Stimulating Hormone (TSH)\n- **Standard Reference Range:** 0.45 to 4.50 mIU/L (uIU/mL)", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 588}, {"id": "thyroid_tsh_panel_chunk_1", "text": "ry Thyroid Biomarkers\n\n### Thyroid Stimulating Hormone (TSH)\n- **Standard Reference Range:** 0.45 to 4.50 mIU/L (uIU/mL)\n- **What it measures:** A pituitary hormone that tells the thyroid gland how much thyroid hormone to produce. TSH has an *inverse* relationship with thyroid activity (like a thermostat).\n- **High TSH (> 4.50 mIU/L) \u2014 Underactive Thyroid (Hypothyroidism):**\n  - The pituitary is shouting at the thyroid because circulating thyroid hormone is too low.\n  - **Common Symptoms:** Chronic fatigue, weight gain despite normal diet, cold intolerance, constipation, brain fog, brittle nails, hair thinning, depression.", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 630}, {"id": "thyroid_tsh_panel_chunk_2", "text": "e, weight gain despite normal diet, cold intolerance, constipation, brain fog, brittle nails, hair thinning, depression.\n  - **Most Common Cause:** Hashimoto's thyroiditis (autoimmune destruction of thyroid tissue).\n  - **Subclinical Hypothyroidism:** TSH is mildly elevated (4.5 - 10.0 mIU/L) while Free T4 remains in normal range. Often monitored unless symptomatic or pregnant.\n- **Low TSH (< 0.40 mIU/L) \u2014 Overactive Thyroid (Hyperthyroidism):**\n  - The pituitary stops signaling because the body is flooded with excess thyroid hormone.\n  - **Common Symptoms:** Rapid heart rate (tachycardia), anxiety, tremors, heat intolerance, unexplained weight loss, diarrhea, insomnia.", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 678}, {"id": "thyroid_tsh_panel_chunk_3", "text": "toms:** Rapid heart rate (tachycardia), anxiety, tremors, heat intolerance, unexplained weight loss, diarrhea, insomnia.\n  - **Most Common Cause:** Graves' disease or toxic multinodular goiter.\n\n### Free Thyroxine (Free T4)\n- **Standard Reference Range:** 0.8 to 1.8 ng/dL\n- **Significance:** The active, unbound form of T4 circulating in the blood. Free T4 directly reflects the hormone available to body tissues.\n- **Low Free T4 + High TSH:** Confirms overt primary hypothyroidism. Treatment typically involves oral Levothyroxine (Synthroid), taken on an empty stomach 30-60 minutes before breakfast with a full glass of water.\n\n### Free Triiodothyronine (Free T3)", "source": "thyroid_tsh_panel.md", "section": "Free Triiodothyronine (Free T3)", "char_count": 666}, {"id": "thyroid_tsh_panel_chunk_4", "text": "aken on an empty stomach 30-60 minutes before breakfast with a full glass of water.\n\n### Free Triiodothyronine (Free T3)\n- **Standard Reference Range:** 2.3 to 4.2 pg/mL\n- **Significance:** The most biologically potent active thyroid hormone, largely converted from T4 in peripheral tissues (liver and kidneys).", "source": "thyroid_tsh_panel.md", "section": "Free Triiodothyronine (Free T3)", "char_count": 311}, {"id": "discharge_care_protocols_chunk_0", "text": "# Clinical Reference Guide: Hospital Discharge Protocols & Patient Recovery Instructions\n*Source: Joint Commission Hospital Quality & Patient Safety Measures, CMS Discharge Guidelines*\n*Target Audience: Post-Hospitalization Patient Guidance & Nursing Review*\n\n## 1. General Post-Discharge Recovery Principles\nHospital discharge represents a vulnerable transition period. Adverse events occur in approximately 20% of patients within 30 days of leaving the hospital, with medication discrepancies and unrecognized infection being the leading causes.\n\n---\n\n## 2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "source": "discharge_care_protocols.md", "section": "2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "char_count": 634}, {"id": "discharge_care_protocols_chunk_1", "text": "fection being the leading causes.\n\n---\n\n## 2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)\nPatients and caregivers must immediately seek emergency evaluation if any of the following occur:\n- **Cardiovascular / Pulmonary:**\n  - Sudden, crushing chest pain or pressure radiating to the jaw, neck, left arm, or back.\n  - Acute severe shortness of breath or sudden inability to speak in full sentences.\n  - Coughing up pink frothy sputum or frank blood.\n  - Sudden fainting (syncope) or loss of consciousness.\n- **Neurological (Signs of Stroke - FAST):**\n  - Sudden facial droop, arm weakness or numbness, or slurred/incomprehensible speech.", "source": "discharge_care_protocols.md", "section": "2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "char_count": 667}, {"id": "discharge_care_protocols_chunk_2", "text": "gical (Signs of Stroke - FAST):**\n  - Sudden facial droop, arm weakness or numbness, or slurred/incomprehensible speech.\n  - Sudden severe \"thunderclap\" headache unlike any previous headache.\n- **Thromboembolic (Blood Clot / DVT / PE):**\n  - Asymmetric swelling, intense warmth, redness, and tenderness in one calf or thigh.\n\n---\n\n## 3. Urgent Warning Signs Requiring Same-Day Clinic Contact\n- **Infection Markers:**\n  - Temperature >= 100.4\u00b0F (38.0\u00b0C) or chills.\n  - Surgical incision showing expanding erythema (redness spreading > 1 inch from incision edge), warmth, increased swelling, or purulent (yellow/green/foul-smelling) drainage.\n- **Fluid & Gastrointestinal:**", "source": "discharge_care_protocols.md", "section": "3. Urgent Warning Signs Requiring Same-Day Clinic Contact", "char_count": 672}, {"id": "discharge_care_protocols_chunk_3", "text": "on edge), warmth, increased swelling, or purulent (yellow/green/foul-smelling) drainage.\n- **Fluid & Gastrointestinal:**\n  - Inability to keep fluids down for > 24 hours due to nausea or vomiting.\n  - Rapid unexplained weight gain (> 3 lbs in 24 hours or 5 lbs in 1 week), especially in heart failure patients (flags fluid retention).\n  - Dark, tarry, black stools (melena) or bright red rectal bleeding.\n\n---\n\n## 4. Medication Reconciliation & Safe Administration Rules\n- **Dual Antiplatelet Therapy (DAPT) Post-Cardiac Stent:**", "source": "discharge_care_protocols.md", "section": "4. Medication Reconciliation & Safe Administration Rules", "char_count": 529}, {"id": "discharge_care_protocols_chunk_4", "text": "## 4. Medication Reconciliation & Safe Administration Rules\n- **Dual Antiplatelet Therapy (DAPT) Post-Cardiac Stent:**\n  - If a coronary stent was placed, medications like Aspirin plus Clopidogrel (Plavix), Ticagrelor (Brilinta), or Prasugrel MUST NEVER be stopped abruptly without consulting the interventional cardiologist. Abrupt cessation carries a high risk of catastrophic acute stent thrombosis.\n- **Pain Management (Opioids vs. NSAIDs):**\n  - Do not exceed 3,000 mg of Acetaminophen (Tylenol) in 24 hours from all sources combined (many prescription opioid combination pills, such as Norco or Percocet, already contain 325 mg of Acetaminophen).", "source": "discharge_care_protocols.md", "section": "4. Medication Reconciliation & Safe Administration Rules", "char_count": 652}, {"id": "discharge_care_protocols_chunk_5", "text": "mbined (many prescription opioid combination pills, such as Norco or Percocet, already contain 325 mg of Acetaminophen).\n  - Avoid NSAIDs (Ibuprofen, Naproxen) if patient has kidney disease, history of stomach ulcers, or is taking blood thinners.\n- **Antibiotic Stewardship:**\n  - Complete the full prescribed course of antibiotics even if feeling 100% improved, unless instructed otherwise by a physician.\n\n---\n\n## 5. Activity Restrictions & Wound Care\n- **Lifting Restrictions:** No lifting objects heavier than 10 lbs (roughly a gallon of milk) for 2 to 4 weeks post-abdominal or cardiac surgery.", "source": "discharge_care_protocols.md", "section": "5. Activity Restrictions & Wound Care", "char_count": 599}, {"id": "discharge_care_protocols_chunk_6", "text": "** No lifting objects heavier than 10 lbs (roughly a gallon of milk) for 2 to 4 weeks post-abdominal or cardiac surgery.\n- **Showering vs. Bathing:** Showering with mild soap and gentle patting dry is generally permitted after 48 hours; do NOT submerge incision in baths, pools, or hot tubs until cleared by the surgeon.", "source": "discharge_care_protocols.md", "section": "5. Activity Restrictions & Wound Care", "char_count": 320}, {"id": "cbc_blood_count_chunk_0", "text": "# Clinical Reference Guide: Complete Blood Count (CBC) with Differential\n*Source: NIH National Heart, Lung, and Blood Institute (NHLBI) & CDC Reference Lab*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Complete Blood Count\nThe Complete Blood Count (CBC) evaluates cellular components circulating in blood: Red Blood Cells (oxygen transport), White Blood Cells (immune defense), and Platelets (blood clotting).\n\n---\n\n## 2. Red Blood Cell Indices (Anemia & Oxygen Delivery)\n\n### Red Blood Cell Count (RBC)\n- **Standard Reference Range:**\n  - Adult Males: 4.35 to 5.65 million cells/mcL\n  - Adult Females: 3.92 to 5.13 million cells/mcL", "source": "cbc_blood_count.md", "section": "Red Blood Cell Count (RBC)", "char_count": 677}, {"id": "cbc_blood_count_chunk_1", "text": "ard Reference Range:**\n  - Adult Males: 4.35 to 5.65 million cells/mcL\n  - Adult Females: 3.92 to 5.13 million cells/mcL\n- **Low Count:** Anemia, active blood loss, bone marrow suppression, nutritional deficiencies (Iron, B12, Folate).\n- **High Count (Erythrocytosis):** Chronic low oxygen (smoking, COPD, sleep apnea), high altitude, polycythemia vera, or hemoconcentration due to dehydration.\n\n### Hemoglobin (Hgb)\n- **Standard Reference Range:**\n  - Adult Males: 13.2 to 16.6 g/dL\n  - Adult Females: 11.6 to 15.0 g/dL\n- **Mild Anemia (10.0 - 11.5 g/dL):** May cause mild fatigue, pale skin, slight shortness of breath with strenuous exertion.", "source": "cbc_blood_count.md", "section": "Hemoglobin (Hgb)", "char_count": 645}, {"id": "cbc_blood_count_chunk_2", "text": "Mild Anemia (10.0 - 11.5 g/dL):** May cause mild fatigue, pale skin, slight shortness of breath with strenuous exertion.\n- **Moderate to Severe Anemia (< 8.0 g/dL):** Palpitations, dizziness, resting shortness of breath. Requires physician evaluation.\n- **Critical Threshold (< 7.0 g/dL):** Typically warrants hospital admission and packed red blood cell transfusion evaluation.\n\n### Hematocrit (Hct)\n- **Standard Reference Range:**\n  - Adult Males: 38.3% to 48.6%\n  - Adult Females: 35.5% to 44.9%\n- **Definition:** The percentage of total blood volume made up of red blood cells (typically ~3 times the hemoglobin level).\n\n### Mean Corpuscular Volume (MCV)", "source": "cbc_blood_count.md", "section": "Mean Corpuscular Volume (MCV)", "char_count": 658}, {"id": "cbc_blood_count_chunk_3", "text": "al blood volume made up of red blood cells (typically ~3 times the hemoglobin level).\n\n### Mean Corpuscular Volume (MCV)\n- **Standard Reference Range:** 80 to 96 fL (femtoliters)\n- **Microcytic (MCV < 80 fL):** Small red cells. Primary causes: Iron deficiency anemia, Thalassemia trait, Anemia of chronic disease.\n- **Normocytic (MCV 80 - 96 fL):** Acute blood loss, kidney failure, early nutritional deficiency.\n- **Macrocytic (MCV > 100 fL):** Large red cells. Primary causes: Vitamin B12 deficiency, Folate deficiency, alcoholism, liver disease, hypothyroid state, certain chemotherapies.\n\n---\n\n## 3. White Blood Cells & Differential (Immune System)\n\n### Total White Blood Cell Count (WBC)", "source": "cbc_blood_count.md", "section": "Total White Blood Cell Count (WBC)", "char_count": 692}, {"id": "cbc_blood_count_chunk_4", "text": "ain chemotherapies.\n\n---\n\n## 3. White Blood Cells & Differential (Immune System)\n\n### Total White Blood Cell Count (WBC)\n- **Standard Reference Range:** 4,000 to 11,000 cells/mcL (4.0 - 11.0 x 10^3 / mcL)\n- **Leukocytosis (WBC > 11,000):** Bacterial infection, acute viral infection, systemic inflammation, severe physical/emotional stress, steroid medication (e.g. Prednisone). Mild elevation (11,000 - 14,000) during or right after an upper respiratory infection or dental work is common and reactive.\n- **Leukopenia (WBC < 4,000):** Viral infections (such as influenza, COVID-19, HIV), autoimmune diseases (lupus), bone marrow disorders, or drug side effects.", "source": "cbc_blood_count.md", "section": "Total White Blood Cell Count (WBC)", "char_count": 662}, {"id": "cbc_blood_count_chunk_5", "text": "infections (such as influenza, COVID-19, HIV), autoimmune diseases (lupus), bone marrow disorders, or drug side effects.\n- **Critical Threshold (< 1,500):** Substantial risk of opportunistic infection; requires isolation precautions.\n\n### Neutrophils (Absolute & Percentage)\n- **Standard Reference Range:** 40% to 70% (1,500 - 7,500 cells/mcL)\n- **Role:** First responders against bacterial infections. \"Left shift\" or presence of immature bands suggests acute bacterial response.\n\n### Lymphocytes\n- **Standard Reference Range:** 20% to 40% (1,000 - 4,800 cells/mcL)", "source": "cbc_blood_count.md", "section": "Lymphocytes", "char_count": 566}, {"id": "cbc_blood_count_chunk_6", "text": "suggests acute bacterial response.\n\n### Lymphocytes\n- **Standard Reference Range:** 20% to 40% (1,000 - 4,800 cells/mcL)\n- **Role:** Combat viral pathogens (T cells, B cells, NK cells). Elevated during mononucleosis, viral illnesses, or chronic lymphocytic conditions.\n\n### Eosinophils\n- **Standard Reference Range:** 1% to 4% (50 - 500 cells/mcL)\n- **Elevated in:** Allergic conditions (asthma, eczema, hay fever), parasitic infections, eosinophilic esophagitis, or drug reactions.\n\n---\n\n## 4. Platelets (Coagulation & Clotting)\n\n### Platelet Count\n- **Standard Reference Range:** 150,000 to 450,000 cells/mcL\n- **Thrombocytopenia (Low Platelets < 150,000):**", "source": "cbc_blood_count.md", "section": "Platelet Count", "char_count": 660}, {"id": "cbc_blood_count_chunk_7", "text": "let Count\n- **Standard Reference Range:** 150,000 to 450,000 cells/mcL\n- **Thrombocytopenia (Low Platelets < 150,000):**\n  - **100,000 - 149,000:** Mild; often asymptomatic, common in viral recovery or gestational thrombocytopenia.\n  - **50,000 - 99,000:** Moderate; minor bruising, petechiae, prolonged bleeding from cuts.\n  - **< 20,000:** Severe; high risk of spontaneous mucosal or intracranial bleeding. Urgent medical management needed.\n- **Thrombocytosis (High Platelets > 450,000):** Reactive (post-infection, iron deficiency, post-splenectomy) or primary essential thrombocythemia.", "source": "cbc_blood_count.md", "section": "Platelet Count", "char_count": 590}, {"id": "metabolic_panel_cmp_chunk_0", "text": "# Clinical Reference Guide: Comprehensive Metabolic Panel (CMP)\n*Source: NIH MedlinePlus & Clinical Chemistry Reference Standards (AACC)*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Comprehensive Metabolic Panel\nThe Comprehensive Metabolic Panel (CMP) is a blood test consisting of 14 separate measurements. It evaluates kidney function, liver function, blood sugar levels, electrolyte balance, and acid/base balance in the blood.\n\n---\n\n## 2. Kidney Function Biomarkers\n\n### Blood Urea Nitrogen (BUN)\n- **Standard Reference Range:** 7 to 20 mg/dL", "source": "metabolic_panel_cmp.md", "section": "Blood Urea Nitrogen (BUN)", "char_count": 591}, {"id": "metabolic_panel_cmp_chunk_1", "text": "blood.\n\n---\n\n## 2. Kidney Function Biomarkers\n\n### Blood Urea Nitrogen (BUN)\n- **Standard Reference Range:** 7 to 20 mg/dL\n- **What it measures:** The amount of nitrogen in the blood that comes from the waste product urea, produced in the liver and eliminated by the kidneys.\n- **High Levels (Azotemia):** May indicate impaired renal filtration, acute kidney injury, congestive heart failure, high protein intake, gastrointestinal bleeding, or severe dehydration. Dehydration is the most frequent benign cause of mildly elevated BUN with a normal creatinine.\n- **Low Levels:** Seen in severe liver disease, malnutrition, low-protein diets, or overhydration.\n\n### Serum Creatinine", "source": "metabolic_panel_cmp.md", "section": "Serum Creatinine", "char_count": 677}, {"id": "metabolic_panel_cmp_chunk_2", "text": "- **Low Levels:** Seen in severe liver disease, malnutrition, low-protein diets, or overhydration.\n\n### Serum Creatinine\n- **Standard Reference Range:** 0.6 to 1.3 mg/dL (adult males: 0.7 - 1.3 mg/dL; adult females: 0.5 - 1.1 mg/dL)\n- **What it measures:** A breakdown byproduct of creatine phosphate in skeletal muscle tissue. Because healthy kidneys filter creatinine at a constant rate, it is the primary direct indicator of renal filtering capability.\n- **High Levels:** Indicates reduced glomerular filtration, intrinsic kidney disease, urinary tract obstruction, or intense strenuous weightlifting (temporary).\n- **Low Levels:** Decreased muscle mass, myasthenia gravis, or advanced age.", "source": "metabolic_panel_cmp.md", "section": "Estimated Glomerular Filtration Rate (eGFR)", "char_count": 693}, {"id": "metabolic_panel_cmp_chunk_3", "text": "tense strenuous weightlifting (temporary).\n- **Low Levels:** Decreased muscle mass, myasthenia gravis, or advanced age.\n\n### Estimated Glomerular Filtration Rate (eGFR)\n- **Standard Reference Range:** Greater than 60 mL/min/1.73 m\u00b2 (Normal baseline: 90 - 120 mL/min/1.73 m\u00b2)\n- **Interpretation:**\n  - **> 90 mL/min:** Normal kidney function.\n  - **60 - 89 mL/min:** Mildly decreased kidney filtration; common with normal aging if no protein is in the urine.\n  - **45 - 59 mL/min (Stage 3a CKD):** Moderate reduction in kidney function. Requires physician review, medication adjustments, and hydration assessment.", "source": "metabolic_panel_cmp.md", "section": "Estimated Glomerular Filtration Rate (eGFR)", "char_count": 612}, {"id": "metabolic_panel_cmp_chunk_4", "text": "):** Moderate reduction in kidney function. Requires physician review, medication adjustments, and hydration assessment.\n  - **15 - 29 mL/min (Stage 4 CKD):** Severe kidney impairment. Immediate nephrology referral required.\n  - **< 15 mL/min:** Kidney failure.\n\n---\n\n## 3. Electrolytes & Fluid Balance\n\n### Sodium (Na+)\n- **Standard Reference Range:** 135 to 145 mEq/L\n- **High (Hypernatremia):** Inadequate water intake, excessive sweating, diuretic therapy, diabetes insipidus.", "source": "metabolic_panel_cmp.md", "section": "Sodium (Na+)", "char_count": 480}, {"id": "metabolic_panel_cmp_chunk_5", "text": "145 mEq/L\n- **High (Hypernatremia):** Inadequate water intake, excessive sweating, diuretic therapy, diabetes insipidus.\n- **Low (Hyponatremia):** Excess water retention, heart failure, cirrhosis, SIADH, vomiting/diarrhea. Mild hyponatremia (130-134 mEq/L) often presents with mild fatigue, nausea, or headache. Severe drops (< 125 mEq/L) are medical emergencies.\n\n### Potassium (K+)\n- **Standard Reference Range:** 3.5 to 5.2 mEq/L\n- **High (Hyperkalemia):** Kidney dysfunction, ACE inhibitors, ARBs, potassium-sparing diuretics, tissue trauma. Levels above 6.0 mEq/L can cause fatal cardiac arrhythmias and require urgent attention.", "source": "metabolic_panel_cmp.md", "section": "Potassium (K+)", "char_count": 634}, {"id": "metabolic_panel_cmp_chunk_6", "text": "aring diuretics, tissue trauma. Levels above 6.0 mEq/L can cause fatal cardiac arrhythmias and require urgent attention.\n- **Low (Hypokalemia):** Diuretics (\"water pills\"), prolonged vomiting, diarrhea, insufficient dietary intake. Can cause muscle cramps, weakness, and cardiac palpitations.\n\n### Carbon Dioxide / Bicarbonate (CO2)\n- **Standard Reference Range:** 22 to 29 mEq/L\n- **What it measures:** The buffering capacity of blood and metabolic acid-base status.\n\n### Calcium\n- **Standard Reference Range:** 8.5 to 10.2 mg/dL\n- **Clinical Significance:** Crucial for bone health, neuromuscular transmission, and cardiac contractility. Regulated by parathyroid hormone (PTH) and Vitamin D.\n\n---", "source": "metabolic_panel_cmp.md", "section": "4. Blood Sugar / Glycemic Marker", "char_count": 698}, {"id": "metabolic_panel_cmp_chunk_7", "text": "alth, neuromuscular transmission, and cardiac contractility. Regulated by parathyroid hormone (PTH) and Vitamin D.\n\n---\n\n## 4. Blood Sugar / Glycemic Marker\n\n### Fasting Blood Glucose\n- **Standard Reference Range:** 70 to 99 mg/dL (after an 8-hour overnight fast)\n- **Impaired Fasting Glucose (Prediabetes):** 100 to 125 mg/dL\n- **Diabetes Diagnostic Threshold:** 126 mg/dL or higher on two separate occasions\n- **Hypoglycemia (< 70 mg/dL):** Causes shakiness, sweating, anxiety, confusion. Immediate carbohydrate ingestion required.\n\n---\n\n## 5. Liver Function & Protein Biomarkers\n\n### Alanine Aminotransferase (ALT)\n- **Standard Reference Range:** 7 to 56 U/L", "source": "metabolic_panel_cmp.md", "section": "Alanine Aminotransferase (ALT)", "char_count": 661}, {"id": "metabolic_panel_cmp_chunk_8", "text": "# 5. Liver Function & Protein Biomarkers\n\n### Alanine Aminotransferase (ALT)\n- **Standard Reference Range:** 7 to 56 U/L\n- **Significance:** Enzyme primarily found in liver cells (hepatocytes). Released into the bloodstream during liver inflammation or injury.\n- **Mild Elevation (1x to 3x normal):** Non-alcoholic fatty liver disease (NAFLD), alcohol consumption, vigorous unaccustomed exercise, statin medications, or acetaminophen use.\n- **Marked Elevation (> 10x normal):** Acute viral hepatitis, ischemic liver injury, or toxin ingestion.\n\n### Aspartate Aminotransferase (AST)\n- **Standard Reference Range:** 10 to 40 U/L", "source": "metabolic_panel_cmp.md", "section": "Aspartate Aminotransferase (AST)", "char_count": 626}, {"id": "metabolic_panel_cmp_chunk_9", "text": "mic liver injury, or toxin ingestion.\n\n### Aspartate Aminotransferase (AST)\n- **Standard Reference Range:** 10 to 40 U/L\n- **Significance:** Found in liver, heart, and skeletal muscle. An AST/ALT ratio > 2.0 often suggests alcohol-induced liver stress.\n\n### Alkaline Phosphatase (ALP)\n- **Standard Reference Range:** 44 to 147 U/L\n- **Significance:** Found in bile ducts and bone. High ALP with elevated GGT indicates biliary blockage; high ALP with normal GGT suggests bone remodeling/growth.\n\n### Total Bilirubin\n- **Standard Reference Range:** 0.2 to 1.2 mg/dL", "source": "metabolic_panel_cmp.md", "section": "Total Bilirubin", "char_count": 563}, {"id": "metabolic_panel_cmp_chunk_10", "text": "P with normal GGT suggests bone remodeling/growth.\n\n### Total Bilirubin\n- **Standard Reference Range:** 0.2 to 1.2 mg/dL\n- **Significance:** Byproduct of red blood cell breakdown. Levels > 2.5 mg/dL cause jaundice (yellowing of eyes and skin). Mild isolated elevation (1.3 - 2.0 mg/dL) with normal liver enzymes is commonly Gilbert's syndrome, a benign genetic trait.\n\n### Albumin & Total Protein\n- **Albumin Reference Range:** 3.4 to 5.4 g/dL\n- **Significance:** Main protein produced by the liver, maintains oncotic pressure. Low albumin may reflect chronic illness, malnutrition, nephrotic syndrome, or chronic liver disease.", "source": "metabolic_panel_cmp.md", "section": "Albumin & Total Protein", "char_count": 628}];
     const MOCK_REPORTS = {"sample_cardiac_discharge": "ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY\nPatient: Robert Miller | Age: 62 | Sex: Male | MRN: 9482104\nAdmit Date: 2026-11-08 | Discharge Date: 2026-11-12\nAttending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)\n\nDISCHARGE DIAGNOSES:\n1. Non-ST Elevation Myocardial Infarction (NSTEMI)\n2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.\n3. Essential Hypertension, moderate.\n4. Hyperlipidemia, uncontrolled.\n\nPROCEDURE PERFORMED:\nLeft heart catheterization, coronary angiography, balloon angioplasty, and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal vascular closure device in right common femoral artery.\n\nHOSPITAL COURSE SUMMARY:\nPatient presented with sudden retrosternal squeezing chest pressure. Troponin-I peaked at 4.2 ng/mL. Taken emergently to cardiac catheterization laboratory. Post-procedure telemetry was unremarkable with no recurrent angina, arrhythmia, or vascular access complications. Patient was ambulating well on day of discharge.\n\nDISCHARGE MEDICATIONS:\n1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).\n2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.\n3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime (High-intensity statin therapy).\n4. Metoprolol Tartrate 25 mg oral twice daily with meals.\n5. Lisinopril 10 mg oral daily.\n6. Nitroglycerin 0.4 mg sublingual tablet PRN chest pain (Take 1 tablet every 5 min up to 3 doses; call 911 if pain persists after first dose).\n\nPOST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:\n- Right groin access site: Keep clean and dry. No soaking in tubs, swimming, or hot tubs for 1 week. Showering permitted after 48 hours.\n- Activity restriction: No heavy lifting (> 10 lbs) or strenuous aerobic exertion for 7 days.\n- Red Flag Emergency Warnings: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or rapid swelling/bleeding at groin puncture site.\n- Contact clinic if temperature exceeds 100.4 F or if you notice spreading redness at puncture site.\n", "sample_annual_checkup_labs": "PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT\nPatient Name: Jane Doe | DOB: 1978-04-12 | Age: 48 | Sex: Female\nOrdering Physician: Dr. Marcus Vance, MD (Internal Medicine)\nCollection Date: 2026-10-24 07:45 AM | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\n\n-- COMPLETE BLOOD COUNT (CBC) --\nWhite Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL\nRed Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL\nHemoglobin                      13.4         12.0 - 15.5 g/dL\nHematocrit                      39.8         37.0 - 48.0 %\nMean Corpuscular Vol (MCV)      88.2         80.0 - 96.0 fL\nPlatelets                       245          150 - 450 10^3/uL\n\n-- COMPREHENSIVE METABOLIC PANEL (CMP) --\nGlucose, Fasting                112          70 - 99 mg/dL       [HIGH]\nBlood Urea Nitrogen (BUN)       16           7 - 20 mg/dL\nCreatinine, Serum               0.82         0.50 - 1.10 mg/dL\neGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2\nSodium                          140          135 - 145 mEq/L\nPotassium                       4.2          3.5 - 5.1 mEq/L\nChloride                        102          96 - 106 mEq/L\nCarbon Dioxide (CO2)            25           22 - 29 mEq/L\nCalcium                         9.4          8.5 - 10.2 mg/dL\nTotal Protein                   7.1          6.0 - 8.3 g/dL\nAlbumin                         4.3          3.5 - 5.0 g/dL\nBilirubin, Total                0.6          0.2 - 1.2 mg/dL\nAlkaline Phosphatase (ALP)      72           44 - 147 U/L\nAST (SGOT)                      34           10 - 40 U/L\nALT (SGPT)                      52           7 - 45 U/L          [HIGH]\n\n-- LIPID & METABOLIC PANEL --\nCholesterol, Total              224          < 200 mg/dL         [HIGH]\nTriglycerides                   188          < 150 mg/dL         [HIGH]\nHDL Cholesterol                 44           > 50 mg/dL          [LOW]\nLDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]\nHemoglobin A1c (HbA1c)          5.9          < 5.7 %             [HIGH]\n\n-- THYROID STIMULATING HORMONE --\nTSH, 3rd Generation             2.14         0.45 - 4.50 uIU/mL\n\nPhysician Clinical Notes:\nPatient reports mild fatigue and sedentary lifestyle over past 6 months. Non-smoker.\nBlood pressure today: 128/82 mmHg. BMI: 28.4. Please review metabolic indices and diet.\n", "sample_kidney_diabetic_labs": "PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP\nPatient: David Hernandez | Age: 57 | Sex: Male\nOrdering Physician: Dr. Elena Rostova, MD (Nephrology)\nCollection Date: 2026-10-18 | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\nGlucose, Fasting                148          70 - 99 mg/dL       [HIGH]\nHemoglobin A1c                  7.8          < 5.7 %             [HIGH]\nSerum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]\neGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]\nBlood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]\nBUN/Creatinine Ratio            17.3         10 - 20\nPotassium                       3.3          3.5 - 5.1 mEq/L     [LOW]\nSodium                          138          135 - 145 mEq/L\nCalcium                         8.9          8.5 - 10.2 mg/dL\nAlbumin, Serum                  3.8          3.5 - 5.0 g/dL\nTotal Cholesterol               194          < 200 mg/dL\nTriglycerides                   210          < 150 mg/dL         [HIGH]\n\nPhysician Clinical Notes:\nPatient has known 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted, likely secondary to hydrochlorothiazide. Review hydration, dietary potassium, and glycemic control.\n", "annual_checkup": "PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT\nPatient Name: Jane Doe | DOB: 1978-04-12 | Age: 48 | Sex: Female\nOrdering Physician: Dr. Marcus Vance, MD (Internal Medicine)\nCollection Date: 2026-10-24 07:45 AM | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\n\n-- COMPLETE BLOOD COUNT (CBC) --\nWhite Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL\nRed Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL\nHemoglobin                      13.4         12.0 - 15.5 g/dL\nHematocrit                      39.8         37.0 - 48.0 %\nMean Corpuscular Vol (MCV)      88.2         80.0 - 96.0 fL\nPlatelets                       245          150 - 450 10^3/uL\n\n-- COMPREHENSIVE METABOLIC PANEL (CMP) --\nGlucose, Fasting                112          70 - 99 mg/dL       [HIGH]\nBlood Urea Nitrogen (BUN)       16           7 - 20 mg/dL\nCreatinine, Serum               0.82         0.50 - 1.10 mg/dL\neGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2\nSodium                          140          135 - 145 mEq/L\nPotassium                       4.2          3.5 - 5.1 mEq/L\nChloride                        102          96 - 106 mEq/L\nCarbon Dioxide (CO2)            25           22 - 29 mEq/L\nCalcium                         9.4          8.5 - 10.2 mg/dL\nTotal Protein                   7.1          6.0 - 8.3 g/dL\nAlbumin                         4.3          3.5 - 5.0 g/dL\nBilirubin, Total                0.6          0.2 - 1.2 mg/dL\nAlkaline Phosphatase (ALP)      72           44 - 147 U/L\nAST (SGOT)                      34           10 - 40 U/L\nALT (SGPT)                      52           7 - 45 U/L          [HIGH]\n\n-- LIPID & METABOLIC PANEL --\nCholesterol, Total              224          < 200 mg/dL         [HIGH]\nTriglycerides                   188          < 150 mg/dL         [HIGH]\nHDL Cholesterol                 44           > 50 mg/dL          [LOW]\nLDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]\nHemoglobin A1c (HbA1c)          5.9          < 5.7 %             [HIGH]\n\n-- THYROID STIMULATING HORMONE --\nTSH, 3rd Generation             2.14         0.45 - 4.50 uIU/mL\n\nPhysician Clinical Notes:\nPatient reports mild fatigue and sedentary lifestyle over past 6 months. Non-smoker.\nBlood pressure today: 128/82 mmHg. BMI: 28.4. Please review metabolic indices and diet.\n", "cardiac_discharge": "ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY\nPatient: Robert Miller | Age: 62 | Sex: Male | MRN: 9482104\nAdmit Date: 2026-11-08 | Discharge Date: 2026-11-12\nAttending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)\n\nDISCHARGE DIAGNOSES:\n1. Non-ST Elevation Myocardial Infarction (NSTEMI)\n2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.\n3. Essential Hypertension, moderate.\n4. Hyperlipidemia, uncontrolled.\n\nPROCEDURE PERFORMED:\nLeft heart catheterization, coronary angiography, balloon angioplasty, and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal vascular closure device in right common femoral artery.\n\nHOSPITAL COURSE SUMMARY:\nPatient presented with sudden retrosternal squeezing chest pressure. Troponin-I peaked at 4.2 ng/mL. Taken emergently to cardiac catheterization laboratory. Post-procedure telemetry was unremarkable with no recurrent angina, arrhythmia, or vascular access complications. Patient was ambulating well on day of discharge.\n\nDISCHARGE MEDICATIONS:\n1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).\n2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.\n3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime (High-intensity statin therapy).\n4. Metoprolol Tartrate 25 mg oral twice daily with meals.\n5. Lisinopril 10 mg oral daily.\n6. Nitroglycerin 0.4 mg sublingual tablet PRN chest pain (Take 1 tablet every 5 min up to 3 doses; call 911 if pain persists after first dose).\n\nPOST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:\n- Right groin access site: Keep clean and dry. No soaking in tubs, swimming, or hot tubs for 1 week. Showering permitted after 48 hours.\n- Activity restriction: No heavy lifting (> 10 lbs) or strenuous aerobic exertion for 7 days.\n- Red Flag Emergency Warnings: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or rapid swelling/bleeding at groin puncture site.\n- Contact clinic if temperature exceeds 100.4 F or if you notice spreading redness at puncture site.\n", "kidney_diabetic": "PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP\nPatient: David Hernandez | Age: 57 | Sex: Male\nOrdering Physician: Dr. Elena Rostova, MD (Nephrology)\nCollection Date: 2026-10-18 | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\nGlucose, Fasting                148          70 - 99 mg/dL       [HIGH]\nHemoglobin A1c                  7.8          < 5.7 %             [HIGH]\nSerum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]\neGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]\nBlood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]\nBUN/Creatinine Ratio            17.3         10 - 20\nPotassium                       3.3          3.5 - 5.1 mEq/L     [LOW]\nSodium                          138          135 - 145 mEq/L\nCalcium                         8.9          8.5 - 10.2 mg/dL\nAlbumin, Serum                  3.8          3.5 - 5.0 g/dL\nTotal Cholesterol               194          < 200 mg/dL\nTriglycerides                   210          < 150 mg/dL         [HIGH]\n\nPhysician Clinical Notes:\nPatient has known 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted, likely secondary to hydrochlorothiazide. Review hydration, dietary potassium, and glycemic control.\n"};
 
     let knowledgeBase = EMBEDDED_KNOWLEDGE_BASE;
@@ -911,7 +929,10 @@
     // Candidate Groq models in prioritized order
     const GROQ_CANDIDATE_MODELS = [
       'llama-3.3-70b-versatile',
+      'openai/gpt-oss-120b',
+      'openai/gpt-oss-20b',
       'llama-3.1-8b-instant',
+      'qwen-2.5-32b',
       'llama3-70b-8192',
       'llama3-8b-8192',
       'gemma2-9b-it',
@@ -992,16 +1013,17 @@
     function isSupportedChatModel(id) {
       if (!id || typeof id !== 'string') return false;
       const lower = id.toLowerCase();
+      // Block non-chat or audio/utility models
       if (lower.includes('whisper') || lower.includes('guard') || lower.includes('canopy') || 
           lower.includes('tts') || lower.includes('voice') || lower.includes('audio') || 
-          lower.includes('embed') || lower.includes('distil') || lower.includes('gpt-oss') ||
+          lower.includes('embed') || lower.includes('distil') || lower.includes('orpheus') ||
           lower.includes('preview')) {
         return false;
       }
-      return lower.includes('llama-3') || lower.includes('llama3') || 
-             lower.includes('gemma-2') || lower.includes('gemma2') || 
-             lower.includes('mixtral') || lower.includes('qwen-2') ||
-             lower.includes('deepseek-r1');
+      return lower.includes('llama') || lower.includes('gemma') || 
+             lower.includes('mixtral') || lower.includes('qwen') ||
+             lower.includes('deepseek') || lower.includes('gpt-oss') ||
+             lower.includes('comp');
     }
 
     // Groq API Key Handling & Live Validation
@@ -1103,9 +1125,15 @@
             })
           });
 
-          const data = await res.json();
+          let data = null;
+          try {
+            data = await res.json();
+          } catch (jsonErr) {
+            lastError = `Invalid response from Groq: ${jsonErr.message}`;
+            continue;
+          }
 
-          if (res.ok && data.choices && data.choices[0] && data.choices[0].message) {
+          if (res.ok && data && Array.isArray(data.choices) && data.choices[0] && data.choices[0].message) {
             if (sel && sel.value !== targetModel) {
               if (!Array.from(sel.options).some(o => o.value === targetModel)) {
                 const opt = document.createElement('option');
@@ -1118,7 +1146,7 @@
             return data.choices[0].message.content;
           }
 
-          if (data.error && data.error.message) {
+          if (data && data.error && data.error.message) {
             lastError = data.error.message;
             console.warn(`Groq model ${targetModel} error: ${lastError}`);
             continue;
@@ -1139,7 +1167,29 @@
       const q = (query || "").trim();
       const qLower = q.toLowerCase();
 
-      // 1. Conversational Greetings & Small Talk
+      // 1. Farewells & Casual Goodbyes
+      const farewells = ["bye", "byee", "goodbye", "see you", "cya", "exit", "quit", "good night", "take care"];
+      if (farewells.some(f => qLower === f || qLower.startsWith(f + " ") || qLower.startsWith(f + "!"))) {
+        return `### 👋 Goodbye & Take Care!\n\n` +
+          `Thank you for consulting with **ClearCare AI**. Wishing you the best in your health journey!\n\n` +
+          `- If you receive new lab results or have questions about medications in the future, I will be here to help.\n` +
+          `- Remember to keep your scheduled follow-up visits with your primary care physician or specialist.\n\n` +
+          `*Disclaimer: ClearCare AI provides educational health literacy support grounded in clinical guidelines.*`;
+      }
+
+      // 2. Gratitude & Pleasantries
+      const thanks = ["thank you", "thanks", "thx", "thank u", "appreciate it", "great", "awesome", "perfect", "got it", "ok", "okay"];
+      if (thanks.some(t => qLower === t || qLower.startsWith(t + " ") || qLower.startsWith(t + "!"))) {
+        return `### 🩺 You're Very Welcome!\n\n` +
+          `I am glad I could help bring clarity to your clinical questions. Health literacy is an essential part of getting the best medical care.\n\n` +
+          `**Pro-tip for your next doctor's visit:**\n` +
+          `1. Bring a physical copy of your latest lab panel or discharge summary.\n` +
+          `2. Keep a short list of 2–3 specific questions ready so you don't forget during your appointment.\n` +
+          `3. Always ask: *"Are there any lifestyle or dietary adjustments that could help optimize these numbers before considering medication changes?"*\n\n` +
+          `*Feel free to ask about any other specific biomarker (such as ALT, eGFR, LDL, or HbA1c)!*`;
+      }
+
+      // 3. Conversational Greetings & Small Talk
       const greetings = ["hello", "hi", "hey", "good morning", "good evening", "greetings", "who are you", "what can you do", "help"];
       if (greetings.some(g => qLower === g || qLower.startsWith(g + " ") || qLower.startsWith(g + "!"))) {
         return `### 🩺 ClearCare Clinical Assistant\n\n` +
@@ -1151,7 +1201,28 @@
           `*Try asking:* *"Why is my ALT high?"*, *"What does an eGFR of 48 mean?"*, or *"Can I stop Plavix if I feel better?"*`;
       }
 
-      // 2. Medication / Dosage Adjustment Inquiries
+      // 4. Disease Diagnosis / Condition Inquiries (Prevent Guessing Diagnoses)
+      const diagTerms = ["disease", "diagnos", "condition", "what do i have", "what might i have", "am i sick", "illness", "cancer", "infection", "what is wrong with me", "what kind of disease"];
+      if (diagTerms.some(d => qLower.includes(d))) {
+        return `### 🩺 Clinical Decision Support: Why AI Cannot Diagnose Diseases\n\n` +
+          `> ⚠️ **Important Medical Principle:** ClearCare AI is designed strictly for **patient health literacy, laboratory translation, and guideline education**, not formal disease diagnosis.\n\n` +
+          `#### 1. Why Isolated Numbers Do Not Equal a Disease Diagnosis\n` +
+          `In medicine, a laboratory test or biomarker variation is **not a diagnosis on its own**. Physicians interpret numbers within a broader clinical picture:\n` +
+          `- **Clinical Correlation is Essential:** A single number only reflects a biochemical measurement at one moment in time. A licensed physician evaluates it alongside your physical symptoms, medical history, family genetics, medications, and vital signs.\n` +
+          `- **Benign & Temporary Causes:** Most abnormal numbers on routine screening tests reflect reversible, non-disease factors:\n` +
+          `  - **Dehydration / Fluid Shifts:** Elevates BUN, Creatinine, and Hematocrit without kidney damage.\n` +
+          `  - **Recent Exercise or Muscular Exertion:** Temporarily spikes liver transaminases (ALT, AST) due to muscle turnover.\n` +
+          `  - **Dietary Factors:** High-carbohydrate meals or lack of 8-hour fasting alter blood glucose and triglycerides.\n` +
+          `- **Confirmatory Testing Protocol:** Doctors rarely diagnose a chronic disease based on one panel. Guidelines typically mandate repeating the test after 6 to 12 weeks to distinguish transient spikes from true clinical trends.\n\n` +
+          `#### 2. Empowering Questions to Ask Your Doctor:\n` +
+          `1. *"Based on my full medical history and current symptoms, what diagnostic possibilities are you considering?"*\n` +
+          `2. *"Could any of my slightly abnormal numbers be influenced by temporary factors like hydration, recent exercise, or diet?"*\n` +
+          `3. *"Would you recommend a follow-up panel in 6 to 12 weeks to confirm whether this is a consistent baseline?"*\n\n` +
+          `---\n` +
+          `*Grounding: [Source: AACC / CDC Health Literacy and Clinical Pathology Guidelines]*`;
+      }
+
+      // 5. Medication / Dosage Adjustment Inquiries
       if (qLower.includes("medication") || qLower.includes("dose") || qLower.includes("dosage") || qLower.includes("adjust") || qLower.includes("pill") || qLower.includes("prescription")) {
         return `### 🩺 Clinical Guidance: Medication Safety & Lab Values\n\n` +
           `> ⚠️ **Critical Safety Principle:** Never alter, stop, or adjust prescription medication dosages on your own. Any dose adjustment must be directed by your prescribing physician.\n\n` +
@@ -1168,7 +1239,7 @@
           `*Grounding: [Source: Joint Commission & AACC Clinical Pharmacology Standards]*`;
       }
 
-      // 3. Stent / Plavix / DAPT Inquiries
+      // 6. Stent / Plavix / DAPT Inquiries
       if (qLower.includes("plavix") || qLower.includes("stent") || qLower.includes("dapt") || qLower.includes("clopidogrel") || qLower.includes("aspirin")) {
         return `### 🩺 Cardiology Guidance: Stent Care & Antiplatelet Therapy\n\n` +
           `> 🚨 **Critical Warning from ACC/AHA Guidelines:** **NEVER stop Plavix (Clopidogrel) or Aspirin without explicit instruction from your cardiologist.** Stopping early is the #1 cause of catastrophic stent thrombosis (sudden blood clot in the stent), which causes severe heart attacks.\n\n` +
@@ -1184,7 +1255,7 @@
           `*Grounding: [Source: ACC/AHA Guideline for Coronary Artery Revascularization]*`;
       }
 
-      // 4. Case 2 Dedicated Translation: Cardiac Stent Discharge Summary
+      // 7. Case 2 Dedicated Translation: Cardiac Stent Discharge Summary
       if (mode === "report" && (qLower.includes("stent") || qLower.includes("plavix") || qLower.includes("angio-seal") || qLower.includes("synergy") || qLower.includes("nstemi"))) {
         return `### 🩺 ClearCare Clinical Translation: Post-PCI Stent Discharge Summary\n\n` +
           `#### 1. Executive Summary\n` +
@@ -1200,7 +1271,7 @@
           `| **Nitroglycerin** | 0.4 mg sublingual | Emergency angina relief | Dissolve under tongue PRN chest pain. Call 911 if pain persists 5 min after 1st dose. |\n\n` +
           `#### 3. Post-Discharge Care & Emergency Red Flags\n` +
           `- **Groin Vascular Access Site (Angio-Seal):** Keep puncture site clean and dry. Showering permitted after 48 hours; **strictly no soaking in bathtubs or swimming pools for 7 days**.\n` +
-          `- **Physical Activity:** No lifting objects heavier than 10 lbs or vigorous pushing/pulling for 7 days.\n` +
+          `- **Activity restriction:** No heavy lifting objects heavier than 10 lbs or vigorous pushing/pulling for 7 days.\n` +
           `- **🚨 Call 911 Immediately If You Experience:**\n` +
           `  - Recurrent retrosternal chest pressure, tightness, squeezing, or radiating pain to jaw/arm.\n` +
           `  - Sudden severe shortness of breath or dizziness.\n` +
@@ -1216,7 +1287,7 @@
           `*Medical Disclaimer: ClearCare AI provides educational clinical health literacy support and does not replace professional medical diagnosis or personalized physician advice.*`;
       }
 
-      // 5. Case 3 Dedicated Translation: Kidney & Diabetes Monitor
+      // 8. Case 3 Dedicated Translation: Kidney & Diabetes Monitor
       if (mode === "report" && (qLower.includes("egfr") || qLower.includes("creatinine") || qLower.includes("nephrology")) && (qLower.includes("hba1c") || qLower.includes("glucose"))) {
         return `### 🩺 ClearCare Clinical Translation: Nephrology & Diabetes Follow-Up\n\n` +
           `#### 1. Executive Summary\n` +
@@ -1245,7 +1316,7 @@
           `*Medical Disclaimer: ClearCare AI provides educational clinical health literacy support and does not replace professional medical diagnosis or personalized physician advice.*`;
       }
 
-      // 6. Case 1 Dedicated Translation: Routine Annual Checkup
+      // 9. Case 1 Dedicated Translation: Routine Annual Checkup
       if (mode === "report" && (qLower.includes("jane doe") || (qLower.includes("ldl") && qLower.includes("alt") && qLower.includes("142")))) {
         return `### 🩺 ClearCare Clinical Translation: Annual Health Checkup\n\n` +
           `#### 1. Executive Summary\n` +
@@ -1272,7 +1343,80 @@
           `*Medical Disclaimer: ClearCare AI provides educational clinical health literacy support and does not replace professional medical diagnosis or personalized physician advice.*`;
       }
 
-      // 7. General Custom Lab Report Translation Mode
+      // 10. Specific Clinical Organ / Biomarker Queries in Chat Mode
+      if (["egfr", "creatinine", "kidney", "gfr", "renal", "bun"].some(k => qLower.includes(k))) {
+        return `### 🩺 Clinical Guidance: Kidney Function & Filtration (eGFR / Creatinine)\n\n` +
+          `#### 1. Understanding Kidney Filtration Markers\n` +
+          `- **Estimated Glomerular Filtration Rate (eGFR):** Measures how efficiently your kidneys filter waste from the bloodstream. A value **> 60 mL/min/1.73m²** is standard normal.\n` +
+          `- **Stages of Filtration:** An eGFR between 45–59 indicates Stage 3a mild-to-moderate reduction. It is a signal for physician review, hydration monitoring, and medication safety checks.\n` +
+          `- **Serum Creatinine:** A byproduct of normal muscle wear-and-tear cleared by the kidneys. Normal range is typically 0.6 to 1.3 mg/dL.\n\n` +
+          `#### 2. Benign & Modifiable Factors\n` +
+          `- **Dehydration:** Inadequate fluid intake concentrates creatinine in the blood, falsely lowering eGFR.\n` +
+          `- **Medications:** High doses of NSAIDs (ibuprofen, naproxen) constrict renal blood vessels. Inform your doctor if you take these regularly.\n` +
+          `- **Diet & Exercise:** Heavy protein intake or vigorous weight lifting shortly before a blood draw can temporarily elevate serum creatinine.\n\n` +
+          `#### 3. Questions for Your Physician:\n` +
+          `1. *"Could my eGFR reading be affected by dehydration or recent muscle exercise?"*\n` +
+          `2. *"Do any of my current daily prescriptions require kidney-specific dosage review?"*\n` +
+          `3. *"Should we recheck my creatinine and urine albumin in 3 months to monitor stability?"*\n\n` +
+          `---\n` +
+          `*Grounding: [Source: KDIGO Clinical Practice Guideline for Chronic Kidney Disease]*`;
+      }
+
+      if (["alt", "ast", "liver", "sgpt", "sgot", "transaminase", "bilirubin"].some(l => qLower.includes(l))) {
+        return `### 🩺 Clinical Guidance: Liver Transaminases (ALT & AST)\n\n` +
+          `#### 1. What Liver Enzymes Indicate\n` +
+          `- **Alanine Aminotransferase (ALT):** An enzyme primarily concentrated within liver cells (hepatocytes). Standard reference is generally **7 to 45 U/L**.\n` +
+          `- **Mild Elevations (1x to 2x upper limit):** Extremely common on routine health screenings. In most cases, mild elevations do not signify liver disease, but rather temporary cellular metabolic turnover.\n\n` +
+          `#### 2. Common Benign & Lifestyle Causes\n` +
+          `- **Vigorous Physical Exercise:** Weight training or strenuous aerobic workouts within 48–72 hours of blood draw release transaminases from muscle tissues.\n` +
+          `- **Over-the-Counter Medications:** Regular use of Acetaminophen (Tylenol) or NSAIDs.\n` +
+          `- **Alcohol & Diet:** Recent alcohol consumption or a rich meal prior to testing.\n` +
+          `- **Temporary Viral Infections:** Even common colds or mild viruses can temporarily elevate ALT.\n\n` +
+          `#### 3. Questions for Your Doctor:\n` +
+          `1. *"Is my mild ALT elevation consistent with my recent exercise routine or medications?"*\n` +
+          `2. *"Would you recommend a repeat hepatic panel in 8 to 12 weeks to observe if levels return to baseline?"*\n\n` +
+          `---\n` +
+          `*Grounding: [Source: AACC / ACG Clinical Guideline: Evaluation of Abnormal Liver Chemistries]*`;
+      }
+
+      if (["cholesterol", "ldl", "hdl", "triglyceride", "lipid", "ascvd"].some(c => qLower.includes(c))) {
+        return `### 🩺 Clinical Guidance: Lipid Panel & Cardiovascular Goals\n\n` +
+          `#### 1. Key Lipid Fractions & Target Ranges\n` +
+          `- **Low-Density Lipoprotein (LDL-C) — "Bad Cholesterol":** Optimal is **< 100 mg/dL** for standard risk. For individuals with stents, heart disease, or diabetes, the ACC/AHA recommends strict targets of **< 70 mg/dL** (or < 55 mg/dL for very high risk).\n` +
+          `- **High-Density Lipoprotein (HDL-C) — "Good Cholesterol":** Protective lipoprotein that clears excess arterial fat. Desirable is **> 40 mg/dL** in men and **> 50 mg/dL** in women.\n` +
+          `- **Triglycerides:** Normal is **< 150 mg/dL**. Elevated triglycerides often correlate with high dietary sugar, refined carbs, or sedentary lifestyle.\n\n` +
+          `#### 2. Evidence-Based Lifestyle Frontline Therapy\n` +
+          `- **Dietary Optimization:** Emphasize soluble fiber (oats, legumes, psyllium) and healthy unsaturated fats (olive oil, avocado, fish) while limiting saturated animal fats.\n` +
+          `- **Physical Activity:** 150 minutes per week of moderate-intensity aerobic exercise (e.g., 30 minutes brisk walking 5 days/week).\n\n` +
+          `#### 3. Questions for Your Doctor:\n` +
+          `1. *"What is my calculated 10-year Atherosclerotic Cardiovascular Disease (ASCVD) risk score?"*\n` +
+          `2. *"What specific LDL target is right for me, and should we attempt 3 months of dietary modifications first?"*\n\n` +
+          `---\n` +
+          `*Grounding: [Source: ACC/AHA Guideline on the Management of Blood Cholesterol]*`;
+      }
+
+      if (["glucose", "sugar", "hba1c", "a1c", "diabetes", "prediabetes"].some(g => qLower.includes(g))) {
+        return `### 🩺 Clinical Guidance: Glycemic Health & Diabetes Screening\n\n` +
+          `#### 1. Diagnostic Thresholds from ADA Guidelines\n` +
+          `- **Fasting Blood Glucose (after 8h fast):**\n` +
+          `  - Normal: **70 to 99 mg/dL**\n` +
+          `  - Impaired Fasting Glucose (Prediabetes): **100 to 125 mg/dL**\n` +
+          `  - Diagnostic Threshold for Diabetes: **≥ 126 mg/dL** (confirmed on two separate tests)\n` +
+          `- **Hemoglobin A1c (HbA1c):** Measures average blood sugar over the preceding 90 days:\n` +
+          `  - Normal: **< 5.7%**\n` +
+          `  - Prediabetes: **5.7% to 6.4%**\n` +
+          `  - Diabetes: **≥ 6.5%**\n\n` +
+          `#### 2. Benign Spikes & Reversibility\n` +
+          `- **Prediabetes is Reversible:** Clinical trials show that 5–7% intentional body weight reduction and 150 min/week of brisk walking reduce progression risk by over 58%.\n` +
+          `- **Transient Spikes:** Acute psychological stress, poor sleep, or an incomplete fast can elevate a single morning glucose reading.\n\n` +
+          `#### 3. Questions for Your Doctor:\n` +
+          `1. *"Does my HbA1c place me in the prediabetes category, and can we start with a nutrition plan?"*\n` +
+          `2. *"Would working with a registered dietitian or diabetes educator be helpful for me?"*\n\n` +
+          `---\n` +
+          `*Grounding: [Source: ADA Standards of Medical Care in Diabetes]*`;
+      }
+
+      // 11. General Custom Lab Report Translation Mode
       if (mode === "report") {
         const findings = [];
         if (/glucose.*?(1[1-9]\d|[2-9]\d\d)/i.test(q)) {
@@ -1314,23 +1458,20 @@
           `*Medical Disclaimer: ClearCare AI is an educational communication tool and does not provide formal medical diagnosis or prescribe treatment. Always discuss these findings with your licensed healthcare provider.*`;
       }
 
-      // Default Clinical Guidance for General Q&A with Matching Chunks
-      let intro = `### 🩺 Clinical Guidance: Evidence-Based Insights\n\n` +
-        `Based on verified clinical knowledge base (ACC/AHA, AACC, and MedlinePlus guidelines), here is the structured context for **"${q}"**:\n\n`;
-
-      let evidence = retrievedChunks.length > 0 ?
-        retrievedChunks.map((c, i) => `#### [Source ${c.source || 'Guideline'}] (*${c.section || 'General'}*, Match: ${Math.round((c.similarity || 0.85)*100)}%)\n> "${(c.text || '').substring(0, 240)}..."\n`).join('\n') :
-        `*Verified clinical guidelines matched. Please consult your physician for individualized medical advice.*`;
-
-      let questions = `\n\n#### Recommended Questions for Your Doctor:\n` +
-        `1. *"How do these findings correlate with my medical history and current symptoms?"*\n` +
-        `2. *"What lifestyle or dietary modifications would you recommend first?"*\n\n` +
-        `---\n*Disclaimer: ClearCare AI provides educational health literacy support grounded in peer-reviewed clinical guidelines.*`;
-
-      return intro + evidence + questions;
+      // 12. Intelligent Health Literacy Orientation Fallback (Zero Raw Broken Dumps)
+      return `### 🩺 ClearCare Clinical Literacy Assistant\n\n` +
+        `Thank you for asking about **"${q}"**.\n\n` +
+        `As an evidence-based clinical translation tool, ClearCare AI is grounded in verified medical guidelines from **ACC/AHA, AACC, KDIGO, and MedlinePlus**.\n\n` +
+        `**What I can help you explore:**\n` +
+        `- **Comprehensive Metabolic Panels:** Blood Urea Nitrogen (BUN), Creatinine, eGFR, Fasting Glucose, Sodium, Potassium, and Calcium.\n` +
+        `- **Complete Blood Counts (CBC):** White blood cells (WBC), Red blood cells (RBC), Hemoglobin, Hematocrit, and Platelets.\n` +
+        `- **Liver Function Tests:** Alanine Aminotransferase (ALT), Aspartate Aminotransferase (AST), and Bilirubin.\n` +
+        `- **Lipid & Cardiovascular Health:** Total Cholesterol, LDL-C, HDL-C, and Triglycerides.\n` +
+        `- **Hospital Discharge Instructions:** Post-coronary stent care, Dual Antiplatelet Therapy (Aspirin + Plavix), and activity precautions.\n\n` +
+        `*Try asking a specific question like:* *"Why is my ALT high?"*, *"What is a normal eGFR?"*, or *"What are LDL goals?"*, or paste your lab report into **Tab 1: Report Translator** for a full traffic-light breakdown!`;
     }
 
-    function updateKeyStatusUI(hasKey) {
+        function updateKeyStatusUI(hasKey) {
       if (hasKey) {
         keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> <span class="text-emerald-400 font-semibold">Groq Key Set</span>`;
       } else {

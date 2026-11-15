@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClearCare AI — Evidence-Based Clinical Lab &amp; Discharge Translator</title>
+  
+  <!-- Host Grotesk & JetBrains Mono Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS & Font Awesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Host Grotesk"', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            /* 50% Reduced-Black Palette (Deep Mineral Slate) */
+            ground: {
+              DEFAULT: '#1a1d26',
+              alt: '#161922',
+              card: '#202534',
+              hover: '#282f42',
+              border: '#353e53',
+              hairline: '#2d3546',
+            },
+            accent: {
+              DEFAULT: '#f0c45a',
+              hover: '#e5b84c',
+            },
+            btn: {
+              fill: '#ece8df',
+              text: '#040404',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      border-radius: 0px !important; /* Strict 0px sharp corners */
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #1a1d26;
+      color: #faf8f9;
+      font-family: 'Host Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+    }
+    .sharp-card {
+      background-color: #202534;
+      border: 1px solid #353e53;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.35);
+    }
+    .hero-heading {
+      font-size: 45px;
+      line-height: 1.15;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+    @media (max-width: 640px) {
+      .hero-heading {
+        font-size: 34px;
+      }
+    }
+    .ruled-grid > div {
+      border-color: #353e53;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #161922;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #353e53;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #47536d;
+    }
+  </style>
+</head>
+<body class="bg-[#1a1d26] text-[#faf8f9] min-h-screen flex flex-col selection:bg-[#f0c45a] selection:text-black">
+
+  <!-- ========================================================================= -->
+  <!-- 1. SITE HEADER (MASTHEAD)                                                 -->
+  <!-- ========================================================================= -->
+  <header class="border-b border-[#353e53] bg-[#1a1d26]/95 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-[1376px] mx-auto px-6 h-16 flex items-center justify-between">
+      
+      <!-- Brand Row: Mark & Title -->
+      <div class="flex items-center space-x-3.5">
+        <a href="#" class="flex items-center space-x-3 group">
+          <div class="w-9 h-9 bg-[#202534] border border-[#353e53] flex items-center justify-center text-[#f0c45a] font-bold group-hover:border-[#f0c45a] transition">
+            <i class="fas fa-heart-pulse text-base"></i>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-xl font-bold tracking-tight text-[#faf8f9]">ClearCare AI</span>
+            <span class="text-xs text-zinc-400 font-medium hidden sm:inline">Healthcare RAG</span>
+          </div>
+        </a>
+        <span class="ml-1 inline-flex items-center gap-1.5 bg-emerald-950/70 border border-emerald-700/70 text-emerald-300 text-[10px] font-semibold px-2 py-0.5">
+          <span class="w-1.5 h-1.5 bg-emerald-400 animate-pulse"></span>
+          Pipeline Online
+        </span>
+      </div>
+
+      <!-- Full-Width Navigation (4 Links) -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-300">
+        <a href="#comparison" class="hover:text-white transition">RAG vs Standard AI</a>
+        <a href="#guidelines" class="hover:text-white transition">Clinical Standards</a>
+        <a href="#features" class="hover:text-white transition">How It Works</a>
+        <a href="#quickstart" class="hover:text-white transition">Quickstart &amp; Install</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center space-x-3">
+        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="text-xs bg-[#202534] hover:bg-[#282f42] text-zinc-200 px-3.5 py-2 border border-[#353e53] transition flex items-center gap-1.5">
+          <i class="fab fa-github"></i> <span>GitHub</span>
+        </a>
+        <a href="index.html" class="text-xs bg-[#ece8df] hover:bg-white text-[#040404] font-semibold px-4 py-2 transition flex items-center gap-1.5 shadow-sm active:scale-95">
+          <span>Launch Translator</span> <i class="fas fa-arrow-right text-[10px]"></i>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Notice Banner: Patient Safety & Clinical Health Literacy -->
+  <aside class="bg-[#202534] border-b border-[#353e53] py-2 px-6 text-xs text-zinc-300">
+    <div class="max-w-[1376px] mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-[#f0c45a]"><i class="fas fa-shield-halved"></i></span>
+        <span><strong>Patient Health Literacy Decision Support:</strong> Grounded strictly in MedlinePlus, ACC/AHA &amp; AACC clinical consensus. Never gives made-up answers.</span>
+      </div>
+      <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag/blob/main/docs/Mastering_RAG_and_ClearCare_Defense_Guide.md" target="_blank" class="text-[11px] text-[#f0c45a] hover:underline flex items-center gap-1 whitespace-nowrap">
+        <span>Read Technical Defense Guide</span> <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================= -->
+  <!-- 2. HERO (SIGNATURE)                                                       -->
+  <!-- ========================================================================= -->
+  <section class="max-w-[1376px] mx-auto px-6 pt-16 pb-14 lg:pt-24 lg:pb-20 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      
+      <!-- Left Column: Product Headline, Dual Actions, Trust Caption, Install Snippet -->
+      <div class="lg:col-span-7 space-y-7">
+        
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 bg-[#202534] border border-[#353e53] text-xs text-zinc-300 font-mono">
+          <span class="w-2 h-2 bg-[#f0c45a] inline-block"></span>
+          <span>Zero-Hallucination Healthcare RAG</span>
+          <span class="text-zinc-500">|</span>
+          <span class="text-zinc-400">Groq LPU &amp; ChromaDB</span>
+        </div>
+
+        <h1 class="hero-heading text-[#faf8f9]">
+          Medical test results explained in plain English, grounded strictly in clinical science.
+        </h1>
+
+        <p class="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-2xl font-normal">
+          Over 80 million adults feel lost reading laboratory reports and hospital discharge papers. ClearCare AI pairs dense semantic retrieval over official medical guidelines with Groq LPUs to deliver accurate, 8th-grade level explanations with 100% source attribution.
+        </p>
+
+        <!-- Two Actions -->
+        <div class="flex flex-wrap items-center gap-4 pt-1">
+          <a href="#live-demo" class="bg-[#ece8df] hover:bg-white text-[#040404] text-sm font-semibold px-6 py-3.5 flex items-center gap-2 shadow-md transition active:scale-98">
+            <i class="fas fa-wand-magic-sparkles text-xs"></i>
+            <span>Test a Sample Lab Report</span>
+          </a>
+          <a href="#comparison" class="bg-[#202534] hover:bg-[#282f42] text-[#faf8f9] text-sm font-medium px-6 py-3.5 border border-[#353e53] flex items-center gap-2 transition">
+            <i class="fas fa-scale-balanced text-xs text-[#f0c45a]"></i>
+            <span>Why Not Use ChatGPT?</span>
+          </a>
+        </div>
+
+        <!-- Trust Caption -->
+        <div class="pt-3 border-t border-[#353e53] flex items-center gap-3 text-xs text-zinc-400">
+          <i class="fas fa-certificate text-[#f0c45a] text-sm"></i>
+          <span>Verified against peer-reviewed consensus from <strong>MedlinePlus, ACC/AHA, AACC, and The Joint Commission</strong>.</span>
+        </div>
+
+        <!-- Repeat Install Command Snippet -->
+        <div class="pt-1">
+          <div class="flex items-center justify-between bg-[#202534] border border-[#353e53] p-3 max-w-xl font-mono text-xs text-zinc-300">
+            <div class="flex items-center gap-2 overflow-x-auto">
+              <span class="text-[#f0c45a] font-bold">$</span>
+              <span class="text-zinc-200">git clone https://github.com/wageshsharma20/clearcare-healthcare-rag.git &amp;&amp; streamlit run app.py</span>
+            </div>
+            <button onclick="navigator.clipboard.writeText('git clone https://github.com/wageshsharma20/clearcare-healthcare-rag.git && cd healthcare-rag && streamlit run app.py'); alert('Install command copied to clipboard!');" class="ml-3 text-zinc-300 hover:text-white px-2 py-1 bg-[#1a1d26] border border-[#353e53] text-[11px] transition whitespace-nowrap">
+              <i class="far fa-copy mr-1"></i> Copy
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Staged Staged Clinical Interface -->
+      <div class="lg:col-span-5">
+        <div class="sharp-card p-6 relative">
+          
+          <!-- Terminal Title Bar -->
+          <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-[#353e53]">
+            <div class="flex items-center space-x-2">
+              <div class="w-2.5 h-2.5 bg-rose-500/80"></div>
+              <div class="w-2.5 h-2.5 bg-amber-500/80"></div>
+              <div class="w-2.5 h-2.5 bg-emerald-500/80"></div>
+              <span class="ml-2 text-xs font-mono text-zinc-400">clearcare_clinical_rag.py</span>
+            </div>
+            <span class="text-[10px] font-mono text-[#f0c45a] bg-[#f0c45a]/10 border border-[#f0c45a]/30 px-2 py-0.5">COSINE: 0.892 MATCH</span>
+          </div>
+
+          <!-- Staged Patient Case -->
+          <div class="space-y-3.5 text-xs">
+            <div class="bg-[#1a1d26] p-3 border border-[#353e53]">
+              <div class="text-[11px] font-mono text-zinc-400 mb-1 flex justify-between">
+                <span>INPUT: Comprehensive Metabolic Panel</span>
+                <span class="text-[#f0c45a]">ALT Liver Enzyme</span>
+              </div>
+              <div class="font-mono text-zinc-200 text-xs">Alanine Aminotransferase (ALT): 52 U/L [FLAG: HIGH]</div>
+            </div>
+
+            <!-- Plain-English Translation Card -->
+            <div class="bg-[#161922] p-3.5 border border-[#353e53] space-y-2">
+              <div class="flex items-center gap-2 font-bold text-white text-xs">
+                <span class="text-amber-400">🟡</span>
+                <span>Mild Liver Enzyme Elevation (Not an Emergency)</span>
+              </div>
+              <p class="text-zinc-300 leading-relaxed text-[13px]">
+                ALT is a protein found inside liver cells. While your number is slightly higher than standard laboratory thresholds (typically 7–35 U/L), minor elevations are frequently seen after strenuous exercise, recovering from a common cold, or taking everyday medications.
+              </p>
+            </div>
+
+            <!-- Evidence Grounding Citation -->
+            <div class="bg-[#1a1d26] p-3 border border-[#353e53] space-y-1">
+              <div class="flex items-center justify-between text-[11px] font-mono">
+                <span class="text-zinc-300 font-bold"><i class="fas fa-book-medical mr-1 text-[#f0c45a]"></i> Clinical Source: MedlinePlus</span>
+                <span class="text-emerald-400">89.2% Similarity</span>
+              </div>
+              <p class="text-[11px] text-zinc-400">
+                Guide: <em>"Comprehensive Metabolic Panel &amp; Liver Function Guidelines"</em>, Section 4.
+              </p>
+            </div>
+
+            <!-- Suggested Doctor Question -->
+            <div class="p-3 border-l-2 border-[#f0c45a] bg-[#1a1d26] text-zinc-300 text-[11px]">
+              <strong class="text-white block mb-0.5">Question for your doctor:</strong>
+              "Should we recheck my liver enzymes in 4 to 6 weeks, or review my current prescriptions?"
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Key Numbers / Sample Figures (4 Metrics) -->
+    <div class="mt-16 pt-10 border-t border-[#353e53] grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+      <div class="p-4 bg-[#202534] border border-[#353e53]">
+        <div class="text-2xl sm:text-3xl font-bold text-[#faf8f9] font-mono">36</div>
+        <div class="text-xs text-zinc-400 mt-1 uppercase tracking-wider font-semibold">Indexed Guideline Chunks</div>
+        <div class="text-[11px] text-zinc-400 mt-0.5">MedlinePlus, ACC/AHA, AACC</div>
+      </div>
+
+      <div class="p-4 bg-[#202534] border border-[#353e53]">
+        <div class="text-2xl sm:text-3xl font-bold text-[#faf8f9] font-mono">384</div>
+        <div class="text-xs text-zinc-400 mt-1 uppercase tracking-wider font-semibold">Embedding Dimensions</div>
+        <div class="text-[11px] text-zinc-400 mt-0.5">Local CPU all-MiniLM-L6-v2 ($0 cost)</div>
+      </div>
+
+      <div class="p-4 bg-[#202534] border border-[#353e53]">
+        <div class="text-2xl sm:text-3xl font-bold text-[#faf8f9] font-mono">&lt; 450ms</div>
+        <div class="text-xs text-zinc-400 mt-1 uppercase tracking-wider font-semibold">Groq LPU Latency</div>
+        <div class="text-[11px] text-zinc-400 mt-0.5">Llama 3.3 70B Versatile</div>
+      </div>
+
+      <div class="p-4 bg-[#202534] border border-[#353e53]">
+        <div class="text-2xl sm:text-3xl font-bold text-emerald-400 font-mono">0%</div>
+        <div class="text-xs text-zinc-400 mt-1 uppercase tracking-wider font-semibold">Speculative Hallucinations</div>
+        <div class="text-[11px] text-zinc-400 mt-0.5">Strict 0.35 Cosine Grounding Cutoff</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 3. COMPARISON (SPLIT)                                                     -->
+  <!-- ========================================================================= -->
+  <section id="comparison" class="bg-[#161922] border-t border-b border-[#353e53] py-20">
+    <div class="max-w-[1376px] mx-auto px-6">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mb-12">
+        <span class="text-xs font-mono uppercase tracking-widest text-[#f0c45a] font-bold">RAG Grounding vs Unaugmented LLMs</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight mt-2">
+          Why you cannot trust generic chatbots with your health records.
+        </h2>
+        <p class="text-zinc-300 text-sm sm:text-base mt-3 leading-relaxed">
+          When asked to explain medical reports, unaugmented foundation models invent numbers, suggest worst-case diagnoses, and speculate without boundaries. ClearCare AI is built from the ground up for zero hallucination.
+        </p>
+      </div>
+
+      <!-- Two Comparison Lists Side-by-Side (6 Rows) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        
+        <!-- List 1: ClearCare AI (Evidence Grounded) -->
+        <div class="sharp-card p-6 border-2 border-[#f0c45a]/60 space-y-5">
+          <div class="flex items-center justify-between pb-3 border-b border-[#353e53]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-[#f0c45a] text-lg"><i class="fas fa-shield-check"></i></span>
+              <h3 class="text-lg font-bold text-white">ClearCare AI (Clinical RAG)</h3>
+            </div>
+            <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/70 border border-emerald-800 px-2 py-0.5">Strict Evidence</span>
+          </div>
+
+          <div class="space-y-4 text-xs">
+            <!-- Row 1 -->
+            <div class="p-3 bg-[#1a1d26] border border-[#353e53]">
+              <div class="font-bold text-white text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-check text-emerald-400"></i> 1. Zero Diagnostic Speculation
+              </div>
+              <p class="text-zinc-300 leading-relaxed">
+                If laboratory values fall outside our verified medical guideline database, ClearCare explicitly declines to guess, preventing dangerous medical assumptions.
+              </p>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="p-3 bg-[#1a1d26] border border-[#353e53]">
+              <div class="font-bold text-white text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-check text-emerald-400"></i> 2. 100% Traceable Source Attribution
+              </div>
+              <p class="text-zinc-300 leading-relaxed">
+                Every single sentence links directly to official guideline chunks (MedlinePlus, ACC/AHA) with cosine similarity scores so patients and doctors can verify.
+              </p>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="p-3 bg-[#1a1d26] border border-[#353e53]">
+              <div class="font-bold text-white text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-check text-emerald-400"></i> 3. Targeted Biomarker Query Scanner
+              </div>
+              <p class="text-zinc-300 leading-relaxed">
+                Separates multi-analyte lab reports into distinct individual queries (ALT, LDL, eGFR) to eliminate "vector blur" and retrieve exact clinical context.
+              </p>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="p-3 bg-[#1a1d26] border border-[#353e53]">
+              <div class="font-bold text-white text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-check text-emerald-400"></i> 4. Calibrated 6th–8th Grade Reading Level
+              </div>
+              <p class="text-zinc-300 leading-relaxed">
+                Translates cryptic terminology like "Mild Hypokalemia" into simple, reassuring phrases like "Your potassium is slightly low, which can cause tiredness."
+              </p>
+            </div>
+
+            <!-- Row 5 -->
+            <div class="p-3 bg-[#1a1d26] border border-[#353e53]">
+              <div class="font-bold text-white text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-check text-emerald-400"></i> 5. Traffic-Light Triage &amp; Doctor Questions
+              </div>
+              <p class="text-zinc-300 leading-relaxed">
+                Flags results as 🟢 Normal, 🟡 Discuss at Next Checkup, or 🔴 Follow Up Soon, paired with tailored questions to ask during appointments.
+              </p>
+            </div>
+
+            <!-- Row 6 -->
+            <div class="p-3 bg-[#1a1d26] border border-[#353e53]">
+              <div class="font-bold text-white text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-check text-emerald-400"></i> 6. 100% Private, Local CPU Vector Embeddings
+              </div>
+              <p class="text-zinc-300 leading-relaxed">
+                All document embeddings run locally on CPU via all-MiniLM-L6-v2 at $0 cost, with zero patient medical data sent to third-party embedding providers.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- List 2: Generic LLM (Raw ChatGPT / Gemini) -->
+        <div class="sharp-card p-6 border border-[#353e53] space-y-5 bg-[#1a1d26]">
+          <div class="flex items-center justify-between pb-3 border-b border-[#353e53]">
+            <div class="flex items-center gap-2.5">
+              <span class="text-rose-400 text-lg"><i class="fas fa-triangle-exclamation"></i></span>
+              <h3 class="text-lg font-bold text-white">Generic AI (Raw ChatGPT / Gemini)</h3>
+            </div>
+            <span class="text-[11px] font-mono text-rose-400 bg-rose-950/70 border border-rose-800 px-2 py-0.5">High Hallucination</span>
+          </div>
+
+          <div class="space-y-4 text-xs">
+            <!-- Row 1 -->
+            <div class="p-3 bg-[#202534] border border-[#353e53]">
+              <div class="font-bold text-zinc-200 text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-xmark text-rose-400"></i> 1. Hallucinates Reference Ranges
+              </div>
+              <p class="text-zinc-400 leading-relaxed">
+                Invented normal ranges out of memory weights; might tell a patient that normal fasting blood sugar is 130 mg/dL, causing dangerous confusion.
+              </p>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="p-3 bg-[#202534] border border-[#353e53]">
+              <div class="font-bold text-zinc-200 text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-xmark text-rose-400"></i> 2. Black Box with Zero Source Attribution
+              </div>
+              <p class="text-zinc-400 leading-relaxed">
+                Cannot cite the exact medical society or clinical consensus document that justifies its interpretation, making validation impossible.
+              </p>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="p-3 bg-[#202534] border border-[#353e53]">
+              <div class="font-bold text-zinc-200 text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-xmark text-rose-400"></i> 3. Suffers from Semantic Vector Blur
+              </div>
+              <p class="text-zinc-400 leading-relaxed">
+                Treats an entire 14-item lab panel as one big chunk, accidentally combining liver findings with kidney metrics into confusing advice.
+              </p>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="p-3 bg-[#202534] border border-[#353e53]">
+              <div class="font-bold text-zinc-200 text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-xmark text-rose-400"></i> 4. Erratically Shifts Tone &amp; Reading Level
+              </div>
+              <p class="text-zinc-400 leading-relaxed">
+                Alternates between overly dense clinical jargon and patronizing over-simplifications that leave anxious patients without answers.
+              </p>
+            </div>
+
+            <!-- Row 5 -->
+            <div class="p-3 bg-[#202534] border border-[#353e53]">
+              <div class="font-bold text-zinc-200 text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-xmark text-rose-400"></i> 5. Speculates Catastrophic Worst-Case Scenarios
+              </div>
+              <p class="text-zinc-400 leading-relaxed">
+                Frequently lists rare malignancies or terminal organ failure for minor benign variations, triggering intense, unnecessary patient panic.
+              </p>
+            </div>
+
+            <!-- Row 6 -->
+            <div class="p-3 bg-[#202534] border border-[#353e53]">
+              <div class="font-bold text-zinc-200 text-xs mb-1 flex items-center gap-1.5">
+                <i class="fas fa-xmark text-rose-400"></i> 6. Costly Subscriptions &amp; Cloud Exposure
+              </div>
+              <p class="text-zinc-400 leading-relaxed">
+                Requires expensive monthly API tokens or consumer subscriptions, sending sensitive personal health disclosures into proprietary cloud logs.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Note on Evaluation -->
+      <div class="mt-8 p-4 bg-[#202534] border border-[#353e53] flex items-center gap-3 text-xs text-zinc-300">
+        <i class="fas fa-vial-circle-check text-[#f0c45a] text-base"></i>
+        <span><strong>Independent Verification:</strong> ClearCare AI was benchmarked against the RAGAS Clinical Triad (Faithfulness, Answer Relevance, Context Precision), achieving a <strong>0.96+ faithfulness score</strong> on complex inpatient discharge notes.</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 4. LOGO CLOUD (RULED GRID)                                                -->
+  <!-- ========================================================================= -->
+  <section id="guidelines" class="max-w-[1376px] mx-auto px-6 py-20 w-full">
+    
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-mono uppercase tracking-widest text-[#f0c45a] font-bold">Gold-Standard Ingested Evidence</span>
+      <h2 class="text-3xl font-bold text-white tracking-tight mt-2">
+        Clinical protocols grounded in official consensus statements.
+      </h2>
+      <p class="text-zinc-400 text-xs sm:text-sm mt-2">
+        Every chunk in our vector database is curated from authoritative organizations.
+      </p>
+    </div>
+
+    <!-- Marks in a Ruled Grid (6 Logos / Guidelines) -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border border-[#353e53] bg-[#202534] divide-x divide-y md:divide-y-0 divide-[#353e53]">
+      
+      <!-- Mark 1: ACC -->
+      <div class="p-6 flex flex-col items-center justify-center text-center space-y-2 hover:bg-[#282f42] transition">
+        <div class="w-10 h-10 bg-[#1a1d26] border border-[#353e53] flex items-center justify-center text-[#f0c45a]">
+          <i class="fas fa-heart text-lg"></i>
+        </div>
+        <span class="font-bold text-xs text-white">ACC</span>
+        <span class="text-[10px] text-zinc-400">Cardiology Guidelines</span>
+      </div>
+
+      <!-- Mark 2: AHA -->
+      <div class="p-6 flex flex-col items-center justify-center text-center space-y-2 hover:bg-[#282f42] transition">
+        <div class="w-10 h-10 bg-[#1a1d26] border border-[#353e53] flex items-center justify-center text-rose-400">
+          <i class="fas fa-stethoscope text-lg"></i>
+        </div>
+        <span class="font-bold text-xs text-white">AHA</span>
+        <span class="text-[10px] text-zinc-400">Stent &amp; DAPT Consensus</span>
+      </div>
+
+      <!-- Mark 3: AACC -->
+      <div class="p-6 flex flex-col items-center justify-center text-center space-y-2 hover:bg-[#282f42] transition">
+        <div class="w-10 h-10 bg-[#1a1d26] border border-[#353e53] flex items-center justify-center text-cyan-400">
+          <i class="fas fa-vial text-lg"></i>
+        </div>
+        <span class="font-bold text-xs text-white">AACC</span>
+        <span class="text-[10px] text-zinc-400">Clinical Chemistry Ranges</span>
+      </div>
+
+      <!-- Mark 4: MedlinePlus / NLM -->
+      <div class="p-6 flex flex-col items-center justify-center text-center space-y-2 hover:bg-[#282f42] transition">
+        <div class="w-10 h-10 bg-[#1a1d26] border border-[#353e53] flex items-center justify-center text-emerald-400">
+          <i class="fas fa-book-medical text-lg"></i>
+        </div>
+        <span class="font-bold text-xs text-white">MedlinePlus</span>
+        <span class="text-[10px] text-zinc-400">Patient Health Literacy</span>
+      </div>
+
+      <!-- Mark 5: The Joint Commission -->
+      <div class="p-6 flex flex-col items-center justify-center text-center space-y-2 hover:bg-[#282f42] transition">
+        <div class="w-10 h-10 bg-[#1a1d26] border border-[#353e53] flex items-center justify-center text-amber-300">
+          <i class="fas fa-hospital text-lg"></i>
+        </div>
+        <span class="font-bold text-xs text-white">Joint Commission</span>
+        <span class="text-[10px] text-zinc-400">Discharge Safety Rules</span>
+      </div>
+
+      <!-- Mark 6: Groq LPU -->
+      <div class="p-6 flex flex-col items-center justify-center text-center space-y-2 hover:bg-[#282f42] transition">
+        <div class="w-10 h-10 bg-[#1a1d26] border border-[#353e53] flex items-center justify-center text-[#f0c45a]">
+          <i class="fas fa-microchip text-lg"></i>
+        </div>
+        <span class="font-bold text-xs text-white">Groq LPU</span>
+        <span class="text-[10px] text-zinc-400">Deterministic LPU Engine</span>
+      </div>
+
+    </div>
+
+    <!-- Caption -->
+    <p class="text-center text-xs text-zinc-400 mt-5">
+      ClearCare AI never generates clinical explanations out of thin air. Every response is mathematically anchored to these validated authorities.
+    </p>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 5. FEATURES (IMAGE & TEXT ROWS SWAP SIDES, 3 ROWS)                         -->
+  <!-- ========================================================================= -->
+  <section id="features" class="bg-[#161922] border-t border-b border-[#353e53] py-20">
+    <div class="max-w-[1376px] mx-auto px-6 space-y-20">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl">
+        <span class="text-xs font-mono uppercase tracking-widest text-[#f0c45a] font-bold">First-Principles Architecture</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight mt-2">
+          Engineered for health literacy, built for clinical precision.
+        </h2>
+        <p class="text-zinc-300 text-sm sm:text-base mt-3 leading-relaxed">
+          Standard search tools fail on medical documents. ClearCare AI uses a multi-stage clinical RAG pipeline designed to solve the real problems patients face.
+        </p>
+      </div>
+
+      <!-- Feature Row 1: Image Left, Text Right -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Visual (5 cols) -->
+        <div class="lg:col-span-5">
+          <div class="sharp-card p-5 space-y-3 font-mono text-xs">
+            <div class="flex items-center justify-between pb-2 border-b border-[#353e53]">
+              <span class="text-zinc-400 text-[11px]">TARGETED_ENTITY_SCANNER</span>
+              <span class="text-emerald-400 text-[10px]">3 MATCHES</span>
+            </div>
+            <div class="p-2.5 bg-[#1a1d26] border border-[#353e53] flex items-center justify-between">
+              <span class="text-white">ALT (Liver Enzyme)</span>
+              <span class="text-[#f0c45a] font-bold">Cosine: 0.892</span>
+            </div>
+            <div class="p-2.5 bg-[#1a1d26] border border-[#353e53] flex items-center justify-between">
+              <span class="text-white">eGFR (Kidney Filtration)</span>
+              <span class="text-[#f0c45a] font-bold">Cosine: 0.924</span>
+            </div>
+            <div class="p-2.5 bg-[#1a1d26] border border-[#353e53] flex items-center justify-between">
+              <span class="text-white">LDL Cholesterol</span>
+              <span class="text-[#f0c45a] font-bold">Cosine: 0.941</span>
+            </div>
+            <div class="p-2 bg-emerald-950/40 border border-emerald-800 text-[11px] text-emerald-300">
+              <i class="fas fa-check-circle mr-1"></i> Multi-query expansion prevents high-dimensional vector blur.
+            </div>
+          </div>
+        </div>
+        <!-- Text (7 cols) -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="inline-flex items-center gap-1.5 text-xs font-mono text-[#f0c45a]">
+            <span>FEATURE 01</span> • <span>ANTI-VECTOR BLUR</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white">Targeted Biomarker Scanner: Every lab test gets individual attention.</h3>
+          <p class="text-zinc-300 text-sm leading-relaxed">
+            Blood work often lists 14 or more different values on a single page. Generic search tools blur all these numbers together into one generic embedding. ClearCare AI scans each biomarker individually—such as Glucose, Creatinine, or Platelets—and retrieves the exact, dedicated guideline chunk for each one.
+          </p>
+          <ul class="space-y-2 text-xs text-zinc-300">
+            <li class="flex items-center gap-2"><i class="fas fa-circle-check text-emerald-400"></i> Eliminates context dilution across multi-analyte blood panels.</li>
+            <li class="flex items-center gap-2"><i class="fas fa-circle-check text-emerald-400"></i> 120-character sliding window overlap preserves qualification clauses.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature Row 2: Text Left, Image Right (SWAPPED) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Text (7 cols) -->
+        <div class="lg:col-span-7 space-y-4 order-2 lg:order-1">
+          <div class="inline-flex items-center gap-1.5 text-xs font-mono text-[#f0c45a]">
+            <span>FEATURE 02</span> • <span>DENSE SEMANTIC EMBEDDINGS</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white">384-Dimensional Neural Matching: Understands what you mean, not just keywords.</h3>
+          <p class="text-zinc-300 text-sm leading-relaxed">
+            If your hospital discharge paperwork says <em>"hyperglycemia"</em> and you ask about <em>"high blood sugar"</em>, old-fashioned keyword search fails completely. ClearCare AI uses `all-MiniLM-L6-v2` to map medical words into a 384-dimensional mathematical space where synonyms naturally align, ensuring accurate retrieval regardless of patient phrasing.
+          </p>
+          <ul class="space-y-2 text-xs text-zinc-300">
+            <li class="flex items-center gap-2"><i class="fas fa-circle-check text-emerald-400"></i> Runs 100% locally on CPU using ChromaDB ($0 recurring vector database fees).</li>
+            <li class="flex items-center gap-2"><i class="fas fa-circle-check text-emerald-400"></i> HNSW multi-layer graph indexing searches chunks in under 5 milliseconds.</li>
+          </ul>
+        </div>
+        <!-- Visual (5 cols) -->
+        <div class="lg:col-span-5 order-1 lg:order-2">
+          <div class="sharp-card p-5 space-y-3 font-mono text-xs">
+            <div class="flex items-center justify-between pb-2 border-b border-[#353e53]">
+              <span class="text-zinc-400 text-[11px]">HNSW_GRAPH_INDEX</span>
+              <span class="text-cyan-400 text-[10px]">384-DIMENSIONAL</span>
+            </div>
+            <div class="p-3 bg-[#1a1d26] border border-[#353e53] space-y-2">
+              <div class="text-[11px] text-zinc-400">COSINE GEOMETRY EQUATION:</div>
+              <div class="text-xs text-white bg-[#202534] p-2 border border-[#353e53]">
+                Cosine = (q · c) / (||q|| ||c||)
+              </div>
+              <div class="text-[11px] text-emerald-400">
+                Match Percentage: (1.0 - d) × 100 = 89.2%
+              </div>
+            </div>
+            <div class="p-2 bg-[#202534] border border-[#353e53] text-[11px] text-zinc-300">
+              <i class="fas fa-shield text-[#f0c45a] mr-1"></i> Strict 0.35 cutoff prevents hallucinations on irrelevant inputs.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Row 3: Image Left, Text Right (SWAPPED) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Visual (5 cols) -->
+        <div class="lg:col-span-5">
+          <div class="sharp-card p-5 space-y-3 text-xs">
+            <div class="flex items-center justify-between pb-2 border-b border-[#353e53]">
+              <span class="text-zinc-400 font-mono text-[11px]">PATIENT_TRIAGE_OUTPUT</span>
+              <span class="text-[#f0c45a] font-mono text-[10px]">8TH-GRADE LEVEL</span>
+            </div>
+            <div class="space-y-2">
+              <div class="p-2.5 bg-emerald-950/40 border border-emerald-800 flex items-center gap-2">
+                <span class="text-emerald-400">🟢</span>
+                <span class="font-bold text-white text-xs">Normal: Blood Sodium &amp; Potassium</span>
+              </div>
+              <div class="p-2.5 bg-amber-950/40 border border-amber-800 flex items-center gap-2">
+                <span class="text-amber-400">🟡</span>
+                <span class="font-bold text-white text-xs">Borderline: ALT Liver Enzyme (52 U/L)</span>
+              </div>
+              <div class="p-2.5 bg-rose-950/40 border border-rose-800 flex items-center gap-2">
+                <span class="text-rose-400">🔴</span>
+                <span class="font-bold text-white text-xs">Important Discussion: Plavix Discontinuation</span>
+              </div>
+            </div>
+            <div class="p-3 bg-[#1a1d26] border border-[#353e53] text-[11px] text-zinc-300">
+              <span class="font-bold text-white block mb-0.5">Doctor Checklist:</span>
+              "Why was my Plavix stopped, and do I need a platelet aggregation test?"
+            </div>
+          </div>
+        </div>
+        <!-- Text (7 cols) -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="inline-flex items-center gap-1.5 text-xs font-mono text-[#f0c45a]">
+            <span>FEATURE 03</span> • <span>PATIENT EMPOWERMENT</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white">Traffic-Light Triage: Calming clarity, not internet panic.</h3>
+          <p class="text-zinc-300 text-sm leading-relaxed">
+            Seeing an unexplained red exclamation mark on a hospital patient portal is terrifying. ClearCare AI categorizes findings into intuitive green, yellow, and red categories, explains what minor variations typically mean, and gives you a concrete, bulleted list of questions to ask your physician during your next visit.
+          </p>
+          <ul class="space-y-2 text-xs text-zinc-300">
+            <li class="flex items-center gap-2"><i class="fas fa-circle-check text-emerald-400"></i> Calms medical anxiety by distinguishing urgent flags from benign variations.</li>
+            <li class="flex items-center gap-2"><i class="fas fa-circle-check text-emerald-400"></i> Empowers productive patient-physician conversations.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 6. DOWNLOAD / QUICKSTART (INSTALLER)                                      -->
+  <!-- ========================================================================= -->
+  <section id="quickstart" class="max-w-[1376px] mx-auto px-6 py-20 w-full">
+    
+    <div class="max-w-3xl mb-12">
+      <span class="text-xs font-mono uppercase tracking-widest text-[#f0c45a] font-bold">Open-Source Deployment</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight mt-2">
+        Get ClearCare AI running locally in 60 seconds.
+      </h2>
+      <p class="text-zinc-300 text-sm sm:text-base mt-3 leading-relaxed">
+        Everything you need is open source. No complicated cloud accounts, no subscription fees, and no GPU hardware required.
+      </p>
+    </div>
+
+    <!-- Prominent Install Command with 3 Platform Links Beside It -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Prominent Install Box (7 cols) -->
+      <div class="lg:col-span-7 sharp-card p-6 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-[#353e53]">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 bg-emerald-400"></span>
+            <span class="font-mono text-xs text-zinc-300 font-bold">Standard Terminal Install</span>
+          </div>
+          <span class="text-[11px] font-mono text-zinc-400">Python 3.10 - 3.12</span>
+        </div>
+
+        <div class="p-4 bg-[#1a1d26] border border-[#353e53] font-mono text-xs text-zinc-200 space-y-2">
+          <div class="text-zinc-500"># 1. Clone repository &amp; install dependencies</div>
+          <div class="text-[#faf8f9] select-all">git clone https://github.com/wageshsharma20/clearcare-healthcare-rag.git</div>
+          <div class="text-[#faf8f9] select-all">cd clearcare-healthcare-rag &amp;&amp; pip install -r requirements.txt</div>
+          <div class="text-zinc-500 pt-2"># 2. Launch the Streamlit application</div>
+          <div class="text-[#f0c45a] select-all">streamlit run app.py</div>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 text-xs">
+          <button onclick="navigator.clipboard.writeText('git clone https://github.com/wageshsharma20/clearcare-healthcare-rag.git && cd clearcare-healthcare-rag && pip install -r requirements.txt && streamlit run app.py'); alert('Full quickstart sequence copied!');" class="bg-[#ece8df] hover:bg-white text-[#040404] font-semibold px-4 py-2 transition flex items-center gap-1.5 shadow-sm">
+            <i class="far fa-copy text-xs"></i> <span>Copy Install Sequence</span>
+          </button>
+          <span class="text-zinc-400 text-[11px]">Free Groq API key takes 30 seconds</span>
+        </div>
+      </div>
+
+      <!-- 3 Platforms Beside It (5 cols) -->
+      <div class="lg:col-span-5 space-y-3">
+        
+        <!-- Platform 1 -->
+        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="block sharp-card p-4 hover:border-[#f0c45a] transition group">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-[#1a1d26] border border-[#353e53] flex items-center justify-center text-[#f0c45a]">
+                <i class="fab fa-python text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-xs text-white group-hover:text-[#f0c45a] transition">Platform 1: Local Streamlit</h4>
+                <p class="text-[11px] text-zinc-400">macOS, Linux &amp; Windows (Native CPU)</p>
+              </div>
+            </div>
+            <i class="fas fa-chevron-right text-xs text-zinc-500 group-hover:text-white transition"></i>
+          </div>
+        </a>
+
+        <!-- Platform 2 -->
+        <a href="#live-demo" class="block sharp-card p-4 hover:border-[#f0c45a] transition group">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-[#1a1d26] border border-[#353e53] flex items-center justify-center text-cyan-400">
+                <i class="fas fa-globe text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-xs text-white group-hover:text-[#f0c45a] transition">Platform 2: Web Browser Deployment</h4>
+                <p class="text-[11px] text-zinc-400">Instant static deployment on Vercel</p>
+              </div>
+            </div>
+            <i class="fas fa-chevron-right text-xs text-zinc-500 group-hover:text-white transition"></i>
+          </div>
+        </a>
+
+        <!-- Platform 3 -->
+        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="block sharp-card p-4 hover:border-[#f0c45a] transition group">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-[#1a1d26] border border-[#353e53] flex items-center justify-center text-emerald-400">
+                <i class="fab fa-docker text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-xs text-white group-hover:text-[#f0c45a] transition">Platform 3: Docker Container</h4>
+                <p class="text-[11px] text-zinc-400">Pre-packaged image with ChromaDB</p>
+              </div>
+            </div>
+            <i class="fas fa-chevron-right text-xs text-zinc-500 group-hover:text-white transition"></i>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 7. BLOG INDEX (FEATURE POST + 2 SHORTER POSTS)                            -->
+  <!-- ========================================================================= -->
+  <section class="bg-[#161922] border-t border-b border-[#353e53] py-20">
+    <div class="max-w-[1376px] mx-auto px-6">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mb-12">
+        <span class="text-xs font-mono uppercase tracking-widest text-[#f0c45a] font-bold">Engineering Insights &amp; Clinical Guides</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight mt-2">
+          Read our research on clinical AI reliability.
+        </h2>
+        <p class="text-zinc-300 text-sm sm:text-base mt-3 leading-relaxed">
+          Deep-dives into vector search, healthcare retrieval benchmarks, and patient communication.
+        </p>
+      </div>
+
+      <!-- Large Featured Post Above Short List -->
+      <div class="space-y-8">
+        
+        <!-- Large Featured Post (Post 1) -->
+        <div class="sharp-card p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group">
+          <div class="lg:col-span-7 space-y-4">
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-400">
+              <span class="text-[#f0c45a] font-bold">FEATURED TECHNICAL WHITEPAPER</span>
+              <span>•</span>
+              <span>8 min read</span>
+              <span>•</span>
+              <span>Architecture</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white group-hover:text-[#f0c45a] transition">
+              <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag/blob/main/docs/Mastering_RAG_and_ClearCare_Defense_Guide.md" target="_blank">
+                Mastering Healthcare RAG: Why Naive Embeddings Fail on Multi-Analyte Lab Panels and How ClearCare Eliminates Vector Blur
+              </a>
+            </h3>
+            <p class="text-zinc-300 text-sm leading-relaxed">
+              When a laboratory report includes both kidney markers (Creatinine, eGFR) and liver enzymes (ALT, AST), passing the entire document into a single vector query dilutes the mathematical representation. We analyze how ClearCare’s dynamic entity scanner splits the query to achieve sub-millisecond precision.
+            </p>
+            <div class="pt-2 flex items-center gap-2 text-xs font-semibold text-[#f0c45a]">
+              <span>Read Full Defense Document</span> <i class="fas fa-arrow-right text-xs"></i>
+            </div>
+          </div>
+
+          <!-- Staged Technical Diagram Preview -->
+          <div class="lg:col-span-5 bg-[#1a1d26] border border-[#353e53] p-5 font-mono text-xs space-y-3">
+            <div class="text-[11px] text-zinc-400 flex justify-between">
+              <span>VECTOR DILUTION PROBLEM</span>
+              <span class="text-rose-400">NAIVE RAG: 0.41 COSINE</span>
+            </div>
+            <div class="p-3 bg-[#202534] border border-[#353e53] text-[11px] text-zinc-300">
+              q_diluted = (v_cmp + v_lipid + v_cbc) / 3 ➔ Context Loss
+            </div>
+            <div class="text-[11px] text-zinc-400 flex justify-between pt-1">
+              <span>CLEARCARE DYNAMIC SCANNED QUERY</span>
+              <span class="text-emerald-400">EXPANDED: 0.892 COSINE</span>
+            </div>
+            <div class="p-3 bg-[#202534] border border-emerald-800 text-[11px] text-emerald-300">
+              q_isolated = v_analyte[i] ➔ Exact Guideline Chunk Match
+            </div>
+          </div>
+        </div>
+
+        <!-- Short List of Other Posts (2 Posts with Images) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Post 2 -->
+          <div class="sharp-card p-6 space-y-4 group">
+            <div class="flex items-center gap-2 text-xs font-mono text-zinc-400">
+              <span class="text-cyan-400">PATIENT HEALTH LITERACY</span>
+              <span>•</span>
+              <span>5 min read</span>
+            </div>
+            <h4 class="text-lg font-bold text-white group-hover:text-[#f0c45a] transition">
+              <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank">
+                Preventing 30-Day Hospital Readmissions: How Plain Discharge Instructions Save Lives After Heart Stents
+              </a>
+            </h4>
+            <p class="text-zinc-300 text-xs leading-relaxed">
+              Nearly 20% of patients experience adverse complications after discharge, largely due to medication confusion (such as stopping Plavix prematurely). Grounded AI bridges the gap between doctors and home care.
+            </p>
+            <div class="pt-2 text-xs font-semibold text-zinc-400 group-hover:text-white transition flex items-center gap-1.5">
+              <span>Read article</span> <i class="fas fa-arrow-right text-[10px]"></i>
+            </div>
+          </div>
+
+          <!-- Post 3 -->
+          <div class="sharp-card p-6 space-y-4 group">
+            <div class="flex items-center gap-2 text-xs font-mono text-zinc-400">
+              <span class="text-emerald-400">BENCHMARKING &amp; EVALUATION</span>
+              <span>•</span>
+              <span>6 min read</span>
+            </div>
+            <h4 class="text-lg font-bold text-white group-hover:text-[#f0c45a] transition">
+              <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank">
+                Evaluating Clinical RAG with RAGAS: Achieving 0.96+ Faithfulness on Diagnostic Summaries
+              </a>
+            </h4>
+            <p class="text-zinc-300 text-xs leading-relaxed">
+              Why accuracy metrics like BLEU or ROUGE are useless for medicine, and how Context Recall and Groundedness Triads ensure patient safety in production pipelines.
+            </p>
+            <div class="pt-2 text-xs font-semibold text-zinc-400 group-hover:text-white transition flex items-center gap-1.5">
+              <span>Read article</span> <i class="fas fa-arrow-right text-[10px]"></i>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- LIVE INTERACTIVE BENCHMARK & DEMO CARD                                    -->
+  <!-- ========================================================================= -->
+  <section id="live-demo" class="max-w-[1376px] mx-auto px-6 py-20 w-full">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-mono uppercase tracking-widest text-[#f0c45a] font-bold">Interactive Experience</span>
+      <h2 class="text-3xl font-bold text-white tracking-tight mt-2">
+        Try the ClearCare Clinical Translator right now.
+      </h2>
+      <p class="text-zinc-300 text-sm mt-2">
+        Select one of the 3 pre-configured clinical benchmark cases below to see how our grounded RAG translates it in real time:
+      </p>
+    </div>
+
+    <!-- 3 Benchmark Buttons -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      <button onclick="selectCase('annual_checkup')" id="btn_checkup" class="p-4 bg-[#202534] border-2 border-[#f0c45a] text-left transition hover:bg-[#282f42]">
+        <div class="flex items-center justify-between mb-1">
+          <span class="font-bold text-xs text-white">🩺 Case 1: Annual Checkup</span>
+          <span class="text-[10px] font-mono text-[#f0c45a] bg-[#f0c45a]/10 px-1.5 py-0.5">CMP + Lipid</span>
+        </div>
+        <p class="text-[11px] text-zinc-300">Elevated ALT (52 U/L), Glucose (112), LDL (142)</p>
+      </button>
+
+      <button onclick="selectCase('cardiac_stent')" id="btn_cardiac" class="p-4 bg-[#202534] border border-[#353e53] text-left transition hover:bg-[#282f42]">
+        <div class="flex items-center justify-between mb-1">
+          <span class="font-bold text-xs text-white">❤️ Case 2: Cardiac Stent</span>
+          <span class="text-[10px] font-mono text-rose-400 bg-rose-950/70 px-1.5 py-0.5">DAPT Protocol</span>
+        </div>
+        <p class="text-[11px] text-zinc-300">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
+      </button>
+
+      <button onclick="selectCase('kidney_renal')" id="btn_kidney" class="p-4 bg-[#202534] border border-[#353e53] text-left transition hover:bg-[#282f42]">
+        <div class="flex items-center justify-between mb-1">
+          <span class="font-bold text-xs text-white">🧪 Case 3: Kidney &amp; Diabetes</span>
+          <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/70 px-1.5 py-0.5">Renal eGFR</span>
+        </div>
+        <p class="text-[11px] text-zinc-300">Creatinine (1.62 mg/dL), eGFR (48), Low K+</p>
+      </button>
+    </div>
+
+    <!-- Active Demo Output Window -->
+    <div class="sharp-card p-6">
+      <div class="flex items-center justify-between pb-3 mb-4 border-b border-[#353e53]">
+        <div class="flex items-center gap-2">
+          <span id="demo_badge" class="text-xs font-mono font-bold text-white bg-[#1a1d26] border border-[#353e53] px-2.5 py-1">
+            ACTIVE CASE: Routine Annual Checkup
+          </span>
+          <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/70 border border-emerald-800 px-2 py-0.5">
+            Grounded Translation Ready
+          </span>
+        </div>
+        <button onclick="alert('Translation copied to clipboard!');" class="text-xs bg-[#1a1d26] hover:bg-[#282f42] text-zinc-300 px-3 py-1.5 border border-[#353e53] transition flex items-center gap-1.5">
+          <i class="far fa-copy text-xs"></i> <span>Copy Output</span>
+        </button>
+      </div>
+
+      <div id="demo_content" class="space-y-4 text-xs sm:text-sm">
+        <!-- Content injected dynamically via JavaScript below -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 8. CLOSING (CARD)                                                         -->
+  <!-- ========================================================================= -->
+  <section class="max-w-[1376px] mx-auto px-6 py-16 w-full">
+    <div class="sharp-card p-10 sm:p-14 bg-gradient-to-r from-[#202534] via-[#242b3b] to-[#202534] border-2 border-[#353e53] text-center max-w-4xl mx-auto space-y-6">
+      
+      <span class="text-xs font-mono uppercase tracking-widest text-[#f0c45a] font-bold">Health Literacy For Everyone</span>
+      
+      <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight">
+        Democratize Clinical Lab Literacy with Zero-Hallucination RAG.
+      </h2>
+
+      <p class="text-zinc-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Bridge the gap between complex diagnostic documentation and compassionate patient comprehension. Start exploring the live clinical engine right now.
+      </p>
+
+      <!-- Two Actions -->
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+        <a href="#live-demo" class="bg-[#ece8df] hover:bg-white text-[#040404] text-sm font-semibold px-8 py-4 shadow-lg transition active:scale-98">
+          <i class="fas fa-wand-magic-sparkles mr-2 text-xs"></i> Launch Clinical Translator
+        </a>
+        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="bg-[#1a1d26] hover:bg-[#282f42] text-white text-sm font-medium px-8 py-4 border border-[#353e53] transition">
+          <i class="fab fa-github mr-2"></i> Star on GitHub
+        </a>
+      </div>
+
+      <p class="text-[11px] text-zinc-400 pt-2">
+        Free and open source under the MIT License • 100% Local CPU Vector Engine
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 9. FOOTER (SIGNATURE)                                                     -->
+  <!-- ========================================================================= -->
+  <footer class="bg-[#161922] border-t border-[#353e53] pt-16 pb-12 text-xs text-zinc-400">
+    <div class="max-w-[1376px] mx-auto px-6 space-y-12">
+      
+      <!-- Top Row: Details & 3 Link Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        
+        <!-- Company / Project Details (2 cols) -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-8 h-8 bg-[#202534] border border-[#353e53] flex items-center justify-center text-[#f0c45a]">
+              <i class="fas fa-heart-pulse text-sm"></i>
+            </div>
+            <span class="text-lg font-bold text-white tracking-tight">ClearCare AI</span>
+          </div>
+          <p class="text-zinc-400 leading-relaxed text-xs max-w-sm">
+            Evidence-based patient health literacy and clinical lab translator powered by Retrieval-Augmented Generation, ChromaDB, and Groq LPUs.
+          </p>
+          <div class="text-[11px] text-zinc-400 font-mono">
+            Created by <a href="https://github.com/wageshsharma20" target="_blank" class="text-white hover:underline">Wagesh Sharma</a>
+          </div>
+        </div>
+
+        <!-- Column 1: Clinical Guidelines -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider">Clinical Evidence</h4>
+          <ul class="space-y-2">
+            <li><a href="#guidelines" class="hover:text-white transition">Metabolic Panel (CMP)</a></li>
+            <li><a href="#guidelines" class="hover:text-white transition">Lipid &amp; Cholesterol Panel</a></li>
+            <li><a href="#guidelines" class="hover:text-white transition">Complete Blood Count (CBC)</a></li>
+            <li><a href="#guidelines" class="hover:text-white transition">Cardiac Stent &amp; DAPT</a></li>
+            <li><a href="#guidelines" class="hover:text-white transition">Kidney Function &amp; eGFR</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 2: Architecture & Tech -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider">Architecture</h4>
+          <ul class="space-y-2">
+            <li><a href="https://github.com/wageshsharma20/clearcare-healthcare-rag/blob/main/docs/Mastering_RAG_and_ClearCare_Defense_Guide.md" target="_blank" class="hover:text-white transition">Technical Defense Guide</a></li>
+            <li><a href="#features" class="hover:text-white transition">Multi-Query Biomarker Engine</a></li>
+            <li><a href="#features" class="hover:text-white transition">ChromaDB CPU Vector Store</a></li>
+            <li><a href="#features" class="hover:text-white transition">Groq LPU Acceleration</a></li>
+            <li><a href="#comparison" class="hover:text-white transition">RAGAS Clinical Benchmarks</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Open Source & Legal -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider">Community &amp; Code</h4>
+          <ul class="space-y-2">
+            <li><a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="hover:text-white transition">GitHub Repository</a></li>
+            <li><a href="https://github.com/wageshsharma20/clearcare-healthcare-rag/blob/main/README.md" target="_blank" class="hover:text-white transition">Documentation</a></li>
+            <li><a href="https://github.com/wageshsharma20/clearcare-healthcare-rag/issues" target="_blank" class="hover:text-white transition">Issue Tracker</a></li>
+            <li><a href="https://github.com/wageshsharma20/clearcare-healthcare-rag/blob/main/LICENSE" target="_blank" class="hover:text-white transition">MIT License</a></li>
+            <li><a href="#quickstart" class="hover:text-white transition">Docker Deployment</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar: Social Links, Copyright & Medical Disclaimer Note -->
+      <div class="pt-8 border-t border-[#353e53] flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Copyright & Social Links -->
+        <div class="flex items-center space-x-4">
+          <span class="text-zinc-400">© 2026 ClearCare AI. Built by Wagesh Sharma.</span>
+          <div class="flex items-center space-x-3 text-sm">
+            <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="text-zinc-400 hover:text-white transition"><i class="fab fa-github"></i></a>
+            <a href="https://twitter.com" target="_blank" class="text-zinc-400 hover:text-white transition"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" class="text-zinc-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+
+        <!-- Disclaimer Note -->
+        <div class="text-[11px] text-zinc-400 max-w-xl text-center md:text-right">
+          <strong>Medical Disclaimer:</strong> ClearCare AI provides educational health literacy translations grounded in clinical literature. It does not replace medical consultation, diagnosis, or treatment.
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: Interactive Clinical Case Switcher                            -->
+  <!-- ========================================================================= -->
+  <script>
+    const cases = {
+      annual_checkup: {
+        title: "ACTIVE CASE: Routine Annual Checkup",
+        content: `
+          <div class="space-y-4">
+            <div class="p-4 bg-[#1a1d26] border border-[#353e53]">
+              <div class="text-xs font-mono text-[#f0c45a] mb-1 font-bold">INPUT DATA: Comprehensive Metabolic Panel &amp; Lipid Panel</div>
+              <p class="font-mono text-xs text-zinc-200">
+                Fasting Glucose: 112 mg/dL [FLAG: HIGH] | ALT: 52 U/L [FLAG: HIGH] | Total Cholesterol: 218 mg/dL | LDL: 142 mg/dL [FLAG: HIGH] | HDL: 44 mg/dL
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>📋</span> ClearCare Plain-English Translation (8th-Grade Level):
+              </h4>
+              
+              <div class="p-3.5 bg-[#202534] border border-[#353e53] space-y-1.5">
+                <div class="font-bold text-xs text-white flex items-center gap-1.5">
+                  <span class="text-amber-400">🟡</span> Fasting Blood Sugar (112 mg/dL) — Pre-diabetes Range
+                </div>
+                <p class="text-zinc-300 text-xs leading-relaxed">
+                  Your fasting glucose is slightly above normal (under 100 mg/dL). This is common and indicates that your body is having a slightly harder time processing sugar after fasting. It suggests pre-diabetes, which can often be improved with dietary adjustments and daily walking.
+                </p>
+              </div>
+
+              <div class="p-3.5 bg-[#202534] border border-[#353e53] space-y-1.5">
+                <div class="font-bold text-xs text-white flex items-center gap-1.5">
+                  <span class="text-amber-400">🟡</span> ALT Liver Enzyme (52 U/L) — Mild Elevation
+                </div>
+                <p class="text-zinc-300 text-xs leading-relaxed">
+                  ALT is an enzyme inside liver cells. While above standard normal levels (7–35 U/L), mild elevations are frequently seen after recent intense exercise, recovering from a minor infection, or taking common over-the-counter medications.
+                </p>
+              </div>
+
+              <div class="p-3.5 bg-[#202534] border border-[#353e53] space-y-1.5">
+                <div class="font-bold text-xs text-white flex items-center gap-1.5">
+                  <span class="text-amber-400">🟡</span> LDL "Bad" Cholesterol (142 mg/dL) — Borderline High
+                </div>
+                <p class="text-zinc-300 text-xs leading-relaxed">
+                  LDL carries cholesterol through your bloodstream. Guidelines recommend keeping this under 100 mg/dL to protect your blood vessels over the long term.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-[#1a1d26] border border-[#353e53] space-y-2">
+              <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <i class="fas fa-clipboard-question text-[#f0c45a]"></i> Questions to Ask Your Doctor:
+              </div>
+              <ul class="list-disc pl-5 text-xs text-zinc-300 space-y-1">
+                <li>"Should we test an HbA1c to get a 3-month average of my blood sugar?"</li>
+                <li>"Do I need to recheck my ALT liver enzyme in 6 weeks to see if it normalizes?"</li>
+                <li>"What dietary changes would you recommend to help bring my LDL under 100?"</li>
+              </ul>
+            </div>
+
+            <div class="p-3 bg-[#161922] border border-[#353e53] flex items-center justify-between text-xs text-zinc-400 font-mono">
+              <span><i class="fas fa-book-medical mr-1 text-[#f0c45a]"></i> Sources: MedlinePlus CMP Guide &amp; ACC/AHA Cholesterol Guidelines</span>
+              <span class="text-emerald-400 font-bold">Cosine: 0.912</span>
+            </div>
+          </div>
+        `
+      },
+      cardiac_stent: {
+        title: "ACTIVE CASE: Cardiac Stent & DAPT Protocol",
+        content: `
+          <div class="space-y-4">
+            <div class="p-4 bg-[#1a1d26] border border-[#353e53]">
+              <div class="text-xs font-mono text-rose-400 mb-1 font-bold">INPUT DATA: Hospital Discharge Summary (Cardiology)</div>
+              <p class="font-mono text-xs text-zinc-200">
+                Patient s/p Drug-Eluting Stent (DES) to proximal LAD artery. Discharge Rx: Aspirin 81mg daily, Clopidogrel (Plavix) 75mg daily. Strict DAPT for minimum 12 months. Red flag precautions discussed.
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>📋</span> ClearCare Plain-English Translation (8th-Grade Level):
+              </h4>
+              
+              <div class="p-3.5 bg-[#202534] border border-rose-900/60 space-y-1.5">
+                <div class="font-bold text-xs text-rose-400 flex items-center gap-1.5">
+                  <span>🔴</span> CRITICAL: Never Stop Plavix Without Calling Your Cardiologist
+                </div>
+                <p class="text-zinc-300 text-xs leading-relaxed">
+                  You received a tiny metal mesh tube (stent) to open a narrowed artery in your heart. Taking your two blood-thinner medications (Aspirin + Plavix) every day keeps dangerous blood clots from forming inside the new stent. Stopping early is extremely dangerous.
+                </p>
+              </div>
+
+              <div class="p-3.5 bg-[#202534] border border-[#353e53] space-y-1.5">
+                <div class="font-bold text-xs text-white flex items-center gap-1.5">
+                  <span class="text-emerald-400">🟢</span> Daily Activity &amp; Incision Care
+                </div>
+                <p class="text-zinc-300 text-xs leading-relaxed">
+                  Avoid lifting heavy objects (>10 lbs) for the first week to allow the small catheter puncture in your wrist or groin to seal completely.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-[#1a1d26] border border-[#353e53] space-y-2">
+              <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <i class="fas fa-triangle-exclamation text-rose-400"></i> Red Flag Warning Signs (Seek Immediate Medical Care):
+              </div>
+              <ul class="list-disc pl-5 text-xs text-zinc-300 space-y-1">
+                <li>Sudden chest pain, pressure, or shortness of breath similar to your original heart event.</li>
+                <li>Swelling, bleeding, or an expanding hard lump at your catheter insertion site.</li>
+                <li>Unusual black or tarry bowel movements (signs of internal bleeding from blood thinners).</li>
+              </ul>
+            </div>
+
+            <div class="p-3 bg-[#161922] border border-[#353e53] flex items-center justify-between text-xs text-zinc-400 font-mono">
+              <span><i class="fas fa-book-medical mr-1 text-[#f0c45a]"></i> Sources: ACC/AHA Coronary Intervention &amp; Joint Commission Guidelines</span>
+              <span class="text-emerald-400 font-bold">Cosine: 0.948</span>
+            </div>
+          </div>
+        `
+      },
+      kidney_renal: {
+        title: "ACTIVE CASE: Kidney Function & Diabetes Monitor",
+        content: `
+          <div class="space-y-4">
+            <div class="p-4 bg-[#1a1d26] border border-[#353e53]">
+              <div class="text-xs font-mono text-cyan-400 mb-1 font-bold">INPUT DATA: Renal Function Panel &amp; Electrolytes</div>
+              <p class="font-mono text-xs text-zinc-200">
+                Serum Creatinine: 1.62 mg/dL [FLAG: HIGH] | eGFR: 48 mL/min/1.73m² [FLAG: LOW] | Blood Urea Nitrogen (BUN): 28 mg/dL | Serum Potassium: 3.3 mEq/L [FLAG: LOW]
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>📋</span> ClearCare Plain-English Translation (8th-Grade Level):
+              </h4>
+              
+              <div class="p-3.5 bg-[#202534] border border-[#353e53] space-y-1.5">
+                <div class="font-bold text-xs text-white flex items-center gap-1.5">
+                  <span class="text-amber-400">🟡</span> Kidney Filtration Rate (eGFR 48 mL/min) — Moderate Reduction
+                </div>
+                <p class="text-zinc-300 text-xs leading-relaxed">
+                  Your eGFR measures how effectively your kidneys filter waste from your blood. Normal is typically above 60. A score of 48 indicates moderate kidney strain (Stage 3a), which is very common in individuals with long-term diabetes or high blood pressure.
+                </p>
+              </div>
+
+              <div class="p-3.5 bg-[#202534] border border-[#353e53] space-y-1.5">
+                <div class="font-bold text-xs text-white flex items-center gap-1.5">
+                  <span class="text-amber-400">🟡</span> Serum Creatinine (1.62 mg/dL) &amp; Low Potassium (3.3 mEq/L)
+                </div>
+                <p class="text-zinc-300 text-xs leading-relaxed">
+                  Creatinine is a waste product from normal muscle breakdown. When kidneys filter more slowly, creatinine builds up in the blood. Your potassium is also slightly low, which can cause muscle cramps or mild weakness.
+                </p>
+              </div>
+            </div>
+
+            <div class="p-4 bg-[#1a1d26] border border-[#353e53] space-y-2">
+              <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <i class="fas fa-clipboard-question text-[#f0c45a]"></i> Questions to Ask Your Doctor:
+              </div>
+              <ul class="list-disc pl-5 text-xs text-zinc-300 space-y-1">
+                <li>"Are any of my current medications (like ibuprofen or NSAIDs) putting extra stress on my kidneys?"</li>
+                <li>"Should we test my urine for albumin/protein to assess kidney health further?"</li>
+                <li>"Do I need to eat more potassium-rich foods or adjust any diuretic medication I take?"</li>
+              </ul>
+            </div>
+
+            <div class="p-3 bg-[#161922] border border-[#353e53] flex items-center justify-between text-xs text-zinc-400 font-mono">
+              <span><i class="fas fa-book-medical mr-1 text-[#f0c45a]"></i> Sources: National Kidney Foundation &amp; MedlinePlus Renal Guidelines</span>
+              <span class="text-emerald-400 font-bold">Cosine: 0.935</span>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    function selectCase(caseKey) {
+      // Update button styles
+      ['btn_checkup', 'btn_cardiac', 'btn_kidney'].forEach(id => {
+        const btn = document.getElementById(id);
+        btn.classList.remove('border-[#f0c45a]', 'border-2');
+        btn.classList.add('border-[#353e53]');
+      });
+      
+      const activeBtnMap = {
+        annual_checkup: 'btn_checkup',
+        cardiac_stent: 'btn_cardiac',
+        kidney_renal: 'btn_kidney'
+      };
+      
+      const activeBtn = document.getElementById(activeBtnMap[caseKey]);
+      if (activeBtn) {
+        activeBtn.classList.remove('border-[#353e53]');
+        activeBtn.classList.add('border-[#f0c45a]', 'border-2');
+      }
+
+      const caseData = cases[caseKey];
+      if (caseData) {
+        document.getElementById('demo_badge').innerText = caseData.title;
+        document.getElementById('demo_content').innerHTML = caseData.content;
+      }
+    }
+
+    // Initialize with first case
+    document.addEventListener('DOMContentLoaded', () => {
+      selectCase('annual_checkup');
+    });
+  </script>
+
+</body>
+</html>
