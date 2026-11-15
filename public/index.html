@@ -1613,7 +1613,7 @@
       }
     }
 
-        function clearReportInput() {
+    function clearReportInput() {
       document.getElementById('reportText').value = '';
       document.getElementById('resultContainer').classList.add('hidden');
       ['annual_checkup', 'cardiac_discharge', 'kidney_diabetic'].forEach(k => {
@@ -1624,16 +1624,9 @@
         }
       });
       showToast("Cleared report text");
-    }`);
-                if (card) {
-          card.classList.remove('border-2', 'border-white', 'bg-[#222838]');
-          card.classList.add('border', 'border-[#2a3246]', 'bg-[#1c212e]');
-        }
-      });
-      showToast("Cleared report text");
     }
 
-        // Tab Switching Logic
+    // Tab Switching Logic
     function switchTab(tabIndex) {
       [1, 2, 3, 4].forEach(i => {
         const tabEl = document.getElementById(`tab${i}`);
@@ -1649,22 +1642,6 @@
           if (btnEl) {
             btnEl.classList.remove('tab-active-light', 'text-slate-900');
             btnEl.classList.add('text-slate-500', 'border-transparent', 'hover:text-slate-900');
-          }
-        }
-      });
-    }`);
-        const btnEl = document.getElementById(`tabBtn${i}`);
-        if (i === tabIndex) {
-          if (tabEl) tabEl.classList.remove('hidden');
-          if (btnEl) {
-            btnEl.classList.remove('text-zinc-400', 'border-transparent', 'hover:text-zinc-200');
-            btnEl.classList.add('tab-active');
-          }
-        } else {
-          if (tabEl) tabEl.classList.add('hidden');
-          if (btnEl) {
-            btnEl.classList.remove('tab-active');
-            btnEl.classList.add('text-zinc-400', 'border-transparent', 'hover:text-zinc-200');
           }
         }
       });
