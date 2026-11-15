@@ -1,0 +1,30 @@
+# Python virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Local Vector Database & Embedding Weights
+chroma_db/
+*.chroma
+
+# Environment variables & secrets
+.env
+*.local
+
+# System & IDE files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# App logs
+*.log

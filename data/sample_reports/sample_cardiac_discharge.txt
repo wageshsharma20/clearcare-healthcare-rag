@@ -1,0 +1,30 @@
+ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY
+Patient: Robert Miller | Age: 62 | Sex: Male | MRN: 9482104
+Admit Date: 2026-11-08 | Discharge Date: 2026-11-12
+Attending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)
+
+DISCHARGE DIAGNOSES:
+1. Non-ST Elevation Myocardial Infarction (NSTEMI)
+2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.
+3. Essential Hypertension, moderate.
+4. Hyperlipidemia, uncontrolled.
+
+PROCEDURE PERFORMED:
+Left heart catheterization, coronary angiography, balloon angioplasty, and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal vascular closure device in right common femoral artery.
+
+HOSPITAL COURSE SUMMARY:
+Patient presented with sudden retrosternal squeezing chest pressure. Troponin-I peaked at 4.2 ng/mL. Taken emergently to cardiac catheterization laboratory. Post-procedure telemetry was unremarkable with no recurrent angina, arrhythmia, or vascular access complications. Patient was ambulating well on day of discharge.
+
+DISCHARGE MEDICATIONS:
+1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).
+2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.
+3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime (High-intensity statin therapy).
+4. Metoprolol Tartrate 25 mg oral twice daily with meals.
+5. Lisinopril 10 mg oral daily.
+6. Nitroglycerin 0.4 mg sublingual tablet PRN chest pain (Take 1 tablet every 5 min up to 3 doses; call 911 if pain persists after first dose).
+
+POST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:
+- Right groin access site: Keep clean and dry. No soaking in tubs, swimming, or hot tubs for 1 week. Showering permitted after 48 hours.
+- Activity restriction: No heavy lifting (> 10 lbs) or strenuous aerobic exertion for 7 days.
+- Red Flag Emergency Warnings: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or rapid swelling/bleeding at groin puncture site.
+- Contact clinic if temperature exceeds 100.4 F or if you notice spreading redness at puncture site.

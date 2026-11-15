@@ -1,0 +1,47 @@
+PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT
+Patient Name: Jane Doe | DOB: 1978-04-12 | Age: 48 | Sex: Female
+Ordering Physician: Dr. Marcus Vance, MD (Internal Medicine)
+Collection Date: 2026-10-24 07:45 AM | Status: Final
+
+======================================================================
+TEST NAME                       RESULT       REFERENCE INTERVAL  FLAG
+======================================================================
+
+-- COMPLETE BLOOD COUNT (CBC) --
+White Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL
+Red Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL
+Hemoglobin                      13.4         12.0 - 15.5 g/dL
+Hematocrit                      39.8         37.0 - 48.0 %
+Mean Corpuscular Vol (MCV)      88.2         80.0 - 96.0 fL
+Platelets                       245          150 - 450 10^3/uL
+
+-- COMPREHENSIVE METABOLIC PANEL (CMP) --
+Glucose, Fasting                112          70 - 99 mg/dL       [HIGH]
+Blood Urea Nitrogen (BUN)       16           7 - 20 mg/dL
+Creatinine, Serum               0.82         0.50 - 1.10 mg/dL
+eGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2
+Sodium                          140          135 - 145 mEq/L
+Potassium                       4.2          3.5 - 5.1 mEq/L
+Chloride                        102          96 - 106 mEq/L
+Carbon Dioxide (CO2)            25           22 - 29 mEq/L
+Calcium                         9.4          8.5 - 10.2 mg/dL
+Total Protein                   7.1          6.0 - 8.3 g/dL
+Albumin                         4.3          3.5 - 5.0 g/dL
+Bilirubin, Total                0.6          0.2 - 1.2 mg/dL
+Alkaline Phosphatase (ALP)      72           44 - 147 U/L
+AST (SGOT)                      34           10 - 40 U/L
+ALT (SGPT)                      52           7 - 45 U/L          [HIGH]
+
+-- LIPID & METABOLIC PANEL --
+Cholesterol, Total              224          < 200 mg/dL         [HIGH]
+Triglycerides                   188          < 150 mg/dL         [HIGH]
+HDL Cholesterol                 44           > 50 mg/dL          [LOW]
+LDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]
+Hemoglobin A1c (HbA1c)          5.9          < 5.7 %             [HIGH]
+
+-- THYROID STIMULATING HORMONE --
+TSH, 3rd Generation             2.14         0.45 - 4.50 uIU/mL
+
+Physician Clinical Notes:
+Patient reports mild fatigue and sedentary lifestyle over past 6 months. Non-smoker.
+Blood pressure today: 128/82 mmHg. BMI: 28.4. Please review metabolic indices and diet.

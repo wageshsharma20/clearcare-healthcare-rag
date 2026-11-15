@@ -1,0 +1,23 @@
+PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP
+Patient: David Hernandez | Age: 57 | Sex: Male
+Ordering Physician: Dr. Elena Rostova, MD (Nephrology)
+Collection Date: 2026-10-18 | Status: Final
+
+======================================================================
+TEST NAME                       RESULT       REFERENCE INTERVAL  FLAG
+======================================================================
+Glucose, Fasting                148          70 - 99 mg/dL       [HIGH]
+Hemoglobin A1c                  7.8          < 5.7 %             [HIGH]
+Serum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]
+eGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]
+Blood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]
+BUN/Creatinine Ratio            17.3         10 - 20
+Potassium                       3.3          3.5 - 5.1 mEq/L     [LOW]
+Sodium                          138          135 - 145 mEq/L
+Calcium                         8.9          8.5 - 10.2 mg/dL
+Albumin, Serum                  3.8          3.5 - 5.0 g/dL
+Total Cholesterol               194          < 200 mg/dL
+Triglycerides                   210          < 150 mg/dL         [HIGH]
+
+Physician Clinical Notes:
+Patient has known 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted, likely secondary to hydrochlorothiazide. Review hydration, dietary potassium, and glycemic control.
