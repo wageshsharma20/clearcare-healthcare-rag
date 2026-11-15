@@ -56,8 +56,8 @@
   <style>
     body {
       font-family: 'Host Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #141722;
-      color: #e2e8f0;
+      background-color: #f1f5f9;
+      color: #0f172a;
       -webkit-font-smoothing: antialiased;
       margin: 0;
       padding: 0;
@@ -67,63 +67,80 @@
       font-feature-settings: "liga" 1, "dlig" 1;
       letter-spacing: -0.02em;
     }
-    .clinical-card {
-      background: #1c212e;
-      border: 1px solid #2a3246;
+    
+    /* Left Sidebar: Deep Black Control Station (50% Black Deck) */
+    .sidebar-dark-card {
+      background: #0b0f19;
+      border: 1px solid #1e2638;
       border-radius: 16px;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 4px 20px -2px rgba(11, 15, 25, 0.25);
+      color: #e2e8f0;
       transition: border-color 0.2s ease;
     }
-    .clinical-card:hover {
-      border-color: #36415a;
+    .sidebar-dark-card:hover {
+      border-color: #2b364f;
     }
+    
+    /* Right Workspace: Clean Crisp Clinical Light Canvas */
+    .workspace-light-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      box-shadow: 0 4px 25px -4px rgba(15, 23, 42, 0.08);
+      color: #0f172a;
+    }
+    
     .pill-btn {
       border-radius: 9999px;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .tab-active {
-      color: #ffffff !important;
-      border-bottom: 2px solid #6ee3ad !important;
-      background: rgba(110, 227, 173, 0.06);
+    
+    .tab-active-light {
+      color: #0f172a !important;
+      border-bottom: 2px solid #059669 !important;
+      background: rgba(5, 150, 105, 0.05);
+      font-weight: 600;
     }
-    .markdown-body { color: #d4d4d8; font-size: 0.9rem; line-height: 1.65; }
-    .markdown-body h1 { font-family: 'EB Garamond', Georgia, serif; font-size: 1.55rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #ffffff; }
-    .markdown-body h2 { font-family: 'EB Garamond', Georgia, serif; font-size: 1.35rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #ffffff; border-bottom: 1px solid #2a3246; padding-bottom: 6px; }
-    .markdown-body h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.35rem; color: #f4f4f5; }
-    .markdown-body h4 { font-size: 0.95rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; color: #e4e4e7; }
-    .markdown-body p { margin-bottom: 0.75rem; line-height: 1.65; color: #d4d4d8; font-size: 0.9rem; }
-    .markdown-body ul { list-style-type: disc; padding-left: 1.4rem; margin-bottom: 0.85rem; font-size: 0.9rem; color: #d4d4d8; }
-    .markdown-body ol { list-style-type: decimal; padding-left: 1.4rem; margin-bottom: 0.85rem; font-size: 0.9rem; color: #d4d4d8; }
-    .markdown-body li { margin-bottom: 0.35rem; line-height: 1.55; }
-    .markdown-body strong { color: #ffffff; font-weight: 600; }
-    .markdown-body table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 1.25rem 0; font-size: 0.85rem; border: 1px solid #2a3246; border-radius: 10px; overflow: hidden; background: #151924; }
-    .markdown-body th, .markdown-body td { border-bottom: 1px solid #222838; padding: 10px 14px; text-align: left; }
-    .markdown-body th { background: #1c212e; font-family: 'EB Garamond', Georgia, serif; font-size: 0.95rem; font-weight: 600; color: #ffffff; border-bottom: 2px solid #2a3246; }
-    .markdown-body tr:last-child td { border-bottom: none; }
-    .markdown-body tr:hover td { background-color: #1a1f2c; }
-    .markdown-body blockquote { border-left: 3px solid #6ee3ad; padding: 0.7rem 1.1rem; color: #e2e8f0; background: #13221a; border-radius: 0 10px 10px 0; margin-bottom: 0.85rem; font-size: 0.88rem; border-top: 1px solid #1c3628; border-right: 1px solid #1c3628; border-bottom: 1px solid #1c3628; }
-    .markdown-body code { background: #1e2433; padding: 2px 7px; border-radius: 9999px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #6ee3ad; border: 1px solid #2a3348; }
+    
+    /* Markdown Body in Light Clinical Area */
+    .markdown-body-light { color: #334155; font-size: 0.92rem; line-height: 1.65; }
+    .markdown-body-light h1 { font-family: 'EB Garamond', Georgia, serif; font-size: 1.6rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #0f172a; }
+    .markdown-body-light h2 { font-family: 'EB Garamond', Georgia, serif; font-size: 1.35rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+    .markdown-body-light h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.35rem; color: #1e293b; }
+    .markdown-body-light h4 { font-size: 0.95rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; color: #334155; }
+    .markdown-body-light p { margin-bottom: 0.75rem; line-height: 1.65; color: #334155; font-size: 0.92rem; }
+    .markdown-body-light ul { list-style-type: disc; padding-left: 1.4rem; margin-bottom: 0.85rem; font-size: 0.92rem; color: #334155; }
+    .markdown-body-light ol { list-style-type: decimal; padding-left: 1.4rem; margin-bottom: 0.85rem; font-size: 0.92rem; color: #334155; }
+    .markdown-body-light li { margin-bottom: 0.35rem; line-height: 1.55; }
+    .markdown-body-light strong { color: #0f172a; font-weight: 600; }
+    .markdown-body-light table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 1.25rem 0; font-size: 0.85rem; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; background: #ffffff; }
+    .markdown-body-light th, .markdown-body-light td { border-bottom: 1px solid #f1f5f9; padding: 10px 14px; text-align: left; }
+    .markdown-body-light th { background: #f8fafc; font-family: 'EB Garamond', Georgia, serif; font-size: 0.95rem; font-weight: 600; color: #0f172a; border-bottom: 2px solid #e2e8f0; }
+    .markdown-body-light tr:last-child td { border-bottom: none; }
+    .markdown-body-light tr:hover td { background-color: #f8fafc; }
+    .markdown-body-light blockquote { border-left: 3px solid #059669; padding: 0.7rem 1.1rem; color: #1e293b; background: #f0fdf4; border-radius: 0 10px 10px 0; margin-bottom: 0.85rem; font-size: 0.9rem; border-top: 1px solid #dcfce7; border-right: 1px solid #dcfce7; border-bottom: 1px solid #dcfce7; }
+    .markdown-body-light code { background: #f1f5f9; padding: 2px 7px; border-radius: 9999px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #059669; border: 1px solid #e2e8f0; }
     
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #141722; }
-    ::-webkit-scrollbar-thumb { background: #262e42; border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #343e58; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
   </style>
 </head>
-<body class="bg-[#141722] text-zinc-200 min-h-screen flex flex-col font-sans selection:bg-zinc-800 selection:text-white">
+<body class="bg-[#f1f5f9] text-slate-800 min-h-screen flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
 
-  <!-- Header (50% Slate Aesthetic) -->
-  <header class="bg-[#181d2a]/95 backdrop-blur-md border-b border-[#273044] sticky top-0 z-40 shadow-lg">
+  <!-- Header (Deep Black Masthead - 50% Black Balance) -->
+  <header class="bg-[#0b0f19] text-white border-b border-[#1b2336] sticky top-0 z-40 shadow-md">
     <div class="max-w-[1240px] mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
       <div class="flex items-center space-x-3.5">
-        <div class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center text-[#6ee3ad] shadow-md">
+        <div class="w-10 h-10 rounded-xl bg-black border border-zinc-700 flex items-center justify-center text-[#6ee3ad] shadow-md">
           <i class="fas fa-heart-pulse text-base"></i>
         </div>
         <div>
           <div class="flex items-center gap-2.5">
             <h1 class="display-serif text-2xl font-medium tracking-tight text-white leading-tight">ClearCare AI</h1>
-            <span class="inline-flex items-center gap-1.5 bg-emerald-950/80 text-emerald-300 border border-emerald-800/80 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="inline-flex items-center gap-1.5 bg-[#142a1f] text-[#6ee3ad] border border-[#1b3528] text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#6ee3ad] animate-pulse"></span>
               RAG Pipeline Online
             </span>
           </div>
@@ -131,13 +148,13 @@
         </div>
       </div>
       <div class="flex items-center space-x-2.5">
-        <a href="clearcare_piano_black.html" class="pill-btn text-xs bg-[#222838] hover:bg-[#2c3447] text-white px-3.5 py-2 border border-[#313a4e] transition flex items-center gap-1.5 shadow-xs">
+        <a href="clearcare_piano_black.html" class="pill-btn text-xs bg-[#161c28] hover:bg-[#20293a] text-white px-3.5 py-2 border border-[#273248] transition flex items-center gap-1.5 shadow-xs">
           <i class="fas fa-layer-group text-amber-400 text-xs"></i> <span class="hidden sm:inline">Landing Page</span>
         </a>
-        <button onclick="window.location.reload(true)" title="Force Reload Latest Version" class="pill-btn text-xs bg-[#222838] hover:bg-[#2c3447] text-zinc-300 px-3 py-2 border border-[#313a4e] transition flex items-center gap-1.5 shadow-xs">
+        <button onclick="window.location.reload(true)" title="Force Reload Latest Version" class="pill-btn text-xs bg-[#161c28] hover:bg-[#20293a] text-zinc-300 px-3 py-2 border border-[#273248] transition flex items-center gap-1.5 shadow-xs">
           <i class="fas fa-arrows-rotate text-xs"></i> <span class="hidden md:inline">Refresh</span>
         </button>
-        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="pill-btn text-xs bg-zinc-900 hover:bg-[#141722] text-white px-4 py-2 font-medium border border-zinc-700 transition flex items-center gap-1.5 active:scale-95 shadow-xs">
+        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="pill-btn text-xs bg-black hover:bg-zinc-900 text-white px-4 py-2 font-medium border border-zinc-700 transition flex items-center gap-1.5 active:scale-95 shadow-xs">
           <i class="fab fa-github text-xs"></i> <span class="hidden sm:inline">GitHub Repo</span>
         </a>
       </div>
@@ -145,35 +162,35 @@
   </header>
 
   <!-- Medical Disclaimer Banner -->
-  <div class="bg-amber-950/30 border-b border-amber-900/40 px-4 py-2 text-xs text-amber-300/90 flex items-center justify-center gap-2 shadow-xs">
-    <i class="fas fa-shield-halved text-amber-400 text-xs"></i>
+  <div class="bg-amber-50 border-b border-amber-200/80 px-4 py-2 text-xs text-amber-900 flex items-center justify-center gap-2 shadow-2xs">
+    <i class="fas fa-shield-halved text-amber-600 text-xs"></i>
     <span><strong>Educational Clinical Decision Support:</strong> ClearCare AI translates laboratory data into patient health literacy using verified practice guidelines (MedlinePlus, ACC/AHA, AACC). It does not provide formal diagnoses or alter prescriptions.</span>
   </div>
 
   <!-- Main Container -->
   <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-    <!-- Left Sidebar: Controls -->
+        <!-- Left Sidebar: Controls (Deep Black Control Deck - 50% Black) -->
     <aside class="lg:col-span-4 space-y-5 self-start">
       
       <!-- 1. Authentication Card -->
-      <div class="clinical-card p-5">
+      <div class="sidebar-dark-card p-5">
         <div class="flex items-center justify-between mb-3">
-          <h2 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-            <i class="fas fa-key text-white"></i> 1. Groq LLM Authentication
+          <h2 class="display-serif text-sm font-medium text-white tracking-tight flex items-center gap-2">
+            <i class="fas fa-key text-[#6ee3ad] text-xs"></i> 1. Groq LLM Authentication
           </h2>
-          <span class="text-[10px] text-zinc-300 font-mono bg-[#222838] px-2 py-0.5 rounded-full border border-[#313a4e]">v2.1 Balanced Slate (50% Black)</span>
+          <span class="text-[10px] text-zinc-300 font-mono bg-[#161c28] px-2 py-0.5 rounded-full border border-[#273248]">v2.2 50/50 Dual-Tone</span>
         </div>
         <div class="space-y-3">
           <div>
-            <div class="flex justify-between items-center mb-1">
-              <label class="text-xs font-semibold text-zinc-300">Groq API Key (Free Tier)</label>
-              <span id="keyStatus" class="text-[11px] text-zinc-400 flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span> <span>Offline Preview</span>
+            <div class="flex justify-between items-center text-xs mb-1">
+              <label for="groqApiKey" class="font-semibold text-zinc-300">Groq API Key (Free Tier)</label>
+              <span id="keyStatusIndicator" class="text-[11px] font-mono text-zinc-400 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span> Offline Preview
               </span>
             </div>
             <div class="relative">
-              <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-xs font-mono px-3 py-2 bg-[#181d29] border border-[#2a3246] text-zinc-100 rounded-lg focus:ring-1 focus:ring-white focus:border-white outline-none transition pr-8">
+              <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-xs font-mono px-3 py-2 bg-[#121724] border border-[#273248] text-zinc-100 rounded-xl focus:border-[#6ee3ad] focus:ring-1 focus:ring-[#6ee3ad]/30 outline-none transition pr-8">
               <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-2.5 top-2.5 text-zinc-400 hover:text-white transition">
                 <i id="eyeIcon" class="fas fa-eye text-xs"></i>
               </button>
@@ -181,22 +198,20 @@
           </div>
 
           <div class="flex items-center justify-between gap-2 pt-1">
-            <button onclick="verifyGroqApiKey()" class="text-xs bg-[#222838] hover:bg-[#2c3447] text-white px-3 py-1.5 rounded-lg border border-[#2a3246] font-semibold transition flex items-center gap-1.5 shadow-2xs active:scale-95">
-              <i class="fas fa-vial-circle-check text-xs"></i> <span>Test Key</span>
+            <button onclick="testGroqKey()" id="testKeyBtn" class="pill-btn bg-[#182030] hover:bg-[#222c42] text-white px-3.5 py-1.5 rounded-full border border-[#2c3954] font-semibold text-xs shadow-xs transition flex items-center gap-1.5 active:scale-95">
+              <i class="fas fa-vial-circle-check text-xs text-[#6ee3ad]"></i> <span>Test Key</span>
             </button>
             <a href="https://console.groq.com/keys" target="_blank" class="text-[11px] text-zinc-400 hover:text-white flex items-center gap-1 transition">
-              <span>Get Free Key</span> <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+              <span>Get Free Key</span> <i class="fas fa-external-link-alt text-[9px]"></i>
             </a>
           </div>
 
-          <div id="keyTestResult" class="text-xs pt-1 min-h-[1.25rem]"></div>
+          <div id="authAlert" class="hidden text-xs p-2.5 rounded-xl border flex items-center gap-2"></div>
 
-          <div class="pt-2 border-t border-[#1e2230]">
+          <div class="pt-2 border-t border-[#1e2638]">
             <label class="block text-xs font-semibold text-zinc-300 mb-1">Inference Model</label>
-            <select id="modelSelect" class="w-full text-xs bg-[#181d29] border border-[#2a3246] text-zinc-200 rounded-lg p-2 focus:ring-1 focus:ring-white focus:border-white outline-none transition">
+            <select id="modelSelect" class="w-full text-xs bg-[#121724] border border-[#273248] text-zinc-200 rounded-xl p-2 focus:border-[#6ee3ad] outline-none transition">
               <option value="llama-3.3-70b-versatile">Llama 3.3 70B Versatile (Recommended)</option>
-              <option value="openai/gpt-oss-120b">OpenAI GPT-OSS 120B (Groq)</option>
-              <option value="openai/gpt-oss-20b">OpenAI GPT-OSS 20B (Groq Fast)</option>
               <option value="llama-3.1-8b-instant">Llama 3.1 8B Instant (Ultra-fast)</option>
               <option value="qwen-2.5-32b">Qwen 2.5 32B</option>
               <option value="llama3-70b-8192">Llama 3 70B</option>
@@ -208,13 +223,13 @@
         </div>
       </div>
 
-                  <!-- 2. Clinical Case Benchmarks Sidebar Picker -->
-      <div class="clinical-card p-5">
+      <!-- 2. Clinical Case Benchmarks Sidebar Picker -->
+      <div class="sidebar-dark-card p-5">
         <h2 class="display-serif text-sm font-medium text-white tracking-tight mb-3 flex items-center gap-2">
           <i class="fas fa-folder-open text-[#6ee3ad] text-xs"></i> 2. Clinical Case Benchmarks
         </h2>
         <div class="space-y-2.5">
-          <button onclick="loadSample('annual_checkup')" id="sideMock_annual_checkup" class="w-full text-left bg-[#222838] hover:bg-[#2c3447] border-2 border-white p-3 rounded-xl transition group shadow-sm">
+          <button onclick="loadSample('annual_checkup')" id="sideMock_annual_checkup" class="w-full text-left bg-[#151b28] hover:bg-[#1d2538] border-2 border-white p-3 rounded-xl transition group shadow-sm">
             <div class="flex items-center justify-between mb-1">
               <span class="font-semibold text-xs text-white flex items-center gap-1.5">
                 <span>🩺</span> Routine Annual Checkup
@@ -224,7 +239,7 @@
             <p class="text-zinc-300 text-[11px] leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
           </button>
 
-          <button onclick="loadSample('cardiac_discharge')" id="sideMock_cardiac_discharge" class="w-full text-left bg-[#1c212e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] p-3 rounded-xl transition group shadow-sm">
+          <button onclick="loadSample('cardiac_discharge')" id="sideMock_cardiac_discharge" class="w-full text-left bg-[#101420] hover:bg-[#182030] border border-[#222c42] hover:border-[#2f3d5c] p-3 rounded-xl transition group shadow-sm">
             <div class="flex items-center justify-between mb-1">
               <span class="font-semibold text-xs text-white flex items-center gap-1.5">
                 <span>❤️</span> Post-PCI Stent Discharge
@@ -234,7 +249,7 @@
             <p class="text-zinc-300 text-[11px] leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
           </button>
 
-          <button onclick="loadSample('kidney_diabetic')" id="sideMock_kidney_diabetic" class="w-full text-left bg-[#1c212e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] p-3 rounded-xl transition group shadow-sm">
+          <button onclick="loadSample('kidney_diabetic')" id="sideMock_kidney_diabetic" class="w-full text-left bg-[#101420] hover:bg-[#182030] border border-[#222c42] hover:border-[#2f3d5c] p-3 rounded-xl transition group shadow-sm">
             <div class="flex items-center justify-between mb-1">
               <span class="font-semibold text-xs text-white flex items-center gap-1.5">
                 <span>🧪</span> Kidney &amp; Diabetes Monitor
@@ -247,33 +262,33 @@
       </div>
 
       <!-- 3. Retrieval Parameters Tuning -->
-      <div class="clinical-card p-5">
-        <h2 class="text-xs font-bold text-white uppercase tracking-wider mb-3.5 flex items-center gap-2">
-          <i class="fas fa-sliders text-white"></i> 3. RAG Retrieval Parameters
+      <div class="sidebar-dark-card p-5">
+        <h2 class="display-serif text-sm font-medium text-white tracking-tight mb-3.5 flex items-center gap-2">
+          <i class="fas fa-sliders text-[#6ee3ad] text-xs"></i> 3. RAG Retrieval Parameters
         </h2>
         <div class="space-y-4">
           <div>
             <div class="flex justify-between items-center text-xs mb-1.5">
               <span class="font-semibold text-zinc-300">Top-K Retrieved Chunks</span>
-              <span id="topKVal" class="font-mono font-bold text-white bg-[#151924] border border-zinc-700 px-2 py-0.5 rounded text-xs">4</span>
+              <span id="topKVal" class="font-mono font-bold text-[#6ee3ad] bg-[#121724] border border-[#273248] px-2 py-0.5 rounded text-xs">4</span>
             </div>
-            <input type="range" id="topKSlider" min="2" max="8" value="4" class="w-full h-1.5 bg-[#151924] rounded-lg appearance-none cursor-pointer accent-[#6ee3ad]" oninput="document.getElementById('topKVal').innerText = this.value">
+            <input type="range" id="topKSlider" min="2" max="8" value="4" class="w-full h-1.5 bg-[#161c28] rounded-lg appearance-none cursor-pointer accent-[#6ee3ad]" oninput="document.getElementById('topKVal').innerText = this.value">
             <span class="text-[10px] text-zinc-400">Controls evidence density passed to the LLM</span>
           </div>
 
           <div>
             <div class="flex justify-between items-center text-xs mb-1.5">
               <span class="font-semibold text-zinc-300">Cosine Threshold</span>
-              <span id="thresholdVal" class="font-mono font-bold text-white bg-[#151924] border border-zinc-700 px-2 py-0.5 rounded text-xs">0.25</span>
+              <span id="thresholdVal" class="font-mono font-bold text-[#6ee3ad] bg-[#121724] border border-[#273248] px-2 py-0.5 rounded text-xs">0.25</span>
             </div>
-            <input type="range" id="thresholdSlider" min="15" max="55" value="25" class="w-full h-1.5 bg-[#151924] rounded-lg appearance-none cursor-pointer accent-[#6ee3ad]" oninput="document.getElementById('thresholdVal').innerText = (this.value/100).toFixed(2)">
+            <input type="range" id="thresholdSlider" min="15" max="55" value="25" class="w-full h-1.5 bg-[#161c28] rounded-lg appearance-none cursor-pointer accent-[#6ee3ad]" oninput="document.getElementById('thresholdVal').innerText = (this.value/100).toFixed(2)">
             <span class="text-[10px] text-zinc-400">Minimum similarity score to qualify as clinical evidence</span>
           </div>
         </div>
       </div>
 
       <!-- 4. Clinical Knowledge Base Index -->
-      <div class="clinical-card p-5">
+      <div class="sidebar-dark-card p-5">
         <div class="flex items-center justify-between mb-2">
           <h2 class="display-serif text-sm font-medium text-white tracking-tight flex items-center gap-2">
             <i class="fas fa-database text-[#6ee3ad] text-xs"></i> Clinical Guidelines
@@ -283,33 +298,33 @@
         <p class="text-[11px] text-zinc-300 leading-relaxed mb-2.5">
           Indexed from <strong>5 authoritative clinical guidelines</strong> (ACC/AHA, AACC, MedlinePlus, Joint Commission).
         </p>
-        <button onclick="switchTab(4)" class="pill-btn w-full text-center text-xs bg-[#222838] hover:bg-[#2c3447] text-[#e5e5e4] border border-[#2a3246] py-2 rounded-full font-medium transition shadow-xs flex items-center justify-center gap-1.5">
+        <button onclick="switchTab(4)" class="pill-btn w-full text-center text-xs bg-[#161c28] hover:bg-[#20293a] text-white border border-[#273248] py-2 rounded-full font-medium transition shadow-xs flex items-center justify-center gap-1.5">
           <span>Explore 8-Stage Pipeline Architecture</span> <i class="fas fa-arrow-right text-[10px]"></i>
         </button>
       </div>
 
     </aside>
 
-    <!-- Main Content Area (8 Cols) -->
-    <main class="lg:col-span-8 clinical-card flex flex-col overflow-hidden">
+        <!-- Main Content Area (8 Cols - Crisp Light Clinical Canvas) -->
+    <main class="lg:col-span-8 workspace-light-card flex flex-col overflow-hidden text-slate-800">
       
-      <!-- Segmented Navigation Tabs (EB Garamond & Piano Black) -->
-      <div class="flex border-b border-[#2a3246] px-4 sm:px-6 pt-3.5 space-x-3 sm:space-x-6 text-sm text-[#a1a1a0] overflow-x-auto">
-        <button id="tabBtn1" onclick="switchTab(1)" class="display-serif text-base pb-3 px-3 tab-active flex items-center gap-2 whitespace-nowrap transition font-medium">
-          <i class="fas fa-file-medical text-sm text-[#6ee3ad]"></i> Report Translator
+      <!-- Segmented Navigation Tabs -->
+      <div class="flex border-b border-slate-200 px-4 sm:px-6 pt-3.5 space-x-3 sm:space-x-6 text-sm text-slate-500 overflow-x-auto">
+        <button id="tabBtn1" onclick="switchTab(1)" class="display-serif text-base pb-3 px-3 tab-active-light text-slate-900 flex items-center gap-2 whitespace-nowrap transition font-medium">
+          <i class="fas fa-file-medical text-sm text-emerald-600"></i> Report Translator
         </button>
-        <button id="tabBtn2" onclick="switchTab(2)" class="display-serif text-base pb-3 px-3 hover:text-white flex items-center gap-2 whitespace-nowrap transition font-medium">
-          <i class="fas fa-comments text-sm text-[#a1a1a0]"></i> Ask ClearCare (Q&amp;A)
+        <button id="tabBtn2" onclick="switchTab(2)" class="display-serif text-base pb-3 px-3 hover:text-slate-900 flex items-center gap-2 whitespace-nowrap transition font-medium">
+          <i class="fas fa-comments text-sm text-slate-400"></i> Ask ClearCare (Q&amp;A)
         </button>
-        <button id="tabBtn3" onclick="switchTab(3)" class="display-serif text-base pb-3 px-3 hover:text-white flex items-center gap-2 whitespace-nowrap transition font-medium">
-          <i class="fas fa-microscope text-sm text-[#a1a1a0]"></i> RAG Inspector
+        <button id="tabBtn3" onclick="switchTab(3)" class="display-serif text-base pb-3 px-3 hover:text-slate-900 flex items-center gap-2 whitespace-nowrap transition font-medium">
+          <i class="fas fa-microscope text-sm text-slate-400"></i> RAG Inspector
         </button>
-        <button id="tabBtn4" onclick="switchTab(4)" class="display-serif text-base pb-3 px-3 hover:text-white flex items-center gap-2 whitespace-nowrap transition font-medium">
-          <i class="fas fa-diagram-project text-sm text-[#a1a1a0]"></i> Pipeline &amp; Architecture
+        <button id="tabBtn4" onclick="switchTab(4)" class="display-serif text-base pb-3 px-3 hover:text-slate-900 flex items-center gap-2 whitespace-nowrap transition font-medium">
+          <i class="fas fa-diagram-project text-sm text-slate-400"></i> Pipeline &amp; Architecture
         </button>
       </div>
 
-      <!-- Tab Content Area -->
+      <!-- Tab Content Area (Encloses All 4 Tabs Perfectly) -->
       <div class="p-5 sm:p-6 flex-1">
 
         <!-- ============================================================= -->
@@ -317,62 +332,62 @@
         <!-- ============================================================= -->
         <div id="tab1" class="space-y-4">
           
-                    <!-- Clinical Case Benchmark Selector (3 Mock Reports) -->
+          <!-- Clinical Case Benchmark Selector (3 Mock Reports) -->
           <div class="space-y-2 mb-4">
             <div class="flex items-center justify-between">
-              <label class="display-serif text-sm font-medium text-white flex items-center gap-2">
-                <i class="fas fa-flask text-[#6ee3ad] text-xs"></i> Select Clinical Mock Case (Click to Load):
+              <label class="display-serif text-sm font-semibold text-slate-900 flex items-center gap-2">
+                <i class="fas fa-flask text-emerald-600 text-xs"></i> Select Clinical Mock Case (Click to Load):
               </label>
-              <span class="text-[11px] text-[#a1a1a0] font-normal">3 Pre-configured Scenarios</span>
+              <span class="text-[11px] text-slate-500 font-normal">3 Pre-configured Scenarios</span>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               
-                            <!-- Mock Card 1 -->
-              <div onclick="loadSample('annual_checkup')" id="mockCard_annual_checkup" class="mock-card text-left p-3.5 rounded-xl border-2 border-white bg-[#222838] shadow-md transition group cursor-pointer active:scale-98 relative">
+              <!-- Mock Card 1 -->
+              <div onclick="loadSample('annual_checkup')" id="mockCard_annual_checkup" class="mock-card text-left p-3.5 rounded-xl border-2 border-emerald-600 bg-emerald-50/50 shadow-sm transition group cursor-pointer active:scale-98 relative">
                 <div class="flex items-center justify-between mb-1.5">
-                  <span class="font-bold text-xs text-white flex items-center gap-1.5">
+                  <span class="font-bold text-xs text-slate-900 flex items-center gap-1.5">
                     <span>🩺</span> Case 1: Checkup
                   </span>
-                  <span class="text-[10px] font-bold text-amber-300 bg-amber-950/90 border border-amber-800/80 px-2 py-0.5 rounded-full">CMP + Lipid</span>
+                  <span class="text-[10px] font-bold text-amber-800 bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-full">CMP + Lipid</span>
                 </div>
-                <p class="text-zinc-300 text-[11px] leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
-                <div class="mt-2.5 pt-2 border-t border-[#313a4e] flex items-center justify-between text-[10px]">
-                  <span class="text-zinc-400">Click to select</span>
-                  <button type="button" onclick="event.stopPropagation(); loadSample('annual_checkup', true)" class="pill-btn text-white hover:text-zinc-100 font-semibold flex items-center gap-1 bg-[#2a3246] hover:bg-[#343e56] border border-[#3d4864] px-2.5 py-0.5 rounded-full transition">
+                <p class="text-slate-600 text-[11px] leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
+                <div class="mt-2.5 pt-2 border-t border-emerald-200/80 flex items-center justify-between text-[10px]">
+                  <span class="text-slate-500 font-medium">Click to select</span>
+                  <button type="button" onclick="event.stopPropagation(); loadSample('annual_checkup', true)" class="pill-btn text-white hover:bg-zinc-800 font-semibold flex items-center gap-1 bg-black px-2.5 py-0.5 rounded-full transition shadow-xs">
                     <i class="fas fa-bolt text-amber-400 text-[9px]"></i> Translate
                   </button>
                 </div>
               </div>
 
-                            <!-- Mock Card 2 -->
-              <div onclick="loadSample('cardiac_discharge')" id="mockCard_cardiac_discharge" class="mock-card text-left p-3.5 rounded-xl border border-[#2a3246] bg-[#1c212e] hover:bg-[#222838] hover:border-[#36415a] shadow-sm transition group cursor-pointer active:scale-98 relative">
+              <!-- Mock Card 2 -->
+              <div onclick="loadSample('cardiac_discharge')" id="mockCard_cardiac_discharge" class="mock-card text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-slate-100 hover:border-slate-300 shadow-2xs transition group cursor-pointer active:scale-98 relative">
                 <div class="flex items-center justify-between mb-1.5">
-                  <span class="font-bold text-xs text-white flex items-center gap-1.5">
+                  <span class="font-bold text-xs text-slate-900 flex items-center gap-1.5">
                     <span>❤️</span> Case 2: Stent
                   </span>
-                  <span class="text-[10px] font-bold text-rose-300 bg-rose-950/90 border border-rose-800/80 px-2 py-0.5 rounded-full">Cardiology DAPT</span>
+                  <span class="text-[10px] font-bold text-rose-800 bg-rose-100 border border-rose-300 px-2 py-0.5 rounded-full">Cardiology DAPT</span>
                 </div>
-                <p class="text-zinc-300 text-[11px] leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
-                <div class="mt-2.5 pt-2 border-t border-[#2a3246] flex items-center justify-between text-[10px]">
-                  <span class="text-zinc-400">Click to select</span>
-                  <button type="button" onclick="event.stopPropagation(); loadSample('cardiac_discharge', true)" class="pill-btn text-white hover:text-zinc-100 font-semibold flex items-center gap-1 bg-[#2a3246] hover:bg-[#343e56] border border-[#3d4864] px-2.5 py-0.5 rounded-full transition">
+                <p class="text-slate-600 text-[11px] leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
+                <div class="mt-2.5 pt-2 border-t border-slate-200 flex items-center justify-between text-[10px]">
+                  <span class="text-slate-500 font-medium">Click to select</span>
+                  <button type="button" onclick="event.stopPropagation(); loadSample('cardiac_discharge', true)" class="pill-btn text-white hover:bg-zinc-800 font-semibold flex items-center gap-1 bg-black px-2.5 py-0.5 rounded-full transition shadow-xs">
                     <i class="fas fa-bolt text-rose-400 text-[9px]"></i> Translate
                   </button>
                 </div>
               </div>
 
-                            <!-- Mock Card 3 -->
-              <div onclick="loadSample('kidney_diabetic')" id="mockCard_kidney_diabetic" class="mock-card text-left p-3.5 rounded-xl border border-[#2a3246] bg-[#1c212e] hover:bg-[#222838] hover:border-[#36415a] shadow-sm transition group cursor-pointer active:scale-98 relative">
+              <!-- Mock Card 3 -->
+              <div onclick="loadSample('kidney_diabetic')" id="mockCard_kidney_diabetic" class="mock-card text-left p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-slate-100 hover:border-slate-300 shadow-2xs transition group cursor-pointer active:scale-98 relative">
                 <div class="flex items-center justify-between mb-1.5">
-                  <span class="font-bold text-xs text-white flex items-center gap-1.5">
+                  <span class="font-bold text-xs text-slate-900 flex items-center gap-1.5">
                     <span>🧪</span> Case 3: Kidney
                   </span>
-                  <span class="text-[10px] font-bold text-indigo-300 bg-indigo-950/90 border border-indigo-800/80 px-2 py-0.5 rounded-full">Renal eGFR</span>
+                  <span class="text-[10px] font-bold text-indigo-800 bg-indigo-100 border border-indigo-300 px-2 py-0.5 rounded-full">Renal eGFR</span>
                 </div>
-                <p class="text-zinc-300 text-[11px] leading-tight">Creatinine (1.62), eGFR (48), Low K+ (3.3)</p>
-                <div class="mt-2.5 pt-2 border-t border-[#2a3246] flex items-center justify-between text-[10px]">
-                  <span class="text-zinc-400">Click to select</span>
-                  <button type="button" onclick="event.stopPropagation(); loadSample('kidney_diabetic', true)" class="pill-btn text-white hover:text-zinc-100 font-semibold flex items-center gap-1 bg-[#2a3246] hover:bg-[#343e56] border border-[#3d4864] px-2.5 py-0.5 rounded-full transition">
+                <p class="text-slate-600 text-[11px] leading-tight">Creatinine (1.62), eGFR (48), Low K+ (3.3)</p>
+                <div class="mt-2.5 pt-2 border-t border-slate-200 flex items-center justify-between text-[10px]">
+                  <span class="text-slate-500 font-medium">Click to select</span>
+                  <button type="button" onclick="event.stopPropagation(); loadSample('kidney_diabetic', true)" class="pill-btn text-white hover:bg-zinc-800 font-semibold flex items-center gap-1 bg-black px-2.5 py-0.5 rounded-full transition shadow-xs">
                     <i class="fas fa-bolt text-indigo-400 text-[9px]"></i> Translate
                   </button>
                 </div>
@@ -380,61 +395,61 @@
 
             </div>
           </div>
-          </div>
 
           <div class="relative">
-            <textarea id="reportText" rows="7" placeholder="Paste medical document text here (e.g., Blood tests, Complete Blood Count, Metabolic Panel, Lipid Panel, or hospital discharge instructions)..." class="w-full text-xs sm:text-sm font-mono p-4 bg-[#151924] border border-[#2a3246] text-[#f9f8f9] rounded-xl focus:border-[#6ee3ad]/60 focus:ring-1 focus:ring-[#6ee3ad]/30 focus:bg-[#12151f] outline-none leading-relaxed transition resize-y"></textarea>
+            <textarea id="reportText" rows="7" placeholder="Paste medical document text here (e.g., Blood tests, Complete Blood Count, Metabolic Panel, Lipid Panel, or hospital discharge instructions)..." class="w-full text-xs sm:text-sm font-mono p-4 bg-[#0a0e17] border border-[#1e2638] text-[#6ee3ad] rounded-xl focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30 outline-none leading-relaxed transition resize-y shadow-inner"></textarea>
           </div>
 
           <!-- Action Buttons Bar -->
           <div class="flex items-center justify-between gap-3 pt-1">
             <div class="flex items-center gap-2.5">
-              <button onclick="translateReport()" id="translateBtn" class="pill-btn bg-white hover:bg-zinc-100 text-black font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-lg transition flex items-center gap-2 active:scale-95">
-                <i class="fas fa-wand-magic-sparkles text-xs"></i> Translate &amp; Explain Report
+              <button onclick="translateReport()" id="translateBtn" class="pill-btn bg-black hover:bg-zinc-800 text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-md transition flex items-center gap-2 active:scale-95">
+                <i class="fas fa-wand-magic-sparkles text-xs text-emerald-400"></i> Translate &amp; Explain Report
               </button>
-              <button onclick="clearReportInput()" class="pill-btn bg-[#222838] hover:bg-[#2c3447] text-zinc-300 hover:text-white text-xs sm:text-sm px-4 py-2.5 rounded-full border border-[#313a4e] font-medium transition active:scale-95">
+              <button onclick="clearReportInput()" class="pill-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm px-4 py-2.5 rounded-full border border-slate-300 font-medium transition active:scale-95">
                 Clear
               </button>
             </div>
-            <span class="text-[11px] text-zinc-400 hidden md:inline">Grounds translation strictly in clinical guidelines</span>
+            <span class="text-[11px] text-slate-500 hidden md:inline">Grounds translation strictly in clinical guidelines</span>
           </div>
 
           <!-- Loading Spinner -->
           <div id="loadingIndicator" class="hidden py-10 text-center space-y-3">
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-3 border-white border-t-transparent"></div>
-            <p class="text-xs sm:text-sm text-zinc-300 font-medium">Scanning clinical biomarkers, resolving multi-query expansion, and generating grounded translation...</p>
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-3 border-emerald-600 border-t-transparent"></div>
+            <p class="text-xs sm:text-sm text-slate-600 font-medium">Scanning clinical biomarkers, resolving multi-query expansion, and generating grounded translation...</p>
           </div>
 
           <!-- Result Area -->
-          <div id="resultContainer" class="hidden pt-4 border-t border-[#2a3246] space-y-4">
+          <div id="resultContainer" class="hidden pt-4 border-t border-slate-200 space-y-4">
             
             <!-- Result Action Header -->
-            <div class="flex items-center justify-between pb-2 border-b border-[#2a3246]">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-200">
               <div class="flex items-center gap-2">
-                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <h3 class="display-serif text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
                   <span>📋</span> ClearCare Clinical Translation &amp; Patient Guidance
                 </h3>
-                <span id="engineBadge" class="hidden sm:inline text-[10px] font-mono text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-2 py-0.5 rounded-full">Grounded Clinical Engine</span>
+                <span id="engineBadge" class="hidden sm:inline text-[10px] font-mono text-emerald-800 bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 rounded-full font-semibold">Grounded Clinical Engine</span>
               </div>
-              <button onclick="copyTranslationResult()" class="pill-btn text-xs bg-[#222838] hover:bg-[#2c3447] text-[#a1a1a0] hover:text-white px-3.5 py-1.5 rounded-full border border-[#2a3246] font-medium transition flex items-center gap-1.5 active:scale-95">
+              <button onclick="copyTranslationResult()" class="pill-btn text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3.5 py-1.5 rounded-full border border-slate-300 font-medium transition flex items-center gap-1.5 active:scale-95">
                 <i class="far fa-copy text-xs"></i> <span>Copy Translation</span>
               </button>
             </div>
 
             <!-- Parsed Translation Markdown Output -->
-            <div id="resultOutput" class="markdown-body text-zinc-200 text-sm"></div>
+            <div id="resultOutput" class="markdown-body-light text-slate-800 text-sm"></div>
 
             <!-- Evidence Drawer -->
-            <div id="evidenceDrawer" class="bg-[#181d29] border border-[#2a3246] rounded-xl p-4 mt-4">
+            <div id="evidenceDrawer" class="bg-slate-50 border border-slate-200 rounded-xl p-4 mt-4">
               <div class="flex items-center justify-between mb-3">
-                <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                  <i class="fas fa-book-medical text-white"></i> Verified Evidence Guidelines Retrieved &amp; Grounded
+                <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <i class="fas fa-book-medical text-emerald-600"></i> Verified Evidence Guidelines Retrieved &amp; Grounded
                 </h4>
-                <span id="evidenceCountBadge" class="text-[10px] font-bold bg-[#222838] text-white px-2 py-0.5 rounded-full">0 matched</span>
+                <span id="evidenceCountBadge" class="text-[10px] font-bold bg-white text-slate-700 border border-slate-200 px-2 py-0.5 rounded-full">0 matched</span>
               </div>
               <div id="evidenceList" class="space-y-2.5 text-xs"></div>
             </div>
           </div>
+
         </div>
 
         <!-- ============================================================= -->
@@ -443,24 +458,24 @@
         <div id="tab2" class="hidden flex flex-col h-[560px]">
           
           <!-- Suggested Question Chips -->
-          <div class="pb-3 border-b border-[#2a3246] flex items-center gap-1.5 overflow-x-auto text-[11px]">
-            <span class="text-zinc-400 font-medium shrink-0">Try asking:</span>
-            <button onclick="askPresetQuestion('What does a normal eGFR level mean, and what causes it to decline?')" class="pill-btn bg-[#222838] hover:bg-[#2c3447] text-[#a1a1a0] hover:text-white text-[11px] px-3 py-1 rounded-full border border-[#2a3246] transition shrink-0 font-medium">What is eGFR?</button>
-            <button onclick="askPresetQuestion('What causes elevated ALT liver enzymes, and are there benign reasons like exercise?')" class="pill-btn bg-[#222838] hover:bg-[#2c3447] text-[#a1a1a0] hover:text-white text-[11px] px-3 py-1 rounded-full border border-[#2a3246] transition shrink-0 font-medium">Why is ALT high?</button>
-            <button onclick="askPresetQuestion('Can I stop taking Plavix or Aspirin after having a cardiac stent placed?')" class="pill-btn bg-[#222838] hover:bg-[#2c3447] text-[#a1a1a0] hover:text-white text-[11px] px-3 py-1 rounded-full border border-[#2a3246] transition shrink-0 font-medium">Can I stop Plavix?</button>
-            <button onclick="askPresetQuestion('What are optimal target LDL cholesterol levels according to ACC/AHA guidelines?')" class="pill-btn bg-[#222838] hover:bg-[#2c3447] text-[#a1a1a0] hover:text-white text-[11px] px-3 py-1 rounded-full border border-[#2a3246] transition shrink-0 font-medium">LDL Goals</button>
-            <button onclick="askPresetQuestion('Do any of my current medications need dosage adjustment based on these numbers?')" class="pill-btn bg-[#222838] hover:bg-[#2c3447] text-[#a1a1a0] hover:text-white text-[11px] px-3 py-1 rounded-full border border-[#2a3246] transition shrink-0 font-medium">Medication Adjustments?</button>
+          <div class="pb-3 border-b border-slate-200 flex items-center gap-1.5 overflow-x-auto text-[11px]">
+            <span class="text-slate-500 font-medium shrink-0">Try asking:</span>
+            <button onclick="askPresetQuestion('What does a normal eGFR level mean, and what causes it to decline?')" class="pill-btn bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 text-[11px] px-3 py-1 rounded-full border border-slate-300 transition shrink-0 font-medium">What is eGFR?</button>
+            <button onclick="askPresetQuestion('What causes elevated ALT liver enzymes, and are there benign reasons like exercise?')" class="pill-btn bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 text-[11px] px-3 py-1 rounded-full border border-slate-300 transition shrink-0 font-medium">Why is ALT high?</button>
+            <button onclick="askPresetQuestion('Can I stop taking Plavix or Aspirin after having a cardiac stent placed?')" class="pill-btn bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 text-[11px] px-3 py-1 rounded-full border border-slate-300 transition shrink-0 font-medium">Can I stop Plavix?</button>
+            <button onclick="askPresetQuestion('What are optimal target LDL cholesterol levels according to ACC/AHA guidelines?')" class="pill-btn bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 text-[11px] px-3 py-1 rounded-full border border-slate-300 transition shrink-0 font-medium">LDL Goals</button>
+            <button onclick="askPresetQuestion('Do any of my current medications need dosage adjustment based on these numbers?')" class="pill-btn bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 text-[11px] px-3 py-1 rounded-full border border-slate-300 transition shrink-0 font-medium">Medication Adjustments?</button>
           </div>
 
           <!-- Chat Conversation Area -->
           <div id="chatMessages" class="flex-1 overflow-y-auto space-y-4 py-4 pr-1">
-            <div class="bg-[#222838] border border-[#2a3246] rounded-2xl p-4 text-xs text-zinc-300 flex gap-3 shadow-2xs">
-              <div class="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 text-white flex items-center justify-center shrink-0">
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs text-slate-700 flex gap-3 shadow-2xs">
+              <div class="w-8 h-8 rounded-full bg-slate-900 text-[#6ee3ad] flex items-center justify-center shrink-0">
                 <i class="fas fa-stethoscope"></i>
               </div>
               <div class="space-y-1">
-                <p class="font-bold text-white">ClearCare Clinical Assistant</p>
-                <p class="text-zinc-300 leading-relaxed">
+                <p class="font-bold text-slate-900">ClearCare Clinical Assistant</p>
+                <p class="text-slate-600 leading-relaxed">
                   Hello! I am ready to answer your questions regarding clinical lab results, biomarker reference ranges, and post-discharge protocols. 
                   Every answer is grounded strictly in verified guidelines from ACC/AHA, AACC, and MedlinePlus.
                 </p>
@@ -469,9 +484,9 @@
           </div>
 
           <!-- Chat Input Bar -->
-          <div class="pt-3 border-t border-[#2a3246] flex gap-2">
-            <input type="text" id="chatInput" placeholder="Type a clinical question (e.g., 'What causes elevated ALT?' or 'Normal eGFR?')..." onkeypress="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-xs sm:text-sm px-4 py-2.5 bg-[#151924] border border-[#2a3246] text-[#f9f8f9] rounded-xl focus:border-[#6ee3ad]/60 focus:ring-1 focus:ring-[#6ee3ad]/30 focus:bg-[#12151f] outline-none transition">
-            <button onclick="sendChatMessage()" class="pill-btn bg-white hover:bg-zinc-100 text-black font-bold px-5 py-2.5 rounded-full shadow-md text-xs sm:text-sm transition flex items-center gap-1.5 active:scale-95">
+          <div class="pt-3 border-t border-slate-200 flex gap-2">
+            <input type="text" id="chatInput" placeholder="Type a clinical question (e.g., 'What causes elevated ALT?' or 'Normal eGFR?')..." onkeypress="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-xs sm:text-sm px-4 py-2.5 bg-slate-50 border border-slate-300 text-slate-900 rounded-xl focus:bg-white focus:border-emerald-600 focus:ring-1 focus:ring-emerald-500/30 outline-none transition">
+            <button onclick="sendChatMessage()" class="pill-btn bg-black hover:bg-zinc-800 text-white font-bold px-5 py-2.5 rounded-full shadow-md text-xs sm:text-sm transition flex items-center gap-1.5 active:scale-95">
               <span>Send</span> <i class="fas fa-paper-plane text-xs"></i>
             </button>
           </div>
@@ -481,38 +496,37 @@
         <!-- TAB 3: RAG Inspector -->
         <!-- ============================================================= -->
         <div id="tab3" class="hidden space-y-5">
-          <div class="flex items-center justify-between pb-2 border-b border-[#2a3246]">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200">
             <div>
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i class="fas fa-microscope text-white"></i> RAG Engine Transparency Inspector
+              <h3 class="display-serif text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                <i class="fas fa-microscope text-emerald-600"></i> RAG Engine Transparency Inspector
               </h3>
-              <p class="text-xs text-zinc-400">Live inspection of vector cosine similarity scores, chunk metadata, and augmented LLM prompt.</p>
+              <p class="text-xs text-slate-500">Live inspection of vector cosine similarity scores, chunk metadata, and augmented LLM prompt.</p>
             </div>
-            <span class="text-xs font-mono bg-[#222838] text-zinc-300 px-2 py-0.5 rounded border border-[#2a3246]">HNSW Graph</span>
+            <span class="text-xs font-mono bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-full border border-slate-200 font-semibold">HNSW Graph</span>
           </div>
 
           <div id="inspectorChunks" class="space-y-3">
-            <div class="p-6 text-center text-xs text-zinc-400 bg-[#181d29] rounded-xl border border-dashed border-[#2a3246]">
-              <i class="fas fa-magnifying-glass text-zinc-400 text-xl mb-2 block"></i>
+            <div class="p-6 text-center text-xs text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-300">
+              <i class="fas fa-magnifying-glass text-slate-400 text-xl mb-2 block"></i>
               No query executed yet. Run a translation in Tab 1 or ask a question in Tab 2 to inspect retrieved vector chunks.
             </div>
           </div>
 
-          <div id="inspectorPromptSection" class="hidden pt-4 border-t border-[#2a3246] space-y-2">
+          <div id="inspectorPromptSection" class="hidden pt-4 border-t border-slate-200 space-y-2">
             <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                <i class="fas fa-terminal text-white"></i> Raw Augmented Prompt Sent to LLM
+              <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fas fa-terminal text-slate-700"></i> Raw Augmented Prompt Sent to LLM
               </h4>
-              <button onclick="copyRawPrompt()" class="text-[11px] text-zinc-300 hover:text-white bg-[#222838] hover:bg-[#2c3447] px-2.5 py-1 rounded font-mono border border-[#2a3246] transition flex items-center gap-1">
+              <button onclick="copyRawPrompt()" class="pill-btn text-[11px] text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded-full font-mono border border-slate-300 transition flex items-center gap-1">
                 <i class="far fa-copy"></i> Copy Prompt
               </button>
             </div>
-            <pre id="inspectorPrompt" class="text-xs bg-[#141722] text-zinc-300 p-4 rounded-xl overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed border border-zinc-800"></pre>
+            <pre id="inspectorPrompt" class="text-xs bg-[#0a0e17] text-slate-200 p-4 rounded-xl overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed border border-[#1e2638]"></pre>
           </div>
-        </div>        <!-- ============================================================= -->
-        <!-- TAB 4: Project Pipeline & Architecture (In Simple Terms) -->
-        <!-- ============================================================= -->
-        <div id="tab4" class="hidden space-y-6">
+        </div>
+
+<div id="tab4" class="hidden space-y-6">
           
           <!-- Architecture Header -->
           <div class="bg-[#1c212e] border border-[#2a3246] rounded-2xl p-6 sm:p-7 text-white shadow-md relative overflow-hidden">
@@ -538,35 +552,35 @@
               <i class="fas fa-route text-white"></i> The 8 Simple Steps (Click Any Step to Learn More)
             </h3>
             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
-              <button onclick="scrollToStage(\'stage1\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
+              <button onclick="scrollToStage('stage1')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-white uppercase">Step 01</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Real Rules</span>
               </button>
-              <button onclick="scrollToStage(\'stage2\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
+              <button onclick="scrollToStage('stage2')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-white uppercase">Step 02</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Neat Pieces</span>
               </button>
-              <button onclick="scrollToStage(\'stage3\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
+              <button onclick="scrollToStage('stage3')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-white uppercase">Step 03</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Word Meaning</span>
               </button>
-              <button onclick="scrollToStage(\'stage4\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
+              <button onclick="scrollToStage('stage4')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-emerald-400 uppercase">Step 04</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Quick Search</span>
               </button>
-              <button onclick="scrollToStage(\'stage5\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
+              <button onclick="scrollToStage('stage5')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-amber-400 uppercase">Step 05</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Check Each Test</span>
               </button>
-              <button onclick="scrollToStage(\'stage6\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
+              <button onclick="scrollToStage('stage6')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-amber-400 uppercase">Step 06</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Shield Filter</span>
               </button>
-              <button onclick="scrollToStage(\'stage7\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
+              <button onclick="scrollToStage('stage7')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-indigo-400 uppercase">Step 07</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-indigo-300 truncate">Safe AI Brain</span>
               </button>
-              <button onclick="scrollToStage(\'stage8\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
+              <button onclick="scrollToStage('stage8')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#222838] border border-[#2a3246] hover:border-[#36415a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-emerald-400 uppercase">Step 08</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Patient Report</span>
               </button>
@@ -923,11 +937,6 @@
           </div>
 
         </div>
-
-
-
-        </div>
-
       </div>
     </main>
 
@@ -1563,39 +1572,29 @@
         const textarea = document.getElementById('reportText');
         if (textarea) textarea.value = content;
         
-        // Highlight active mock card in Tab 1
+                // Highlight active mock card in Tab 1 and Sidebar
         ['annual_checkup', 'cardiac_discharge', 'kidney_diabetic'].forEach(k => {
           const card = document.getElementById(`mockCard_${k}`);
           const sideCard = document.getElementById(`sideMock_${k}`);
           const isMatch = (k === key || `sample_${k}_labs` === key || `sample_${k}` === key);
 
-                    if (card) {
+          if (card) {
             if (isMatch) {
-              card.classList.remove('border-[#2a3246]', 'bg-[#1c212e]');
-              card.classList.add('border-2', 'border-white', 'bg-[#222838]');
+              card.classList.remove('border-slate-200', 'bg-slate-50/70');
+              card.classList.add('border-2', 'border-emerald-600', 'bg-emerald-50/50');
             } else {
-              card.classList.remove('border-2', 'border-white', 'bg-[#222838]');
-              card.classList.add('border', 'border-[#2a3246]', 'bg-[#1c212e]');
+              card.classList.remove('border-2', 'border-emerald-600', 'bg-emerald-50/50');
+              card.classList.add('border', 'border-slate-200', 'bg-slate-50/70');
             }
           }
 
           if (sideCard) {
             if (isMatch) {
-              sideCard.classList.remove('border-[#2a3246]', 'bg-[#1c212e]');
-              sideCard.classList.add('border-2', 'border-white', 'bg-[#222838]');
+              sideCard.classList.remove('border-[#222c42]', 'bg-[#101420]');
+              sideCard.classList.add('border-2', 'border-white', 'bg-[#151b28]');
             } else {
-              sideCard.classList.remove('border-2', 'border-white', 'bg-[#222838]');
-              sideCard.classList.add('border', 'border-[#2a3246]', 'bg-[#1c212e]');
-            }
-          }
-
-          if (sideCard) {
-            if (isMatch) {
-              sideCard.classList.remove('border-[#2a3246]', 'bg-[#1c212e]');
-              sideCard.classList.add('border-[#6ee3ad]/70', 'bg-[#222838]');
-            } else {
-              sideCard.classList.remove('border-[#6ee3ad]/70', 'bg-[#222838]');
-              sideCard.classList.add('border-[#2a3246]', 'bg-[#1c212e]');
+              sideCard.classList.remove('border-2', 'border-white', 'bg-[#151b28]');
+              sideCard.classList.add('border', 'border-[#222c42]', 'bg-[#101420]');
             }
           }
         });
@@ -1614,11 +1613,18 @@
       }
     }
 
-    function clearReportInput() {
+        function clearReportInput() {
       document.getElementById('reportText').value = '';
       document.getElementById('resultContainer').classList.add('hidden');
       ['annual_checkup', 'cardiac_discharge', 'kidney_diabetic'].forEach(k => {
         const card = document.getElementById(`mockCard_${k}`);
+        if (card) {
+          card.classList.remove('border-2', 'border-emerald-600', 'bg-emerald-50/50');
+          card.classList.add('border', 'border-slate-200', 'bg-slate-50/70');
+        }
+      });
+      showToast("Cleared report text");
+    }`);
                 if (card) {
           card.classList.remove('border-2', 'border-white', 'bg-[#222838]');
           card.classList.add('border', 'border-[#2a3246]', 'bg-[#1c212e]');
@@ -1627,10 +1633,26 @@
       showToast("Cleared report text");
     }
 
-    // Tab Switching Logic
+        // Tab Switching Logic
     function switchTab(tabIndex) {
       [1, 2, 3, 4].forEach(i => {
         const tabEl = document.getElementById(`tab${i}`);
+        const btnEl = document.getElementById(`tabBtn${i}`);
+        if (i === tabIndex) {
+          if (tabEl) tabEl.classList.remove('hidden');
+          if (btnEl) {
+            btnEl.classList.remove('text-slate-500', 'border-transparent', 'hover:text-slate-900');
+            btnEl.classList.add('tab-active-light', 'text-slate-900');
+          }
+        } else {
+          if (tabEl) tabEl.classList.add('hidden');
+          if (btnEl) {
+            btnEl.classList.remove('tab-active-light', 'text-slate-900');
+            btnEl.classList.add('text-slate-500', 'border-transparent', 'hover:text-slate-900');
+          }
+        }
+      });
+    }`);
         const btnEl = document.getElementById(`tabBtn${i}`);
         if (i === tabIndex) {
           if (tabEl) tabEl.classList.remove('hidden');
@@ -1763,10 +1785,10 @@
       const chatContainer = document.getElementById('chatMessages');
       const apiKey = apiKeyInput.value.trim();
 
-            // User Bubble (Clean White Contrast Pill)
+                  // User Bubble (Solid Black Pill)
       chatContainer.innerHTML += `
         <div class="flex justify-end">
-          <div class="bg-white text-zinc-950 font-semibold rounded-2xl px-4 py-2.5 max-w-[80%] text-xs sm:text-sm shadow-md">
+          <div class="bg-black text-white font-medium rounded-2xl px-4 py-2.5 max-w-[80%] text-xs sm:text-sm shadow-md">
             ${marked.parse(question)}
           </div>
         </div>`;
@@ -1803,13 +1825,13 @@
         answerText = synthesizeClinicalGuidance(question, retrieved, "chat");
       }
 
-            // Assistant Bubble (Slate Card with Emerald Icon)
+                  // Assistant Bubble (Crisp White Card with Emerald Accent Stethoscope)
       chatContainer.innerHTML += `
         <div class="flex justify-start gap-2.5">
-          <div class="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 text-[#6ee3ad] flex items-center justify-center shrink-0 text-xs mt-1">
+          <div class="w-8 h-8 rounded-full bg-slate-900 text-[#6ee3ad] flex items-center justify-center shrink-0 text-xs mt-1 shadow-xs">
             <i class="fas fa-stethoscope"></i>
           </div>
-          <div class="bg-[#1c212e] border border-[#2a3246] text-zinc-200 rounded-2xl px-4 py-3 max-w-[85%] text-xs sm:text-sm shadow-md markdown-body">
+          <div class="bg-white border border-slate-200 text-slate-800 rounded-2xl px-4 py-3 max-w-[85%] text-xs sm:text-sm shadow-sm markdown-body-light">
             ${marked.parse(answerText)}
           </div>
         </div>`;
