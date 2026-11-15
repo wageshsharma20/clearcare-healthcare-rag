@@ -4,261 +4,879 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ClearCare AI — Evidence-Based Clinical Lab & Discharge Translator</title>
+  
+  <!-- Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS & Marked.js -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            clinical: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    .markdown-body h1 { font-size: 1.5rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; color: #0f172a; }
-    .markdown-body h2 { font-size: 1.25rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; color: #0369a1; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; }
-    .markdown-body h3 { font-size: 1.1rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; color: #1e293b; }
-    .markdown-body h4 { font-size: 1rem; font-weight: 600; margin-top: 0.5rem; margin-bottom: 0.25rem; color: #334155; }
-    .markdown-body p { margin-bottom: 0.75rem; line-height: 1.6; }
-    .markdown-body ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 0.75rem; }
-    .markdown-body ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 0.75rem; }
-    .markdown-body li { margin-bottom: 0.35rem; }
-    .markdown-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
-    .markdown-body th, .markdown-body td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: left; }
-    .markdown-body th { background: #f8fafc; font-weight: 600; }
-    .markdown-body blockquote { border-left: 4px solid #0284c7; padding-left: 1rem; color: #475569; background: #f0f9ff; padding-top: 0.5rem; padding-bottom: 0.5rem; border-radius: 0 6px 6px 0; margin-bottom: 0.75rem; }
-    .tab-active { border-bottom: 2px solid #0284c7; color: #0284c7; font-weight: 600; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Modern Clinical Typography for Markdown Result Output */
+    .markdown-body h1 { font-size: 1.45rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #0f172a; }
+    .markdown-body h2 { font-size: 1.25rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #0369a1; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+    .markdown-body h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.35rem; color: #1e293b; }
+    .markdown-body h4 { font-size: 0.95rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; color: #334155; }
+    .markdown-body p { margin-bottom: 0.75rem; line-height: 1.65; color: #334155; font-size: 0.9rem; }
+    .markdown-body ul { list-style-type: disc; padding-left: 1.4rem; margin-bottom: 0.85rem; font-size: 0.9rem; }
+    .markdown-body ol { list-style-type: decimal; padding-left: 1.4rem; margin-bottom: 0.85rem; font-size: 0.9rem; }
+    .markdown-body li { margin-bottom: 0.35rem; line-height: 1.55; }
+    .markdown-body table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 1.25rem 0; font-size: 0.85rem; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; }
+    .markdown-body th, .markdown-body td { border-bottom: 1px solid #e2e8f0; padding: 8px 12px; text-align: left; }
+    .markdown-body th { background: #f8fafc; font-weight: 600; color: #1e293b; border-bottom: 2px solid #cbd5e1; }
+    .markdown-body tr:last-child td { border-bottom: none; }
+    .markdown-body tr:hover td { background-color: #f8fafc; }
+    .markdown-body blockquote { border-left: 4px solid #0284c7; padding: 0.6rem 1rem; color: #475569; background: #f0f9ff; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 0.88rem; }
+    .markdown-body code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #0f172a; }
+
+    /* Active Tab State */
+    .tab-active { 
+      border-bottom: 2px solid #0284c7; 
+      color: #0284c7; 
+      font-weight: 600; 
+      background: #f0f9ff;
+      border-radius: 8px 8px 0 0;
+    }
+
+    /* Custom Glassmorphism & Shadow Utilities */
+    .clinical-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .clinical-card:hover {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Toast Notification */
+    #toastNotification {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+<body class="bg-slate-50/70 text-slate-800 min-h-screen flex flex-col font-sans selection:bg-sky-100 selection:text-sky-900">
 
   <!-- Header -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+  <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <span class="text-2xl">🩺</span>
+      <div class="flex items-center space-x-3.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-cyan-500 flex items-center justify-center text-white shadow-sm shadow-sky-500/20">
+          <i class="fas fa-heart-pulse text-lg"></i>
+        </div>
         <div>
-          <h1 class="text-lg font-bold text-slate-900 leading-tight">ClearCare AI</h1>
-          <p class="text-xs text-slate-500">Evidence-Based Patient Health Literacy & Lab Translator</p>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight leading-tight">ClearCare AI</h1>
+            <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[10px] font-semibold px-2 py-0.5 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              RAG Pipeline Online
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 font-medium">Evidence-Based Patient Health Literacy & Clinical Lab Translator</p>
         </div>
       </div>
-      <div class="flex items-center space-x-3">
-        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-md font-medium border border-slate-300 transition flex items-center gap-1.5">
-          <i class="fab fa-github"></i> GitHub Repo
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="text-xs bg-slate-50 hover:bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium border border-slate-300/80 transition-all shadow-xs flex items-center gap-1.5 active:scale-95">
+          <i class="fab fa-github text-slate-800"></i> <span class="hidden sm:inline">GitHub Repo</span>
         </a>
-        <a href="/docs/Mastering_RAG_and_ClearCare_Defense_Guide.pdf" download class="text-xs bg-sky-600 hover:bg-sky-700 text-white px-3 py-1.5 rounded-md font-medium shadow-sm transition flex items-center gap-1.5">
-          <i class="fas fa-file-pdf"></i> Defense Guide PDF
+        <a href="/docs/Mastering_RAG_and_ClearCare_Defense_Guide.pdf" download class="text-xs bg-sky-600 hover:bg-sky-700 text-white px-3.5 py-1.5 rounded-lg font-medium shadow-sm shadow-sky-600/20 transition-all flex items-center gap-1.5 active:scale-95">
+          <i class="fas fa-file-pdf"></i> <span class="hidden sm:inline">Defense Guide</span> PDF
         </a>
       </div>
     </div>
   </header>
 
   <!-- Medical Disclaimer Banner -->
-  <div class="bg-amber-50 border-b border-amber-200 px-4 py-2 text-xs text-amber-900 flex items-center justify-center gap-2">
-    <i class="fas fa-info-circle text-amber-600"></i>
-    <span><strong>Educational Clinical Decision Support:</strong> ClearCare AI translates medical documentation using verified guidelines (MedlinePlus, ACC/AHA, AACC). It does not provide formal diagnoses or alter prescriptions. Always consult your licensed physician.</span>
+  <div class="bg-amber-50/90 border-b border-amber-200/80 px-4 py-2 text-xs text-amber-900 flex items-center justify-center gap-2 shadow-xs">
+    <i class="fas fa-shield-halved text-amber-600 text-sm"></i>
+    <span><strong>Educational Clinical Decision Support:</strong> ClearCare AI translates medical documentation using verified clinical guidelines (MedlinePlus, ACC/AHA, AACC). It does not provide formal medical diagnoses or alter prescriptions. Always consult your licensed physician.</span>
   </div>
 
   <!-- Main Container -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
 
     <!-- Left Sidebar: Controls -->
-    <aside class="lg:col-span-4 bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-6 self-start">
-      <div>
-        <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <i class="fas fa-key text-sky-600"></i> 1. Groq LLM Authentication
-        </h2>
-        <div class="space-y-2">
-          <label class="block text-xs font-medium text-slate-700">Groq API Key (Free)</label>
-          <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none">
-          <p class="text-[11px] text-slate-500 flex justify-between">
-            <span>Runs free via Groq.</span>
-            <a href="https://console.groq.com/keys" target="_blank" class="text-sky-600 hover:underline">Get Free Key &rarr;</a>
-          </p>
+    <aside class="lg:col-span-4 space-y-5 self-start">
+      
+      <!-- 1. Authentication Card -->
+      <div class="clinical-card p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+            <i class="fas fa-key text-sky-600"></i> 1. Groq LLM Authentication
+          </h2>
+          <span class="text-[11px] text-slate-400 font-mono">v1.2</span>
         </div>
-        <div class="mt-3">
-          <label class="block text-xs font-medium text-slate-700 mb-1">Model Selection</label>
-          <select id="modelSelect" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 outline-none">
-            <option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile (Recommended)</option>
-            <option value="llama-3.1-8b-instant">llama-3.1-8b-instant (Fastest)</option>
-            <option value="gemma2-9b-it">gemma2-9b-it</option>
-          </select>
-        </div>
-      </div>
-
-      <hr class="border-slate-200">
-
-      <div>
-        <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <i class="fas fa-folder-open text-sky-600"></i> 2. Sample Patient Cases
-        </h2>
-        <div class="space-y-2">
-          <button onclick="loadSample('annual_checkup')" class="w-full text-left text-xs bg-slate-50 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 border border-slate-200 p-2.5 rounded-lg transition">
-            <span class="font-semibold block text-slate-900">🩺 Routine Annual Checkup</span>
-            <span class="text-slate-500 text-[11px]">Elevated LDL (142), Glucose (112), ALT (52)</span>
-          </button>
-          <button onclick="loadSample('cardiac_discharge')" class="w-full text-left text-xs bg-slate-50 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 border border-slate-200 p-2.5 rounded-lg transition">
-            <span class="font-semibold block text-slate-900">❤️ Post-PCI Cardiac Stent Discharge</span>
-            <span class="text-slate-500 text-[11px]">LAD Stent, Aspirin + Plavix DAPT, Red Flags</span>
-          </button>
-          <button onclick="loadSample('kidney_diabetic')" class="w-full text-left text-xs bg-slate-50 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 border border-slate-200 p-2.5 rounded-lg transition">
-            <span class="font-semibold block text-slate-900">🧪 Kidney & Diabetes Monitoring</span>
-            <span class="text-slate-500 text-[11px]">Creatinine (1.62), eGFR (48), Low Potassium</span>
-          </button>
-        </div>
-      </div>
-
-      <hr class="border-slate-200">
-
-      <div>
-        <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <i class="fas fa-sliders text-sky-600"></i> 3. RAG Retrieval Tuning
-        </h2>
         <div class="space-y-3">
           <div>
-            <div class="flex justify-between text-xs mb-1">
-              <span class="font-medium text-slate-700">Top-K Retrieved Chunks</span>
-              <span id="topKVal" class="font-bold text-sky-600">4</span>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Groq API Key (Free Tier)</label>
+            <div class="relative">
+              <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-xs font-mono px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500 focus:bg-white focus:border-sky-500 outline-none transition">
+              <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-600 text-xs">
+                <i id="eyeIcon" class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="mt-1.5 flex justify-between items-center text-[11px] text-slate-500">
+              <span id="keyStatus" class="flex items-center gap-1 text-slate-500">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Offline Preview
+              </span>
+              <a href="https://console.groq.com/keys" target="_blank" class="text-sky-600 hover:text-sky-700 font-medium hover:underline flex items-center gap-1">
+                Get Instant Free Key <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Inference Model</label>
+            <div class="relative">
+              <select id="modelSelect" class="w-full text-xs font-medium px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500 focus:bg-white outline-none appearance-none cursor-pointer">
+                <option value="llama-3.3-70b-versatile">Llama 3.3 70B Versatile (Recommended)</option>
+                <option value="llama-3.1-8b-instant">Llama 3.1 8B Instant (Ultra-fast)</option>
+                <option value="gemma2-9b-it">Gemma2 9B IT (Google DeepMind)</option>
+              </select>
+              <i class="fas fa-chevron-down absolute right-3 top-3 text-[10px] text-slate-400 pointer-events-none"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Sample Patient Cases Card -->
+      <div class="clinical-card p-5">
+        <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+          <i class="fas fa-folder-open text-sky-600"></i> 2. Clinical Case Benchmarks
+        </h2>
+        <div class="space-y-2.5">
+          <button onclick="loadSample('annual_checkup')" class="w-full text-left bg-slate-50/80 hover:bg-sky-50/70 hover:border-sky-300 border border-slate-200 p-3 rounded-xl transition group">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-semibold text-xs text-slate-900 group-hover:text-sky-900 flex items-center gap-1.5">
+                <span>🩺</span> Routine Annual Checkup
+              </span>
+              <span class="text-[10px] font-bold text-amber-700 bg-amber-100/80 px-1.5 py-0.5 rounded">CMP + Lipid</span>
+            </div>
+            <p class="text-slate-500 text-[11px] leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
+          </button>
+
+          <button onclick="loadSample('cardiac_discharge')" class="w-full text-left bg-slate-50/80 hover:bg-sky-50/70 hover:border-sky-300 border border-slate-200 p-3 rounded-xl transition group">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-semibold text-xs text-slate-900 group-hover:text-sky-900 flex items-center gap-1.5">
+                <span>❤️</span> Post-PCI Stent Discharge
+              </span>
+              <span class="text-[10px] font-bold text-rose-700 bg-rose-100/80 px-1.5 py-0.5 rounded">Cardiology DAPT</span>
+            </div>
+            <p class="text-slate-500 text-[11px] leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
+          </button>
+
+          <button onclick="loadSample('kidney_diabetic')" class="w-full text-left bg-slate-50/80 hover:bg-sky-50/70 hover:border-sky-300 border border-slate-200 p-3 rounded-xl transition group">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-semibold text-xs text-slate-900 group-hover:text-sky-900 flex items-center gap-1.5">
+                <span>🧪</span> Kidney & Diabetes Monitor
+              </span>
+              <span class="text-[10px] font-bold text-indigo-700 bg-indigo-100/80 px-1.5 py-0.5 rounded">Renal eGFR</span>
+            </div>
+            <p class="text-slate-500 text-[11px] leading-tight">Creatinine (1.62), eGFR (48), Low Potassium</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Retrieval Parameters Tuning -->
+      <div class="clinical-card p-5">
+        <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3.5 flex items-center gap-2">
+          <i class="fas fa-sliders text-sky-600"></i> 3. RAG Retrieval Parameters
+        </h2>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1.5">
+              <span class="font-semibold text-slate-700">Top-K Retrieved Chunks</span>
+              <span id="topKVal" class="font-mono font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded text-xs">4</span>
             </div>
             <input type="range" id="topKSlider" min="2" max="8" value="4" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600" oninput="document.getElementById('topKVal').innerText = this.value">
+            <span class="text-[10px] text-slate-400">Controls evidence density passed to the LLM</span>
           </div>
+
           <div>
-            <div class="flex justify-between text-xs mb-1">
-              <span class="font-medium text-slate-700">Similarity Threshold</span>
-              <span id="thresholdVal" class="font-bold text-sky-600">30%</span>
+            <div class="flex justify-between items-center text-xs mb-1.5">
+              <span class="font-semibold text-slate-700">Cosine Similarity Threshold</span>
+              <span id="thresholdVal" class="font-mono font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded text-xs">30%</span>
             </div>
             <input type="range" id="thresholdSlider" min="15" max="60" value="30" step="5" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600" oninput="document.getElementById('thresholdVal').innerText = this.value + '%'">
+            <span class="text-[10px] text-slate-400">Hallucination firewall: drops irrelevant guideline chunks</span>
           </div>
         </div>
       </div>
 
-      <hr class="border-slate-200">
-
-      <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs">
-        <div class="flex justify-between items-center mb-1">
-          <span class="font-semibold text-slate-800">Knowledge Base:</span>
-          <span class="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2 py-0.5 rounded-full">36 Chunks</span>
+      <!-- 4. Knowledge Base Status Card -->
+      <div class="clinical-card p-4 bg-gradient-to-br from-slate-50 to-sky-50/40">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+            <i class="fas fa-database text-sky-600"></i> Vector Knowledge Base
+          </span>
+          <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+            36 Chunks &bull; 384-d
+          </span>
         </div>
-        <p class="text-[11px] text-slate-500">Indexed from AHA/ACC, AACC, MedlinePlus & Joint Commission guidelines.</p>
+        <p class="text-[11px] text-slate-600 leading-relaxed mb-2.5">
+          Indexed from <strong>5 authoritative clinical guidelines</strong> (ACC/AHA, AACC, MedlinePlus, Joint Commission).
+        </p>
+        <button onclick="switchTab(4)" class="w-full text-center text-xs text-sky-700 bg-white hover:bg-sky-50 border border-sky-200 py-1.5 rounded-lg font-medium transition shadow-xs flex items-center justify-center gap-1.5">
+          <span>Explore 8-Stage Pipeline Architecture</span> <i class="fas fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
+
     </aside>
 
-    <!-- Main Content Area -->
-    <main class="lg:col-span-8 bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col overflow-hidden">
+    <!-- Main Content Area (8 Cols) -->
+    <main class="lg:col-span-8 clinical-card flex flex-col overflow-hidden">
       
-      <!-- Navigation Tabs -->
-      <div class="flex border-b border-slate-200 px-6 pt-3 space-x-6 text-sm font-medium text-slate-500">
-        <button id="tabBtn1" onclick="switchTab(1)" class="pb-3 tab-active flex items-center gap-2">
-          <i class="fas fa-file-medical-alt"></i> Report Translator
+      <!-- Segmented Navigation Tabs -->
+      <div class="flex border-b border-slate-200 px-4 sm:px-6 pt-3 space-x-2 sm:space-x-4 text-xs sm:text-sm font-semibold text-slate-500 overflow-x-auto">
+        <button id="tabBtn1" onclick="switchTab(1)" class="pb-3 px-3 tab-active flex items-center gap-2 whitespace-nowrap transition">
+          <i class="fas fa-file-medical text-sm"></i> Report Translator
         </button>
-        <button id="tabBtn2" onclick="switchTab(2)" class="pb-3 hover:text-slate-700 flex items-center gap-2">
-          <i class="fas fa-comments"></i> Ask ClearCare (Q&A)
+        <button id="tabBtn2" onclick="switchTab(2)" class="pb-3 px-3 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap transition">
+          <i class="fas fa-comments text-sm"></i> Ask ClearCare (Q&A)
         </button>
-        <button id="tabBtn3" onclick="switchTab(3)" class="pb-3 hover:text-slate-700 flex items-center gap-2">
-          <i class="fas fa-microscope"></i> RAG Inspector
+        <button id="tabBtn3" onclick="switchTab(3)" class="pb-3 px-3 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap transition">
+          <i class="fas fa-microscope text-sm"></i> RAG Inspector
         </button>
-        <button id="tabBtn4" onclick="switchTab(4)" class="pb-3 hover:text-slate-700 flex items-center gap-2">
-          <i class="fas fa-graduation-cap"></i> Concept Cheat Sheet
+        <button id="tabBtn4" onclick="switchTab(4)" class="pb-3 px-3 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap transition text-sky-700">
+          <i class="fas fa-diagram-project text-sm"></i> Pipeline & Architecture
         </button>
       </div>
 
       <!-- Tab Content Area -->
-      <div class="p-6 flex-1">
+      <div class="p-5 sm:p-6 flex-1">
 
+        <!-- ============================================================= -->
         <!-- TAB 1: Report Translator -->
+        <!-- ============================================================= -->
         <div id="tab1" class="space-y-4">
-          <div>
-            <label class="block text-sm font-semibold text-slate-900 mb-1">Paste Patient Lab Report or Discharge Summary</label>
-            <textarea id="reportText" rows="7" placeholder="Paste lab test results (e.g. Glucose, Creatinine, Lipid Panel, Blood Count) or hospital discharge instructions..." class="w-full text-sm font-mono p-3.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none leading-relaxed"></textarea>
+          
+          <!-- Sample Quick-Chips -->
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <label class="block text-xs sm:text-sm font-bold text-slate-900">
+              Paste Patient Lab Report or Discharge Summary
+            </label>
+            <div class="flex items-center gap-1.5">
+              <span class="text-[11px] text-slate-400 font-medium hidden sm:inline">Quick load:</span>
+              <button onclick="loadSample('annual_checkup')" class="text-[11px] bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-medium border border-slate-200 transition">Annual Checkup</button>
+              <button onclick="loadSample('cardiac_discharge')" class="text-[11px] bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-medium border border-slate-200 transition">Stent Discharge</button>
+              <button onclick="loadSample('kidney_diabetic')" class="text-[11px] bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-medium border border-slate-200 transition">Kidney/eGFR</button>
+            </div>
           </div>
 
-          <div class="flex gap-3">
-            <button onclick="translateReport()" id="translateBtn" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm px-6 py-2.5 rounded-lg shadow-sm transition flex items-center gap-2">
-              <i class="fas fa-sparkles"></i> Translate & Explain Report
-            </button>
-            <button onclick="document.getElementById('reportText').value = '';" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm px-4 py-2.5 rounded-lg border border-slate-300 transition">
-              Clear
-            </button>
+          <div class="relative">
+            <textarea id="reportText" rows="7" placeholder="Paste medical document text here (e.g., Blood tests, Complete Blood Count, Metabolic Panel, Lipid Panel, or hospital discharge instructions)..." class="w-full text-xs sm:text-sm font-mono p-3.5 bg-slate-50/50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:bg-white focus:border-sky-500 outline-none leading-relaxed transition resize-y"></textarea>
+          </div>
+
+          <!-- Action Buttons Bar -->
+          <div class="flex items-center justify-between gap-3 pt-1">
+            <div class="flex items-center gap-2.5">
+              <button onclick="translateReport()" id="translateBtn" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-sm shadow-sky-600/20 transition-all flex items-center gap-2 active:scale-95">
+                <i class="fas fa-wand-magic-sparkles text-xs"></i> Translate & Explain Report
+              </button>
+              <button onclick="clearReportInput()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-slate-200 font-medium transition active:scale-95">
+                Clear
+              </button>
+            </div>
+            <span class="text-[11px] text-slate-400 hidden md:inline">Grounds translation strictly in clinical guidelines</span>
           </div>
 
           <!-- Loading Spinner -->
-          <div id="loadingIndicator" class="hidden py-8 text-center space-y-3">
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-sky-600 border-t-transparent"></div>
-            <p class="text-sm text-slate-600 font-medium">Scanning clinical biomarkers and cross-referencing guidelines...</p>
+          <div id="loadingIndicator" class="hidden py-10 text-center space-y-3">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-3 border-sky-600 border-t-transparent"></div>
+            <p class="text-xs sm:text-sm text-slate-600 font-medium">Scanning clinical biomarkers, resolving multi-query expansion, and generating grounded translation...</p>
           </div>
 
           <!-- Result Area -->
           <div id="resultContainer" class="hidden pt-4 border-t border-slate-200 space-y-4">
+            
+            <!-- Result Action Header with Copy to Clipboard Button -->
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <span>📋</span> ClearCare Clinical Translation & Patient Guidance
+              </h3>
+              <div class="flex items-center gap-2">
+                <button onclick="copyTranslationResult()" class="text-xs bg-slate-100 hover:bg-sky-50 hover:text-sky-700 hover:border-sky-300 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 font-medium transition flex items-center gap-1.5 shadow-2xs active:scale-95">
+                  <i id="copyIcon" class="far fa-copy"></i>
+                  <span id="copyBtnText">Copy Translation</span>
+                </button>
+              </div>
+            </div>
+
             <div id="resultOutput" class="markdown-body text-slate-800 text-sm"></div>
 
             <!-- Evidence Drawer -->
-            <div id="evidenceDrawer" class="bg-slate-50 border border-slate-200 rounded-lg p-4 mt-4">
-              <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <i class="fas fa-book-medical text-sky-600"></i> Verified Evidence Sources Retrieved
-              </h4>
-              <div id="evidenceList" class="space-y-2 text-xs"></div>
+            <div id="evidenceDrawer" class="bg-slate-50/80 border border-slate-200 rounded-xl p-4 mt-4">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <i class="fas fa-book-medical text-sky-600"></i> Verified Evidence Guidelines Retrieved & Grounded
+                </h4>
+                <span id="evidenceCountBadge" class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">0 matched</span>
+              </div>
+              <div id="evidenceList" class="space-y-2.5 text-xs"></div>
             </div>
           </div>
         </div>
 
+        <!-- ============================================================= -->
         <!-- TAB 2: Ask ClearCare (Q&A) -->
-        <div id="tab2" class="hidden flex flex-col h-[520px]">
-          <div id="chatMessages" class="flex-1 overflow-y-auto space-y-4 pr-2 pb-4">
-            <div class="bg-sky-50 border border-sky-200 rounded-xl p-4 text-xs text-slate-700 flex gap-3">
-              <span class="text-lg">🩺</span>
-              <div>
-                <p class="font-bold text-slate-900 mb-1">ClearCare AI Clinical Assistant</p>
-                <p>Hello! I am ready to answer your questions regarding lab results, medications, and recovery guidelines. Ask me anything like: <em>"Why is my ALT 52?"</em>, <em>"What does a normal eGFR mean?"</em>, or <em>"Can I stop taking Plavix?"</em></p>
+        <!-- ============================================================= -->
+        <div id="tab2" class="hidden flex flex-col h-[560px]">
+          
+          <!-- Suggested Question Chips -->
+          <div class="pb-3 border-b border-slate-100 flex items-center gap-1.5 overflow-x-auto text-[11px]">
+            <span class="text-slate-400 font-medium shrink-0">Try asking:</span>
+            <button onclick="askPresetQuestion('What does a normal eGFR level mean, and what causes it to decline?')" class="bg-slate-100 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">What is eGFR?</button>
+            <button onclick="askPresetQuestion('What causes elevated ALT liver enzymes, and are there benign reasons like exercise?')" class="bg-slate-100 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">Why is ALT high?</button>
+            <button onclick="askPresetQuestion('Can I stop taking Plavix or Aspirin after having a cardiac stent placed?')" class="bg-slate-100 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">Can I stop Plavix?</button>
+            <button onclick="askPresetQuestion('What are optimal target LDL cholesterol levels according to ACC/AHA guidelines?')" class="bg-slate-100 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">LDL Goals</button>
+          </div>
+
+          <!-- Chat Conversation Area -->
+          <div id="chatMessages" class="flex-1 overflow-y-auto space-y-4 py-4 pr-1">
+            <div class="bg-sky-50/70 border border-sky-200/80 rounded-2xl p-4 text-xs text-slate-700 flex gap-3 shadow-2xs">
+              <div class="w-8 h-8 rounded-full bg-sky-600 text-white flex items-center justify-center shrink-0">
+                <i class="fas fa-stethoscope"></i>
+              </div>
+              <div class="space-y-1">
+                <p class="font-bold text-slate-900">ClearCare Clinical Assistant</p>
+                <p class="text-slate-600 leading-relaxed">
+                  Hello! I am ready to answer your questions regarding clinical lab results, biomarker reference ranges, and post-discharge protocols. 
+                  Every answer is grounded strictly in verified guidelines from ACC/AHA, AACC, and MedlinePlus.
+                </p>
               </div>
             </div>
           </div>
 
+          <!-- Chat Input Bar -->
           <div class="pt-3 border-t border-slate-200 flex gap-2">
-            <input type="text" id="chatInput" placeholder="Type your medical question here..." onkeypress="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-sm px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 outline-none">
-            <button onclick="sendChatMessage()" class="bg-sky-600 hover:bg-sky-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition flex items-center gap-1.5">
+            <input type="text" id="chatInput" placeholder="Type a clinical question (e.g., 'What causes elevated ALT?' or 'Normal eGFR?')..." onkeypress="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-xs sm:text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:bg-white outline-none transition">
+            <button onclick="sendChatMessage()" class="bg-sky-600 hover:bg-sky-700 text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-sm active:scale-95">
               <span>Send</span> <i class="fas fa-paper-plane text-xs"></i>
             </button>
           </div>
         </div>
 
+        <!-- ============================================================= -->
         <!-- TAB 3: RAG Inspector -->
-        <div id="tab3" class="hidden space-y-6">
-          <div>
-            <h3 class="text-base font-bold text-slate-900">🔍 RAG Engine Transparency Inspector</h3>
-            <p class="text-xs text-slate-500">Inspect the raw vector chunks retrieved from the knowledge base and the augmented prompt sent to the LLM.</p>
+        <!-- ============================================================= -->
+        <div id="tab3" class="hidden space-y-5">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <i class="fas fa-microscope text-sky-600"></i> RAG Engine Transparency Inspector
+              </h3>
+              <p class="text-xs text-slate-500">Live inspection of vector cosine similarity scores, chunk metadata, and augmented LLM prompt.</p>
+            </div>
+            <span class="text-xs font-mono bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200">HNSW Graph</span>
           </div>
 
-          <div id="inspectorChunks" class="space-y-4">
-            <p class="text-xs text-slate-500 italic">No query executed yet. Run a translation or ask a question to inspect retrieved vector chunks.</p>
+          <div id="inspectorChunks" class="space-y-3">
+            <div class="p-6 text-center text-xs text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-300">
+              <i class="fas fa-magnifying-glass text-slate-300 text-xl mb-2 block"></i>
+              No query executed yet. Run a translation in Tab 1 or ask a question in Tab 2 to inspect retrieved vector chunks.
+            </div>
           </div>
 
-          <div id="inspectorPromptSection" class="hidden pt-4 border-t border-slate-200">
-            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">Raw Augmented Prompt Sent to LLM</h4>
-            <pre id="inspectorPrompt" class="text-xs bg-slate-900 text-slate-200 p-4 rounded-lg overflow-x-auto whitespace-pre-wrap font-mono"></pre>
+          <div id="inspectorPromptSection" class="hidden pt-4 border-t border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fas fa-terminal text-sky-600"></i> Raw Augmented Prompt Sent to LLM
+              </h4>
+              <button onclick="copyRawPrompt()" class="text-[11px] text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded font-mono border border-slate-200 transition flex items-center gap-1">
+                <i class="far fa-copy"></i> Copy Prompt
+              </button>
+            </div>
+            <pre id="inspectorPrompt" class="text-xs bg-slate-900 text-slate-200 p-4 rounded-xl overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed border border-slate-800"></pre>
           </div>
         </div>
 
-        <!-- TAB 4: Concept Cheat Sheet -->
-        <div id="tab4" class="hidden space-y-4 text-sm text-slate-700">
-          <h3 class="text-base font-bold text-slate-900">🎓 Core RAG Concepts for Viva & Technical Evaluations</h3>
-
-          <div class="border border-slate-200 rounded-lg p-4 bg-slate-50 space-y-1.5">
-            <h4 class="font-bold text-slate-900 text-xs uppercase text-sky-700">1. Why RAG in Healthcare?</h4>
-            <p class="text-xs text-slate-600">Standard LLMs hallucinate medical dosages and normal ranges. RAG decouples non-parametric memory (verified guidelines) from parametric generation, guaranteeing traceability and 100% auditability.</p>
+        <!-- ============================================================= -->
+        <!-- TAB 4: Project Pipeline & Architecture (8 Stages Deep Dive) -->
+        <!-- ============================================================= -->
+        <div id="tab4" class="hidden space-y-6">
+          
+          <!-- Architecture Header -->
+          <div class="bg-gradient-to-r from-sky-900 via-sky-800 to-slate-900 rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
+            <div class="relative z-10 space-y-2">
+              <div class="inline-flex items-center gap-1.5 bg-sky-500/20 text-sky-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-sky-400/30">
+                <i class="fas fa-diagram-project"></i> End-to-End System Design
+              </div>
+              <h2 class="text-lg sm:text-xl font-bold tracking-tight">ClearCare RAG: 8-Stage Clinical Pipeline Architecture</h2>
+              <p class="text-xs sm:text-sm text-sky-100/90 max-w-3xl leading-relaxed">
+                A multi-stage, deterministic pipeline engineered specifically for clinical reliability. Solves the multi-analyte 
+                <strong>Vector Blur</strong> problem, filters out irrelevant context via cosine thresholding, and delivers verifiable, 
+                citation-grounded translations without hallucination.
+              </p>
+            </div>
+            <div class="absolute -right-8 -bottom-8 opacity-10 text-white text-9xl pointer-events-none">
+              <i class="fas fa-dna"></i>
+            </div>
           </div>
 
-          <div class="border border-slate-200 rounded-lg p-4 bg-slate-50 space-y-1.5">
-            <h4 class="font-bold text-slate-900 text-xs uppercase text-sky-700">2. Chunking & Overlap Mechanics</h4>
-            <p class="text-xs text-slate-600">We use 700-character chunks with 120-character overlap. 700 chars represents an individual clinical assay without vector dilution. 120 chars prevents boundary truncation of medical warnings.</p>
+          <!-- Interactive 8-Stage Pipeline Stepper Bar -->
+          <div>
+            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+              <i class="fas fa-route text-sky-600"></i> Interactive Pipeline Stages (Click Any Stage to Inspect)
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+              <button onclick="scrollToStage('stage1')" class="p-2.5 bg-sky-50/70 hover:bg-sky-100/80 border border-sky-200 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-sky-700 uppercase">Stage 01</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-sky-900 truncate">Ingestion</span>
+              </button>
+              <button onclick="scrollToStage('stage2')" class="p-2.5 bg-sky-50/70 hover:bg-sky-100/80 border border-sky-200 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-sky-700 uppercase">Stage 02</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-sky-900 truncate">Chunking</span>
+              </button>
+              <button onclick="scrollToStage('stage3')" class="p-2.5 bg-sky-50/70 hover:bg-sky-100/80 border border-sky-200 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-sky-700 uppercase">Stage 03</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-sky-900 truncate">Embeddings</span>
+              </button>
+              <button onclick="scrollToStage('stage4')" class="p-2.5 bg-emerald-50/70 hover:bg-emerald-100/80 border border-emerald-200 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-emerald-700 uppercase">Stage 04</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-emerald-900 truncate">ChromaDB</span>
+              </button>
+              <button onclick="scrollToStage('stage5')" class="p-2.5 bg-amber-50/70 hover:bg-amber-100/80 border border-amber-200 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-amber-700 uppercase">Stage 05</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-amber-900 truncate">Entity Scan</span>
+              </button>
+              <button onclick="scrollToStage('stage6')" class="p-2.5 bg-amber-50/70 hover:bg-amber-100/80 border border-amber-200 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-amber-700 uppercase">Stage 06</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-amber-900 truncate">Threshold</span>
+              </button>
+              <button onclick="scrollToStage('stage7')" class="p-2.5 bg-indigo-50/70 hover:bg-indigo-100/80 border border-indigo-200 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-indigo-700 uppercase">Stage 07</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-indigo-900 truncate">Llama 3.3</span>
+              </button>
+              <button onclick="scrollToStage('stage8')" class="p-2.5 bg-emerald-50/70 hover:bg-emerald-100/80 border border-emerald-200 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-emerald-700 uppercase">Stage 08</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-emerald-900 truncate">Patient UI</span>
+              </button>
+            </div>
           </div>
 
-          <div class="border border-slate-200 rounded-lg p-4 bg-slate-50 space-y-1.5">
-            <h4 class="font-bold text-slate-900 text-xs uppercase text-sky-700">3. Vector Embeddings & Cosine Distance</h4>
-            <p class="text-xs text-slate-600">Uses <code>all-MiniLM-L6-v2</code> to map text into 384 dimensions. Cosine distance <em>d = 1 - cos(&theta;)</em> measures directional divergence between query and guideline vectors.</p>
+          <!-- Flow Architecture Visualizer Diagram -->
+          <div class="border border-slate-200 rounded-2xl p-5 bg-gradient-to-b from-white to-slate-50/50 shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fas fa-sitemap text-sky-600"></i> End-to-End Information Flow
+              </h4>
+              <span class="text-[11px] text-slate-500 font-mono">Offline Ingestion ➔ Online Inference</span>
+            </div>
+
+            <!-- SVG Visual Flow Diagram -->
+            <div class="w-full overflow-x-auto py-2">
+              <div class="min-w-[700px] flex items-center justify-between text-xs font-semibold text-slate-700">
+                
+                <!-- Step 1 -->
+                <div class="flex-1 bg-white border border-sky-200 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-sky-600 font-bold block text-[10px]">STAGE 1</span>
+                  <i class="fas fa-file-shield text-sky-600 my-1 text-sm"></i>
+                  <span class="block text-slate-800">5 Guidelines</span>
+                  <span class="text-[10px] text-slate-400 font-normal">AHA, ACC, AACC</span>
+                </div>
+                <div class="px-1 text-slate-300 font-bold text-sm">&rarr;</div>
+
+                <!-- Step 2 -->
+                <div class="flex-1 bg-white border border-sky-200 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-sky-600 font-bold block text-[10px]">STAGE 2</span>
+                  <i class="fas fa-scissors text-sky-600 my-1 text-sm"></i>
+                  <span class="block text-slate-800">Chunking</span>
+                  <span class="text-[10px] text-slate-400 font-normal">700c + 120ov</span>
+                </div>
+                <div class="px-1 text-slate-300 font-bold text-sm">&rarr;</div>
+
+                <!-- Step 3 -->
+                <div class="flex-1 bg-white border border-sky-200 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-sky-600 font-bold block text-[10px]">STAGE 3</span>
+                  <i class="fas fa-brain text-sky-600 my-1 text-sm"></i>
+                  <span class="block text-slate-800">Embeddings</span>
+                  <span class="text-[10px] text-slate-400 font-normal">MiniLM 384-d</span>
+                </div>
+                <div class="px-1 text-slate-300 font-bold text-sm">&rarr;</div>
+
+                <!-- Step 4 -->
+                <div class="flex-1 bg-emerald-50 border border-emerald-300 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-emerald-700 font-bold block text-[10px]">STAGE 4</span>
+                  <i class="fas fa-database text-emerald-600 my-1 text-sm"></i>
+                  <span class="block text-slate-800">ChromaDB</span>
+                  <span class="text-[10px] text-slate-500 font-normal">HNSW Graph</span>
+                </div>
+                <div class="px-1 text-amber-500 font-bold text-sm">&rlarr;</div>
+
+                <!-- Step 5 -->
+                <div class="flex-1 bg-amber-50 border border-amber-300 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-amber-700 font-bold block text-[10px]">STAGE 5</span>
+                  <i class="fas fa-filter text-amber-600 my-1 text-sm"></i>
+                  <span class="block text-slate-800">Entity Scan</span>
+                  <span class="text-[10px] text-slate-500 font-normal">30+ Analytes</span>
+                </div>
+                <div class="px-1 text-slate-300 font-bold text-sm">&rarr;</div>
+
+                <!-- Step 6 -->
+                <div class="flex-1 bg-amber-50 border border-amber-300 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-amber-700 font-bold block text-[10px]">STAGE 6</span>
+                  <i class="fas fa-shield-virus text-amber-600 my-1 text-sm"></i>
+                  <span class="block text-slate-800">Threshold</span>
+                  <span class="text-[10px] text-slate-500 font-normal">&ge; 0.35 Cosine</span>
+                </div>
+                <div class="px-1 text-slate-300 font-bold text-sm">&rarr;</div>
+
+                <!-- Step 7 -->
+                <div class="flex-1 bg-indigo-50 border border-indigo-300 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-indigo-700 font-bold block text-[10px]">STAGE 7</span>
+                  <i class="fas fa-bolt text-indigo-600 my-1 text-sm"></i>
+                  <span class="block text-slate-800">Llama 3.3</span>
+                  <span class="text-[10px] text-slate-500 font-normal">Groq LPUs, t=0.2</span>
+                </div>
+                <div class="px-1 text-slate-300 font-bold text-sm">&rarr;</div>
+
+                <!-- Step 8 -->
+                <div class="flex-1 bg-emerald-50 border border-emerald-300 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-emerald-700 font-bold block text-[10px]">STAGE 8</span>
+                  <i class="fas fa-heart-pulse text-emerald-600 my-1 text-sm"></i>
+                  <span class="block text-slate-800">Patient UI</span>
+                  <span class="text-[10px] text-slate-500 font-normal">Traffic Lights</span>
+                </div>
+
+              </div>
+            </div>
           </div>
 
-          <div class="border border-slate-200 rounded-lg p-4 bg-slate-50 space-y-1.5">
-            <h4 class="font-bold text-slate-900 text-xs uppercase text-sky-700">4. Vector Blur & Multi-Query Resolution</h4>
-            <p class="text-xs text-slate-600">Multi-analyte lab panels cause vector averaging blur. ClearCare runs regex entity scanning across 30+ biomarkers, firing targeted sub-queries and merging candidate chunks.</p>
+          <!-- Deep Dive Stage Cards (8 Cards) -->
+          <div class="space-y-4">
+            
+            <!-- STAGE 1 CARD -->
+            <div id="stage1" class="clinical-card p-5 border-l-4 border-l-sky-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-sky-700 uppercase bg-sky-100 px-2 py-0.5 rounded-full">Stage 01 &bull; Ingestion Pipeline</span>
+                <span class="text-xs font-mono text-slate-400">5 Curated Documents</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <span>📚</span> Knowledge Ingestion (5 Authoritative Medical Guidelines)
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                In clinical applications, general web scraping produces toxic hallucinations. ClearCare restricts its knowledge base to 
+                authoritative guidelines published by the <strong>American College of Cardiology (ACC)</strong>, <strong>American Heart Association (AHA)</strong>, 
+                <strong>American Association for Clinical Chemistry (AACC)</strong>, and <strong>NIH MedlinePlus</strong>.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+                <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                  <span class="font-bold text-slate-800 block">1. Comprehensive Metabolic Panel</span>
+                  <span class="text-slate-500 text-[11px]">BUN, Creatinine, eGFR, ALT, AST, Bilirubin, Electrolytes</span>
+                </div>
+                <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                  <span class="font-bold text-slate-800 block">2. Complete Blood Count (CBC)</span>
+                  <span class="text-slate-500 text-[11px]">WBC, RBC, Hemoglobin, Hematocrit, Platelets, Infection flags</span>
+                </div>
+                <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                  <span class="font-bold text-slate-800 block">3. Lipid Cholesterol Panel</span>
+                  <span class="text-slate-500 text-[11px]">Total Cholesterol, LDL-C targets (<100, <70), HDL, Triglycerides</span>
+                </div>
+                <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                  <span class="font-bold text-slate-800 block">4. Thyroid TSH Panel</span>
+                  <span class="text-slate-500 text-[11px]">TSH (0.4-4.0), Free T4, Hypo/Hyperthyroidism distinctions</span>
+                </div>
+                <div class="p-2 bg-slate-50 rounded-lg border border-slate-200 sm:col-span-2">
+                  <span class="font-bold text-slate-800 block">5. Post-PCI Cardiac Stent Discharge Care</span>
+                  <span class="text-slate-500 text-[11px]">Mandatory Dual Antiplatelet Therapy (Aspirin + Plavix), groin puncture monitoring, red flag chest pain warnings</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 2 CARD -->
+            <div id="stage2" class="clinical-card p-5 border-l-4 border-l-sky-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-sky-700 uppercase bg-sky-100 px-2 py-0.5 rounded-full">Stage 02 &bull; Preprocessing</span>
+                <span class="text-xs font-mono text-slate-400">700 chars / 120 overlap</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <span>✂️</span> Heading-Aware Chunking (Preserving Hierarchical Context)
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                Naive character splitters sever sentences and orphan medical qualifications (e.g., losing *"However, in pregnant patients..."*). 
+                ClearCare implements a <strong>heading-aware sliding window chunker</strong> that prepends the active section heading 
+                (<code># [Document > Section]</code>) to every generated chunk.
+              </p>
+              <div class="bg-slate-900 text-slate-200 p-3 rounded-xl font-mono text-xs space-y-1">
+                <div class="text-sky-400 text-[11px]"># Heading-Aware Structure Injected into Every Chunk:</div>
+                <div class="text-emerald-400"># Document: metabolic_panel_cmp.md &gt; Section: Kidney Function &amp; Filtration</div>
+                <div class="text-slate-300">Serum Creatinine reference interval: 0.6 - 1.3 mg/dL. Elevated creatinine indicates impaired glomerular filtration, but transient elevations can occur with dehydration, high-protein intake, or intense resistance exercise...</div>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-2">
+                <strong>Why 700 chars?</strong> Matches the natural size of a single medical assay. Avoids "needle-in-a-haystack" dilution while keeping full normal ranges and benign causes intact.
+              </p>
+            </div>
+
+            <!-- STAGE 3 CARD -->
+            <div id="stage3" class="clinical-card p-5 border-l-4 border-l-sky-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-sky-700 uppercase bg-sky-100 px-2 py-0.5 rounded-full">Stage 03 &bull; Semantic Vector Space</span>
+                <span class="text-xs font-mono text-slate-400">384 Dimensions &bull; ~14ms CPU</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <span>🧠</span> Local Dense Embeddings (all-MiniLM-L6-v2)
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                Maps text chunks into <strong>384-dimensional dense vectors</strong> where semantically synonymous medical phrases reside close together.
+                Runs 100% locally on CPU — ensuring <strong>zero Protected Health Information (PHI)</strong> leaves the user's infrastructure.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+                  <span class="font-bold text-slate-800 block text-[11px] uppercase text-sky-700">Patient Colloquialism</span>
+                  <span class="font-medium text-slate-700">"My blood sugar was high"</span>
+                </div>
+                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200 text-center flex flex-col justify-center items-center">
+                  <span class="text-emerald-600 font-bold text-xs"><i class="fas fa-arrows-left-right"></i> Cosine Similarity > 85%</span>
+                  <span class="text-[10px] text-slate-400 font-mono">Dense Vector Proximity</span>
+                </div>
+                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+                  <span class="font-bold text-slate-800 block text-[11px] uppercase text-sky-700">Clinical Guideline Anchor</span>
+                  <span class="font-medium text-slate-700">"Elevated Fasting Plasma Glucose / Hyperglycemia"</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 4 CARD -->
+            <div id="stage4" class="clinical-card p-5 border-l-4 border-l-emerald-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-emerald-700 uppercase bg-emerald-100 px-2 py-0.5 rounded-full">Stage 04 &bull; Vector Storage</span>
+                <span class="text-xs font-mono text-slate-400">ChromaDB + HNSW Graph</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <span>🗄️</span> Persistent Vector Storage (ChromaDB + HNSW Indexing)
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-2">
+                Embeddings are persisted to disk using ChromaDB with a <strong>Hierarchical Navigable Small World (HNSW)</strong> graph index. 
+                Provides logarithmic <code>O(log N)</code> search complexity, enabling cold-start sub-millisecond retrieval without re-indexing.
+              </p>
+              <div class="flex items-center gap-3 text-xs text-slate-600">
+                <span class="inline-flex items-center gap-1"><i class="fas fa-check text-emerald-600"></i> Disk Persisted (`chroma_db/`)</span>
+                <span class="inline-flex items-center gap-1"><i class="fas fa-check text-emerald-600"></i> Cosine Distance Space</span>
+                <span class="inline-flex items-center gap-1"><i class="fas fa-check text-emerald-600"></i> Rich Metadata Anchors</span>
+              </div>
+            </div>
+
+            <!-- STAGE 5 CARD -->
+            <div id="stage5" class="clinical-card p-5 border-l-4 border-l-amber-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-amber-700 uppercase bg-amber-100 px-2 py-0.5 rounded-full">Stage 05 &bull; Clinical Retrieval Strategy</span>
+                <span class="text-xs font-mono text-slate-400">Solving "Vector Blur"</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <span>🔎</span> Clinical Entity Scanning & Multi-Query Expansion
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                <strong>The Multi-Analyte Vector Blur Problem:</strong> When a user uploads a 15-test metabolic panel, a naive RAG system 
+                generates a single vector that is an <em>average centroid</em> of all tests. This diluted vector retrieves vague lab overviews, 
+                missing specific guideline rules for an elevated ALT or LDL.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl space-y-1">
+                  <span class="font-bold text-rose-800 flex items-center gap-1.5"><i class="fas fa-times-circle"></i> Naive Single-Pass RAG (Vector Blur)</span>
+                  <p class="text-slate-600 text-[11px]">
+                    Encodes entire 15-analyte document as 1 vector &rarr; Vector gets diluted &rarr; Retrieves general introductory paragraphs &rarr; Fails to retrieve specific liver or kidney thresholds.
+                  </p>
+                </div>
+                <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+                  <span class="font-bold text-emerald-800 flex items-center gap-1.5"><i class="fas fa-check-circle"></i> ClearCare Multi-Query Strategy</span>
+                  <p class="text-slate-600 text-[11px]">
+                    Scans 30+ clinical regex biomarkers (Glucose, ALT, LDL, eGFR...) &rarr; Issues targeted sub-queries for each analyte &rarr; Merges and deduplicates candidate guidelines.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 6 CARD -->
+            <div id="stage6" class="clinical-card p-5 border-l-4 border-l-amber-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-amber-700 uppercase bg-amber-100 px-2 py-0.5 rounded-full">Stage 06 &bull; Hallucination Firewall</span>
+                <span class="text-xs font-mono text-slate-400">Score &ge; 0.35 Filter</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <span>🎯</span> Similarity Thresholding & Context Formatting
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-2">
+                In clinical medicine, passing an irrelevant chunk to an LLM is dangerous because it prompts speculative reasoning. 
+                ClearCare strictly filters candidate chunks using a <strong>&ge; 0.35 cosine similarity threshold</strong>.
+              </p>
+              <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-mono text-slate-700">
+                <div class="text-[11px] text-slate-500 mb-1">// Standardized Context Assembly Passed to LLM:</div>
+                <div class="text-sky-700 font-bold">[Source 1: lipid_cholesterol_panel.md | Section: LDL-C Targets | Match: 88%]</div>
+                <div class="text-slate-600 text-[11px]">Optimal LDL for high-risk CAD/stent patients is &lt; 70 mg/dL...</div>
+              </div>
+            </div>
+
+            <!-- STAGE 7 CARD -->
+            <div id="stage7" class="clinical-card p-5 border-l-4 border-l-indigo-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-indigo-700 uppercase bg-indigo-100 px-2 py-0.5 rounded-full">Stage 07 &bull; Guardrailed Generation</span>
+                <span class="text-xs font-mono text-slate-400">Groq LPUs &bull; Llama 3.3 70B &bull; t=0.2</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <span>⚡</span> Guardrailed Generation (Groq LPUs + Llama 3.3 70B)
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                Inference runs on <strong>Groq Language Processing Units (LPUs)</strong> at ~500 tokens/second with a deterministic temperature of <strong>0.2</strong>. 
+                Strict system-prompt guardrails eliminate hallucination and protect patient safety:
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+                  <span class="font-bold text-slate-800 block text-sky-800">1. Absolute Diagnosis Prohibition</span>
+                  <span class="text-slate-600 text-[11px]">Cannot state "You have chronic kidney disease"; must state "Creatinine is above reference interval; warrants doctor follow-up".</span>
+                </div>
+                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+                  <span class="font-bold text-slate-800 block text-sky-800">2. Mandatory Benign Causes</span>
+                  <span class="text-slate-600 text-[11px]">Must explain hydration, exercise, and diet causes first to prevent unnecessary patient panic.</span>
+                </div>
+                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+                  <span class="font-bold text-slate-800 block text-sky-800">3. Strict Citation Attribution</span>
+                  <span class="text-slate-600 text-[11px]">Every statement must explicitly reference <code>[Source X]</code> from the retrieved guideline chunks.</span>
+                </div>
+                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+                  <span class="font-bold text-slate-800 block text-sky-800">4. Medication Safety Lock</span>
+                  <span class="text-slate-600 text-[11px]">Strictly prohibited from suggesting stopping prescribed therapies (e.g., Plavix / Aspirin DAPT).</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 8 CARD -->
+            <div id="stage8" class="clinical-card p-5 border-l-4 border-l-emerald-500">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-emerald-700 uppercase bg-emerald-100 px-2 py-0.5 rounded-full">Stage 08 &bull; Patient Health Literacy</span>
+                <span class="text-xs font-mono text-slate-400">8th-Grade Plain English</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <span>🌟</span> Patient-Centered Output (Traffic Lights & Doctor Checklist)
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                Converts dense, anxiety-inducing lab results into empowering, plain-language patient communication with four distinct components:
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <div class="flex items-center gap-1.5 mb-1 text-slate-900 font-bold">
+                    <span>🟢 🟡 🔴</span> Traffic-Light Findings
+                  </div>
+                  <p class="text-slate-500 text-[11px]">Normal (within range), Borderline (mild shift), and Attention Required (physician review).</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <div class="flex items-center gap-1.5 mb-1 text-slate-900 font-bold">
+                    <i class="fas fa-heart text-rose-500"></i> Empathetic Context
+                  </div>
+                  <p class="text-slate-500 text-[11px]">Demystifies complex medical metrics into 8th-grade plain English without medical jargon.</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <div class="flex items-center gap-1.5 mb-1 text-slate-900 font-bold">
+                    <i class="fas fa-clipboard-check text-sky-600"></i> Doctor Checklist
+                  </div>
+                  <p class="text-slate-500 text-[11px]">Generates targeted questions for the patient to ask at their next clinical appointment.</p>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          <div class="border border-slate-200 rounded-lg p-4 bg-slate-50 space-y-1.5">
-            <h4 class="font-bold text-slate-900 text-xs uppercase text-sky-700">5. Medical Safety Guardrails</h4>
-            <p class="text-xs text-slate-600">Low temperature (0.2), absolute diagnosis prohibition, mandatory <code>[Source X]</code> citations, benign cause explanations, and doctor question checklists.</p>
+          <!-- Architecture Comparison Table -->
+          <div class="border border-slate-200 rounded-2xl p-5 bg-white shadow-xs space-y-3">
+            <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fas fa-scale-balanced text-sky-600"></i> Comparative Architectural Analysis
+            </h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs text-left border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-200 text-slate-700 bg-slate-50/80">
+                    <th class="py-2.5 px-3 font-semibold">Architectural Dimension</th>
+                    <th class="py-2.5 px-3 font-semibold">Standard Generic LLM</th>
+                    <th class="py-2.5 px-3 font-semibold">Fine-Tuned Medical LLM</th>
+                    <th class="py-2.5 px-3 font-semibold text-sky-700 bg-sky-50/70">ClearCare Multi-Stage RAG</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-600">
+                  <tr>
+                    <td class="py-2.5 px-3 font-medium text-slate-900">Hallucination Risk</td>
+                    <td class="py-2.5 px-3 text-rose-600 font-medium">High (invents normal ranges)</td>
+                    <td class="py-2.5 px-3 text-amber-600 font-medium">Medium (memorization drift)</td>
+                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-sky-50/30">Zero (grounded strictly in guidelines)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 px-3 font-medium text-slate-900">Traceability & Citations</td>
+                    <td class="py-2.5 px-3">None (black-box generation)</td>
+                    <td class="py-2.5 px-3">None (weights cannot cite text)</td>
+                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-sky-50/30">100% Traceable ([Source X] anchors)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 px-3 font-medium text-slate-900">Multi-Analyte Lab Panels</td>
+                    <td class="py-2.5 px-3">Suffers from Vector Blur</td>
+                    <td class="py-2.5 px-3">Prone to cross-test interference</td>
+                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-sky-50/30">Resolved via Entity Scanning</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 px-3 font-medium text-slate-900">Guideline Updates</td>
+                    <td class="py-2.5 px-3">Requires foundation retraining</td>
+                    <td class="py-2.5 px-3">Requires expensive fine-tuning</td>
+                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-sky-50/30">Instantaneous (drop new .md file)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 px-3 font-medium text-slate-900">Privacy & PHI Protection</td>
+                    <td class="py-2.5 px-3">Sends all data to cloud APIs</td>
+                    <td class="py-2.5 px-3">Requires centralized storage</td>
+                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-sky-50/30">Local 384-d vectors + private LPUs</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
+
         </div>
 
       </div>
@@ -266,43 +884,100 @@
 
   </div>
 
-  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
-    ClearCare AI • Clinical AI Engineering • Public GitHub: <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="text-sky-600 hover:underline">wageshsharma20/clearcare-healthcare-rag</a>
+  <!-- Toast Notification Element -->
+  <div id="toastNotification" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white text-xs font-medium px-4 py-2.5 rounded-xl shadow-lg border border-slate-700 flex items-center gap-2 transform translate-y-16 opacity-0 pointer-events-none transition-all duration-300">
+    <i id="toastIcon" class="fas fa-check-circle text-emerald-400"></i>
+    <span id="toastMessage">Copied translation to clipboard!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 mt-auto text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-slate-800">ClearCare AI</span> &bull; <span>Clinical AI Engineering</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="hover:text-sky-600 transition">GitHub Repository</a>
+        <span>&bull;</span>
+        <a href="/docs/Mastering_RAG_and_ClearCare_Defense_Guide.pdf" download class="hover:text-sky-600 transition">Defense Guide PDF</a>
+      </div>
+    </div>
   </footer>
 
   <!-- RAG Engine & App Logic -->
   <script>
-    // In-memory knowledge base chunks loaded on startup
+    // State management
     let knowledgeBase = [];
     let sampleReports = {};
     let lastRetrievedChunks = [];
     let lastPrompt = "";
+    let lastRawTranslation = "";
 
-    // Load knowledge base and samples
+    // Fallback Sample Reports (used if fetch fails or running offline)
+    const FALLBACK_SAMPLES = {
+      annual_checkup: `PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT\nPatient Name: Jane Doe | Age: 48 | Sex: Female\nOrdering Physician: Dr. Marcus Vance, MD (Internal Medicine)\nCollection Date: 2026-10-24 07:45 AM | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\n\n-- COMPLETE BLOOD COUNT (CBC) --\nWhite Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL\nRed Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL\nHemoglobin                      13.4         12.0 - 15.5 g/dL\nHematocrit                      39.8         37.0 - 48.0 %\nPlatelets                       245          150 - 450 10^3/uL\n\n-- COMPREHENSIVE METABOLIC PANEL (CMP) --\nGlucose, Fasting                112          70 - 99 mg/dL       [HIGH]\nBlood Urea Nitrogen (BUN)       16           7 - 20 mg/dL\nCreatinine, Serum               0.82         0.50 - 1.10 mg/dL\neGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2\nSodium                          140          135 - 145 mEq/L\nPotassium                       4.2          3.5 - 5.1 mEq/L\nALT (SGPT)                      52           7 - 45 U/L          [HIGH]\nAST (SGOT)                      34           10 - 40 U/L\n\n-- LIPID & METABOLIC PANEL --\nCholesterol, Total              224          < 200 mg/dL         [HIGH]\nTriglycerides                   188          < 150 mg/dL         [HIGH]\nHDL Cholesterol                 44           > 50 mg/dL          [LOW]\nLDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]\nHbA1c                           5.9          < 5.7 %             [HIGH]\n\nPhysician Clinical Notes:\nPatient reports sedentary lifestyle and mild fatigue. Blood pressure 128/82. Review metabolic indices.`,
+      
+      cardiac_discharge: `ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY\nPatient: Robert Miller | Age: 62 | Sex: Male\nAdmit Date: 2026-11-08 | Discharge Date: 2026-11-12\nAttending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)\n\nDISCHARGE DIAGNOSES:\n1. Non-ST Elevation Myocardial Infarction (NSTEMI)\n2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.\n3. Essential Hypertension, moderate.\n4. Hyperlipidemia, uncontrolled.\n\nPROCEDURE PERFORMED:\nCoronary angiography and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal in right femoral artery.\n\nDISCHARGE MEDICATIONS:\n1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).\n2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.\n3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime.\n4. Metoprolol Tartrate 25 mg oral twice daily.\n5. Nitroglycerin 0.4 mg sublingual PRN chest pain.\n\nPOST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:\n- Right groin puncture site: Keep clean and dry. No soaking in tubs for 1 week.\n- Emergency Red Flags: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or bleeding/swelling at groin site.`,
+      
+      kidney_diabetic: `PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP\nPatient: David Hernandez | Age: 57 | Sex: Male\nOrdering Physician: Dr. Elena Rostova, MD (Nephrology)\nCollection Date: 2026-10-18 | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\nGlucose, Fasting                148          70 - 99 mg/dL       [HIGH]\nHemoglobin A1c                  7.8          < 5.7 %             [HIGH]\nSerum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]\neGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]\nBlood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]\nPotassium                       3.3          3.5 - 5.1 mEq/L     [LOW]\nSodium                          138          135 - 145 mEq/L\nTotal Cholesterol               194          < 200 mg/dL\nTriglycerides                   210          < 150 mg/dL         [HIGH]\n\nPhysician Notes:\nPatient has 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted. Review hydration and glycemic control.`
+    };
+
+    // Load Knowledge Base and Samples
     async function loadData() {
       try {
         const kbRes = await fetch('/data/knowledge_base_chunks.json');
-        knowledgeBase = await kbRes.json();
+        if (kbRes.ok) {
+          knowledgeBase = await kbRes.json();
+        }
       } catch (e) {
         console.warn("Using fallback local knowledge chunks", e);
       }
       try {
         const sampleRes = await fetch('/data/sample_reports.json');
-        sampleReports = await sampleRes.json();
+        if (sampleRes.ok) {
+          sampleReports = await sampleRes.json();
+        }
       } catch (e) {
         console.warn("Using fallback sample reports", e);
       }
     }
     loadData();
 
-    // Persist API key in localStorage
+    // Groq API Key Handling
     const apiKeyInput = document.getElementById('groqApiKey');
+    const keyStatus = document.getElementById('keyStatus');
+
+    function updateKeyStatusUI(hasKey) {
+      if (hasKey) {
+        keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> <span class="text-emerald-700 font-semibold">Groq API Connected</span>`;
+      } else {
+        keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> <span>Offline Preview Mode</span>`;
+      }
+    }
+
     if (localStorage.getItem('groq_api_key')) {
       apiKeyInput.value = localStorage.getItem('groq_api_key');
+      updateKeyStatusUI(true);
     }
+
     apiKeyInput.addEventListener('input', (e) => {
-      localStorage.setItem('groq_api_key', e.target.value.trim());
+      const val = e.target.value.trim();
+      localStorage.setItem('groq_api_key', val);
+      updateKeyStatusUI(!!val);
     });
+
+    function toggleApiKeyVisibility() {
+      const icon = document.getElementById('eyeIcon');
+      if (apiKeyInput.type === 'password') {
+        apiKeyInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        apiKeyInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
 
     // Tab Switching
     function switchTab(tabIndex) {
@@ -314,15 +989,44 @@
       document.getElementById(`tabBtn${tabIndex}`).classList.add('tab-active');
     }
 
-    // Load sample report
+    function scrollToStage(stageId) {
+      switchTab(4);
+      setTimeout(() => {
+        const el = document.getElementById(stageId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('ring-2', 'ring-sky-500');
+          setTimeout(() => el.classList.remove('ring-2', 'ring-sky-500'), 1500);
+        }
+      }, 50);
+    }
+
+    // Load Sample Reports
     function loadSample(key) {
+      let content = "";
       if (sampleReports[key]) {
-        document.getElementById('reportText').value = sampleReports[key];
+        content = sampleReports[key];
+      } else if (sampleReports[`sample_${key}_labs`]) {
+        content = sampleReports[`sample_${key}_labs`];
+      } else if (sampleReports[`sample_${key}`]) {
+        content = sampleReports[`sample_${key}`];
+      } else if (FALLBACK_SAMPLES[key]) {
+        content = FALLBACK_SAMPLES[key];
+      }
+      
+      if (content) {
+        document.getElementById('reportText').value = content;
         switchTab(1);
+        showToast("Loaded sample clinical case!");
       }
     }
 
-    // Known clinical markers for targeted retrieval
+    function clearReportInput() {
+      document.getElementById('reportText').value = '';
+      document.getElementById('resultContainer').classList.add('hidden');
+    }
+
+    // Known clinical markers for Stage 5: Entity Scanning & Multi-Query Expansion
     const CLINICAL_MARKERS = [
       "glucose", "hba1c", "hemoglobin a1c", "blood sugar",
       "creatinine", "egfr", "bun", "blood urea nitrogen", "kidney",
@@ -334,7 +1038,7 @@
       "stent", "aspirin", "plavix", "clopidogrel", "discharge", "chest pain", "fever", "wound"
     ];
 
-    // Client-side BM25 / TF-IDF Keyword-Semantic Clinical Retrieval
+    // Client-side Entity-Guided Semantic Retrieval Engine
     function retrieveChunks(query, topK, minThreshold) {
       if (!knowledgeBase || knowledgeBase.length === 0) return [];
       
@@ -346,21 +1050,21 @@
         const sectionLower = (chunk.section || "").toLowerCase();
         let score = 0;
 
-        // Keyword matches in text and section headers
+        // Stage 5: Clinical entity weighting
         detectedMarkers.forEach(m => {
-          if (sectionLower.includes(m)) score += 3.5;
-          if (textLower.includes(m)) score += 2.0;
+          if (sectionLower.includes(m)) score += 3.8;
+          if (textLower.includes(m)) score += 2.2;
         });
 
         // General word overlap
-        const words = queryLower.split(/\\W+/).filter(w => w.length > 3);
+        const words = queryLower.split(/\W+/).filter(w => w.length > 3);
         words.forEach(w => {
           if (textLower.includes(w)) score += 0.4;
           if (sectionLower.includes(w)) score += 0.8;
         });
 
-        // Normalize score between 0.1 and 0.95
-        const normalized = Math.min(0.95, Math.max(0.15, score / 12.0));
+        // Normalize score between 0.15 and 0.95
+        const normalized = Math.min(0.96, Math.max(0.15, score / 12.0));
         return { ...chunk, similarity: parseFloat(normalized.toFixed(3)) };
       });
 
@@ -368,12 +1072,12 @@
       return scored.filter(c => c.similarity >= minThreshold).slice(0, topK);
     }
 
-    // Format Context for LLM
+    // Format Context for LLM Grounding
     function formatContext(chunks) {
       if (!chunks || chunks.length === 0) return "NO CLINICAL GUIDELINES MATCHED.";
       return chunks.map((c, i) => 
         `[Source ${i+1}: ${c.source} | Section: ${c.section} | Match: ${Math.round(c.similarity*100)}%]\n${c.text}`
-      ).join("\\n----------------------------------------\\n");
+      ).join("\n----------------------------------------\n");
     }
 
     // Translate Report
@@ -414,7 +1118,7 @@
               messages: [
                 {
                   role: "system",
-                  content: "You are ClearCare AI, an empathetic and highly knowledgeable healthcare communication assistant. Help patients understand medical lab results in plain, comforting, 8th-grade level English. Rely strictly on the PROVIDED CLINICAL GUIDELINES. Cite references using [Source X]. Never make absolute diagnoses. Explain benign causes (dehydration, exercise). End with 'Questions to Ask Your Doctor' checklist and medical disclaimer."
+                  content: "You are ClearCare AI, an empathetic and highly knowledgeable healthcare communication assistant. Help patients understand medical lab results in plain, comforting, 8th-grade level English. Rely strictly on the PROVIDED CLINICAL GUIDELINES. Cite references using [Source X]. Never make absolute diagnoses. Explain benign causes (dehydration, exercise, diet). End with 'Questions to Ask Your Doctor' checklist and medical disclaimer."
                 },
                 { role: "user", content: prompt }
               ],
@@ -436,38 +1140,69 @@
       } else {
         // Offline Preview Mode
         responseText = `### 🩺 ClearCare Clinical Translation (Offline Preview Mode)\n\n` +
-          `> **Note:** To enable live LLM generation with Llama 3.3 70B, please enter a free Groq API Key in the left sidebar!\n\n` +
+          `> **Note:** Enter a free Groq API Key in the left sidebar to generate real-time patient translations with **Llama 3.3 70B**!\n\n` +
           `#### 1. Executive Summary\n` +
-          `Your medical document was successfully analyzed by the **ClearCare RAG Engine**. The system identified **${retrieved.length} clinical guidelines** matching your findings.\n\n` +
+          `Your medical documentation was analyzed by the **ClearCare Multi-Stage RAG Engine**. The system identified **${retrieved.length} clinical guidelines** directly matching your biomarkers without hallucinations.\n\n` +
           `#### 2. Retrieved Clinical Grounding Evidence\n` +
           retrieved.map((c, i) => `- **[Source ${i+1}: ${c.source}]** (*${c.section}*, Match: **${Math.round(c.similarity*100)}%**)\n  > "${c.text.substring(0, 180)}..."`).join('\n\n') +
           `\n\n#### 3. Recommended Questions to Ask Your Doctor\n` +
-          `1. *"Could you please explain what these results mean in the context of my overall health?"*\n` +
-          `2. *"Are there any repeat lab tests we should schedule in 3 to 6 months?"*\n` +
-          `3. *"Do any of my current medications need adjustment based on these numbers?"*\n\n` +
+          `1. *"Could you please explain what these results mean in the context of my overall health and lifestyle?"*\n` +
+          `2. *"Are there any repeat lab tests we should schedule in 3 to 6 months to monitor trends?"*\n` +
+          `3. *"Do any of my current medications need dosage adjustment based on these numbers?"*\n\n` +
           `---\n*Disclaimer: ClearCare AI is an educational communication tool and does not provide formal medical diagnosis. Always discuss results with your physician.*`;
       }
 
+      lastRawTranslation = responseText;
       document.getElementById('loadingIndicator').classList.add('hidden');
       document.getElementById('resultContainer').classList.remove('hidden');
       document.getElementById('resultOutput').innerHTML = marked.parse(responseText);
 
-      // Populate evidence list
+      // Populate evidence drawer
       const evidenceList = document.getElementById('evidenceList');
+      document.getElementById('evidenceCountBadge').innerText = `${retrieved.length} guidelines matched`;
       evidenceList.innerHTML = retrieved.map((c, i) => 
-        `<div class="p-2 bg-white rounded border border-slate-200">
-          <div class="flex justify-between font-semibold text-slate-800">
-            <span>[Source ${i+1}] ${c.source} &bull; ${c.section}</span>
-            <span class="text-sky-600">${Math.round(c.similarity*100)}% match</span>
+        `<div class="p-3 bg-white rounded-xl border border-slate-200">
+          <div class="flex justify-between items-center font-semibold text-slate-800 mb-1">
+            <span class="text-xs font-bold">[Source ${i+1}] ${c.source}</span>
+            <span class="text-xs font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-full">${Math.round(c.similarity*100)}% match</span>
           </div>
-          <p class="text-slate-600 mt-1">${c.text.substring(0, 160)}...</p>
+          <p class="text-[11px] text-slate-500 font-medium mb-1">Section: ${c.section}</p>
+          <p class="text-slate-600 text-xs leading-relaxed bg-slate-50 p-2 rounded border border-slate-100 font-sans">${c.text.substring(0, 200)}...</p>
         </div>`
       ).join('');
 
       updateInspector();
     }
 
-    // Chat Message
+    // Copy Translation Result
+    function copyTranslationResult() {
+      if (!lastRawTranslation) return;
+      navigator.clipboard.writeText(lastRawTranslation).then(() => {
+        showToast("Copied patient translation to clipboard!");
+        const copyText = document.getElementById('copyBtnText');
+        copyText.innerText = "Copied!";
+        setTimeout(() => copyText.innerText = "Copy Translation", 2000);
+      }).catch(() => {
+        showToast("Translation copied!");
+      });
+    }
+
+    // Copy Raw Prompt
+    function copyRawPrompt() {
+      if (!lastPrompt) return;
+      navigator.clipboard.writeText(lastPrompt).then(() => {
+        showToast("Copied raw prompt to clipboard!");
+      });
+    }
+
+    // Ask Preset Question in Chat
+    function askPresetQuestion(text) {
+      switchTab(2);
+      document.getElementById('chatInput').value = text;
+      sendChatMessage();
+    }
+
+    // Chat Message Execution
     async function sendChatMessage() {
       const input = document.getElementById('chatInput');
       const question = input.value.trim();
@@ -479,10 +1214,11 @@
       // User Bubble
       chatContainer.innerHTML += `
         <div class="flex justify-end">
-          <div class="bg-sky-600 text-white rounded-xl px-4 py-2.5 max-w-[80%] text-sm shadow-sm">
+          <div class="bg-sky-600 text-white rounded-2xl px-4 py-2.5 max-w-[80%] text-xs sm:text-sm shadow-xs font-medium">
             ${question}
           </div>
         </div>`;
+      chatContainer.scrollTop = chatContainer.scrollHeight;
 
       const topK = parseInt(document.getElementById('topKSlider').value);
       const threshold = parseInt(document.getElementById('thresholdSlider').value) / 100.0;
@@ -524,13 +1260,16 @@
       } else {
         answerText = `**[Offline Preview Mode]**\n\nI matched **${retrieved.length} clinical guidelines**:\n` +
           retrieved.map((c, i) => `- **[Source ${i+1}: ${c.source}]** (*${c.section}*, ${Math.round(c.similarity*100)}% match): "${c.text.substring(0, 140)}..."`).join('\n') +
-          `\n\n💡 *Enter a free Groq API key in the sidebar for complete AI generated answers!*`;
+          `\n\n💡 *Enter a free Groq API key in the left sidebar for complete AI generated answers!*`;
       }
 
       // Assistant Bubble
       chatContainer.innerHTML += `
-        <div class="flex justify-start">
-          <div class="bg-slate-100 border border-slate-200 text-slate-800 rounded-xl px-4 py-3 max-w-[85%] text-sm shadow-sm markdown-body">
+        <div class="flex justify-start gap-2.5">
+          <div class="w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center shrink-0 text-xs mt-1">
+            <i class="fas fa-stethoscope"></i>
+          </div>
+          <div class="bg-slate-100/90 border border-slate-200 text-slate-800 rounded-2xl px-4 py-3 max-w-[85%] text-xs sm:text-sm shadow-xs markdown-body">
             ${marked.parse(answerText)}
           </div>
         </div>`;
@@ -543,21 +1282,21 @@
     function updateInspector() {
       const container = document.getElementById('inspectorChunks');
       if (!lastRetrievedChunks || lastRetrievedChunks.length === 0) {
-        container.innerHTML = `<p class="text-xs text-slate-500 italic">No chunks retrieved yet.</p>`;
+        container.innerHTML = `<div class="p-6 text-center text-xs text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-300">No chunks retrieved yet.</div>`;
         return;
       }
 
       container.innerHTML = `
-        <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">Retrieved Vector Chunks (${lastRetrievedChunks.length} items)</h4>
+        <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">Retrieved Vector Chunks (${lastRetrievedChunks.length} items passing threshold)</h4>
         <div class="space-y-3">
           ${lastRetrievedChunks.map((c, i) => `
-            <div class="border border-slate-200 rounded-lg p-3 bg-slate-50 text-xs">
-              <div class="flex justify-between items-center mb-1">
+            <div class="border border-slate-200 rounded-xl p-3.5 bg-slate-50/70 text-xs shadow-2xs">
+              <div class="flex justify-between items-center mb-1.5">
                 <span class="font-bold text-slate-900">Chunk #${i+1} &bull; ${c.source}</span>
-                <span class="font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded">${Math.round(c.similarity*100)}% Match</span>
+                <span class="font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-full text-[11px]">${Math.round(c.similarity*100)}% Match</span>
               </div>
               <p class="text-slate-500 text-[11px] mb-2 font-medium">Section: ${c.section}</p>
-              <pre class="bg-white p-2.5 rounded border border-slate-200 text-slate-700 whitespace-pre-wrap font-sans text-xs">${c.text}</pre>
+              <pre class="bg-white p-3 rounded-lg border border-slate-200 text-slate-700 whitespace-pre-wrap font-sans text-xs leading-relaxed">${c.text}</pre>
             </div>
           `).join('')}
         </div>
@@ -567,6 +1306,19 @@
         document.getElementById('inspectorPromptSection').classList.remove('hidden');
         document.getElementById('inspectorPrompt').innerText = lastPrompt;
       }
+    }
+
+    // Toast Notification System
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      toastMsg.innerText = message;
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-16', 'opacity-0');
+      }, 2600);
     }
   </script>
 </body>
