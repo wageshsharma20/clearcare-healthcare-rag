@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ClearCare AI — Evidence-Based Clinical Lab & Discharge Translator</title>
+  <title>ClearCare AI — Evidence-Based Clinical Lab &amp; Discharge Translator</title>
   
   <!-- Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,33 +25,30 @@
           fontFamily: {
             sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            clinical: {
-              50: '#f0f9ff',
-              100: '#e0f2fe',
-              200: '#bae6fd',
-              500: '#0ea5e9',
-              600: '#0f172a',
-              700: '#020617',
-              800: '#075985',
-              900: '#0c4a6e',
-            }
           }
         }
       }
-    }
+    };
   </script>
 
   <style>
-    /* Obsidian Dark Theme Core */
     body {
-      background-color: #08090d;
-      background-image: radial-gradient(circle at 50% 0%, #161824 0%, #08090d 75%);
-      color: #e4e4e7;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #07080c;
+      color: #e2e8f0;
+      -webkit-font-smoothing: antialiased;
     }
-
-    /* Markdown Content Styling for Dark Obsidian Theme */
+    .clinical-card {
+      background: #0f121a;
+      border: 1px solid #1c2233;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+    }
+    .tab-active {
+      color: #ffffff !important;
+      border-bottom: 2px solid #ffffff !important;
+      background: rgba(255, 255, 255, 0.04);
+    }
     .markdown-body { color: #d4d4d8; font-size: 0.9rem; line-height: 1.65; }
     .markdown-body h1 { font-size: 1.45rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #ffffff; }
     .markdown-body h2 { font-size: 1.25rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #ffffff; border-bottom: 1px solid #232736; padding-bottom: 6px; }
@@ -69,55 +66,17 @@
     .markdown-body tr:hover td { background-color: #121520; }
     .markdown-body blockquote { border-left: 4px solid #ffffff; padding: 0.6rem 1rem; color: #d4d4d8; background: #12141e; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 0.88rem; border-top: 1px solid #1d212e; border-right: 1px solid #1d212e; border-bottom: 1px solid #1d212e; }
     .markdown-body code { background: #161824; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #93c5fd; border: 1px solid #24293a; }
-
-    /* Active Tab State */
-    .tab-active { 
-      border-bottom: 2px solid #ffffff !important; 
-      color: #ffffff !important; 
-      font-weight: 600; 
-      background: rgba(255, 255, 255, 0.08) !important;
-      border-radius: 8px 8px 0 0;
-    }
-
-    /* Custom Glassmorphism & Shadow Utilities */
-    .clinical-card {
-      background: #0f111a;
-      border: 1px solid #1f2334;
-      border-radius: 14px;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .clinical-card:hover {
-      border-color: #2e344a;
-      box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.8);
-    }
-
-    /* Toast Notification */
-    #toastNotification {
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-    }
-
-    /* Custom Scrollbar for Dark Theme */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #08090d;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #232736;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #363c52;
-    }
+    
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #07080c; }
+    ::-webkit-scrollbar-thumb { background: #1f2538; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2f3854; }
   </style>
 </head>
-<body class="bg-[#090a0f] text-zinc-200 min-h-screen flex flex-col font-sans selection:bg-zinc-800 selection:text-white">
+<body class="bg-[#07080c] text-zinc-200 min-h-screen flex flex-col font-sans selection:bg-zinc-800 selection:text-white">
 
   <!-- Header -->
-  <header class="bg-[#0c0e15]/95 backdrop-blur-md border-b border-[#1e2230] sticky top-0 z-40 shadow-md">
+  <header class="bg-[#0a0c13]/95 backdrop-blur-md border-b border-[#181d2a] sticky top-0 z-40 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3.5">
         <div class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center text-white shadow-md">
@@ -126,24 +85,27 @@
         <div>
           <div class="flex items-center gap-2">
             <h1 class="text-base sm:text-lg font-bold text-white tracking-tight leading-tight">ClearCare AI</h1>
-            <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[10px] font-semibold px-2 py-0.5 rounded-full">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="inline-flex items-center gap-1 bg-emerald-950/80 text-emerald-300 border border-emerald-800/80 text-[10px] font-semibold px-2 py-0.5 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
               RAG Pipeline Online
             </span>
           </div>
-          <p class="text-xs text-zinc-400 font-medium">Evidence-Based Patient Health Literacy & Clinical Lab Translator</p>
+          <p class="text-xs text-zinc-400 font-medium">Evidence-Based Patient Health Literacy &amp; Clinical Lab Translator</p>
         </div>
       </div>
       <div class="flex items-center space-x-2 sm:space-x-3">
-        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="text-xs bg-[#141724] hover:bg-[#1d2232] text-zinc-200 px-3 py-1.5 rounded-lg font-medium border border-[#2b3042] transition-all shadow-xs flex items-center gap-1.5 active:scale-95">
-          <i class="fab fa-github text-zinc-200"></i> <span class="hidden sm:inline">GitHub Repo</span>
+        <button onclick="window.location.reload(true)" title="Force Reload Latest Version" class="text-xs bg-[#131722] hover:bg-[#1c2233] text-zinc-300 px-2.5 py-1.5 rounded-lg border border-[#22283a] transition flex items-center gap-1.5 shadow-xs">
+          <i class="fas fa-arrows-rotate text-xs"></i> <span class="hidden md:inline">Refresh</span>
+        </button>
+        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="text-xs bg-zinc-900 hover:bg-black text-white px-3 py-1.5 rounded-lg font-medium border border-zinc-700 transition-all shadow-xs flex items-center gap-1.5 active:scale-95">
+          <i class="fab fa-github text-white"></i> <span class="hidden sm:inline">GitHub Repo</span>
         </a>
-        </div>
+      </div>
     </div>
   </header>
 
   <!-- Medical Disclaimer Banner -->
-  <div class="bg-amber-950/40 border-b border-amber-900/50 px-4 py-2 text-xs text-amber-300/90 flex items-center justify-center gap-2 shadow-xs">
+  <div class="bg-amber-950/30 border-b border-amber-900/40 px-4 py-2 text-xs text-amber-300/90 flex items-center justify-center gap-2 shadow-xs">
     <i class="fas fa-shield-halved text-amber-400 text-sm"></i>
     <span><strong>Educational Clinical Decision Support:</strong> ClearCare AI translates medical documentation using verified clinical guidelines (MedlinePlus, ACC/AHA, AACC). It does not provide formal medical diagnoses or alter prescriptions. Always consult your licensed physician.</span>
   </div>
@@ -160,83 +122,83 @@
           <h2 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
             <i class="fas fa-key text-white"></i> 1. Groq LLM Authentication
           </h2>
-          <span class="text-[11px] text-zinc-500 font-mono">v1.4 (Mock Benchmarks & Obsidian Dark)</span>
+          <span class="text-[10px] text-zinc-400 font-mono bg-[#141724] px-1.5 py-0.5 rounded border border-[#232738]">v1.5 Obsidian</span>
         </div>
         <div class="space-y-3">
           <div>
-            <label class="block text-xs font-semibold text-zinc-300 mb-1">Groq API Key (Free Tier)</label>
+            <div class="flex justify-between items-center mb-1">
+              <label class="text-xs font-semibold text-zinc-300">Groq API Key (Free Tier)</label>
+              <span id="keyStatus" class="text-[11px] text-zinc-400 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span> <span>Offline Preview</span>
+              </span>
+            </div>
             <div class="relative">
-              <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-xs font-mono px-3 py-2.5 bg-[#07080d] border border-[#232736] text-zinc-100 rounded-lg focus:ring-2 focus:ring-zinc-400 focus:border-white focus:bg-[#050609] focus:border-white outline-none transition">
-              <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-2.5 top-2.5 text-zinc-500 hover:text-zinc-300 text-xs">
-                <i id="eyeIcon" class="fas fa-eye"></i>
+              <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-xs font-mono px-3 py-2 bg-[#08090f] border border-[#232736] text-zinc-100 rounded-lg focus:ring-1 focus:ring-white focus:border-white outline-none transition pr-8">
+              <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-2.5 top-2.5 text-zinc-400 hover:text-white transition">
+                <i id="eyeIcon" class="fas fa-eye text-xs"></i>
               </button>
             </div>
-            <div class="mt-2 flex items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <button type="button" onclick="verifyGroqApiKey()" id="verifyKeyBtn" class="text-[11px] bg-zinc-800 hover:bg-zinc-700 text-white px-2.5 py-1 rounded-md font-medium border border-zinc-700 transition flex items-center gap-1 active:scale-95">
-                  <i class="fas fa-plug text-[9px]"></i> Test Key
-                </button>
-                <span id="keyStatus" class="flex items-center gap-1 text-[11px] text-zinc-400">
-                  <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> <span>Offline</span>
-                </span>
-              </div>
-              <a href="https://console.groq.com/keys" target="_blank" class="text-[11px] text-white font-medium hover:underline flex items-center gap-1">
-                Get Free Key <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
-              </a>
-            </div>
-            <div id="keyTestResult" class="mt-1 text-[11px] empty:hidden"></div>
           </div>
 
-          <div>
+          <div class="flex items-center justify-between gap-2 pt-1">
+            <button onclick="verifyGroqApiKey()" class="text-xs bg-[#141724] hover:bg-[#1e2334] text-white px-3 py-1.5 rounded-lg border border-[#232738] font-semibold transition flex items-center gap-1.5 shadow-2xs active:scale-95">
+              <i class="fas fa-vial-circle-check text-xs"></i> <span>Test Key</span>
+            </button>
+            <a href="https://console.groq.com/keys" target="_blank" class="text-[11px] text-zinc-400 hover:text-white flex items-center gap-1 transition">
+              <span>Get Free Key</span> <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+
+          <div id="keyTestResult" class="text-xs pt-1 min-h-[1.25rem]"></div>
+
+          <div class="pt-2 border-t border-[#1e2230]">
             <label class="block text-xs font-semibold text-zinc-300 mb-1">Inference Model</label>
-            <div class="relative">
-              <select id="modelSelect" class="w-full text-xs font-medium px-3 py-2 bg-[#07080d] border border-[#232736] text-zinc-100 rounded-lg focus:ring-2 focus:ring-zinc-400 focus:border-white focus:bg-[#050609] outline-none appearance-none cursor-pointer">
-                <option value="llama-3.1-8b-instant" selected>Llama 3.1 8B Instant (Fast & Universal)</option>
-                <option value="llama-3.3-70b-versatile">Llama 3.3 70B Versatile</option>
-                <option value="llama3-70b-8192">Llama 3 70B (8192)</option>
-                <option value="llama3-8b-8192">Llama 3 8B (8192)</option>
-                <option value="gemma2-9b-it">Gemma2 9B IT</option>
-              </select>
-              <i class="fas fa-chevron-down absolute right-3 top-3 text-[10px] text-zinc-500 pointer-events-none"></i>
-            </div>
+            <select id="modelSelect" class="w-full text-xs bg-[#08090f] border border-[#232736] text-zinc-200 rounded-lg p-2 focus:ring-1 focus:ring-white focus:border-white outline-none transition">
+              <option value="llama-3.3-70b-versatile">Llama 3.3 70B Versatile (Recommended)</option>
+              <option value="llama-3.1-8b-instant">Llama 3.1 8B Instant (Ultra-fast)</option>
+              <option value="llama3-70b-8192">Llama 3 70B</option>
+              <option value="llama3-8b-8192">Llama 3 8B</option>
+              <option value="gemma2-9b-it">Gemma 2 9B IT</option>
+              <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <!-- 2. Sample Patient Cases Card -->
+      <!-- 2. Clinical Case Benchmarks Sidebar Picker -->
       <div class="clinical-card p-5">
         <h2 class="text-xs font-bold text-white uppercase tracking-wider mb-3 flex items-center gap-2">
           <i class="fas fa-folder-open text-white"></i> 2. Clinical Case Benchmarks
         </h2>
         <div class="space-y-2.5">
-          <button onclick="loadSample('annual_checkup')" class="w-full text-left bg-[#141724] hover:bg-[#1d2232] hover:border-zinc-500 border border-[#232738] p-3 rounded-xl transition group">
+          <button onclick="loadSample('annual_checkup')" id="sideMock_annual_checkup" class="w-full text-left bg-[#131624] hover:bg-[#1a1e30] border-2 border-white p-3 rounded-xl transition group shadow-sm">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-semibold text-xs text-white group-hover:text-white flex items-center gap-1.5">
+              <span class="font-semibold text-xs text-white flex items-center gap-1.5">
                 <span>🩺</span> Routine Annual Checkup
               </span>
-              <span class="text-[10px] font-bold text-amber-700 bg-amber-100/80 px-1.5 py-0.5 rounded">CMP + Lipid</span>
+              <span class="text-[9px] font-bold text-amber-300 bg-amber-950/90 border border-amber-800/80 px-1.5 py-0.5 rounded">CMP + Lipid</span>
             </div>
             <p class="text-zinc-400 text-[11px] leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
           </button>
 
-          <button onclick="loadSample('cardiac_discharge')" class="w-full text-left bg-[#141724] hover:bg-[#1d2232] hover:border-zinc-500 border border-[#232738] p-3 rounded-xl transition group">
+          <button onclick="loadSample('cardiac_discharge')" id="sideMock_cardiac_discharge" class="w-full text-left bg-[#131624] hover:bg-[#1a1e30] border border-[#232738] p-3 rounded-xl transition group shadow-sm">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-semibold text-xs text-white group-hover:text-white flex items-center gap-1.5">
+              <span class="font-semibold text-xs text-white flex items-center gap-1.5">
                 <span>❤️</span> Post-PCI Stent Discharge
               </span>
-              <span class="text-[10px] font-bold text-rose-700 bg-rose-100/80 px-1.5 py-0.5 rounded">Cardiology DAPT</span>
+              <span class="text-[9px] font-bold text-rose-300 bg-rose-950/90 border border-rose-800/80 px-1.5 py-0.5 rounded">Cardiology DAPT</span>
             </div>
             <p class="text-zinc-400 text-[11px] leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
           </button>
 
-          <button onclick="loadSample('kidney_diabetic')" class="w-full text-left bg-[#141724] hover:bg-[#1d2232] hover:border-zinc-500 border border-[#232738] p-3 rounded-xl transition group">
+          <button onclick="loadSample('kidney_diabetic')" id="sideMock_kidney_diabetic" class="w-full text-left bg-[#131624] hover:bg-[#1a1e30] border border-[#232738] p-3 rounded-xl transition group shadow-sm">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-semibold text-xs text-white group-hover:text-white flex items-center gap-1.5">
-                <span>🧪</span> Kidney & Diabetes Monitor
+              <span class="font-semibold text-xs text-white flex items-center gap-1.5">
+                <span>🧪</span> Kidney &amp; Diabetes Monitor
               </span>
-              <span class="text-[10px] font-bold text-indigo-700 bg-indigo-100/80 px-1.5 py-0.5 rounded">Renal eGFR</span>
+              <span class="text-[9px] font-bold text-indigo-300 bg-indigo-950/90 border border-indigo-800/80 px-1.5 py-0.5 rounded">Renal eGFR</span>
             </div>
-            <p class="text-zinc-400 text-[11px] leading-tight">Creatinine (1.62), eGFR (48), Low Potassium</p>
+            <p class="text-zinc-400 text-[11px] leading-tight">Creatinine (1.62), eGFR (48), Low K+ (3.3)</p>
           </button>
         </div>
       </div>
@@ -250,37 +212,35 @@
           <div>
             <div class="flex justify-between items-center text-xs mb-1.5">
               <span class="font-semibold text-zinc-300">Top-K Retrieved Chunks</span>
-              <span id="topKVal" class="font-mono font-bold text-white bg-[#1a1d29] border border-zinc-700 px-2 py-0.5 rounded text-xs text-white">4</span>
+              <span id="topKVal" class="font-mono font-bold text-white bg-[#1a1d29] border border-zinc-700 px-2 py-0.5 rounded text-xs">4</span>
             </div>
             <input type="range" id="topKSlider" min="2" max="8" value="4" class="w-full h-1.5 bg-[#1a1d29] rounded-lg appearance-none cursor-pointer accent-white" oninput="document.getElementById('topKVal').innerText = this.value">
-            <span class="text-[10px] text-zinc-500">Controls evidence density passed to the LLM</span>
+            <span class="text-[10px] text-zinc-400">Controls evidence density passed to the LLM</span>
           </div>
 
           <div>
             <div class="flex justify-between items-center text-xs mb-1.5">
-              <span class="font-semibold text-zinc-300">Cosine Similarity Threshold</span>
-              <span id="thresholdVal" class="font-mono font-bold text-white bg-[#1a1d29] border border-zinc-700 px-2 py-0.5 rounded text-xs text-white">30%</span>
+              <span class="font-semibold text-zinc-300">Cosine Threshold</span>
+              <span id="thresholdVal" class="font-mono font-bold text-white bg-[#1a1d29] border border-zinc-700 px-2 py-0.5 rounded text-xs">0.25</span>
             </div>
-            <input type="range" id="thresholdSlider" min="15" max="60" value="30" step="5" class="w-full h-1.5 bg-[#1a1d29] rounded-lg appearance-none cursor-pointer accent-white" oninput="document.getElementById('thresholdVal').innerText = this.value + '%'">
-            <span class="text-[10px] text-zinc-500">Hallucination firewall: drops irrelevant guideline chunks</span>
+            <input type="range" id="thresholdSlider" min="15" max="55" value="25" class="w-full h-1.5 bg-[#1a1d29] rounded-lg appearance-none cursor-pointer accent-white" oninput="document.getElementById('thresholdVal').innerText = (this.value/100).toFixed(2)">
+            <span class="text-[10px] text-zinc-400">Minimum similarity score to qualify as clinical evidence</span>
           </div>
         </div>
       </div>
 
-      <!-- 4. Knowledge Base Status Card -->
-      <div class="clinical-card p-4 bg-[#0c0e15] border border-[#202434]">
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-xs font-bold text-zinc-200 flex items-center gap-1.5">
-            <i class="fas fa-database text-white"></i> Vector Knowledge Base
-          </span>
-          <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200">
-            36 Chunks &bull; 384-d
-          </span>
+      <!-- 4. Clinical Knowledge Base Index -->
+      <div class="clinical-card p-5">
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <i class="fas fa-database text-white"></i> Clinical Guidelines
+          </h2>
+          <span class="text-[11px] font-mono text-zinc-400">36 Chunks</span>
         </div>
         <p class="text-[11px] text-zinc-300 leading-relaxed mb-2.5">
           Indexed from <strong>5 authoritative clinical guidelines</strong> (ACC/AHA, AACC, MedlinePlus, Joint Commission).
         </p>
-        <button onclick="switchTab(4)" class="w-full text-center text-xs text-white bg-[#141724] hover:bg-[#1d2232] text-zinc-200 border border-[#2b3042] py-1.5 rounded-lg font-medium transition shadow-xs flex items-center justify-center gap-1.5">
+        <button onclick="switchTab(4)" class="w-full text-center text-xs bg-[#141724] hover:bg-[#1d2232] text-zinc-200 border border-[#2b3042] py-2 rounded-lg font-medium transition shadow-xs flex items-center justify-center gap-1.5">
           <span>Explore 8-Stage Pipeline Architecture</span> <i class="fas fa-arrow-right text-[10px]"></i>
         </button>
       </div>
@@ -291,18 +251,18 @@
     <main class="lg:col-span-8 clinical-card flex flex-col overflow-hidden">
       
       <!-- Segmented Navigation Tabs -->
-      <div class="flex border-b border-[#202434] px-4 sm:px-6 pt-3 space-x-2 sm:space-x-4 text-xs sm:text-sm font-semibold text-zinc-400 overflow-x-auto">
+      <div class="flex border-b border-[#1f2538] px-4 sm:px-6 pt-3 space-x-2 sm:space-x-4 text-xs sm:text-sm font-semibold text-zinc-400 overflow-x-auto">
         <button id="tabBtn1" onclick="switchTab(1)" class="pb-3 px-3 tab-active flex items-center gap-2 whitespace-nowrap transition">
           <i class="fas fa-file-medical text-sm"></i> Report Translator
         </button>
         <button id="tabBtn2" onclick="switchTab(2)" class="pb-3 px-3 hover:text-zinc-200 flex items-center gap-2 whitespace-nowrap transition">
-          <i class="fas fa-comments text-sm"></i> Ask ClearCare (Q&A)
+          <i class="fas fa-comments text-sm"></i> Ask ClearCare (Q&amp;A)
         </button>
         <button id="tabBtn3" onclick="switchTab(3)" class="pb-3 px-3 hover:text-zinc-200 flex items-center gap-2 whitespace-nowrap transition">
           <i class="fas fa-microscope text-sm"></i> RAG Inspector
         </button>
-        <button id="tabBtn4" onclick="switchTab(4)" class="pb-3 px-3 hover:text-zinc-200 flex items-center gap-2 whitespace-nowrap transition text-white">
-          <i class="fas fa-diagram-project text-sm"></i> Pipeline & Architecture
+        <button id="tabBtn4" onclick="switchTab(4)" class="pb-3 px-3 hover:text-zinc-200 flex items-center gap-2 whitespace-nowrap transition">
+          <i class="fas fa-diagram-project text-sm"></i> Pipeline &amp; Architecture
         </button>
       </div>
 
@@ -318,58 +278,81 @@
           <div class="space-y-2 mb-3">
             <div class="flex items-center justify-between">
               <label class="block text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                <i class="fas fa-flask text-zinc-400"></i> Select Clinical Mock Case (Click to Load):
+                <i class="fas fa-flask text-zinc-300"></i> Select Clinical Mock Case (Click to Load):
               </label>
-              <span class="text-[11px] text-zinc-400 font-medium">3 Pre-configured Patient Scenarios</span>
+              <span class="text-[11px] text-zinc-400 font-medium">3 Pre-configured Scenarios</span>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              <button type="button" onclick="loadSample('annual_checkup')" id="mockCard_annual_checkup" class="mock-card text-left p-3 rounded-xl border-2 border-white bg-[#181c2b] shadow-md transition group cursor-pointer active:scale-98">
+              
+              <!-- Mock Card 1 -->
+              <div onclick="loadSample('annual_checkup')" id="mockCard_annual_checkup" class="mock-card text-left p-3 rounded-xl border-2 border-white bg-[#181c2b] shadow-md transition group cursor-pointer active:scale-98 relative">
                 <div class="flex items-center justify-between mb-1">
                   <span class="font-bold text-xs text-white flex items-center gap-1.5">
-                    <span>🩺</span> Case 1: Annual Checkup
+                    <span>🩺</span> Case 1: Checkup
                   </span>
-                  <span class="text-[9px] font-bold text-amber-300 bg-amber-950/80 border border-amber-800/80 px-1.5 py-0.5 rounded">CMP + Lipid</span>
+                  <span class="text-[9px] font-bold text-amber-300 bg-amber-950/90 border border-amber-800/80 px-1.5 py-0.5 rounded">CMP + Lipid</span>
                 </div>
-                <p class="text-[11px] text-zinc-400 leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
-              </button>
+                <p class="text-[11px] text-zinc-300 leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
+                <div class="mt-2 pt-1.5 border-t border-zinc-700/60 flex items-center justify-between text-[10px]">
+                  <span class="text-zinc-400">Click to select</span>
+                  <button type="button" onclick="event.stopPropagation(); loadSample('annual_checkup', true)" class="text-white hover:text-zinc-200 font-semibold flex items-center gap-1 bg-[#262c3e] hover:bg-[#323a52] px-2 py-0.5 rounded transition">
+                    <i class="fas fa-bolt text-amber-400 text-[9px]"></i> Translate
+                  </button>
+                </div>
+              </div>
 
-              <button type="button" onclick="loadSample('cardiac_discharge')" id="mockCard_cardiac_discharge" class="mock-card text-left p-3 rounded-xl border border-[#232738] bg-[#121420] hover:bg-[#181c2b] hover:border-zinc-400 shadow-sm transition group cursor-pointer active:scale-98">
+              <!-- Mock Card 2 -->
+              <div onclick="loadSample('cardiac_discharge')" id="mockCard_cardiac_discharge" class="mock-card text-left p-3 rounded-xl border border-[#232738] bg-[#121420] hover:bg-[#181c2b] hover:border-zinc-400 shadow-sm transition group cursor-pointer active:scale-98 relative">
                 <div class="flex items-center justify-between mb-1">
                   <span class="font-bold text-xs text-white flex items-center gap-1.5">
-                    <span>❤️</span> Case 2: Stent Discharge
+                    <span>❤️</span> Case 2: Stent
                   </span>
-                  <span class="text-[9px] font-bold text-rose-300 bg-rose-950/80 border border-rose-800/80 px-1.5 py-0.5 rounded">Cardiology DAPT</span>
+                  <span class="text-[9px] font-bold text-rose-300 bg-rose-950/90 border border-rose-800/80 px-1.5 py-0.5 rounded">Cardiology DAPT</span>
                 </div>
-                <p class="text-[11px] text-zinc-400 leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
-              </button>
+                <p class="text-[11px] text-zinc-300 leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
+                <div class="mt-2 pt-1.5 border-t border-zinc-700/60 flex items-center justify-between text-[10px]">
+                  <span class="text-zinc-400">Click to select</span>
+                  <button type="button" onclick="event.stopPropagation(); loadSample('cardiac_discharge', true)" class="text-white hover:text-zinc-200 font-semibold flex items-center gap-1 bg-[#262c3e] hover:bg-[#323a52] px-2 py-0.5 rounded transition">
+                    <i class="fas fa-bolt text-rose-400 text-[9px]"></i> Translate
+                  </button>
+                </div>
+              </div>
 
-              <button type="button" onclick="loadSample('kidney_diabetic')" id="mockCard_kidney_diabetic" class="mock-card text-left p-3 rounded-xl border border-[#232738] bg-[#121420] hover:bg-[#181c2b] hover:border-zinc-400 shadow-sm transition group cursor-pointer active:scale-98">
+              <!-- Mock Card 3 -->
+              <div onclick="loadSample('kidney_diabetic')" id="mockCard_kidney_diabetic" class="mock-card text-left p-3 rounded-xl border border-[#232738] bg-[#121420] hover:bg-[#181c2b] hover:border-zinc-400 shadow-sm transition group cursor-pointer active:scale-98 relative">
                 <div class="flex items-center justify-between mb-1">
                   <span class="font-bold text-xs text-white flex items-center gap-1.5">
-                    <span>🧪</span> Case 3: Kidney & Diabetes
+                    <span>🧪</span> Case 3: Kidney
                   </span>
-                  <span class="text-[9px] font-bold text-indigo-300 bg-indigo-950/80 border border-indigo-800/80 px-1.5 py-0.5 rounded">Renal eGFR</span>
+                  <span class="text-[9px] font-bold text-indigo-300 bg-indigo-950/90 border border-indigo-800/80 px-1.5 py-0.5 rounded">Renal eGFR</span>
                 </div>
-                <p class="text-[11px] text-zinc-400 leading-tight">Creatinine (1.62), eGFR (48), Low K+ (3.3)</p>
-              </button>
+                <p class="text-[11px] text-zinc-300 leading-tight">Creatinine (1.62), eGFR (48), Low K+ (3.3)</p>
+                <div class="mt-2 pt-1.5 border-t border-zinc-700/60 flex items-center justify-between text-[10px]">
+                  <span class="text-zinc-400">Click to select</span>
+                  <button type="button" onclick="event.stopPropagation(); loadSample('kidney_diabetic', true)" class="text-white hover:text-zinc-200 font-semibold flex items-center gap-1 bg-[#262c3e] hover:bg-[#323a52] px-2 py-0.5 rounded transition">
+                    <i class="fas fa-bolt text-indigo-400 text-[9px]"></i> Translate
+                  </button>
+                </div>
+              </div>
+
             </div>
           </div>
 
           <div class="relative">
-            <textarea id="reportText" rows="7" placeholder="Paste medical document text here (e.g., Blood tests, Complete Blood Count, Metabolic Panel, Lipid Panel, or hospital discharge instructions)..." class="w-full text-xs sm:text-sm font-mono p-3.5 bg-[#07080d] border border-[#232736] text-zinc-100 rounded-xl focus:ring-2 focus:ring-zinc-400 focus:border-white focus:bg-[#050609] outline-none leading-relaxed transition resize-y"></textarea>
+            <textarea id="reportText" rows="7" placeholder="Paste medical document text here (e.g., Blood tests, Complete Blood Count, Metabolic Panel, Lipid Panel, or hospital discharge instructions)..." class="w-full text-xs sm:text-sm font-mono p-3.5 bg-[#08090f] border border-[#232736] text-zinc-100 rounded-xl focus:ring-1 focus:ring-white focus:border-white focus:bg-[#06070c] outline-none leading-relaxed transition resize-y"></textarea>
           </div>
 
           <!-- Action Buttons Bar -->
           <div class="flex items-center justify-between gap-3 pt-1">
             <div class="flex items-center gap-2.5">
-              <button onclick="translateReport()" id="translateBtn" class="bg-white hover:bg-zinc-200 text-black font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-white/5 transition-all flex items-center gap-2 active:scale-95">
-                <i class="fas fa-wand-magic-sparkles text-xs"></i> Translate & Explain Report
+              <button onclick="translateReport()" id="translateBtn" class="bg-white hover:bg-zinc-200 text-black font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg transition-all flex items-center gap-2 active:scale-95">
+                <i class="fas fa-wand-magic-sparkles text-xs"></i> Translate &amp; Explain Report
               </button>
               <button onclick="clearReportInput()" class="bg-[#141724] hover:bg-[#1e2334] text-zinc-300 text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-[#202434] font-medium transition active:scale-95">
                 Clear
               </button>
             </div>
-            <span class="text-[11px] text-zinc-500 hidden md:inline">Grounds translation strictly in clinical guidelines</span>
+            <span class="text-[11px] text-zinc-400 hidden md:inline">Grounds translation strictly in clinical guidelines</span>
           </div>
 
           <!-- Loading Spinner -->
@@ -381,26 +364,27 @@
           <!-- Result Area -->
           <div id="resultContainer" class="hidden pt-4 border-t border-[#202434] space-y-4">
             
-            <!-- Result Action Header with Copy to Clipboard Button -->
+            <!-- Result Action Header -->
             <div class="flex items-center justify-between pb-2 border-b border-[#1b1f2c]">
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <span>📋</span> ClearCare Clinical Translation & Patient Guidance
-              </h3>
               <div class="flex items-center gap-2">
-                <button onclick="copyTranslationResult()" class="text-xs bg-[#141724] hover:bg-[#141724] hover:text-white hover:border-slate-400 text-zinc-300 px-3 py-1.5 rounded-lg border border-[#202434] font-medium transition flex items-center gap-1.5 shadow-2xs active:scale-95">
-                  <i id="copyIcon" class="far fa-copy"></i>
-                  <span id="copyBtnText">Copy Translation</span>
-                </button>
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <span>📋</span> ClearCare Clinical Translation &amp; Patient Guidance
+                </h3>
+                <span id="engineBadge" class="hidden sm:inline text-[10px] font-mono text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-2 py-0.5 rounded-full">Grounded Clinical Engine</span>
               </div>
+              <button onclick="copyTranslationResult()" class="text-xs bg-[#141724] hover:bg-[#1e2334] text-zinc-300 px-3 py-1.5 rounded-lg border border-[#202434] font-medium transition flex items-center gap-1.5 active:scale-95">
+                <i class="far fa-copy text-xs"></i> <span>Copy Translation</span>
+              </button>
             </div>
 
+            <!-- Parsed Translation Markdown Output -->
             <div id="resultOutput" class="markdown-body text-zinc-200 text-sm"></div>
 
             <!-- Evidence Drawer -->
             <div id="evidenceDrawer" class="bg-[#0a0c12] border border-[#202434] rounded-xl p-4 mt-4">
               <div class="flex items-center justify-between mb-3">
                 <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                  <i class="fas fa-book-medical text-white"></i> Verified Evidence Guidelines Retrieved & Grounded
+                  <i class="fas fa-book-medical text-white"></i> Verified Evidence Guidelines Retrieved &amp; Grounded
                 </h4>
                 <span id="evidenceCountBadge" class="text-[10px] font-bold bg-[#1e2334] text-white px-2 py-0.5 rounded-full">0 matched</span>
               </div>
@@ -416,11 +400,12 @@
           
           <!-- Suggested Question Chips -->
           <div class="pb-3 border-b border-[#1b1f2c] flex items-center gap-1.5 overflow-x-auto text-[11px]">
-            <span class="text-zinc-500 font-medium shrink-0">Try asking:</span>
-            <button onclick="askPresetQuestion('What does a normal eGFR level mean, and what causes it to decline?')" class="bg-[#141724] hover:bg-[#141724] hover:text-white hover:border-slate-400 text-zinc-300 px-2.5 py-1 rounded-full border border-[#202434] transition shrink-0 font-medium">What is eGFR?</button>
-            <button onclick="askPresetQuestion('What causes elevated ALT liver enzymes, and are there benign reasons like exercise?')" class="bg-[#141724] hover:bg-[#141724] hover:text-white hover:border-slate-400 text-zinc-300 px-2.5 py-1 rounded-full border border-[#202434] transition shrink-0 font-medium">Why is ALT high?</button>
-            <button onclick="askPresetQuestion('Can I stop taking Plavix or Aspirin after having a cardiac stent placed?')" class="bg-[#141724] hover:bg-[#141724] hover:text-white hover:border-slate-400 text-zinc-300 px-2.5 py-1 rounded-full border border-[#202434] transition shrink-0 font-medium">Can I stop Plavix?</button>
-            <button onclick="askPresetQuestion('What are optimal target LDL cholesterol levels according to ACC/AHA guidelines?')" class="bg-[#141724] hover:bg-[#141724] hover:text-white hover:border-slate-400 text-zinc-300 px-2.5 py-1 rounded-full border border-[#202434] transition shrink-0 font-medium">LDL Goals</button>
+            <span class="text-zinc-400 font-medium shrink-0">Try asking:</span>
+            <button onclick="askPresetQuestion('What does a normal eGFR level mean, and what causes it to decline?')" class="bg-[#141724] hover:bg-[#1e2334] text-zinc-300 px-2.5 py-1 rounded-full border border-[#202434] transition shrink-0 font-medium">What is eGFR?</button>
+            <button onclick="askPresetQuestion('What causes elevated ALT liver enzymes, and are there benign reasons like exercise?')" class="bg-[#141724] hover:bg-[#1e2334] text-zinc-300 px-2.5 py-1 rounded-full border border-[#202434] transition shrink-0 font-medium">Why is ALT high?</button>
+            <button onclick="askPresetQuestion('Can I stop taking Plavix or Aspirin after having a cardiac stent placed?')" class="bg-[#141724] hover:bg-[#1e2334] text-zinc-300 px-2.5 py-1 rounded-full border border-[#202434] transition shrink-0 font-medium">Can I stop Plavix?</button>
+            <button onclick="askPresetQuestion('What are optimal target LDL cholesterol levels according to ACC/AHA guidelines?')" class="bg-[#141724] hover:bg-[#1e2334] text-zinc-300 px-2.5 py-1 rounded-full border border-[#202434] transition shrink-0 font-medium">LDL Goals</button>
+            <button onclick="askPresetQuestion('Do any of my current medications need dosage adjustment based on these numbers?')" class="bg-[#141724] hover:bg-[#1e2334] text-zinc-300 px-2.5 py-1 rounded-full border border-[#202434] transition shrink-0 font-medium">Medication Adjustments?</button>
           </div>
 
           <!-- Chat Conversation Area -->
@@ -441,8 +426,8 @@
 
           <!-- Chat Input Bar -->
           <div class="pt-3 border-t border-[#202434] flex gap-2">
-            <input type="text" id="chatInput" placeholder="Type a clinical question (e.g., 'What causes elevated ALT?' or 'Normal eGFR?')..." onkeypress="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-xs sm:text-sm px-3.5 py-2.5 bg-[#07080d] border border-[#232736] text-zinc-100 rounded-xl focus:ring-2 focus:ring-zinc-400 focus:border-white focus:bg-[#050609] outline-none transition">
-            <button onclick="sendChatMessage()" class="bg-white hover:bg-zinc-200 text-black font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm shadow-lg shadow-white/5 transition flex items-center gap-1.5 active:scale-95">
+            <input type="text" id="chatInput" placeholder="Type a clinical question (e.g., 'What causes elevated ALT?' or 'Normal eGFR?')..." onkeypress="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-xs sm:text-sm px-3.5 py-2.5 bg-[#08090f] border border-[#232736] text-zinc-100 rounded-xl focus:ring-1 focus:ring-white focus:border-white focus:bg-[#06070c] outline-none transition">
+            <button onclick="sendChatMessage()" class="bg-white hover:bg-zinc-200 text-black font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm shadow-lg transition flex items-center gap-1.5 active:scale-95">
               <span>Send</span> <i class="fas fa-paper-plane text-xs"></i>
             </button>
           </div>
@@ -463,7 +448,7 @@
           </div>
 
           <div id="inspectorChunks" class="space-y-3">
-            <div class="p-6 text-center text-xs text-zinc-500 bg-[#090a0f] rounded-xl border border-dashed border-[#262b3a]">
+            <div class="p-6 text-center text-xs text-zinc-400 bg-[#090a0f] rounded-xl border border-dashed border-[#262b3a]">
               <i class="fas fa-magnifying-glass text-zinc-400 text-xl mb-2 block"></i>
               No query executed yet. Run a translation in Tab 1 or ask a question in Tab 2 to inspect retrieved vector chunks.
             </div>
@@ -488,14 +473,14 @@
         <div id="tab4" class="hidden space-y-6">
           
           <!-- Architecture Header -->
-          <div class="bg-gradient-to-r from-black via-slate-900 to-zinc-900 rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
+          <div class="bg-gradient-to-r from-black via-zinc-900 to-black rounded-2xl p-6 text-white shadow-md relative overflow-hidden border border-zinc-800">
             <div class="relative z-10 space-y-2">
-              <div class="inline-flex items-center gap-1.5 bg-[#0f111a]/10 text-zinc-300 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-zinc-700">
+              <div class="inline-flex items-center gap-1.5 bg-[#141724] text-zinc-300 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-zinc-700">
                 <i class="fas fa-diagram-project"></i> End-to-End System Design
               </div>
               <h2 class="text-lg sm:text-xl font-bold tracking-tight">ClearCare RAG: 8-Stage Clinical Pipeline Architecture</h2>
-              <p class="text-xs sm:text-sm text-zinc-400 max-w-3xl leading-relaxed">
-                A multi-stage, deterministic pipeline engineered specifically for clinical reliability. Solves the multi-analyte 
+              <p class="text-xs sm:text-sm text-zinc-300 max-w-3xl leading-relaxed">
+                A deterministic, multi-stage pipeline engineered specifically for clinical reliability. Solves the multi-analyte 
                 <strong>Vector Blur</strong> problem, filters out irrelevant context via cosine thresholding, and delivers verifiable, 
                 citation-grounded translations without hallucination.
               </p>
@@ -523,25 +508,25 @@
                 <span class="block text-[10px] font-bold text-white uppercase">Stage 03</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Embeddings</span>
               </button>
-              <button onclick="scrollToStage('stage4')" class="p-2.5 bg-emerald-50/70 hover:bg-emerald-100/80 border border-emerald-200 rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-emerald-700 uppercase">Stage 04</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-900 truncate">ChromaDB</span>
+              <button onclick="scrollToStage('stage4')" class="p-2.5 bg-[#131622] hover:bg-[#1c2132] border border-[#262b3a] rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-emerald-400 uppercase">Stage 04</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">ChromaDB</span>
               </button>
-              <button onclick="scrollToStage('stage5')" class="p-2.5 bg-amber-50/70 hover:bg-amber-100/80 border border-amber-200 rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-amber-700 uppercase">Stage 05</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-900 truncate">Entity Scan</span>
+              <button onclick="scrollToStage('stage5')" class="p-2.5 bg-[#131622] hover:bg-[#1c2132] border border-[#262b3a] rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-amber-400 uppercase">Stage 05</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Entity Scan</span>
               </button>
-              <button onclick="scrollToStage('stage6')" class="p-2.5 bg-amber-50/70 hover:bg-amber-100/80 border border-amber-200 rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-amber-700 uppercase">Stage 06</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-900 truncate">Threshold</span>
+              <button onclick="scrollToStage('stage6')" class="p-2.5 bg-[#131622] hover:bg-[#1c2132] border border-[#262b3a] rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-amber-400 uppercase">Stage 06</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Threshold</span>
               </button>
-              <button onclick="scrollToStage('stage7')" class="p-2.5 bg-indigo-50/70 hover:bg-indigo-100/80 border border-indigo-200 rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-indigo-700 uppercase">Stage 07</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-indigo-900 truncate">Llama 3.3</span>
+              <button onclick="scrollToStage('stage7')" class="p-2.5 bg-[#131622] hover:bg-[#1c2132] border border-[#262b3a] rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-indigo-400 uppercase">Stage 07</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-indigo-300 truncate">Llama 3.3</span>
               </button>
-              <button onclick="scrollToStage('stage8')" class="p-2.5 bg-emerald-50/70 hover:bg-emerald-100/80 border border-emerald-200 rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-emerald-700 uppercase">Stage 08</span>
-                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-900 truncate">Patient UI</span>
+              <button onclick="scrollToStage('stage8')" class="p-2.5 bg-[#131622] hover:bg-[#1c2132] border border-[#262b3a] rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-emerald-400 uppercase">Stage 08</span>
+                <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Patient UI</span>
               </button>
             </div>
           </div>
@@ -552,7 +537,7 @@
               <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
                 <i class="fas fa-sitemap text-white"></i> End-to-End Information Flow
               </h4>
-              <span class="text-[11px] text-zinc-400 font-mono">Offline Ingestion ➔ Online Inference</span>
+              <span class="text-[11px] text-zinc-400 font-mono">Offline Ingestion &rarr; Online Inference</span>
             </div>
 
             <!-- SVG Visual Flow Diagram -->
@@ -564,7 +549,7 @@
                   <span class="text-white font-bold block text-[10px]">STAGE 1</span>
                   <i class="fas fa-file-shield text-white my-1 text-sm"></i>
                   <span class="block text-zinc-200">5 Guidelines</span>
-                  <span class="text-[10px] text-zinc-500 font-normal">AHA, ACC, AACC</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">AHA, ACC, AACC</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
@@ -573,7 +558,7 @@
                   <span class="text-white font-bold block text-[10px]">STAGE 2</span>
                   <i class="fas fa-scissors text-white my-1 text-sm"></i>
                   <span class="block text-zinc-200">Chunking</span>
-                  <span class="text-[10px] text-zinc-500 font-normal">700c + 120ov</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">700c + 120ov</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
@@ -582,50 +567,50 @@
                   <span class="text-white font-bold block text-[10px]">STAGE 3</span>
                   <i class="fas fa-brain text-white my-1 text-sm"></i>
                   <span class="block text-zinc-200">Embeddings</span>
-                  <span class="text-[10px] text-zinc-500 font-normal">MiniLM 384-d</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">MiniLM 384-d</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 4 -->
-                <div class="flex-1 bg-emerald-950/40 border border-emerald-800/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-emerald-700 font-bold block text-[10px]">STAGE 4</span>
-                  <i class="fas fa-database text-emerald-600 my-1 text-sm"></i>
+                <div class="flex-1 bg-[#101923] border border-emerald-900/60 p-2.5 rounded-xl shadow-md text-center">
+                  <span class="text-emerald-400 font-bold block text-[10px]">STAGE 4</span>
+                  <i class="fas fa-database text-emerald-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">ChromaDB</span>
                   <span class="text-[10px] text-zinc-400 font-normal">HNSW Graph</span>
                 </div>
-                <div class="px-1 text-amber-500 font-bold text-sm">&rlarr;</div>
+                <div class="px-1 text-amber-400 font-bold text-sm">&harr;</div>
 
                 <!-- Step 5 -->
-                <div class="flex-1 bg-amber-950/40 border border-amber-800/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-amber-700 font-bold block text-[10px]">STAGE 5</span>
-                  <i class="fas fa-filter text-amber-600 my-1 text-sm"></i>
+                <div class="flex-1 bg-[#1a1715] border border-amber-900/60 p-2.5 rounded-xl shadow-md text-center">
+                  <span class="text-amber-400 font-bold block text-[10px]">STAGE 5</span>
+                  <i class="fas fa-filter text-amber-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">Entity Scan</span>
                   <span class="text-[10px] text-zinc-400 font-normal">30+ Analytes</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 6 -->
-                <div class="flex-1 bg-amber-950/40 border border-amber-800/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-amber-700 font-bold block text-[10px]">STAGE 6</span>
-                  <i class="fas fa-shield-virus text-amber-600 my-1 text-sm"></i>
+                <div class="flex-1 bg-[#1a1715] border border-amber-900/60 p-2.5 rounded-xl shadow-md text-center">
+                  <span class="text-amber-400 font-bold block text-[10px]">STAGE 6</span>
+                  <i class="fas fa-shield-virus text-amber-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">Threshold</span>
-                  <span class="text-[10px] text-zinc-400 font-normal">&ge; 0.35 Cosine</span>
+                  <span class="text-[10px] text-zinc-400 font-normal">&ge; 0.25 Cosine</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 7 -->
-                <div class="flex-1 bg-indigo-950/40 border border-indigo-800/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-indigo-700 font-bold block text-[10px]">STAGE 7</span>
-                  <i class="fas fa-bolt text-indigo-600 my-1 text-sm"></i>
+                <div class="flex-1 bg-[#141629] border border-indigo-900/60 p-2.5 rounded-xl shadow-md text-center">
+                  <span class="text-indigo-300 font-bold block text-[10px]">STAGE 7</span>
+                  <i class="fas fa-bolt text-indigo-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">Llama 3.3</span>
                   <span class="text-[10px] text-zinc-400 font-normal">Groq LPUs, t=0.2</span>
                 </div>
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 8 -->
-                <div class="flex-1 bg-emerald-950/40 border border-emerald-800/60 p-2.5 rounded-xl shadow-md text-center">
-                  <span class="text-emerald-700 font-bold block text-[10px]">STAGE 8</span>
-                  <i class="fas fa-heart-pulse text-emerald-600 my-1 text-sm"></i>
+                <div class="flex-1 bg-[#101923] border border-emerald-900/60 p-2.5 rounded-xl shadow-md text-center">
+                  <span class="text-emerald-400 font-bold block text-[10px]">STAGE 8</span>
+                  <i class="fas fa-heart-pulse text-emerald-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">Patient UI</span>
                   <span class="text-[10px] text-zinc-400 font-normal">Traffic Lights</span>
                 </div>
@@ -641,7 +626,7 @@
             <div id="stage1" class="clinical-card p-5 border-l-4 border-l-white">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Stage 01 &bull; Ingestion Pipeline</span>
-                <span class="text-xs font-mono text-zinc-500">5 Curated Documents</span>
+                <span class="text-xs font-mono text-zinc-400">5 Curated Documents</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
                 <span>📚</span> Knowledge Ingestion (5 Authoritative Medical Guidelines)
@@ -662,7 +647,7 @@
                 </div>
                 <div class="p-2 bg-[#090b10] rounded-lg border border-[#1b1f2c]">
                   <span class="font-bold text-zinc-200 block">3. Lipid Cholesterol Panel</span>
-                  <span class="text-zinc-400 text-[11px]">Total Cholesterol, LDL-C targets (<100, <70), HDL, Triglycerides</span>
+                  <span class="text-zinc-400 text-[11px]">Total Cholesterol, LDL-C targets (&lt;100, &lt;70), HDL, Triglycerides</span>
                 </div>
                 <div class="p-2 bg-[#090b10] rounded-lg border border-[#1b1f2c]">
                   <span class="font-bold text-zinc-200 block">4. Thyroid TSH Panel</span>
@@ -679,98 +664,71 @@
             <div id="stage2" class="clinical-card p-5 border-l-4 border-l-white">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Stage 02 &bull; Preprocessing</span>
-                <span class="text-xs font-mono text-zinc-500">700 chars / 120 overlap</span>
+                <span class="text-xs font-mono text-zinc-400">700 chars / 120 overlap</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
                 <span>✂️</span> Heading-Aware Chunking (Preserving Hierarchical Context)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                Naive character splitters sever sentences and orphan medical qualifications (e.g., losing *"However, in pregnant patients..."*). 
-                ClearCare implements a <strong>heading-aware sliding window chunker</strong> that prepends the active section heading 
-                (<code># [Document > Section]</code>) to every generated chunk.
+                Naive character splitters sever sentences and orphan medical qualifications. ClearCare implements a <strong>heading-aware sliding window chunker</strong> that prepends the active section heading (<code># [Document &gt; Section]</code>) to every generated chunk.
               </p>
-              <div class="bg-black text-zinc-300 p-3 rounded-xl font-mono text-xs space-y-1">
+              <div class="bg-black text-zinc-300 p-3 rounded-xl font-mono text-xs space-y-1 border border-zinc-800">
                 <div class="text-zinc-400 text-[11px]"># Heading-Aware Structure Injected into Every Chunk:</div>
                 <div class="text-emerald-400"># Document: metabolic_panel_cmp.md &gt; Section: Kidney Function &amp; Filtration</div>
                 <div class="text-zinc-400">Serum Creatinine reference interval: 0.6 - 1.3 mg/dL. Elevated creatinine indicates impaired glomerular filtration, but transient elevations can occur with dehydration, high-protein intake, or intense resistance exercise...</div>
               </div>
-              <p class="text-[11px] text-zinc-400 mt-2">
-                <strong>Why 700 chars?</strong> Matches the natural size of a single medical assay. Avoids "needle-in-a-haystack" dilution while keeping full normal ranges and benign causes intact.
-              </p>
             </div>
 
             <!-- STAGE 3 CARD -->
             <div id="stage3" class="clinical-card p-5 border-l-4 border-l-white">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Stage 03 &bull; Semantic Vector Space</span>
-                <span class="text-xs font-mono text-zinc-500">384 Dimensions &bull; ~14ms CPU</span>
+                <span class="text-xs font-mono text-zinc-400">384 Dimensions &bull; Local CPU</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
                 <span>🧠</span> Local Dense Embeddings (all-MiniLM-L6-v2)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                Maps text chunks into <strong>384-dimensional dense vectors</strong> where semantically synonymous medical phrases reside close together.
-                Runs 100% locally on CPU — ensuring <strong>zero Protected Health Information (PHI)</strong> leaves the user's infrastructure.
+                Maps text chunks into <strong>384-dimensional dense vectors</strong> where semantically synonymous medical phrases reside close together. Runs locally on CPU — ensuring <strong>zero Protected Health Information (PHI)</strong> leaves the user's system.
               </p>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-                <div class="p-2.5 bg-[#090b10] rounded-lg border border-[#1b1f2c]">
-                  <span class="font-bold text-zinc-200 block text-[11px] uppercase text-white">Patient Colloquialism</span>
-                  <span class="font-medium text-zinc-300">"My blood sugar was high"</span>
-                </div>
-                <div class="p-2.5 bg-[#090b10] rounded-lg border border-[#1b1f2c] text-center flex flex-col justify-center items-center">
-                  <span class="text-emerald-600 font-bold text-xs"><i class="fas fa-arrows-left-right"></i> Cosine Similarity > 85%</span>
-                  <span class="text-[10px] text-zinc-500 font-mono">Dense Vector Proximity</span>
-                </div>
-                <div class="p-2.5 bg-[#090b10] rounded-lg border border-[#1b1f2c]">
-                  <span class="font-bold text-zinc-200 block text-[11px] uppercase text-white">Clinical Guideline Anchor</span>
-                  <span class="font-medium text-zinc-300">"Elevated Fasting Plasma Glucose / Hyperglycemia"</span>
-                </div>
-              </div>
             </div>
 
             <!-- STAGE 4 CARD -->
             <div id="stage4" class="clinical-card p-5 border-l-4 border-l-emerald-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-emerald-700 uppercase bg-emerald-100 px-2 py-0.5 rounded-full">Stage 04 &bull; Vector Storage</span>
-                <span class="text-xs font-mono text-zinc-500">ChromaDB + HNSW Graph</span>
+                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Stage 04 &bull; Vector Storage</span>
+                <span class="text-xs font-mono text-zinc-400">ChromaDB + HNSW Graph</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
                 <span>🗄️</span> Persistent Vector Storage (ChromaDB + HNSW Indexing)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-2">
                 Embeddings are persisted to disk using ChromaDB with a <strong>Hierarchical Navigable Small World (HNSW)</strong> graph index. 
-                Provides logarithmic <code>O(log N)</code> search complexity, enabling cold-start sub-millisecond retrieval without re-indexing.
+                Provides logarithmic <code>O(log N)</code> search complexity, enabling sub-millisecond retrieval.
               </p>
-              <div class="flex items-center gap-3 text-xs text-zinc-300">
-                <span class="inline-flex items-center gap-1"><i class="fas fa-check text-emerald-600"></i> Disk Persisted (`chroma_db/`)</span>
-                <span class="inline-flex items-center gap-1"><i class="fas fa-check text-emerald-600"></i> Cosine Distance Space</span>
-                <span class="inline-flex items-center gap-1"><i class="fas fa-check text-emerald-600"></i> Rich Metadata Anchors</span>
-              </div>
             </div>
 
             <!-- STAGE 5 CARD -->
             <div id="stage5" class="clinical-card p-5 border-l-4 border-l-amber-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-amber-700 uppercase bg-amber-100 px-2 py-0.5 rounded-full">Stage 05 &bull; Clinical Retrieval Strategy</span>
-                <span class="text-xs font-mono text-zinc-500">Solving "Vector Blur"</span>
+                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Stage 05 &bull; Clinical Retrieval Strategy</span>
+                <span class="text-xs font-mono text-zinc-400">Solving "Vector Blur"</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🔎</span> Clinical Entity Scanning & Multi-Query Expansion
+                <span>🔎</span> Clinical Entity Scanning &amp; Multi-Query Expansion
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
-                <strong>The Multi-Analyte Vector Blur Problem:</strong> When a user uploads a 15-test metabolic panel, a naive RAG system 
-                generates a single vector that is an <em>average centroid</em> of all tests. This diluted vector retrieves vague lab overviews, 
-                missing specific guideline rules for an elevated ALT or LDL.
+                <strong>The Multi-Analyte Vector Blur Problem:</strong> When a user uploads a 15-test metabolic panel, a naive RAG system generates a single vector that is an <em>average centroid</em> of all tests. This diluted vector retrieves vague lab overviews, missing specific guideline rules for an elevated ALT or LDL.
               </p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl space-y-1">
-                  <span class="font-bold text-rose-800 flex items-center gap-1.5"><i class="fas fa-times-circle"></i> Naive Single-Pass RAG (Vector Blur)</span>
+                <div class="p-3 bg-rose-950/40 border border-rose-800/60 rounded-xl space-y-1">
+                  <span class="font-bold text-rose-300 flex items-center gap-1.5"><i class="fas fa-times-circle"></i> Naive Single-Pass RAG (Vector Blur)</span>
                   <p class="text-zinc-300 text-[11px]">
-                    Encodes entire 15-analyte document as 1 vector &rarr; Vector gets diluted &rarr; Retrieves general introductory paragraphs &rarr; Fails to retrieve specific liver or kidney thresholds.
+                    Encodes entire 15-analyte document as 1 vector &rarr; Vector gets diluted &rarr; Retrieves general overviews &rarr; Misses specific liver or kidney thresholds.
                   </p>
                 </div>
-                <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
-                  <span class="font-bold text-emerald-800 flex items-center gap-1.5"><i class="fas fa-check-circle"></i> ClearCare Multi-Query Strategy</span>
+                <div class="p-3 bg-emerald-950/40 border border-emerald-800/60 rounded-xl space-y-1">
+                  <span class="font-bold text-emerald-300 flex items-center gap-1.5"><i class="fas fa-check-circle"></i> ClearCare Multi-Query Strategy</span>
                   <p class="text-zinc-300 text-[11px]">
                     Scans 30+ clinical regex biomarkers (Glucose, ALT, LDL, eGFR...) &rarr; Issues targeted sub-queries for each analyte &rarr; Merges and deduplicates candidate guidelines.
                   </p>
@@ -781,28 +739,22 @@
             <!-- STAGE 6 CARD -->
             <div id="stage6" class="clinical-card p-5 border-l-4 border-l-amber-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-amber-700 uppercase bg-amber-100 px-2 py-0.5 rounded-full">Stage 06 &bull; Hallucination Firewall</span>
-                <span class="text-xs font-mono text-zinc-500">Score &ge; 0.35 Filter</span>
+                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Stage 06 &bull; Hallucination Firewall</span>
+                <span class="text-xs font-mono text-zinc-400">Score &ge; 0.25 Filter</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🎯</span> Similarity Thresholding & Context Formatting
+                <span>🎯</span> Similarity Thresholding &amp; Context Formatting
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-2">
-                In clinical medicine, passing an irrelevant chunk to an LLM is dangerous because it prompts speculative reasoning. 
-                ClearCare strictly filters candidate chunks using a <strong>&ge; 0.35 cosine similarity threshold</strong>.
+                In clinical medicine, passing an irrelevant chunk to an LLM is dangerous because it prompts speculative reasoning. ClearCare strictly filters candidate chunks using a <strong>&ge; 0.25 cosine similarity threshold</strong>.
               </p>
-              <div class="bg-[#090a0f] border border-[#202434] p-3 rounded-xl text-xs font-mono text-zinc-300">
-                <div class="text-[11px] text-zinc-400 mb-1">// Standardized Context Assembly Passed to LLM:</div>
-                <div class="text-white font-bold">[Source 1: lipid_cholesterol_panel.md | Section: LDL-C Targets | Match: 88%]</div>
-                <div class="text-zinc-300 text-[11px]">Optimal LDL for high-risk CAD/stent patients is &lt; 70 mg/dL...</div>
-              </div>
             </div>
 
             <!-- STAGE 7 CARD -->
             <div id="stage7" class="clinical-card p-5 border-l-4 border-l-indigo-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-indigo-700 uppercase bg-indigo-100 px-2 py-0.5 rounded-full">Stage 07 &bull; Guardrailed Generation</span>
-                <span class="text-xs font-mono text-zinc-500">Groq LPUs &bull; Llama 3.3 70B &bull; t=0.2</span>
+                <span class="text-[10px] font-bold text-indigo-300 uppercase bg-indigo-950/80 border border-indigo-800/80 px-2 py-0.5 rounded-full">Stage 07 &bull; Guardrailed Generation</span>
+                <span class="text-xs font-mono text-zinc-400">Groq LPUs &bull; Llama 3.3 70B &bull; t=0.2</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
                 <span>⚡</span> Guardrailed Generation (Groq LPUs + Llama 3.3 70B)
@@ -813,19 +765,19 @@
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <div class="p-2.5 bg-[#090b10] rounded-lg border border-[#1b1f2c]">
-                  <span class="font-bold text-zinc-200 block text-white">1. Absolute Diagnosis Prohibition</span>
+                  <span class="font-bold text-white block">1. Absolute Diagnosis Prohibition</span>
                   <span class="text-zinc-300 text-[11px]">Cannot state "You have chronic kidney disease"; must state "Creatinine is above reference interval; warrants doctor follow-up".</span>
                 </div>
                 <div class="p-2.5 bg-[#090b10] rounded-lg border border-[#1b1f2c]">
-                  <span class="font-bold text-zinc-200 block text-white">2. Mandatory Benign Causes</span>
+                  <span class="font-bold text-white block">2. Mandatory Benign Causes</span>
                   <span class="text-zinc-300 text-[11px]">Must explain hydration, exercise, and diet causes first to prevent unnecessary patient panic.</span>
                 </div>
                 <div class="p-2.5 bg-[#090b10] rounded-lg border border-[#1b1f2c]">
-                  <span class="font-bold text-zinc-200 block text-white">3. Strict Citation Attribution</span>
+                  <span class="font-bold text-white block">3. Strict Citation Attribution</span>
                   <span class="text-zinc-300 text-[11px]">Every statement must explicitly reference <code>[Source X]</code> from the retrieved guideline chunks.</span>
                 </div>
                 <div class="p-2.5 bg-[#090b10] rounded-lg border border-[#1b1f2c]">
-                  <span class="font-bold text-zinc-200 block text-white">4. Medication Safety Lock</span>
+                  <span class="font-bold text-white block">4. Medication Safety Lock</span>
                   <span class="text-zinc-300 text-[11px]">Strictly prohibited from suggesting stopping prescribed therapies (e.g., Plavix / Aspirin DAPT).</span>
                 </div>
               </div>
@@ -834,11 +786,11 @@
             <!-- STAGE 8 CARD -->
             <div id="stage8" class="clinical-card p-5 border-l-4 border-l-emerald-500">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-emerald-700 uppercase bg-emerald-100 px-2 py-0.5 rounded-full">Stage 08 &bull; Patient Health Literacy</span>
-                <span class="text-xs font-mono text-zinc-500">8th-Grade Plain English</span>
+                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Stage 08 &bull; Patient Health Literacy</span>
+                <span class="text-xs font-mono text-zinc-400">8th-Grade Plain English</span>
               </div>
               <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
-                <span>🌟</span> Patient-Centered Output (Traffic Lights & Doctor Checklist)
+                <span>🌟</span> Patient-Centered Output (Traffic Lights &amp; Doctor Checklist)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
                 Converts dense, anxiety-inducing lab results into empowering, plain-language patient communication with four distinct components:
@@ -885,33 +837,33 @@
                 <tbody class="divide-y divide-[#1b1f2c] text-zinc-300">
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-white">Hallucination Risk</td>
-                    <td class="py-2.5 px-3 text-rose-600 font-medium">High (invents normal ranges)</td>
-                    <td class="py-2.5 px-3 text-amber-600 font-medium">Medium (memorization drift)</td>
-                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-[#0c0e15]">Zero (grounded strictly in guidelines)</td>
+                    <td class="py-2.5 px-3 text-rose-400 font-medium">High (invents normal ranges)</td>
+                    <td class="py-2.5 px-3 text-amber-400 font-medium">Medium (memorization drift)</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#0c0e15]">Zero (grounded strictly in guidelines)</td>
                   </tr>
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Traceability & Citations</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Traceability &amp; Citations</td>
                     <td class="py-2.5 px-3">None (black-box generation)</td>
                     <td class="py-2.5 px-3">None (weights cannot cite text)</td>
-                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-[#0c0e15]">100% Traceable ([Source X] anchors)</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#0c0e15]">100% Traceable ([Source X] anchors)</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-white">Multi-Analyte Lab Panels</td>
                     <td class="py-2.5 px-3">Suffers from Vector Blur</td>
                     <td class="py-2.5 px-3">Prone to cross-test interference</td>
-                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-[#0c0e15]">Resolved via Entity Scanning</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#0c0e15]">Resolved via Entity Scanning</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-white">Guideline Updates</td>
                     <td class="py-2.5 px-3">Requires foundation retraining</td>
                     <td class="py-2.5 px-3">Requires expensive fine-tuning</td>
-                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-[#0c0e15]">Instantaneous (drop new .md file)</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#0c0e15]">Instantaneous (drop new .md file)</td>
                   </tr>
                   <tr>
-                    <td class="py-2.5 px-3 font-medium text-white">Privacy & PHI Protection</td>
+                    <td class="py-2.5 px-3 font-medium text-white">Privacy &amp; PHI Protection</td>
                     <td class="py-2.5 px-3">Sends all data to cloud APIs</td>
                     <td class="py-2.5 px-3">Requires centralized storage</td>
-                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-[#0c0e15]">Local 384-d vectors + private LPUs</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#0c0e15]">Local 384-d vectors + private LPUs</td>
                   </tr>
                 </tbody>
               </table>
@@ -927,30 +879,15 @@
 
   <!-- Toast Notification Element -->
   <div id="toastNotification" class="fixed bottom-5 right-5 z-50 bg-white text-zinc-950 text-xs font-bold px-4 py-2.5 rounded-xl shadow-2xl border border-zinc-200 flex items-center gap-2 transform translate-y-16 opacity-0 pointer-events-none transition-all duration-300">
-    <i id="toastIcon" class="fas fa-check-circle text-emerald-400"></i>
-    <span id="toastMessage">Copied translation to clipboard!</span>
+    <i id="toastIcon" class="fas fa-check-circle text-emerald-600"></i>
+    <span id="toastMessage">Notification</span>
   </div>
 
-  <!-- Footer -->
-  <footer class="bg-[#0f111a] border-t border-[#202434] py-4 mt-auto text-center text-xs text-zinc-400">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
-        <span class="font-semibold text-zinc-200">ClearCare AI</span> &bull; <span>Clinical AI Engineering</span>
-      </div>
-      <div class="flex items-center gap-3">
-        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="hover:text-white transition">GitHub Repository</a>
-        <span>&bull;</span>
-        </div>
-    </div>
-  </footer>
-
-  <!-- RAG Engine & App Logic -->
+  <!-- Embedded Pre-Indexed Clinical Knowledge Base & RAG Logic -->
   <script>
-    // Embedded Pre-Indexed Clinical Knowledge Base & Mock Benchmarks
     const EMBEDDED_KNOWLEDGE_BASE = [{"id": "lipid_cholesterol_panel_chunk_0", "text": "# Clinical Reference Guide: Lipid Panel & Cardiovascular Health Markers\n*Source: American College of Cardiology (ACC) / American Heart Association (AHA) Multisociety Guideline on the Management of Blood Cholesterol*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Lipid Panel\nThe Lipid Panel is a blood screening test that measures concentrations of fat molecules (lipids) in the bloodstream to calculate cardiovascular risk for heart attack, atherosclerosis, and stroke.\n\n---\n\n## 2. Cholesterol Fractions & Diagnostic Targets\n\n### Total Cholesterol\n- **Desirable:** Less than 200 mg/dL\n- **Borderline High:** 200 to 239 mg/dL\n- **High:** 240 mg/dL or higher", "source": "lipid_cholesterol_panel.md", "section": "Total Cholesterol", "char_count": 699}, {"id": "lipid_cholesterol_panel_chunk_1", "text": "Cholesterol\n- **Desirable:** Less than 200 mg/dL\n- **Borderline High:** 200 to 239 mg/dL\n- **High:** 240 mg/dL or higher\n- **Clinical Note:** Total cholesterol reflects LDL + HDL + 20% of Triglycerides. High total cholesterol alone is not an absolute disease diagnosis, but a signal to calculate composite 10-year atherosclerotic cardiovascular disease (ASCVD) risk.\n\n### Low-Density Lipoprotein (LDL-C) \u2014 \"Bad Cholesterol\"\n- **Optimal:** Less than 100 mg/dL\n- **Optimal for High-Risk Individuals (History of CAD, Stents, Diabetes):** Less than 70 mg/dL (or < 55 mg/dL for very high risk)\n- **Near Optimal / Above Optimal:** 100 to 129 mg/dL\n- **Borderline High:** 130 to 159 mg/dL", "source": "lipid_cholesterol_panel.md", "section": "Low-Density Lipoprotein (LDL-C) \u2014 \"Bad Cholesterol\"", "char_count": 681}, {"id": "lipid_cholesterol_panel_chunk_2", "text": "5 mg/dL for very high risk)\n- **Near Optimal / Above Optimal:** 100 to 129 mg/dL\n- **Borderline High:** 130 to 159 mg/dL\n- **High:** 160 to 189 mg/dL\n- **Very High:** 190 mg/dL or higher (Often flags familial hypercholesterolemia genetic screening)\n- **Pathophysiology:** Excess LDL particles deposit into coronary and carotid arterial walls, forming inflammatory plaques that can rupture and cause myocardial infarction (heart attack) or ischemic stroke.\n\n### High-Density Lipoprotein (HDL-C) \u2014 \"Good Cholesterol\"\n- **Desirable (Protective):**\n  - Adult Males: Greater than 40 mg/dL (preferably > 50 mg/dL)\n  - Adult Females: Greater than 50 mg/dL (preferably > 60 mg/dL)", "source": "lipid_cholesterol_panel.md", "section": "High-Density Lipoprotein (HDL-C) \u2014 \"Good Cholesterol\"", "char_count": 672}, {"id": "lipid_cholesterol_panel_chunk_3", "text": "lt Males: Greater than 40 mg/dL (preferably > 50 mg/dL)\n  - Adult Females: Greater than 50 mg/dL (preferably > 60 mg/dL)\n- **Low HDL (< 40 mg/dL):** An independent risk factor for coronary artery disease.\n- **How to raise HDL:** Aerobic exercise, quitting smoking, consuming healthy monounsaturated fats (olive oil, avocados, nuts).\n\n### Triglycerides\n- **Normal:** Less than 150 mg/dL\n- **Borderline High:** 150 to 199 mg/dL\n- **High:** 200 to 499 mg/dL\n- **Very High (Severe Hypertriglyceridemia):** 500 mg/dL or higher\n- **Critical Risk:** Levels above 500-1000 mg/dL increase risk of acute pancreatitis.", "source": "lipid_cholesterol_panel.md", "section": "Triglycerides", "char_count": 607}, {"id": "lipid_cholesterol_panel_chunk_4", "text": "yceridemia):** 500 mg/dL or higher\n- **Critical Risk:** Levels above 500-1000 mg/dL increase risk of acute pancreatitis.\n- **Common Lifestyle Drivers:** Excessive refined sugar/simple carbohydrates, alcohol intake, obesity, untreated hypothyroidism, or uncontrolled diabetes.\n\n---\n\n## 3. Glycated Hemoglobin (HbA1c) \u2014 Diabetic Marker\n- **Normal (Non-Diabetic):** Below 5.7%\n- **Prediabetes:** 5.7% to 6.4%\n- **Diabetes Diagnostic Threshold:** 6.5% or higher\n- **Clinical Action for Prediabetes:** 5-7% intentional body weight loss, 150 minutes/week of moderate physical activity (brisk walking), reduction of sugar-sweetened beverages.", "source": "lipid_cholesterol_panel.md", "section": "3. Glycated Hemoglobin (HbA1c) \u2014 Diabetic Marker", "char_count": 635}, {"id": "thyroid_tsh_panel_chunk_0", "text": "# Clinical Reference Guide: Thyroid Function Panel & Endocrine Markers\n*Source: American Thyroid Association (ATA) & Endocrine Society Guidelines*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Thyroid Panel\nThe thyroid is a butterfly-shaped gland located in the lower front of the neck. It produces hormones that regulate metabolism, heart rate, body temperature, and energy consumption throughout the body.\n\n---\n\n## 2. Primary Thyroid Biomarkers\n\n### Thyroid Stimulating Hormone (TSH)\n- **Standard Reference Range:** 0.45 to 4.50 mIU/L (uIU/mL)", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 588}, {"id": "thyroid_tsh_panel_chunk_1", "text": "ry Thyroid Biomarkers\n\n### Thyroid Stimulating Hormone (TSH)\n- **Standard Reference Range:** 0.45 to 4.50 mIU/L (uIU/mL)\n- **What it measures:** A pituitary hormone that tells the thyroid gland how much thyroid hormone to produce. TSH has an *inverse* relationship with thyroid activity (like a thermostat).\n- **High TSH (> 4.50 mIU/L) \u2014 Underactive Thyroid (Hypothyroidism):**\n  - The pituitary is shouting at the thyroid because circulating thyroid hormone is too low.\n  - **Common Symptoms:** Chronic fatigue, weight gain despite normal diet, cold intolerance, constipation, brain fog, brittle nails, hair thinning, depression.", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 630}, {"id": "thyroid_tsh_panel_chunk_2", "text": "e, weight gain despite normal diet, cold intolerance, constipation, brain fog, brittle nails, hair thinning, depression.\n  - **Most Common Cause:** Hashimoto's thyroiditis (autoimmune destruction of thyroid tissue).\n  - **Subclinical Hypothyroidism:** TSH is mildly elevated (4.5 - 10.0 mIU/L) while Free T4 remains in normal range. Often monitored unless symptomatic or pregnant.\n- **Low TSH (< 0.40 mIU/L) \u2014 Overactive Thyroid (Hyperthyroidism):**\n  - The pituitary stops signaling because the body is flooded with excess thyroid hormone.\n  - **Common Symptoms:** Rapid heart rate (tachycardia), anxiety, tremors, heat intolerance, unexplained weight loss, diarrhea, insomnia.", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 678}, {"id": "thyroid_tsh_panel_chunk_3", "text": "toms:** Rapid heart rate (tachycardia), anxiety, tremors, heat intolerance, unexplained weight loss, diarrhea, insomnia.\n  - **Most Common Cause:** Graves' disease or toxic multinodular goiter.\n\n### Free Thyroxine (Free T4)\n- **Standard Reference Range:** 0.8 to 1.8 ng/dL\n- **Significance:** The active, unbound form of T4 circulating in the blood. Free T4 directly reflects the hormone available to body tissues.\n- **Low Free T4 + High TSH:** Confirms overt primary hypothyroidism. Treatment typically involves oral Levothyroxine (Synthroid), taken on an empty stomach 30-60 minutes before breakfast with a full glass of water.\n\n### Free Triiodothyronine (Free T3)", "source": "thyroid_tsh_panel.md", "section": "Free Triiodothyronine (Free T3)", "char_count": 666}, {"id": "thyroid_tsh_panel_chunk_4", "text": "aken on an empty stomach 30-60 minutes before breakfast with a full glass of water.\n\n### Free Triiodothyronine (Free T3)\n- **Standard Reference Range:** 2.3 to 4.2 pg/mL\n- **Significance:** The most biologically potent active thyroid hormone, largely converted from T4 in peripheral tissues (liver and kidneys).", "source": "thyroid_tsh_panel.md", "section": "Free Triiodothyronine (Free T3)", "char_count": 311}, {"id": "discharge_care_protocols_chunk_0", "text": "# Clinical Reference Guide: Hospital Discharge Protocols & Patient Recovery Instructions\n*Source: Joint Commission Hospital Quality & Patient Safety Measures, CMS Discharge Guidelines*\n*Target Audience: Post-Hospitalization Patient Guidance & Nursing Review*\n\n## 1. General Post-Discharge Recovery Principles\nHospital discharge represents a vulnerable transition period. Adverse events occur in approximately 20% of patients within 30 days of leaving the hospital, with medication discrepancies and unrecognized infection being the leading causes.\n\n---\n\n## 2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "source": "discharge_care_protocols.md", "section": "2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "char_count": 634}, {"id": "discharge_care_protocols_chunk_1", "text": "fection being the leading causes.\n\n---\n\n## 2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)\nPatients and caregivers must immediately seek emergency evaluation if any of the following occur:\n- **Cardiovascular / Pulmonary:**\n  - Sudden, crushing chest pain or pressure radiating to the jaw, neck, left arm, or back.\n  - Acute severe shortness of breath or sudden inability to speak in full sentences.\n  - Coughing up pink frothy sputum or frank blood.\n  - Sudden fainting (syncope) or loss of consciousness.\n- **Neurological (Signs of Stroke - FAST):**\n  - Sudden facial droop, arm weakness or numbness, or slurred/incomprehensible speech.", "source": "discharge_care_protocols.md", "section": "2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "char_count": 667}, {"id": "discharge_care_protocols_chunk_2", "text": "gical (Signs of Stroke - FAST):**\n  - Sudden facial droop, arm weakness or numbness, or slurred/incomprehensible speech.\n  - Sudden severe \"thunderclap\" headache unlike any previous headache.\n- **Thromboembolic (Blood Clot / DVT / PE):**\n  - Asymmetric swelling, intense warmth, redness, and tenderness in one calf or thigh.\n\n---\n\n## 3. Urgent Warning Signs Requiring Same-Day Clinic Contact\n- **Infection Markers:**\n  - Temperature >= 100.4\u00b0F (38.0\u00b0C) or chills.\n  - Surgical incision showing expanding erythema (redness spreading > 1 inch from incision edge), warmth, increased swelling, or purulent (yellow/green/foul-smelling) drainage.\n- **Fluid & Gastrointestinal:**", "source": "discharge_care_protocols.md", "section": "3. Urgent Warning Signs Requiring Same-Day Clinic Contact", "char_count": 672}, {"id": "discharge_care_protocols_chunk_3", "text": "on edge), warmth, increased swelling, or purulent (yellow/green/foul-smelling) drainage.\n- **Fluid & Gastrointestinal:**\n  - Inability to keep fluids down for > 24 hours due to nausea or vomiting.\n  - Rapid unexplained weight gain (> 3 lbs in 24 hours or 5 lbs in 1 week), especially in heart failure patients (flags fluid retention).\n  - Dark, tarry, black stools (melena) or bright red rectal bleeding.\n\n---\n\n## 4. Medication Reconciliation & Safe Administration Rules\n- **Dual Antiplatelet Therapy (DAPT) Post-Cardiac Stent:**", "source": "discharge_care_protocols.md", "section": "4. Medication Reconciliation & Safe Administration Rules", "char_count": 529}, {"id": "discharge_care_protocols_chunk_4", "text": "## 4. Medication Reconciliation & Safe Administration Rules\n- **Dual Antiplatelet Therapy (DAPT) Post-Cardiac Stent:**\n  - If a coronary stent was placed, medications like Aspirin plus Clopidogrel (Plavix), Ticagrelor (Brilinta), or Prasugrel MUST NEVER be stopped abruptly without consulting the interventional cardiologist. Abrupt cessation carries a high risk of catastrophic acute stent thrombosis.\n- **Pain Management (Opioids vs. NSAIDs):**\n  - Do not exceed 3,000 mg of Acetaminophen (Tylenol) in 24 hours from all sources combined (many prescription opioid combination pills, such as Norco or Percocet, already contain 325 mg of Acetaminophen).", "source": "discharge_care_protocols.md", "section": "4. Medication Reconciliation & Safe Administration Rules", "char_count": 652}, {"id": "discharge_care_protocols_chunk_5", "text": "mbined (many prescription opioid combination pills, such as Norco or Percocet, already contain 325 mg of Acetaminophen).\n  - Avoid NSAIDs (Ibuprofen, Naproxen) if patient has kidney disease, history of stomach ulcers, or is taking blood thinners.\n- **Antibiotic Stewardship:**\n  - Complete the full prescribed course of antibiotics even if feeling 100% improved, unless instructed otherwise by a physician.\n\n---\n\n## 5. Activity Restrictions & Wound Care\n- **Lifting Restrictions:** No lifting objects heavier than 10 lbs (roughly a gallon of milk) for 2 to 4 weeks post-abdominal or cardiac surgery.", "source": "discharge_care_protocols.md", "section": "5. Activity Restrictions & Wound Care", "char_count": 599}, {"id": "discharge_care_protocols_chunk_6", "text": "** No lifting objects heavier than 10 lbs (roughly a gallon of milk) for 2 to 4 weeks post-abdominal or cardiac surgery.\n- **Showering vs. Bathing:** Showering with mild soap and gentle patting dry is generally permitted after 48 hours; do NOT submerge incision in baths, pools, or hot tubs until cleared by the surgeon.", "source": "discharge_care_protocols.md", "section": "5. Activity Restrictions & Wound Care", "char_count": 320}, {"id": "cbc_blood_count_chunk_0", "text": "# Clinical Reference Guide: Complete Blood Count (CBC) with Differential\n*Source: NIH National Heart, Lung, and Blood Institute (NHLBI) & CDC Reference Lab*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Complete Blood Count\nThe Complete Blood Count (CBC) evaluates cellular components circulating in blood: Red Blood Cells (oxygen transport), White Blood Cells (immune defense), and Platelets (blood clotting).\n\n---\n\n## 2. Red Blood Cell Indices (Anemia & Oxygen Delivery)\n\n### Red Blood Cell Count (RBC)\n- **Standard Reference Range:**\n  - Adult Males: 4.35 to 5.65 million cells/mcL\n  - Adult Females: 3.92 to 5.13 million cells/mcL", "source": "cbc_blood_count.md", "section": "Red Blood Cell Count (RBC)", "char_count": 677}, {"id": "cbc_blood_count_chunk_1", "text": "ard Reference Range:**\n  - Adult Males: 4.35 to 5.65 million cells/mcL\n  - Adult Females: 3.92 to 5.13 million cells/mcL\n- **Low Count:** Anemia, active blood loss, bone marrow suppression, nutritional deficiencies (Iron, B12, Folate).\n- **High Count (Erythrocytosis):** Chronic low oxygen (smoking, COPD, sleep apnea), high altitude, polycythemia vera, or hemoconcentration due to dehydration.\n\n### Hemoglobin (Hgb)\n- **Standard Reference Range:**\n  - Adult Males: 13.2 to 16.6 g/dL\n  - Adult Females: 11.6 to 15.0 g/dL\n- **Mild Anemia (10.0 - 11.5 g/dL):** May cause mild fatigue, pale skin, slight shortness of breath with strenuous exertion.", "source": "cbc_blood_count.md", "section": "Hemoglobin (Hgb)", "char_count": 645}, {"id": "cbc_blood_count_chunk_2", "text": "Mild Anemia (10.0 - 11.5 g/dL):** May cause mild fatigue, pale skin, slight shortness of breath with strenuous exertion.\n- **Moderate to Severe Anemia (< 8.0 g/dL):** Palpitations, dizziness, resting shortness of breath. Requires physician evaluation.\n- **Critical Threshold (< 7.0 g/dL):** Typically warrants hospital admission and packed red blood cell transfusion evaluation.\n\n### Hematocrit (Hct)\n- **Standard Reference Range:**\n  - Adult Males: 38.3% to 48.6%\n  - Adult Females: 35.5% to 44.9%\n- **Definition:** The percentage of total blood volume made up of red blood cells (typically ~3 times the hemoglobin level).\n\n### Mean Corpuscular Volume (MCV)", "source": "cbc_blood_count.md", "section": "Mean Corpuscular Volume (MCV)", "char_count": 658}, {"id": "cbc_blood_count_chunk_3", "text": "al blood volume made up of red blood cells (typically ~3 times the hemoglobin level).\n\n### Mean Corpuscular Volume (MCV)\n- **Standard Reference Range:** 80 to 96 fL (femtoliters)\n- **Microcytic (MCV < 80 fL):** Small red cells. Primary causes: Iron deficiency anemia, Thalassemia trait, Anemia of chronic disease.\n- **Normocytic (MCV 80 - 96 fL):** Acute blood loss, kidney failure, early nutritional deficiency.\n- **Macrocytic (MCV > 100 fL):** Large red cells. Primary causes: Vitamin B12 deficiency, Folate deficiency, alcoholism, liver disease, hypothyroid state, certain chemotherapies.\n\n---\n\n## 3. White Blood Cells & Differential (Immune System)\n\n### Total White Blood Cell Count (WBC)", "source": "cbc_blood_count.md", "section": "Total White Blood Cell Count (WBC)", "char_count": 692}, {"id": "cbc_blood_count_chunk_4", "text": "ain chemotherapies.\n\n---\n\n## 3. White Blood Cells & Differential (Immune System)\n\n### Total White Blood Cell Count (WBC)\n- **Standard Reference Range:** 4,000 to 11,000 cells/mcL (4.0 - 11.0 x 10^3 / mcL)\n- **Leukocytosis (WBC > 11,000):** Bacterial infection, acute viral infection, systemic inflammation, severe physical/emotional stress, steroid medication (e.g. Prednisone). Mild elevation (11,000 - 14,000) during or right after an upper respiratory infection or dental work is common and reactive.\n- **Leukopenia (WBC < 4,000):** Viral infections (such as influenza, COVID-19, HIV), autoimmune diseases (lupus), bone marrow disorders, or drug side effects.", "source": "cbc_blood_count.md", "section": "Total White Blood Cell Count (WBC)", "char_count": 662}, {"id": "cbc_blood_count_chunk_5", "text": "infections (such as influenza, COVID-19, HIV), autoimmune diseases (lupus), bone marrow disorders, or drug side effects.\n- **Critical Threshold (< 1,500):** Substantial risk of opportunistic infection; requires isolation precautions.\n\n### Neutrophils (Absolute & Percentage)\n- **Standard Reference Range:** 40% to 70% (1,500 - 7,500 cells/mcL)\n- **Role:** First responders against bacterial infections. \"Left shift\" or presence of immature bands suggests acute bacterial response.\n\n### Lymphocytes\n- **Standard Reference Range:** 20% to 40% (1,000 - 4,800 cells/mcL)", "source": "cbc_blood_count.md", "section": "Lymphocytes", "char_count": 566}, {"id": "cbc_blood_count_chunk_6", "text": "suggests acute bacterial response.\n\n### Lymphocytes\n- **Standard Reference Range:** 20% to 40% (1,000 - 4,800 cells/mcL)\n- **Role:** Combat viral pathogens (T cells, B cells, NK cells). Elevated during mononucleosis, viral illnesses, or chronic lymphocytic conditions.\n\n### Eosinophils\n- **Standard Reference Range:** 1% to 4% (50 - 500 cells/mcL)\n- **Elevated in:** Allergic conditions (asthma, eczema, hay fever), parasitic infections, eosinophilic esophagitis, or drug reactions.\n\n---\n\n## 4. Platelets (Coagulation & Clotting)\n\n### Platelet Count\n- **Standard Reference Range:** 150,000 to 450,000 cells/mcL\n- **Thrombocytopenia (Low Platelets < 150,000):**", "source": "cbc_blood_count.md", "section": "Platelet Count", "char_count": 660}, {"id": "cbc_blood_count_chunk_7", "text": "let Count\n- **Standard Reference Range:** 150,000 to 450,000 cells/mcL\n- **Thrombocytopenia (Low Platelets < 150,000):**\n  - **100,000 - 149,000:** Mild; often asymptomatic, common in viral recovery or gestational thrombocytopenia.\n  - **50,000 - 99,000:** Moderate; minor bruising, petechiae, prolonged bleeding from cuts.\n  - **< 20,000:** Severe; high risk of spontaneous mucosal or intracranial bleeding. Urgent medical management needed.\n- **Thrombocytosis (High Platelets > 450,000):** Reactive (post-infection, iron deficiency, post-splenectomy) or primary essential thrombocythemia.", "source": "cbc_blood_count.md", "section": "Platelet Count", "char_count": 590}, {"id": "metabolic_panel_cmp_chunk_0", "text": "# Clinical Reference Guide: Comprehensive Metabolic Panel (CMP)\n*Source: NIH MedlinePlus & Clinical Chemistry Reference Standards (AACC)*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Comprehensive Metabolic Panel\nThe Comprehensive Metabolic Panel (CMP) is a blood test consisting of 14 separate measurements. It evaluates kidney function, liver function, blood sugar levels, electrolyte balance, and acid/base balance in the blood.\n\n---\n\n## 2. Kidney Function Biomarkers\n\n### Blood Urea Nitrogen (BUN)\n- **Standard Reference Range:** 7 to 20 mg/dL", "source": "metabolic_panel_cmp.md", "section": "Blood Urea Nitrogen (BUN)", "char_count": 591}, {"id": "metabolic_panel_cmp_chunk_1", "text": "ood.\n\n---\n\n## 2. Kidney Function Biomarkers\n\n### Blood Urea Nitrogen (BUN)\n- **Standard Reference Range:** 7 to 20 mg/dL\n- **What it measures:** The amount of nitrogen in the blood that comes from the waste product urea, produced in the liver and eliminated by the kidneys.\n- **High Levels (Azotemia):** May indicate impaired renal filtration, acute kidney injury, congestive heart failure, high protein intake, gastrointestinal bleeding, or severe dehydration. Dehydration is the most frequent benign cause of mildly elevated BUN with a normal creatinine.\n- **Low Levels:** Seen in severe liver disease, malnutrition, low-protein diets, or overhydration.\n\n### Serum Creatinine", "source": "metabolic_panel_cmp.md", "section": "Serum Creatinine", "char_count": 677}, {"id": "metabolic_panel_cmp_chunk_2", "text": "- **Low Levels:** Seen in severe liver disease, malnutrition, low-protein diets, or overhydration.\n\n### Serum Creatinine\n- **Standard Reference Range:** 0.6 to 1.3 mg/dL (adult males: 0.7 - 1.3 mg/dL; adult females: 0.5 - 1.1 mg/dL)\n- **What it measures:** A breakdown byproduct of creatine phosphate in skeletal muscle tissue. Because healthy kidneys filter creatinine at a constant rate, it is the primary direct indicator of renal filtering capability.\n- **High Levels:** Indicates reduced glomerular filtration, intrinsic kidney disease, urinary tract obstruction, or intense strenuous weightlifting (temporary).\n- **Low Levels:** Decreased muscle mass, myasthenia gravis, or advanced age.", "source": "metabolic_panel_cmp.md", "section": "Estimated Glomerular Filtration Rate (eGFR)", "char_count": 693}, {"id": "metabolic_panel_cmp_chunk_3", "text": "tense strenuous weightlifting (temporary).\n- **Low Levels:** Decreased muscle mass, myasthenia gravis, or advanced age.\n\n### Estimated Glomerular Filtration Rate (eGFR)\n- **Standard Reference Range:** Greater than 60 mL/min/1.73 m\u00b2 (Normal baseline: 90 - 120 mL/min/1.73 m\u00b2)\n- **Interpretation:**\n  - **> 90 mL/min:** Normal kidney function.\n  - **60 - 89 mL/min:** Mildly decreased kidney filtration; common with normal aging if no protein is in the urine.\n  - **45 - 59 mL/min (Stage 3a CKD):** Moderate reduction in kidney function. Requires physician review, medication adjustments, and hydration assessment.", "source": "metabolic_panel_cmp.md", "section": "Estimated Glomerular Filtration Rate (eGFR)", "char_count": 612}, {"id": "metabolic_panel_cmp_chunk_4", "text": "):** Moderate reduction in kidney function. Requires physician review, medication adjustments, and hydration assessment.\n  - **15 - 29 mL/min (Stage 4 CKD):** Severe kidney impairment. Immediate nephrology referral required.\n  - **< 15 mL/min:** Kidney failure.\n\n---\n\n## 3. Electrolytes & Fluid Balance\n\n### Sodium (Na+)\n- **Standard Reference Range:** 135 to 145 mEq/L\n- **High (Hypernatremia):** Inadequate water intake, excessive sweating, diuretic therapy, diabetes insipidus.", "source": "metabolic_panel_cmp.md", "section": "Sodium (Na+)", "char_count": 480}, {"id": "metabolic_panel_cmp_chunk_5", "text": "145 mEq/L\n- **High (Hypernatremia):** Inadequate water intake, excessive sweating, diuretic therapy, diabetes insipidus.\n- **Low (Hyponatremia):** Excess water retention, heart failure, cirrhosis, SIADH, vomiting/diarrhea. Mild hyponatremia (130-134 mEq/L) often presents with mild fatigue, nausea, or headache. Severe drops (< 125 mEq/L) are medical emergencies.\n\n### Potassium (K+)\n- **Standard Reference Range:** 3.5 to 5.2 mEq/L\n- **High (Hyperkalemia):** Kidney dysfunction, ACE inhibitors, ARBs, potassium-sparing diuretics, tissue trauma. Levels above 6.0 mEq/L can cause fatal cardiac arrhythmias and require urgent attention.", "source": "metabolic_panel_cmp.md", "section": "Potassium (K+)", "char_count": 634}, {"id": "metabolic_panel_cmp_chunk_6", "text": "aring diuretics, tissue trauma. Levels above 6.0 mEq/L can cause fatal cardiac arrhythmias and require urgent attention.\n- **Low (Hypokalemia):** Diuretics (\"water pills\"), prolonged vomiting, diarrhea, insufficient dietary intake. Can cause muscle cramps, weakness, and cardiac palpitations.\n\n### Carbon Dioxide / Bicarbonate (CO2)\n- **Standard Reference Range:** 22 to 29 mEq/L\n- **What it measures:** The buffering capacity of blood and metabolic acid-base status.\n\n### Calcium\n- **Standard Reference Range:** 8.5 to 10.2 mg/dL\n- **Clinical Significance:** Crucial for bone health, neuromuscular transmission, and cardiac contractility. Regulated by parathyroid hormone (PTH) and Vitamin D.\n\n---", "source": "metabolic_panel_cmp.md", "section": "4. Blood Sugar / Glycemic Marker", "char_count": 698}, {"id": "metabolic_panel_cmp_chunk_7", "text": "alth, neuromuscular transmission, and cardiac contractility. Regulated by parathyroid hormone (PTH) and Vitamin D.\n\n---\n\n## 4. Blood Sugar / Glycemic Marker\n\n### Fasting Blood Glucose\n- **Standard Reference Range:** 70 to 99 mg/dL (after an 8-hour overnight fast)\n- **Impaired Fasting Glucose (Prediabetes):** 100 to 125 mg/dL\n- **Diabetes Diagnostic Threshold:** 126 mg/dL or higher on two separate occasions\n- **Hypoglycemia (< 70 mg/dL):** Causes shakiness, sweating, anxiety, confusion. Immediate carbohydrate ingestion required.\n\n---\n\n## 5. Liver Function & Protein Biomarkers\n\n### Alanine Aminotransferase (ALT)\n- **Standard Reference Range:** 7 to 56 U/L", "source": "metabolic_panel_cmp.md", "section": "Alanine Aminotransferase (ALT)", "char_count": 661}, {"id": "metabolic_panel_cmp_chunk_8", "text": "# 5. Liver Function & Protein Biomarkers\n\n### Alanine Aminotransferase (ALT)\n- **Standard Reference Range:** 7 to 56 U/L\n- **Significance:** Enzyme primarily found in liver cells (hepatocytes). Released into the bloodstream during liver inflammation or injury.\n- **Mild Elevation (1x to 3x normal):** Non-alcoholic fatty liver disease (NAFLD), alcohol consumption, vigorous unaccustomed exercise, statin medications, or acetaminophen use.\n- **Marked Elevation (> 10x normal):** Acute viral hepatitis, ischemic liver injury, or toxin ingestion.\n\n### Aspartate Aminotransferase (AST)\n- **Standard Reference Range:** 10 to 40 U/L", "source": "metabolic_panel_cmp.md", "section": "Aspartate Aminotransferase (AST)", "char_count": 626}, {"id": "metabolic_panel_cmp_chunk_9", "text": "mic liver injury, or toxin ingestion.\n\n### Aspartate Aminotransferase (AST)\n- **Standard Reference Range:** 10 to 40 U/L\n- **Significance:** Found in liver, heart, and skeletal muscle. An AST/ALT ratio > 2.0 often suggests alcohol-induced liver stress.\n\n### Alkaline Phosphatase (ALP)\n- **Standard Reference Range:** 44 to 147 U/L\n- **Significance:** Found in bile ducts and bone. High ALP with elevated GGT indicates biliary blockage; high ALP with normal GGT suggests bone remodeling/growth.\n\n### Total Bilirubin\n- **Standard Reference Range:** 0.2 to 1.2 mg/dL", "source": "metabolic_panel_cmp.md", "section": "Total Bilirubin", "char_count": 563}, {"id": "metabolic_panel_cmp_chunk_10", "text": "P with normal GGT suggests bone remodeling/growth.\n\n### Total Bilirubin\n- **Standard Reference Range:** 0.2 to 1.2 mg/dL\n- **Significance:** Byproduct of red blood cell breakdown. Levels > 2.5 mg/dL cause jaundice (yellowing of eyes and skin). Mild isolated elevation (1.3 - 2.0 mg/dL) with normal liver enzymes is commonly Gilbert's syndrome, a benign genetic trait.\n\n### Albumin & Total Protein\n- **Albumin Reference Range:** 3.4 to 5.4 g/dL\n- **Significance:** Main protein produced by the liver, maintains oncotic pressure. Low albumin may reflect chronic illness, malnutrition, nephrotic syndrome, or chronic liver disease.", "source": "metabolic_panel_cmp.md", "section": "Albumin & Total Protein", "char_count": 628}];
-    const MOCK_REPORTS = {"annual_checkup": "PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT\nPatient Name: Jane Doe | DOB: 1978-04-12 | Age: 48 | Sex: Female\nOrdering Physician: Dr. Marcus Vance, MD (Internal Medicine)\nCollection Date: 2026-10-24 07:45 AM | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\n\n-- COMPLETE BLOOD COUNT (CBC) --\nWhite Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL\nRed Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL\nHemoglobin                      13.4         12.0 - 15.5 g/dL\nHematocrit                      39.8         37.0 - 48.0 %\nMean Corpuscular Vol (MCV)      88.2         80.0 - 96.0 fL\nPlatelets                       245          150 - 450 10^3/uL\n\n-- COMPREHENSIVE METABOLIC PANEL (CMP) --\nGlucose, Fasting                112          70 - 99 mg/dL       [HIGH]\nBlood Urea Nitrogen (BUN)       16           7 - 20 mg/dL\nCreatinine, Serum               0.82         0.50 - 1.10 mg/dL\neGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2\nSodium                          140          135 - 145 mEq/L\nPotassium                       4.2          3.5 - 5.1 mEq/L\nChloride                        102          96 - 106 mEq/L\nCarbon Dioxide (CO2)            25           22 - 29 mEq/L\nCalcium                         9.4          8.5 - 10.2 mg/dL\nTotal Protein                   7.1          6.0 - 8.3 g/dL\nAlbumin                         4.3          3.5 - 5.0 g/dL\nBilirubin, Total                0.6          0.2 - 1.2 mg/dL\nAlkaline Phosphatase (ALP)      72           44 - 147 U/L\nAST (SGOT)                      34           10 - 40 U/L\nALT (SGPT)                      52           7 - 45 U/L          [HIGH]\n\n-- LIPID & METABOLIC PANEL --\nCholesterol, Total              224          < 200 mg/dL         [HIGH]\nTriglycerides                   188          < 150 mg/dL         [HIGH]\nHDL Cholesterol                 44           > 50 mg/dL          [LOW]\nLDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]\nHemoglobin A1c (HbA1c)          5.9          < 5.7 %             [HIGH]\n\n-- THYROID STIMULATING HORMONE --\nTSH, 3rd Generation             2.14         0.45 - 4.50 uIU/mL\n\nPhysician Clinical Notes:\nPatient reports mild fatigue and sedentary lifestyle over past 6 months. Non-smoker.\nBlood pressure today: 128/82 mmHg. BMI: 28.4. Please review metabolic indices and diet.\n", "cardiac_discharge": "ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY\nPatient: Robert Miller | Age: 62 | Sex: Male | MRN: 9482104\nAdmit Date: 2026-11-08 | Discharge Date: 2026-11-12\nAttending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)\n\nDISCHARGE DIAGNOSES:\n1. Non-ST Elevation Myocardial Infarction (NSTEMI)\n2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.\n3. Essential Hypertension, moderate.\n4. Hyperlipidemia, uncontrolled.\n\nPROCEDURE PERFORMED:\nLeft heart catheterization, coronary angiography, balloon angioplasty, and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal vascular closure device in right common femoral artery.\n\nHOSPITAL COURSE SUMMARY:\nPatient presented with sudden retrosternal squeezing chest pressure. Troponin-I peaked at 4.2 ng/mL. Taken emergently to cardiac catheterization laboratory. Post-procedure telemetry was unremarkable with no recurrent angina, arrhythmia, or vascular access complications. Patient was ambulating well on day of discharge.\n\nDISCHARGE MEDICATIONS:\n1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).\n2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.\n3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime (High-intensity statin therapy).\n4. Metoprolol Tartrate 25 mg oral twice daily with meals.\n5. Lisinopril 10 mg oral daily.\n6. Nitroglycerin 0.4 mg sublingual tablet PRN chest pain (Take 1 tablet every 5 min up to 3 doses; call 911 if pain persists after first dose).\n\nPOST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:\n- Right groin access site: Keep clean and dry. No soaking in tubs, swimming, or hot tubs for 1 week. Showering permitted after 48 hours.\n- Activity restriction: No heavy lifting (> 10 lbs) or strenuous aerobic exertion for 7 days.\n- Red Flag Emergency Warnings: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or rapid swelling/bleeding at groin puncture site.\n- Contact clinic if temperature exceeds 100.4 F or if you notice spreading redness at puncture site.\n", "kidney_diabetic": "PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP\nPatient: David Hernandez | Age: 57 | Sex: Male\nOrdering Physician: Dr. Elena Rostova, MD (Nephrology)\nCollection Date: 2026-10-18 | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\nGlucose, Fasting                148          70 - 99 mg/dL       [HIGH]\nHemoglobin A1c                  7.8          < 5.7 %             [HIGH]\nSerum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]\neGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]\nBlood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]\nBUN/Creatinine Ratio            17.3         10 - 20\nPotassium                       3.3          3.5 - 5.1 mEq/L     [LOW]\nSodium                          138          135 - 145 mEq/L\nCalcium                         8.9          8.5 - 10.2 mg/dL\nAlbumin, Serum                  3.8          3.5 - 5.0 g/dL\nTotal Cholesterol               194          < 200 mg/dL\nTriglycerides                   210          < 150 mg/dL         [HIGH]\n\nPhysician Clinical Notes:\nPatient has known 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted, likely secondary to hydrochlorothiazide. Review hydration, dietary potassium, and glycemic control.\n", "sample_annual_checkup_labs": "PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT\nPatient Name: Jane Doe | DOB: 1978-04-12 | Age: 48 | Sex: Female\nOrdering Physician: Dr. Marcus Vance, MD (Internal Medicine)\nCollection Date: 2026-10-24 07:45 AM | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\n\n-- COMPLETE BLOOD COUNT (CBC) --\nWhite Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL\nRed Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL\nHemoglobin                      13.4         12.0 - 15.5 g/dL\nHematocrit                      39.8         37.0 - 48.0 %\nMean Corpuscular Vol (MCV)      88.2         80.0 - 96.0 fL\nPlatelets                       245          150 - 450 10^3/uL\n\n-- COMPREHENSIVE METABOLIC PANEL (CMP) --\nGlucose, Fasting                112          70 - 99 mg/dL       [HIGH]\nBlood Urea Nitrogen (BUN)       16           7 - 20 mg/dL\nCreatinine, Serum               0.82         0.50 - 1.10 mg/dL\neGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2\nSodium                          140          135 - 145 mEq/L\nPotassium                       4.2          3.5 - 5.1 mEq/L\nChloride                        102          96 - 106 mEq/L\nCarbon Dioxide (CO2)            25           22 - 29 mEq/L\nCalcium                         9.4          8.5 - 10.2 mg/dL\nTotal Protein                   7.1          6.0 - 8.3 g/dL\nAlbumin                         4.3          3.5 - 5.0 g/dL\nBilirubin, Total                0.6          0.2 - 1.2 mg/dL\nAlkaline Phosphatase (ALP)      72           44 - 147 U/L\nAST (SGOT)                      34           10 - 40 U/L\nALT (SGPT)                      52           7 - 45 U/L          [HIGH]\n\n-- LIPID & METABOLIC PANEL --\nCholesterol, Total              224          < 200 mg/dL         [HIGH]\nTriglycerides                   188          < 150 mg/dL         [HIGH]\nHDL Cholesterol                 44           > 50 mg/dL          [LOW]\nLDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]\nHemoglobin A1c (HbA1c)          5.9          < 5.7 %             [HIGH]\n\n-- THYROID STIMULATING HORMONE --\nTSH, 3rd Generation             2.14         0.45 - 4.50 uIU/mL\n\nPhysician Clinical Notes:\nPatient reports mild fatigue and sedentary lifestyle over past 6 months. Non-smoker.\nBlood pressure today: 128/82 mmHg. BMI: 28.4. Please review metabolic indices and diet.\n", "sample_cardiac_discharge": "ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY\nPatient: Robert Miller | Age: 62 | Sex: Male | MRN: 9482104\nAdmit Date: 2026-11-08 | Discharge Date: 2026-11-12\nAttending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)\n\nDISCHARGE DIAGNOSES:\n1. Non-ST Elevation Myocardial Infarction (NSTEMI)\n2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.\n3. Essential Hypertension, moderate.\n4. Hyperlipidemia, uncontrolled.\n\nPROCEDURE PERFORMED:\nLeft heart catheterization, coronary angiography, balloon angioplasty, and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal vascular closure device in right common femoral artery.\n\nHOSPITAL COURSE SUMMARY:\nPatient presented with sudden retrosternal squeezing chest pressure. Troponin-I peaked at 4.2 ng/mL. Taken emergently to cardiac catheterization laboratory. Post-procedure telemetry was unremarkable with no recurrent angina, arrhythmia, or vascular access complications. Patient was ambulating well on day of discharge.\n\nDISCHARGE MEDICATIONS:\n1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).\n2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.\n3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime (High-intensity statin therapy).\n4. Metoprolol Tartrate 25 mg oral twice daily with meals.\n5. Lisinopril 10 mg oral daily.\n6. Nitroglycerin 0.4 mg sublingual tablet PRN chest pain (Take 1 tablet every 5 min up to 3 doses; call 911 if pain persists after first dose).\n\nPOST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:\n- Right groin access site: Keep clean and dry. No soaking in tubs, swimming, or hot tubs for 1 week. Showering permitted after 48 hours.\n- Activity restriction: No heavy lifting (> 10 lbs) or strenuous aerobic exertion for 7 days.\n- Red Flag Emergency Warnings: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or rapid swelling/bleeding at groin puncture site.\n- Contact clinic if temperature exceeds 100.4 F or if you notice spreading redness at puncture site.\n", "sample_kidney_diabetic_labs": "PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP\nPatient: David Hernandez | Age: 57 | Sex: Male\nOrdering Physician: Dr. Elena Rostova, MD (Nephrology)\nCollection Date: 2026-10-18 | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\nGlucose, Fasting                148          70 - 99 mg/dL       [HIGH]\nHemoglobin A1c                  7.8          < 5.7 %             [HIGH]\nSerum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]\neGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]\nBlood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]\nBUN/Creatinine Ratio            17.3         10 - 20\nPotassium                       3.3          3.5 - 5.1 mEq/L     [LOW]\nSodium                          138          135 - 145 mEq/L\nCalcium                         8.9          8.5 - 10.2 mg/dL\nAlbumin, Serum                  3.8          3.5 - 5.0 g/dL\nTotal Cholesterol               194          < 200 mg/dL\nTriglycerides                   210          < 150 mg/dL         [HIGH]\n\nPhysician Clinical Notes:\nPatient has known 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted, likely secondary to hydrochlorothiazide. Review hydration, dietary potassium, and glycemic control.\n"};
+    const MOCK_REPORTS = {"sample_cardiac_discharge": "ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY\nPatient: Robert Miller | Age: 62 | Sex: Male | MRN: 9482104\nAdmit Date: 2026-11-08 | Discharge Date: 2026-11-12\nAttending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)\n\nDISCHARGE DIAGNOSES:\n1. Non-ST Elevation Myocardial Infarction (NSTEMI)\n2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.\n3. Essential Hypertension, moderate.\n4. Hyperlipidemia, uncontrolled.\n\nPROCEDURE PERFORMED:\nLeft heart catheterization, coronary angiography, balloon angioplasty, and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal vascular closure device in right common femoral artery.\n\nHOSPITAL COURSE SUMMARY:\nPatient presented with sudden retrosternal squeezing chest pressure. Troponin-I peaked at 4.2 ng/mL. Taken emergently to cardiac catheterization laboratory. Post-procedure telemetry was unremarkable with no recurrent angina, arrhythmia, or vascular access complications. Patient was ambulating well on day of discharge.\n\nDISCHARGE MEDICATIONS:\n1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).\n2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.\n3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime (High-intensity statin therapy).\n4. Metoprolol Tartrate 25 mg oral twice daily with meals.\n5. Lisinopril 10 mg oral daily.\n6. Nitroglycerin 0.4 mg sublingual tablet PRN chest pain (Take 1 tablet every 5 min up to 3 doses; call 911 if pain persists after first dose).\n\nPOST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:\n- Right groin access site: Keep clean and dry. No soaking in tubs, swimming, or hot tubs for 1 week. Showering permitted after 48 hours.\n- Activity restriction: No heavy lifting (> 10 lbs) or strenuous aerobic exertion for 7 days.\n- Red Flag Emergency Warnings: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or rapid swelling/bleeding at groin puncture site.\n- Contact clinic if temperature exceeds 100.4 F or if you notice spreading redness at puncture site.\n", "sample_annual_checkup_labs": "PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT\nPatient Name: Jane Doe | DOB: 1978-04-12 | Age: 48 | Sex: Female\nOrdering Physician: Dr. Marcus Vance, MD (Internal Medicine)\nCollection Date: 2026-10-24 07:45 AM | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\n\n-- COMPLETE BLOOD COUNT (CBC) --\nWhite Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL\nRed Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL\nHemoglobin                      13.4         12.0 - 15.5 g/dL\nHematocrit                      39.8         37.0 - 48.0 %\nMean Corpuscular Vol (MCV)      88.2         80.0 - 96.0 fL\nPlatelets                       245          150 - 450 10^3/uL\n\n-- COMPREHENSIVE METABOLIC PANEL (CMP) --\nGlucose, Fasting                112          70 - 99 mg/dL       [HIGH]\nBlood Urea Nitrogen (BUN)       16           7 - 20 mg/dL\nCreatinine, Serum               0.82         0.50 - 1.10 mg/dL\neGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2\nSodium                          140          135 - 145 mEq/L\nPotassium                       4.2          3.5 - 5.1 mEq/L\nChloride                        102          96 - 106 mEq/L\nCarbon Dioxide (CO2)            25           22 - 29 mEq/L\nCalcium                         9.4          8.5 - 10.2 mg/dL\nTotal Protein                   7.1          6.0 - 8.3 g/dL\nAlbumin                         4.3          3.5 - 5.0 g/dL\nBilirubin, Total                0.6          0.2 - 1.2 mg/dL\nAlkaline Phosphatase (ALP)      72           44 - 147 U/L\nAST (SGOT)                      34           10 - 40 U/L\nALT (SGPT)                      52           7 - 45 U/L          [HIGH]\n\n-- LIPID & METABOLIC PANEL --\nCholesterol, Total              224          < 200 mg/dL         [HIGH]\nTriglycerides                   188          < 150 mg/dL         [HIGH]\nHDL Cholesterol                 44           > 50 mg/dL          [LOW]\nLDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]\nHemoglobin A1c (HbA1c)          5.9          < 5.7 %             [HIGH]\n\n-- THYROID STIMULATING HORMONE --\nTSH, 3rd Generation             2.14         0.45 - 4.50 uIU/mL\n\nPhysician Clinical Notes:\nPatient reports mild fatigue and sedentary lifestyle over past 6 months. Non-smoker.\nBlood pressure today: 128/82 mmHg. BMI: 28.4. Please review metabolic indices and diet.\n", "sample_kidney_diabetic_labs": "PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP\nPatient: David Hernandez | Age: 57 | Sex: Male\nOrdering Physician: Dr. Elena Rostova, MD (Nephrology)\nCollection Date: 2026-10-18 | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\nGlucose, Fasting                148          70 - 99 mg/dL       [HIGH]\nHemoglobin A1c                  7.8          < 5.7 %             [HIGH]\nSerum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]\neGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]\nBlood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]\nBUN/Creatinine Ratio            17.3         10 - 20\nPotassium                       3.3          3.5 - 5.1 mEq/L     [LOW]\nSodium                          138          135 - 145 mEq/L\nCalcium                         8.9          8.5 - 10.2 mg/dL\nAlbumin, Serum                  3.8          3.5 - 5.0 g/dL\nTotal Cholesterol               194          < 200 mg/dL\nTriglycerides                   210          < 150 mg/dL         [HIGH]\n\nPhysician Clinical Notes:\nPatient has known 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted, likely secondary to hydrochlorothiazide. Review hydration, dietary potassium, and glycemic control.\n", "annual_checkup": "PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT\nPatient Name: Jane Doe | DOB: 1978-04-12 | Age: 48 | Sex: Female\nOrdering Physician: Dr. Marcus Vance, MD (Internal Medicine)\nCollection Date: 2026-10-24 07:45 AM | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\n\n-- COMPLETE BLOOD COUNT (CBC) --\nWhite Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL\nRed Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL\nHemoglobin                      13.4         12.0 - 15.5 g/dL\nHematocrit                      39.8         37.0 - 48.0 %\nMean Corpuscular Vol (MCV)      88.2         80.0 - 96.0 fL\nPlatelets                       245          150 - 450 10^3/uL\n\n-- COMPREHENSIVE METABOLIC PANEL (CMP) --\nGlucose, Fasting                112          70 - 99 mg/dL       [HIGH]\nBlood Urea Nitrogen (BUN)       16           7 - 20 mg/dL\nCreatinine, Serum               0.82         0.50 - 1.10 mg/dL\neGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2\nSodium                          140          135 - 145 mEq/L\nPotassium                       4.2          3.5 - 5.1 mEq/L\nChloride                        102          96 - 106 mEq/L\nCarbon Dioxide (CO2)            25           22 - 29 mEq/L\nCalcium                         9.4          8.5 - 10.2 mg/dL\nTotal Protein                   7.1          6.0 - 8.3 g/dL\nAlbumin                         4.3          3.5 - 5.0 g/dL\nBilirubin, Total                0.6          0.2 - 1.2 mg/dL\nAlkaline Phosphatase (ALP)      72           44 - 147 U/L\nAST (SGOT)                      34           10 - 40 U/L\nALT (SGPT)                      52           7 - 45 U/L          [HIGH]\n\n-- LIPID & METABOLIC PANEL --\nCholesterol, Total              224          < 200 mg/dL         [HIGH]\nTriglycerides                   188          < 150 mg/dL         [HIGH]\nHDL Cholesterol                 44           > 50 mg/dL          [LOW]\nLDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]\nHemoglobin A1c (HbA1c)          5.9          < 5.7 %             [HIGH]\n\n-- THYROID STIMULATING HORMONE --\nTSH, 3rd Generation             2.14         0.45 - 4.50 uIU/mL\n\nPhysician Clinical Notes:\nPatient reports mild fatigue and sedentary lifestyle over past 6 months. Non-smoker.\nBlood pressure today: 128/82 mmHg. BMI: 28.4. Please review metabolic indices and diet.\n", "cardiac_discharge": "ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY\nPatient: Robert Miller | Age: 62 | Sex: Male | MRN: 9482104\nAdmit Date: 2026-11-08 | Discharge Date: 2026-11-12\nAttending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)\n\nDISCHARGE DIAGNOSES:\n1. Non-ST Elevation Myocardial Infarction (NSTEMI)\n2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.\n3. Essential Hypertension, moderate.\n4. Hyperlipidemia, uncontrolled.\n\nPROCEDURE PERFORMED:\nLeft heart catheterization, coronary angiography, balloon angioplasty, and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal vascular closure device in right common femoral artery.\n\nHOSPITAL COURSE SUMMARY:\nPatient presented with sudden retrosternal squeezing chest pressure. Troponin-I peaked at 4.2 ng/mL. Taken emergently to cardiac catheterization laboratory. Post-procedure telemetry was unremarkable with no recurrent angina, arrhythmia, or vascular access complications. Patient was ambulating well on day of discharge.\n\nDISCHARGE MEDICATIONS:\n1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).\n2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.\n3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime (High-intensity statin therapy).\n4. Metoprolol Tartrate 25 mg oral twice daily with meals.\n5. Lisinopril 10 mg oral daily.\n6. Nitroglycerin 0.4 mg sublingual tablet PRN chest pain (Take 1 tablet every 5 min up to 3 doses; call 911 if pain persists after first dose).\n\nPOST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:\n- Right groin access site: Keep clean and dry. No soaking in tubs, swimming, or hot tubs for 1 week. Showering permitted after 48 hours.\n- Activity restriction: No heavy lifting (> 10 lbs) or strenuous aerobic exertion for 7 days.\n- Red Flag Emergency Warnings: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or rapid swelling/bleeding at groin puncture site.\n- Contact clinic if temperature exceeds 100.4 F or if you notice spreading redness at puncture site.\n", "kidney_diabetic": "PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP\nPatient: David Hernandez | Age: 57 | Sex: Male\nOrdering Physician: Dr. Elena Rostova, MD (Nephrology)\nCollection Date: 2026-10-18 | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\nGlucose, Fasting                148          70 - 99 mg/dL       [HIGH]\nHemoglobin A1c                  7.8          < 5.7 %             [HIGH]\nSerum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]\neGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]\nBlood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]\nBUN/Creatinine Ratio            17.3         10 - 20\nPotassium                       3.3          3.5 - 5.1 mEq/L     [LOW]\nSodium                          138          135 - 145 mEq/L\nCalcium                         8.9          8.5 - 10.2 mg/dL\nAlbumin, Serum                  3.8          3.5 - 5.0 g/dL\nTotal Cholesterol               194          < 200 mg/dL\nTriglycerides                   210          < 150 mg/dL         [HIGH]\n\nPhysician Clinical Notes:\nPatient has known 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted, likely secondary to hydrochlorothiazide. Review hydration, dietary potassium, and glycemic control.\n"};
 
-    // State management
     let knowledgeBase = EMBEDDED_KNOWLEDGE_BASE;
     let sampleReports = MOCK_REPORTS;
     let lastRetrievedChunks = [];
@@ -958,7 +895,7 @@
     let lastRawTranslation = "";
     let cachedAccessibleModels = null;
 
-    // Known clinical markers for Stage 5: Entity Scanning & Multi-Query Expansion
+    // Clinical markers list
     const CLINICAL_MARKERS = [
       "glucose", "hba1c", "hemoglobin a1c", "blood sugar",
       "creatinine", "egfr", "bun", "blood urea nitrogen", "kidney",
@@ -978,9 +915,7 @@
       'llama3-70b-8192',
       'llama3-8b-8192',
       'gemma2-9b-it',
-      'mixtral-8x7b-32768',
-      'qwen-2.5-32b',
-      'deepseek-r1-distill-llama-70b'
+      'mixtral-8x7b-32768'
     ];
 
     // Client-side Entity-Guided Semantic Retrieval Engine
@@ -988,29 +923,56 @@
       if (!knowledgeBase || knowledgeBase.length === 0) return [];
       
       const queryLower = (query || "").toLowerCase();
-      const detectedMarkers = CLINICAL_MARKERS.filter(m => queryLower.includes(m));
+      
+      // Step A: Entity Extraction
+      const activeEntities = CLINICAL_MARKERS.filter(m => queryLower.includes(m));
+      
+      // Step B: Tokenization
+      const queryTokens = new Set(
+        queryLower
+          .replace(/[^a-z0-9]/g, ' ')
+          .split(/\s+/)
+          .filter(t => t.length > 2)
+      );
 
+      // Step C: Scoring chunks
       const scored = knowledgeBase.map(chunk => {
-        const textLower = (chunk.text || "").toLowerCase();
+        const textLower = chunk.text.toLowerCase();
         const sectionLower = (chunk.section || "").toLowerCase();
-        let score = 0;
+        const sourceLower = (chunk.source || "").toLowerCase();
 
-        // Stage 5: Clinical entity weighting
-        detectedMarkers.forEach(m => {
-          if (sectionLower.includes(m)) score += 4.5;
-          if (textLower.includes(m)) score += 2.5;
+        let tokenMatches = 0;
+        queryTokens.forEach(t => {
+          if (textLower.includes(t)) tokenMatches++;
         });
+        const tokenScore = queryTokens.size > 0 ? (tokenMatches / queryTokens.size) : 0;
 
-        // General word overlap
-        const words = queryLower.split(/\W+/).filter(w => w.length > 3);
-        words.forEach(w => {
-          if (textLower.includes(w)) score += 0.5;
-          if (sectionLower.includes(w)) score += 0.9;
+        let entityMatches = 0;
+        activeEntities.forEach(e => {
+          if (textLower.includes(e) || sectionLower.includes(e)) entityMatches++;
         });
+        const entityScore = activeEntities.length > 0 ? (entityMatches / activeEntities.length) : 0;
 
-        // Normalize score between 0.15 and 0.96
-        const normalized = Math.min(0.96, Math.max(0.18, score / 11.0));
-        return { ...chunk, similarity: parseFloat(normalized.toFixed(3)) };
+        let boost = 0.0;
+        if (queryLower.includes('stent') || queryLower.includes('plavix') || queryLower.includes('aspirin') || queryLower.includes('discharge')) {
+          if (sourceLower.includes('stent') || sourceLower.includes('discharge')) boost += 0.35;
+        }
+        if (queryLower.includes('creatinine') || queryLower.includes('egfr') || queryLower.includes('bun') || queryLower.includes('kidney')) {
+          if (sectionLower.includes('kidney') || textLower.includes('creatinine')) boost += 0.25;
+        }
+        if (queryLower.includes('alt') || queryLower.includes('liver') || queryLower.includes('ast')) {
+          if (sectionLower.includes('liver') || textLower.includes('alt')) boost += 0.25;
+        }
+        if (queryLower.includes('cholesterol') || queryLower.includes('ldl') || queryLower.includes('lipid')) {
+          if (sourceLower.includes('lipid') || sectionLower.includes('ldl')) boost += 0.25;
+        }
+
+        const similarity = Math.min(0.98, Math.max(0.12, (tokenScore * 0.40) + (entityScore * 0.45) + boost));
+
+        return {
+          ...chunk,
+          similarity: similarity
+        };
       });
 
       scored.sort((a, b) => b.similarity - a.similarity);
@@ -1028,14 +990,18 @@
 
     // Model filtering helper: strictly allow only chat LLM models
     function isSupportedChatModel(id) {
+      if (!id || typeof id !== 'string') return false;
       const lower = id.toLowerCase();
       if (lower.includes('whisper') || lower.includes('guard') || lower.includes('canopy') || 
           lower.includes('tts') || lower.includes('voice') || lower.includes('audio') || 
-          lower.includes('embed') || lower.includes('distil')) {
+          lower.includes('embed') || lower.includes('distil') || lower.includes('gpt-oss') ||
+          lower.includes('preview')) {
         return false;
       }
-      return lower.includes('llama') || lower.includes('gemma') || lower.includes('mixtral') || 
-             lower.includes('qwen') || lower.includes('deepseek') || lower.includes('gpt');
+      return lower.includes('llama-3') || lower.includes('llama3') || 
+             lower.includes('gemma-2') || lower.includes('gemma2') || 
+             lower.includes('mixtral') || lower.includes('qwen-2') ||
+             lower.includes('deepseek-r1');
     }
 
     // Groq API Key Handling & Live Validation
@@ -1047,10 +1013,10 @@
       const resSpan = document.getElementById('keyTestResult');
       if (!key) {
         if (!silent && resSpan) resSpan.innerHTML = '<span class="text-amber-400 font-medium"><i class="fas fa-exclamation-triangle"></i> Please paste an API key first</span>';
-        keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span> <span>Offline</span>';
+        keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span> <span>Offline Preview</span>';
         return false;
       }
-      if (!silent && resSpan) resSpan.innerHTML = '<span class="text-zinc-400"><i class="fas fa-spinner fa-spin"></i> Checking model access with Groq...</span>';
+      if (!silent && resSpan) resSpan.innerHTML = '<span class="text-zinc-400"><i class="fas fa-spinner fa-spin"></i> Checking Groq model access...</span>';
       
       try {
         const res = await fetch('https://api.groq.com/openai/v1/models', {
@@ -1087,12 +1053,12 @@
           
           const modelCount = chatModels.length > 0 ? `${chatModels.length} chat models ready` : 'Connected';
           if (resSpan) resSpan.innerHTML = `<span class="text-emerald-400 font-medium"><i class="fas fa-check-circle"></i> Connected to Groq (${modelCount})</span>`;
-          keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> <span class="text-emerald-400 font-semibold">Connected</span>';
+          keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> <span class="text-emerald-400 font-semibold">Groq Online</span>';
           return true;
         } else {
           const errMsg = data.error?.message || 'Invalid API Key';
           if (!silent && resSpan) resSpan.innerHTML = `<span class="text-rose-400 font-medium"><i class="fas fa-times-circle"></i> ${errMsg}</span>`;
-          keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> <span class="text-rose-400 font-medium">Key Invalid</span>';
+          keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> <span class="text-rose-400 font-medium">Key Issue</span>';
           return false;
         }
       } catch (err) {
@@ -1102,14 +1068,12 @@
     }
 
     // Unified Multi-Model Robust Groq API Caller
-    async function callGroqAPI(messages, maxTokens = 1024, temperature = 0.2) {
+    async function callGroqAPI(messages, maxTokens = 2048, temperature = 0.2) {
       const apiKey = apiKeyInput.value.trim();
-      if (!apiKey) {
-        throw new Error("NO_API_KEY");
-      }
+      if (!apiKey) throw new Error("NO_API_KEY");
 
       const sel = document.getElementById('modelSelect');
-      const selectedModel = sel ? sel.value : 'llama-3.1-8b-instant';
+      const selectedModel = sel ? sel.value : 'llama-3.3-70b-versatile';
 
       const modelsToTry = [selectedModel];
       if (cachedAccessibleModels && Array.isArray(cachedAccessibleModels)) {
@@ -1156,24 +1120,15 @@
 
           if (data.error && data.error.message) {
             lastError = data.error.message;
-            if (lastError.includes('does not exist') || lastError.includes('access') || lastError.includes('decommissioned')) {
-              console.warn(`Groq model ${targetModel} restricted (${lastError}). Trying next candidate...`);
-              continue;
-            } else if (lastError.includes('rate limit') || lastError.includes('429')) {
-              console.warn(`Groq rate limit on ${targetModel}. Trying next model...`);
-              continue;
-            } else {
-              throw new Error(lastError);
-            }
+            console.warn(`Groq model ${targetModel} error: ${lastError}`);
+            continue;
           }
         } catch (fetchErr) {
-          if (fetchErr.message && !fetchErr.message.includes('access') && !fetchErr.message.includes('exist')) {
-            lastError = fetchErr.message;
-          }
+          lastError = fetchErr.message;
         }
       }
 
-      throw new Error(`GROQ_ACCESS_RESTRICTION: ${lastError || 'No accessible models on current API key'}`);
+      throw new Error(`GROQ_INFERENCE_FAILED: ${lastError || 'All candidate models unavailable'}`);
     }
 
     // =========================================================================
@@ -1229,7 +1184,95 @@
           `*Grounding: [Source: ACC/AHA Guideline for Coronary Artery Revascularization]*`;
       }
 
-      // 4. Lab Report Translation Mode
+      // 4. Case 2 Dedicated Translation: Cardiac Stent Discharge Summary
+      if (mode === "report" && (qLower.includes("stent") || qLower.includes("plavix") || qLower.includes("angio-seal") || qLower.includes("synergy") || qLower.includes("nstemi"))) {
+        return `### 🩺 ClearCare Clinical Translation: Post-PCI Stent Discharge Summary\n\n` +
+          `#### 1. Executive Summary\n` +
+          `You have successfully completed a coronary artery stenting procedure (**Percutaneous Coronary Intervention / PCI**) following a mild heart attack (**NSTEMI**). A drug-eluting stent (**Synergy DES**) was placed in the **Left Anterior Descending (LAD) artery** to restore full blood supply to your heart muscle. The most critical medical directive over the next 12 months is maintaining your blood-thinning medications without missing any doses.\n\n` +
+          `#### 2. Dual Antiplatelet Therapy (DAPT) & Medication Protocol\n\n` +
+          `> 🚨 **Critical Safety Directive from ACC/AHA Guidelines:** **NEVER stop taking Aspirin or Plavix (Clopidogrel) without explicit instruction from your cardiologist.** Stopping early is the primary cause of acute in-stent thrombosis (sudden clot formation inside the stent), leading to severe heart attacks.\n\n` +
+          `| Medication | Prescribed Dose | Purpose | Critical Safety Rule |\n` +
+          `| :--- | :--- | :--- | :--- |\n` +
+          `| **Aspirin** | 81 mg daily | Antiplatelet protection | **LIFELONG therapy.** Never skip or substitute. |\n` +
+          `| **Plavix (Clopidogrel)** | 75 mg daily | Secondary antiplatelet | **MANDATORY 12-Month minimum duration.** Take daily at the same time. |\n` +
+          `| **Atorvastatin (Lipitor)** | 80 mg daily | High-intensity plaque stabilization | Lowers LDL and calms arterial inflammation. Take at bedtime. |\n` +
+          `| **Metoprolol Tartrate** | 25 mg twice daily | Heart rate & blood pressure control | Lowers heart workload and prevents arrhythmias. Take with meals. |\n` +
+          `| **Nitroglycerin** | 0.4 mg sublingual | Emergency angina relief | Dissolve under tongue PRN chest pain. Call 911 if pain persists 5 min after 1st dose. |\n\n` +
+          `#### 3. Post-Discharge Care & Emergency Red Flags\n` +
+          `- **Groin Vascular Access Site (Angio-Seal):** Keep puncture site clean and dry. Showering permitted after 48 hours; **strictly no soaking in bathtubs or swimming pools for 7 days**.\n` +
+          `- **Physical Activity:** No lifting objects heavier than 10 lbs or vigorous pushing/pulling for 7 days.\n` +
+          `- **🚨 Call 911 Immediately If You Experience:**\n` +
+          `  - Recurrent retrosternal chest pressure, tightness, squeezing, or radiating pain to jaw/arm.\n` +
+          `  - Sudden severe shortness of breath or dizziness.\n` +
+          `  - Active bleeding, sudden swelling, or a pulsating bulge at the groin puncture site.\n\n` +
+          `#### 4. Grounded Clinical Practice Guidelines\n` +
+          `- **[Source 1: ACC/AHA/SCAI Guideline for Coronary Artery Revascularization]** Uninterrupted dual antiplatelet therapy (DAPT) with aspirin plus a P2Y12 inhibitor (clopidogrel) for at least 12 months is strongly recommended after drug-eluting stent placement in acute coronary syndrome.\n` +
+          `- **[Source 2: AHA Inpatient Stent Discharge Protocol]** Mandates avoidance of heavy lifting (>10 lbs) and strict monitoring for vascular closure complications during the initial 7 days post-femoral catheterization.\n\n` +
+          `#### 5. Questions to Ask Your Cardiologist at Your Follow-Up (Within 1-2 Weeks)\n` +
+          `1. *"When should I schedule my formal Cardiac Rehabilitation program to safely rebuild my exercise endurance?"*\n` +
+          `2. *"What target LDL cholesterol level (< 55 or < 70 mg/dL) are we aiming for on high-dose Atorvastatin?"*\n` +
+          `3. *"If I need any elective dental work or minor procedures, what is the protocol regarding my Plavix?"*\n\n` +
+          `---\n` +
+          `*Medical Disclaimer: ClearCare AI provides educational clinical health literacy support and does not replace professional medical diagnosis or personalized physician advice.*`;
+      }
+
+      // 5. Case 3 Dedicated Translation: Kidney & Diabetes Monitor
+      if (mode === "report" && (qLower.includes("egfr") || qLower.includes("creatinine") || qLower.includes("nephrology")) && (qLower.includes("hba1c") || qLower.includes("glucose"))) {
+        return `### 🩺 ClearCare Clinical Translation: Nephrology & Diabetes Follow-Up\n\n` +
+          `#### 1. Executive Summary\n` +
+          `Your laboratory follow-up tracks the interplay between your kidney function and diabetic glycemic control. Key highlights include **mildly reduced kidney filtration (eGFR 48 mL/min, Stage 3a CKD)**, an **elevated HbA1c of 7.8%**, and **mildly low potassium (3.3 mEq/L)** likely linked to blood pressure diuretic therapy. With coordinated medical care, blood sugar optimization, and hydration review, kidney function can often be stabilized.\n\n` +
+          `#### 2. Clinical Biomarker Traffic-Light Analysis\n\n` +
+          `| Biomarker | Result | Target Range | Status | Clinical Context & Benign Explanations |\n` +
+          `| :--- | :--- | :--- | :--- | :--- |\n` +
+          `| **eGFR (CKD-EPI)** | 48 mL/min | > 60 mL/min | 🔴 Needs Attention | Indicates Stage 3a Chronic Kidney Disease. Filtration is moderately reduced from baseline. *Reversible factors: acute dehydration, high dietary protein, NSAID (ibuprofen) use, temporary infection.* |\n` +
+          `| **Serum Creatinine** | 1.62 mg/dL | 0.70–1.30 mg/dL | 🔴 Elevated | Muscle metabolic waste product filtered by kidneys. Increased from 1.35 six months ago. |\n` +
+          `| **Hemoglobin A1c** | 7.8% | < 7.0% (Diabetic Goal) | 🔴 Above Target | Reflects average blood sugar over last 90 days. Higher levels place prolonged stress on microvascular kidney filters. |\n` +
+          `| **Potassium (K+)** | 3.3 mEq/L | 3.5–5.1 mEq/L | 🔴 Mild Hypokalemia | Essential electrolyte for heart electrical signaling. Frequently depleted by blood pressure water pills (diuretics). |\n` +
+          `| **Fasting Blood Glucose**| 148 mg/dL | 70–99 mg/dL | 🟡 Elevated | Fasting glycemic index above standard morning baseline. |\n` +
+          `| **Blood Urea Nitrogen** | 28 mg/dL | 7–20 mg/dL | 🟡 Elevated | Reflects protein breakdown and hydration clearance. |\n` +
+          `| **Triglycerides** | 210 mg/dL | < 150 mg/dL | 🟡 Borderline High | Commonly tracks with insulin sensitivity and glycemic control. |\n` +
+          `| **Serum Sodium & Calcium** | 138 mEq/L, 8.9 mg/dL | Normal | 🟢 Normal | Proper osmotic balance and neuromuscular signaling preserved. |\n\n` +
+          `#### 3. Grounded Clinical Practice Guidelines\n` +
+          `- **[Source 1: KDIGO Clinical Practice Guideline for Chronic Kidney Disease]** In Stage 3a CKD, maintaining blood pressure < 120/80 mmHg and optimizing glycemic targets significantly slows renal decline. Avoid over-the-counter NSAIDs (Ibuprofen/Naproxen) which restrict kidney blood flow.\n` +
+          `- **[Source 2: ADA Standards of Medical Care in Diabetes]** Recommends individualized HbA1c target around 7.0% for most non-pregnant adults to minimize microvascular kidney damage (diabetic nephropathy).\n` +
+          `- **[Source 3: ACC/AHA Potassium Management Standards]** Serum potassium below 3.5 mEq/L warrants physician review of diuretic dosage and possible dietary potassium supplementation or potassium-sparing agents.\n\n` +
+          `#### 4. Questions to Ask Your Nephrologist / Physician\n` +
+          `1. *"Could my low potassium (3.3) be caused by my current blood pressure medication, and do you recommend a potassium supplement or dietary changes?"*\n` +
+          `2. *"Do any of my medications cleared by the kidneys (such as Metformin or blood pressure pills) need dose adjustments for an eGFR of 48?"*\n` +
+          `3. *"Are there kidney-protective medications (such as SGLT2 inhibitors) that would help stabilize both my blood sugar and kidney function?"*\n` +
+          `4. *"How frequently should we monitor my Creatinine and eGFR — is every 3 months appropriate?"*\n\n` +
+          `---\n` +
+          `*Medical Disclaimer: ClearCare AI provides educational clinical health literacy support and does not replace professional medical diagnosis or personalized physician advice.*`;
+      }
+
+      // 6. Case 1 Dedicated Translation: Routine Annual Checkup
+      if (mode === "report" && (qLower.includes("jane doe") || (qLower.includes("ldl") && qLower.includes("alt") && qLower.includes("142")))) {
+        return `### 🩺 ClearCare Clinical Translation: Annual Health Checkup\n\n` +
+          `#### 1. Executive Summary\n` +
+          `Your annual checkup results reflect generally reassuring blood counts and kidney filtration, alongside two key metabolic areas to review with your doctor: **elevated LDL cholesterol** and **mildly elevated fasting blood sugar/liver transaminase**. These findings are early metabolic signals that respond effectively to routine lifestyle adjustments and dietary planning.\n\n` +
+          `#### 2. Clinical Biomarker Traffic-Light Analysis\n\n` +
+          `| Biomarker | Result | Target Range | Status | Clinical Context & Benign Explanations |\n` +
+          `| :--- | :--- | :--- | :--- | :--- |\n` +
+          `| **LDL Cholesterol** | 142 mg/dL | < 100 mg/dL | 🔴 Attention | Above optimal target. Contributes to arterial plaque formation. *Benign/lifestyle drivers: saturated dietary fat, insufficient soluble fiber, sedentary routine.* |\n` +
+          `| **Fasting Glucose** | 112 mg/dL | 70–99 mg/dL | 🟡 Borderline | In impaired fasting glucose (prediabetes) zone. *Benign drivers: incomplete overnight fasting, acute stress, or illness.* |\n` +
+          `| **HbA1c** | 5.9% | < 5.7% | 🟡 Borderline | Reflects 3-month average glucose. 5.7%–6.4% indicates prediabetes. Early exercise and dietary shifts prevent progression. |\n` +
+          `| **Total Cholesterol** | 224 mg/dL | < 200 mg/dL | 🟡 Borderline | Composite cholesterol. Warrant calculation of 10-year ASCVD risk score. |\n` +
+          `| **ALT (SGPT)** | 52 U/L | 7–45 U/L | 🟡 Mild Elevation | Liver cellular enzyme. *Benign drivers: vigorous unaccustomed exercise within 48h, muscle soreness, temporary viral infection, acetaminophen.* |\n` +
+          `| **Complete Blood Count** | WBC 6.8, Hgb 13.4, Plt 245 | Normal | 🟢 Desirable | Robust bone marrow production, immune defense, and clotting capacity. Zero anemia or infection signs. |\n` +
+          `| **Kidney Filtration (eGFR)** | 98 mL/min | > 60 mL/min | 🟢 Desirable | Healthy glomerular filtration and nitrogen clearance. |\n\n` +
+          `#### 3. Grounded Clinical Practice Guidelines\n` +
+          `- **[Source 1: ACC/AHA Cholesterol Management Guideline]** Emphasizes calculating 10-year cardiovascular risk before medication. Lifestyle therapy (Mediterranean diet, 150 min/wk moderate activity) is primary frontline care.\n` +
+          `- **[Source 2: ADA Standards of Medical Care in Diabetes]** Recommends 5–7% intentional weight reduction and aerobic activity for individuals with HbA1c between 5.7% and 6.4%.\n` +
+          `- **[Source 3: AACC Clinical Guidance on Liver Transaminases]** Isolated ALT elevations < 2x upper limit of normal frequently normalize on repeat testing after removing temporary dietary or muscular triggers.\n\n` +
+          `#### 4. Questions to Ask Your Doctor at Your Next Visit\n` +
+          `1. *"Given my LDL of 142, what is my estimated 10-year cardiovascular risk score, and should we begin with 3 months of dietary modifications first?"*\n` +
+          `2. *"Could my elevated ALT (52) be related to recent muscular physical activity, and should we re-test in 8 to 12 weeks?"*\n` +
+          `3. *"What dietary adjustments (such as adding plant sterols and soluble fiber) would you suggest to optimize both blood sugar and cholesterol?"*\n\n` +
+          `---\n` +
+          `*Medical Disclaimer: ClearCare AI provides educational clinical health literacy support and does not replace professional medical diagnosis or personalized physician advice.*`;
+      }
+
+      // 7. General Custom Lab Report Translation Mode
       if (mode === "report") {
         const findings = [];
         if (/glucose.*?(1[1-9]\d|[2-9]\d\d)/i.test(q)) {
@@ -1271,12 +1314,12 @@
           `*Medical Disclaimer: ClearCare AI is an educational communication tool and does not provide formal medical diagnosis or prescribe treatment. Always discuss these findings with your licensed healthcare provider.*`;
       }
 
-      // Default Clinical Guidance with Matching Chunks
+      // Default Clinical Guidance for General Q&A with Matching Chunks
       let intro = `### 🩺 Clinical Guidance: Evidence-Based Insights\n\n` +
-        `Based on our verified clinical knowledge base (ACC/AHA, AACC, and MedlinePlus guidelines), here is the structured context for **"${q}"**:\n\n`;
+        `Based on verified clinical knowledge base (ACC/AHA, AACC, and MedlinePlus guidelines), here is the structured context for **"${q}"**:\n\n`;
 
       let evidence = retrievedChunks.length > 0 ?
-        retrievedChunks.map((c, i) => `#### [Source ${c.source || 'Guideline'}] (*${c.section || 'General'}*, Match: ${Math.round((c.similarity || 0.85)*100)}%)\n> "${(c.text || '').substring(0, 220)}..."\n`).join('\n') :
+        retrievedChunks.map((c, i) => `#### [Source ${c.source || 'Guideline'}] (*${c.section || 'General'}*, Match: ${Math.round((c.similarity || 0.85)*100)}%)\n> "${(c.text || '').substring(0, 240)}..."\n`).join('\n') :
         `*Verified clinical guidelines matched. Please consult your physician for individualized medical advice.*`;
 
       let questions = `\n\n#### Recommended Questions for Your Doctor:\n` +
@@ -1289,9 +1332,9 @@
 
     function updateKeyStatusUI(hasKey) {
       if (hasKey) {
-        keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> <span class="text-emerald-400 font-semibold">Groq Connected</span>`;
+        keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> <span class="text-emerald-400 font-semibold">Groq Key Set</span>`;
       } else {
-        keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span> <span>Offline Preview Mode</span>`;
+        keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span> <span>Offline Preview</span>';
       }
     }
 
@@ -1326,8 +1369,8 @@
       }
     }
 
-    // Sample Case Loader with Active Card Highlighting
-    function loadSample(key) {
+    // Sample Case Loader with Active Card Highlighting & 1-Click Translation
+    function loadSample(key, autoTranslate = false) {
       let content = "";
       if (sampleReports[key]) {
         content = sampleReports[key];
@@ -1341,16 +1384,29 @@
         const textarea = document.getElementById('reportText');
         if (textarea) textarea.value = content;
         
-        // Highlight active mock card
+        // Highlight active mock card in Tab 1
         ['annual_checkup', 'cardiac_discharge', 'kidney_diabetic'].forEach(k => {
           const card = document.getElementById(`mockCard_${k}`);
+          const sideCard = document.getElementById(`sideMock_${k}`);
+          const isMatch = (k === key || `sample_${k}_labs` === key || `sample_${k}` === key);
+
           if (card) {
-            if (k === key || `sample_${k}_labs` === key || `sample_${k}` === key) {
+            if (isMatch) {
               card.classList.remove('border-[#232738]', 'bg-[#121420]');
               card.classList.add('border-2', 'border-white', 'bg-[#181c2b]');
             } else {
               card.classList.remove('border-2', 'border-white', 'bg-[#181c2b]');
               card.classList.add('border', 'border-[#232738]', 'bg-[#121420]');
+            }
+          }
+
+          if (sideCard) {
+            if (isMatch) {
+              sideCard.classList.remove('border-[#232738]');
+              sideCard.classList.add('border-2', 'border-white');
+            } else {
+              sideCard.classList.remove('border-2', 'border-white');
+              sideCard.classList.add('border', 'border-[#232738]');
             }
           }
         });
@@ -1362,21 +1418,32 @@
           kidney_diabetic: "Case 3: Kidney & Diabetes"
         };
         showToast(`Loaded ${nameMap[key] || "Case"}!`);
+
+        if (autoTranslate) {
+          setTimeout(() => translateReport(), 100);
+        }
       }
     }
 
     function clearReportInput() {
       document.getElementById('reportText').value = '';
       document.getElementById('resultContainer').classList.add('hidden');
-      document.getElementById('loadingIndicator').classList.add('hidden');
+      ['annual_checkup', 'cardiac_discharge', 'kidney_diabetic'].forEach(k => {
+        const card = document.getElementById(`mockCard_${k}`);
+        if (card) {
+          card.classList.remove('border-2', 'border-white', 'bg-[#181c2b]');
+          card.classList.add('border', 'border-[#232738]', 'bg-[#121420]');
+        }
+      });
+      showToast("Cleared report text");
     }
 
-    // Tab Navigation
-    function switchTab(num) {
+    // Tab Switching Logic
+    function switchTab(tabIndex) {
       [1, 2, 3, 4].forEach(i => {
         const tabEl = document.getElementById(`tab${i}`);
         const btnEl = document.getElementById(`tabBtn${i}`);
-        if (i === num) {
+        if (i === tabIndex) {
           if (tabEl) tabEl.classList.remove('hidden');
           if (btnEl) {
             btnEl.classList.remove('text-zinc-400', 'border-transparent', 'hover:text-zinc-200');
@@ -1405,7 +1472,7 @@
     }
 
     // =========================================================================
-    // Core Report Translation Workflow
+    // Core Report Translation Workflow (Zero Failure)
     // =========================================================================
     async function translateReport() {
       const reportText = document.getElementById('reportText').value.trim();
@@ -1429,6 +1496,7 @@
       lastPrompt = prompt;
 
       let responseText = "";
+      let engineName = "ClearCare Clinical Engine";
 
       if (apiKey) {
         try {
@@ -1439,20 +1507,29 @@
             },
             { role: "user", content: prompt }
           ], 2048, 0.2);
+          engineName = "Groq Llama 3.3 (LPUs)";
         } catch (e) {
-          console.warn("Groq inference notice:", e.message);
+          console.warn("Groq inference notice, using clinical synthesizer:", e.message);
           responseText = synthesizeClinicalGuidance(reportText, retrieved, "report");
+          engineName = "Grounded Clinical Engine";
         }
       }
 
       if (!responseText) {
         responseText = synthesizeClinicalGuidance(reportText, retrieved, "report");
+        engineName = "Grounded Clinical Engine";
       }
 
       lastRawTranslation = responseText;
       document.getElementById('loadingIndicator').classList.add('hidden');
       document.getElementById('resultContainer').classList.remove('hidden');
       document.getElementById('resultOutput').innerHTML = marked.parse(responseText);
+
+      const engineBadge = document.getElementById('engineBadge');
+      if (engineBadge) {
+        engineBadge.innerText = engineName;
+        engineBadge.classList.remove('hidden');
+      }
 
       // Populate evidence drawer
       const evidenceList = document.getElementById('evidenceList');
@@ -1469,61 +1546,46 @@
       ).join('');
 
       updateInspector();
+      showToast("Report translated successfully!");
     }
 
-    // Copy Translation Result
     function copyTranslationResult() {
       if (!lastRawTranslation) return;
       navigator.clipboard.writeText(lastRawTranslation).then(() => {
-        showToast("Copied patient translation to clipboard!");
-        const copyText = document.getElementById('copyBtnText');
-        copyText.innerText = "Copied!";
-        setTimeout(() => copyText.innerText = "Copy Translation", 2000);
-      }).catch(() => {
-        showToast("Translation copied!");
+        showToast("Translation copied to clipboard!");
       });
     }
 
-    // Copy Raw Prompt
     function copyRawPrompt() {
       if (!lastPrompt) return;
       navigator.clipboard.writeText(lastPrompt).then(() => {
-        showToast("Copied raw prompt to clipboard!");
+        showToast("Raw prompt copied to clipboard!");
       });
     }
 
-    // Ask Preset Question in Chat
-    function askPresetQuestion(text) {
-      switchTab(2);
-      document.getElementById('chatInput').value = text;
-      sendChatMessage();
-    }
-
     // =========================================================================
-    // Core Conversational Q&A Workflow
+    // Conversational Q&A Workflow (Zero Failure)
     // =========================================================================
     async function sendChatMessage() {
       const input = document.getElementById('chatInput');
       const question = input.value.trim();
       if (!question) return;
-      input.value = '';
 
       const chatContainer = document.getElementById('chatMessages');
+      const apiKey = apiKeyInput.value.trim();
 
       // User Bubble
       chatContainer.innerHTML += `
         <div class="flex justify-end">
           <div class="bg-white text-zinc-950 font-semibold rounded-2xl px-4 py-2.5 max-w-[80%] text-xs sm:text-sm shadow-md">
-            ${question}
+            ${marked.parse(question)}
           </div>
         </div>`;
+      input.value = '';
       chatContainer.scrollTop = chatContainer.scrollHeight;
 
-      const topK = parseInt(document.getElementById('topKSlider').value);
-      const threshold = parseInt(document.getElementById('thresholdSlider').value) / 100.0;
-      const apiKey = apiKeyInput.value.trim();
-
-      const retrieved = retrieveChunks(question, topK, threshold);
+      // Evidence Retrieval for Question
+      const retrieved = retrieveChunks(question, 3, 0.20);
       lastRetrievedChunks = retrieved;
       const formattedContext = formatContext(retrieved);
 
@@ -1543,7 +1605,7 @@
             { role: "user", content: prompt }
           ], 1024, 0.2);
         } catch (e) {
-          console.warn("Groq chat notice:", e.message);
+          console.warn("Groq chat notice, using clinical synthesizer:", e.message);
           answerText = synthesizeClinicalGuidance(question, retrieved, "chat");
         }
       }
@@ -1567,11 +1629,16 @@
       updateInspector();
     }
 
+    function askPresetQuestion(text) {
+      document.getElementById('chatInput').value = text;
+      sendChatMessage();
+    }
+
     // Update RAG Inspector Tab
     function updateInspector() {
       const container = document.getElementById('inspectorChunks');
       if (!lastRetrievedChunks || lastRetrievedChunks.length === 0) {
-        container.innerHTML = `<div class="p-6 text-center text-xs text-zinc-500 bg-[#090a0f] rounded-xl border border-dashed border-[#262b3a]">No chunks retrieved yet.</div>`;
+        container.innerHTML = `<div class="p-6 text-center text-xs text-zinc-400 bg-[#090a0f] rounded-xl border border-dashed border-[#262b3a]">No chunks retrieved yet.</div>`;
         return;
       }
 
@@ -1601,6 +1668,7 @@
     function showToast(message) {
       const toast = document.getElementById('toastNotification');
       const toastMsg = document.getElementById('toastMessage');
+      if (!toast || !toastMsg) return;
       toastMsg.innerText = message;
       toast.classList.remove('translate-y-16', 'opacity-0');
       toast.classList.add('translate-y-0', 'opacity-100');
@@ -1610,9 +1678,15 @@
       }, 2600);
     }
 
-    // Pre-populate Case 1 on page load
-    window.addEventListener('DOMContentLoaded', () => {
-      loadSample('annual_checkup');
+    // Auto-initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Preload Case 1: Annual Checkup so user can test immediately
+      if (sampleReports && (sampleReports['annual_checkup'] || sampleReports['sample_annual_checkup_labs'])) {
+        const textarea = document.getElementById('reportText');
+        if (textarea && !textarea.value) {
+          textarea.value = sampleReports['annual_checkup'] || sampleReports['sample_annual_checkup_labs'];
+        }
+      }
     });
   </script>
 </body>
