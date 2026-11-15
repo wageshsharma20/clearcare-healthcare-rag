@@ -8,23 +8,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ClearCare AI — Evidence-Based Clinical Lab &amp; Discharge Translator</title>
   
-  <!-- Fonts: Inter & JetBrains Mono -->
+  <!-- Fonts: EB Garamond (Display Serif), Host Grotesk (Body Sans), JetBrains Mono (Code) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS & Marked.js -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <script>
+    <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
+            serif: ['"EB Garamond"', 'Georgia', 'serif'],
+            sans: ['"Host Grotesk"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            piano: {
+              DEFAULT: '#000000',
+              surface: '#0b0b0b',
+              surfaceAlt: '#121212',
+              card: '#0f0f0f',
+              border: '#1d1d1d',
+              borderLighter: '#262626',
+            },
+            mint: {
+              DEFAULT: '#6ee3ad',
+              glow: 'rgba(110, 227, 173, 0.15)',
+              dim: '#489f78',
+              dark: '#142a1f'
+            },
+            btn: {
+              fill: '#1c1c1c',
+              hover: '#282828',
+              text: '#fcfcfd'
+            }
           }
         }
       }
@@ -33,88 +55,104 @@
 
   <style>
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #141722;
-      color: #e2e8f0;
+      font-family: 'Host Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #000000;
+      color: #f9f8f9;
       -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+    }
+    .display-serif {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-feature-settings: "liga" 1, "dlig" 1;
+      letter-spacing: -0.025em;
     }
     .clinical-card {
-      background: #1c212e;
-      border: 1px solid #2a3246;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+      background: #0b0b0b;
+      border: 1px solid #1d1d1d;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+      transition: border-color 0.2s ease;
+    }
+    .clinical-card:hover {
+      border-color: #262626;
+    }
+    .pill-btn {
+      border-radius: 9999px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .tab-active {
       color: #ffffff !important;
-      border-bottom: 2px solid #ffffff !important;
-      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 2px solid #6ee3ad !important;
+      background: rgba(110, 227, 173, 0.04);
     }
-    .markdown-body { color: #d4d4d8; font-size: 0.9rem; line-height: 1.65; }
-    .markdown-body h1 { font-size: 1.45rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #ffffff; }
-    .markdown-body h2 { font-size: 1.25rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #ffffff; border-bottom: 1px solid #232736; padding-bottom: 6px; }
-    .markdown-body h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.35rem; color: #f4f4f5; }
-    .markdown-body h4 { font-size: 0.95rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; color: #e4e4e7; }
-    .markdown-body p { margin-bottom: 0.75rem; line-height: 1.65; color: #d4d4d8; font-size: 0.9rem; }
-    .markdown-body ul { list-style-type: disc; padding-left: 1.4rem; margin-bottom: 0.85rem; font-size: 0.9rem; color: #d4d4d8; }
-    .markdown-body ol { list-style-type: decimal; padding-left: 1.4rem; margin-bottom: 0.85rem; font-size: 0.9rem; color: #d4d4d8; }
+    .markdown-body { color: #d6d6d5; font-size: 0.9rem; line-height: 1.65; }
+    .markdown-body h1 { font-family: 'EB Garamond', Georgia, serif; font-size: 1.6rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #ffffff; }
+    .markdown-body h2 { font-family: 'EB Garamond', Georgia, serif; font-size: 1.35rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #ffffff; border-bottom: 1px solid #1d1d1d; padding-bottom: 6px; }
+    .markdown-body h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 1.2rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.35rem; color: #f4f4f5; }
+    .markdown-body h4 { font-size: 0.95rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; color: #e5e5e4; }
+    .markdown-body p { margin-bottom: 0.75rem; line-height: 1.65; color: #d6d6d5; font-size: 0.9rem; }
+    .markdown-body ul { list-style-type: disc; padding-left: 1.4rem; margin-bottom: 0.85rem; font-size: 0.9rem; color: #d6d6d5; }
+    .markdown-body ol { list-style-type: decimal; padding-left: 1.4rem; margin-bottom: 0.85rem; font-size: 0.9rem; color: #d6d6d5; }
     .markdown-body li { margin-bottom: 0.35rem; line-height: 1.55; }
     .markdown-body strong { color: #ffffff; font-weight: 600; }
-    .markdown-body table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 1.25rem 0; font-size: 0.85rem; border: 1px solid #232736; border-radius: 8px; overflow: hidden; background: #0c0e15; }
-    .markdown-body th, .markdown-body td { border-bottom: 1px solid #1c202d; padding: 8px 12px; text-align: left; }
-    .markdown-body th { background: #141724; font-weight: 600; color: #ffffff; border-bottom: 2px solid #232736; }
+    .markdown-body table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 1.25rem 0; font-size: 0.85rem; border: 1px solid #1d1d1d; border-radius: 12px; overflow: hidden; background: #060606; }
+    .markdown-body th, .markdown-body td { border-bottom: 1px solid #171717; padding: 10px 14px; text-align: left; }
+    .markdown-body th { background: #0c0c0c; font-family: 'EB Garamond', Georgia, serif; font-size: 0.95rem; font-weight: 600; color: #ffffff; border-bottom: 2px solid #1d1d1d; }
     .markdown-body tr:last-child td { border-bottom: none; }
-    .markdown-body tr:hover td { background-color: #121520; }
-    .markdown-body blockquote { border-left: 4px solid #ffffff; padding: 0.6rem 1rem; color: #d4d4d8; background: #12141e; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 0.88rem; border-top: 1px solid #1d212e; border-right: 1px solid #1d212e; border-bottom: 1px solid #1d212e; }
-    .markdown-body code { background: #161824; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #93c5fd; border: 1px solid #24293a; }
+    .markdown-body tr:hover td { background-color: #0d0d0d; }
+    .markdown-body blockquote { border-left: 3px solid #6ee3ad; padding: 0.7rem 1.1rem; color: #e5e5e4; background: #0c1510; border-radius: 0 10px 10px 0; margin-bottom: 0.85rem; font-size: 0.88rem; border-top: 1px solid #1b3528; border-right: 1px solid #1b3528; border-bottom: 1px solid #1b3528; }
+    .markdown-body code { background: #111111; padding: 2px 7px; border-radius: 9999px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #6ee3ad; border: 1px solid #222222; }
     
+    /* Scrollbars */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #07080c; }
-    ::-webkit-scrollbar-thumb { background: #1f2538; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #2f3854; }
+    ::-webkit-scrollbar-track { background: #000000; }
+    ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2a2a2a; }
   </style>
 </head>
-<body class="bg-[#141722] text-zinc-200 min-h-screen flex flex-col font-sans selection:bg-zinc-800 selection:text-white">
+<body class="bg-black text-[#f9f8f9] min-h-screen flex flex-col font-sans selection:bg-emerald-950 selection:text-emerald-200">
 
-  <!-- Header -->
-  <header class="bg-[#181d2a]/95 backdrop-blur-md border-b border-[#273044] sticky top-0 z-40 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <!-- Header (Masthead Brand Row in Piano Black) -->
+  <header class="bg-black/95 backdrop-blur-md border-b border-[#1d1d1d] sticky top-0 z-40 shadow-lg">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
       <div class="flex items-center space-x-3.5">
-        <div class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center text-white shadow-md">
-          <i class="fas fa-heart-pulse text-lg"></i>
+        <div class="w-9 h-9 rounded-full bg-[#121212] border border-[#262626] flex items-center justify-center text-[#6ee3ad] shadow-inner">
+          <i class="fas fa-heart-pulse text-sm"></i>
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-base sm:text-lg font-bold text-white tracking-tight leading-tight">ClearCare AI</h1>
-            <span class="inline-flex items-center gap-1 bg-emerald-950/80 text-emerald-300 border border-emerald-800/80 text-[10px] font-semibold px-2 py-0.5 rounded-full">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              RAG Pipeline Online
+          <div class="flex items-center gap-2.5">
+            <h1 class="display-serif text-2xl font-medium tracking-tight text-white leading-tight">ClearCare AI</h1>
+            <span class="inline-flex items-center gap-1.5 bg-[#121815] text-[#6ee3ad] border border-[#1b3528] text-[11px] font-medium px-2.5 py-0.5 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#6ee3ad] animate-pulse"></span>
+              Grounded RAG
             </span>
           </div>
-          <p class="text-xs text-zinc-400 font-medium">Evidence-Based Patient Health Literacy &amp; Clinical Lab Translator</p>
+          <p class="text-xs text-[#a1a1a0] font-normal">Evidence-Based Patient Health Literacy &amp; Clinical Lab Translator</p>
         </div>
       </div>
-      <div class="flex items-center space-x-2 sm:space-x-3">
-        <a href="clearcare_piano_black.html" class="text-xs bg-[#222838] hover:bg-[#2c3447] text-white px-3 py-1.5 rounded-lg font-medium border border-[#313a4e] transition-all shadow-xs flex items-center gap-1.5">
-          <i class="fas fa-layer-group text-amber-400"></i> <span class="hidden sm:inline">Landing Page</span>
+      <div class="flex items-center space-x-3">
+        <a href="clearcare_piano_black.html" class="pill-btn text-xs bg-[#111111] hover:bg-[#1c1c1c] text-[#e5e5e4] px-4 py-2 border border-[#262626] transition flex items-center gap-2 shadow-sm">
+          <i class="fas fa-layer-group text-[#6ee3ad] text-xs"></i> <span class="hidden sm:inline">Landing Page</span>
         </a>
-        <button onclick="window.location.reload(true)" title="Force Reload Latest Version" class="text-xs bg-[#222838] hover:bg-[#2c3447] text-zinc-300 px-2.5 py-1.5 rounded-lg border border-[#313a4e] transition flex items-center gap-1.5 shadow-xs">
+        <button onclick="window.location.reload(true)" title="Force Reload Latest Version" class="pill-btn text-xs bg-[#111111] hover:bg-[#1c1c1c] text-zinc-300 px-3.5 py-2 border border-[#262626] transition flex items-center gap-1.5">
           <i class="fas fa-arrows-rotate text-xs"></i> <span class="hidden md:inline">Refresh</span>
         </button>
-        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="text-xs bg-zinc-900 hover:bg-black text-white px-3 py-1.5 rounded-lg font-medium border border-zinc-700 transition-all shadow-xs flex items-center gap-1.5 active:scale-95">
-          <i class="fab fa-github text-white"></i> <span class="hidden sm:inline">GitHub Repo</span>
+        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="pill-btn text-xs bg-[#1c1c1c] hover:bg-[#282828] text-[#fcfcfd] px-4 py-2 font-medium border border-[#333333] transition flex items-center gap-2 active:scale-95">
+          <i class="fab fa-github text-xs"></i> <span class="hidden sm:inline">GitHub</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Medical Disclaimer Banner -->
-  <div class="bg-amber-950/30 border-b border-amber-900/40 px-4 py-2 text-xs text-amber-300/90 flex items-center justify-center gap-2 shadow-xs">
-    <i class="fas fa-shield-halved text-amber-400 text-sm"></i>
-    <span><strong>Educational Clinical Decision Support:</strong> ClearCare AI translates medical documentation using verified clinical guidelines (MedlinePlus, ACC/AHA, AACC). It does not provide formal medical diagnoses or alter prescriptions. Always consult your licensed physician.</span>
+  <!-- Medical Disclaimer Banner (Subtle, High-Legibility) -->
+  <div class="bg-[#0c0e0d] border-b border-[#1b2b22] px-4 py-2.5 text-xs text-zinc-300 flex items-center justify-center gap-2">
+    <i class="fas fa-shield-halved text-[#6ee3ad] text-xs"></i>
+    <span><strong>Educational Clinical Decision Support:</strong> ClearCare AI translates laboratory data into patient health literacy using verified practice guidelines (MedlinePlus, ACC/AHA, AACC). It does not provide formal diagnoses or alter prescriptions.</span>
   </div>
 
   <!-- Main Container -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
 
     <!-- Left Sidebar: Controls -->
     <aside class="lg:col-span-4 space-y-5 self-start">
@@ -125,7 +163,7 @@
           <h2 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
             <i class="fas fa-key text-white"></i> 1. Groq LLM Authentication
           </h2>
-          <span class="text-[10px] text-zinc-400 font-mono bg-[#222838] px-1.5 py-0.5 rounded border border-[#313a4e]">v1.6 Balanced Slate (50% Black Reduction)</span>
+          <span class="text-[10px] text-[#6ee3ad] font-mono bg-[#121815] px-2 py-0.5 rounded-full border border-[#1b3528]">v2.0 Piano Black</span>
         </div>
         <div class="space-y-3">
           <div>
@@ -136,7 +174,7 @@
               </span>
             </div>
             <div class="relative">
-              <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-xs font-mono px-3 py-2 bg-[#181d29] border border-[#313a4e] text-zinc-100 rounded-lg focus:ring-1 focus:ring-white focus:border-white outline-none transition pr-8">
+              <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-xs font-mono px-3 py-2 bg-[#080808] border border-[#1d1d1d] text-zinc-100 rounded-lg focus:ring-1 focus:ring-white focus:border-white outline-none transition pr-8">
               <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-2.5 top-2.5 text-zinc-400 hover:text-white transition">
                 <i id="eyeIcon" class="fas fa-eye text-xs"></i>
               </button>
@@ -144,7 +182,7 @@
           </div>
 
           <div class="flex items-center justify-between gap-2 pt-1">
-            <button onclick="verifyGroqApiKey()" class="text-xs bg-[#222838] hover:bg-[#2c3447] text-white px-3 py-1.5 rounded-lg border border-[#313a4e] font-semibold transition flex items-center gap-1.5 shadow-2xs active:scale-95">
+            <button onclick="verifyGroqApiKey()" class="text-xs bg-[#141414] hover:bg-[#202020] text-white px-3 py-1.5 rounded-lg border border-[#1d1d1d] font-semibold transition flex items-center gap-1.5 shadow-2xs active:scale-95">
               <i class="fas fa-vial-circle-check text-xs"></i> <span>Test Key</span>
             </button>
             <a href="https://console.groq.com/keys" target="_blank" class="text-[11px] text-zinc-400 hover:text-white flex items-center gap-1 transition">
@@ -156,7 +194,7 @@
 
           <div class="pt-2 border-t border-[#1e2230]">
             <label class="block text-xs font-semibold text-zinc-300 mb-1">Inference Model</label>
-            <select id="modelSelect" class="w-full text-xs bg-[#181d29] border border-[#313a4e] text-zinc-200 rounded-lg p-2 focus:ring-1 focus:ring-white focus:border-white outline-none transition">
+            <select id="modelSelect" class="w-full text-xs bg-[#080808] border border-[#1d1d1d] text-zinc-200 rounded-lg p-2 focus:ring-1 focus:ring-white focus:border-white outline-none transition">
               <option value="llama-3.3-70b-versatile">Llama 3.3 70B Versatile (Recommended)</option>
               <option value="openai/gpt-oss-120b">OpenAI GPT-OSS 120B (Groq)</option>
               <option value="openai/gpt-oss-20b">OpenAI GPT-OSS 20B (Groq Fast)</option>
@@ -171,40 +209,40 @@
         </div>
       </div>
 
-      <!-- 2. Clinical Case Benchmarks Sidebar Picker -->
+            <!-- 2. Clinical Case Benchmarks Sidebar Picker -->
       <div class="clinical-card p-5">
-        <h2 class="text-xs font-bold text-white uppercase tracking-wider mb-3 flex items-center gap-2">
-          <i class="fas fa-folder-open text-white"></i> 2. Clinical Case Benchmarks
+        <h2 class="display-serif text-sm font-medium text-white tracking-tight mb-3 flex items-center gap-2">
+          <i class="fas fa-folder-open text-[#6ee3ad] text-xs"></i> 2. Clinical Case Benchmarks
         </h2>
         <div class="space-y-2.5">
-          <button onclick="loadSample('annual_checkup')" id="sideMock_annual_checkup" class="w-full text-left bg-[#222838] hover:bg-[#2c3447] border-2 border-white p-3 rounded-xl transition group shadow-sm">
+          <button onclick="loadSample('annual_checkup')" id="sideMock_annual_checkup" class="w-full text-left bg-[#141414] hover:bg-[#1a1a1a] border border-[#6ee3ad]/70 p-3 rounded-xl transition group shadow-sm">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-semibold text-xs text-white flex items-center gap-1.5">
+              <span class="font-medium text-xs text-white flex items-center gap-1.5">
                 <span>🩺</span> Routine Annual Checkup
               </span>
-              <span class="text-[9px] font-bold text-amber-300 bg-amber-950/90 border border-amber-800/80 px-1.5 py-0.5 rounded">CMP + Lipid</span>
+              <span class="text-[10px] font-mono font-medium text-[#f59e0b] bg-[#1a1508] border border-[#3d2f0a] px-2 py-0.5 rounded-full">CMP + Lipid</span>
             </div>
-            <p class="text-zinc-400 text-[11px] leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
+            <p class="text-[#a1a1a0] text-[11px] leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
           </button>
 
-          <button onclick="loadSample('cardiac_discharge')" id="sideMock_cardiac_discharge" class="w-full text-left bg-[#222838] hover:bg-[#2c3447] border border-[#313a4e] p-3 rounded-xl transition group shadow-sm">
+          <button onclick="loadSample('cardiac_discharge')" id="sideMock_cardiac_discharge" class="w-full text-left bg-[#0b0b0b] hover:bg-[#121212] border border-[#1d1d1d] hover:border-[#2a2a2a] p-3 rounded-xl transition group shadow-sm">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-semibold text-xs text-white flex items-center gap-1.5">
+              <span class="font-medium text-xs text-white flex items-center gap-1.5">
                 <span>❤️</span> Post-PCI Stent Discharge
               </span>
-              <span class="text-[9px] font-bold text-rose-300 bg-rose-950/90 border border-rose-800/80 px-1.5 py-0.5 rounded">Cardiology DAPT</span>
+              <span class="text-[10px] font-mono font-medium text-[#f87171] bg-[#1a0a0a] border border-[#3d1414] px-2 py-0.5 rounded-full">Cardiology DAPT</span>
             </div>
-            <p class="text-zinc-400 text-[11px] leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
+            <p class="text-[#a1a1a0] text-[11px] leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
           </button>
 
-          <button onclick="loadSample('kidney_diabetic')" id="sideMock_kidney_diabetic" class="w-full text-left bg-[#222838] hover:bg-[#2c3447] border border-[#313a4e] p-3 rounded-xl transition group shadow-sm">
+          <button onclick="loadSample('kidney_diabetic')" id="sideMock_kidney_diabetic" class="w-full text-left bg-[#0b0b0b] hover:bg-[#121212] border border-[#1d1d1d] hover:border-[#2a2a2a] p-3 rounded-xl transition group shadow-sm">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-semibold text-xs text-white flex items-center gap-1.5">
+              <span class="font-medium text-xs text-white flex items-center gap-1.5">
                 <span>🧪</span> Kidney &amp; Diabetes Monitor
               </span>
-              <span class="text-[9px] font-bold text-indigo-300 bg-indigo-950/90 border border-indigo-800/80 px-1.5 py-0.5 rounded">Renal eGFR</span>
+              <span class="text-[10px] font-mono font-medium text-[#818cf8] bg-[#0f1026] border border-[#1e224d] px-2 py-0.5 rounded-full">Renal eGFR</span>
             </div>
-            <p class="text-zinc-400 text-[11px] leading-tight">Creatinine (1.62), eGFR (48), Low K+ (3.3)</p>
+            <p class="text-[#a1a1a0] text-[11px] leading-tight">Creatinine (1.62), eGFR (48), Low K+ (3.3)</p>
           </button>
         </div>
       </div>
@@ -218,18 +256,18 @@
           <div>
             <div class="flex justify-between items-center text-xs mb-1.5">
               <span class="font-semibold text-zinc-300">Top-K Retrieved Chunks</span>
-              <span id="topKVal" class="font-mono font-bold text-white bg-[#1a1d29] border border-zinc-700 px-2 py-0.5 rounded text-xs">4</span>
+              <span id="topKVal" class="font-mono font-bold text-white bg-[#090909] border border-zinc-700 px-2 py-0.5 rounded text-xs">4</span>
             </div>
-            <input type="range" id="topKSlider" min="2" max="8" value="4" class="w-full h-1.5 bg-[#1a1d29] rounded-lg appearance-none cursor-pointer accent-white" oninput="document.getElementById('topKVal').innerText = this.value">
+            <input type="range" id="topKSlider" min="2" max="8" value="4" class="w-full h-1.5 bg-[#090909] rounded-lg appearance-none cursor-pointer accent-[#6ee3ad]" oninput="document.getElementById('topKVal').innerText = this.value">
             <span class="text-[10px] text-zinc-400">Controls evidence density passed to the LLM</span>
           </div>
 
           <div>
             <div class="flex justify-between items-center text-xs mb-1.5">
               <span class="font-semibold text-zinc-300">Cosine Threshold</span>
-              <span id="thresholdVal" class="font-mono font-bold text-white bg-[#1a1d29] border border-zinc-700 px-2 py-0.5 rounded text-xs">0.25</span>
+              <span id="thresholdVal" class="font-mono font-bold text-white bg-[#090909] border border-zinc-700 px-2 py-0.5 rounded text-xs">0.25</span>
             </div>
-            <input type="range" id="thresholdSlider" min="15" max="55" value="25" class="w-full h-1.5 bg-[#1a1d29] rounded-lg appearance-none cursor-pointer accent-white" oninput="document.getElementById('thresholdVal').innerText = (this.value/100).toFixed(2)">
+            <input type="range" id="thresholdSlider" min="15" max="55" value="25" class="w-full h-1.5 bg-[#090909] rounded-lg appearance-none cursor-pointer accent-[#6ee3ad]" oninput="document.getElementById('thresholdVal').innerText = (this.value/100).toFixed(2)">
             <span class="text-[10px] text-zinc-400">Minimum similarity score to qualify as clinical evidence</span>
           </div>
         </div>
@@ -238,15 +276,15 @@
       <!-- 4. Clinical Knowledge Base Index -->
       <div class="clinical-card p-5">
         <div class="flex items-center justify-between mb-2">
-          <h2 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-            <i class="fas fa-database text-white"></i> Clinical Guidelines
+          <h2 class="display-serif text-sm font-medium text-white tracking-tight flex items-center gap-2">
+            <i class="fas fa-database text-[#6ee3ad] text-xs"></i> Clinical Guidelines
           </h2>
           <span class="text-[11px] font-mono text-zinc-400">36 Chunks</span>
         </div>
         <p class="text-[11px] text-zinc-300 leading-relaxed mb-2.5">
           Indexed from <strong>5 authoritative clinical guidelines</strong> (ACC/AHA, AACC, MedlinePlus, Joint Commission).
         </p>
-        <button onclick="switchTab(4)" class="w-full text-center text-xs bg-[#222838] hover:bg-[#2c3447] text-zinc-200 border border-[#364057] py-2 rounded-lg font-medium transition shadow-xs flex items-center justify-center gap-1.5">
+        <button onclick="switchTab(4)" class="pill-btn w-full text-center text-xs bg-[#111111] hover:bg-[#1a1a1a] text-[#e5e5e4] border border-[#222222] py-2 rounded-full font-medium transition shadow-xs flex items-center justify-center gap-1.5">
           <span>Explore 8-Stage Pipeline Architecture</span> <i class="fas fa-arrow-right text-[10px]"></i>
         </button>
       </div>
@@ -256,19 +294,19 @@
     <!-- Main Content Area (8 Cols) -->
     <main class="lg:col-span-8 clinical-card flex flex-col overflow-hidden">
       
-      <!-- Segmented Navigation Tabs -->
-      <div class="flex border-b border-[#2d364a] px-4 sm:px-6 pt-3 space-x-2 sm:space-x-4 text-xs sm:text-sm font-semibold text-zinc-400 overflow-x-auto">
-        <button id="tabBtn1" onclick="switchTab(1)" class="pb-3 px-3 tab-active flex items-center gap-2 whitespace-nowrap transition">
-          <i class="fas fa-file-medical text-sm"></i> Report Translator
+      <!-- Segmented Navigation Tabs (EB Garamond & Piano Black) -->
+      <div class="flex border-b border-[#1d1d1d] px-4 sm:px-6 pt-3.5 space-x-3 sm:space-x-6 text-sm text-[#a1a1a0] overflow-x-auto">
+        <button id="tabBtn1" onclick="switchTab(1)" class="display-serif text-base pb-3 px-3 tab-active flex items-center gap-2 whitespace-nowrap transition font-medium">
+          <i class="fas fa-file-medical text-sm text-[#6ee3ad]"></i> Report Translator
         </button>
-        <button id="tabBtn2" onclick="switchTab(2)" class="pb-3 px-3 hover:text-zinc-200 flex items-center gap-2 whitespace-nowrap transition">
-          <i class="fas fa-comments text-sm"></i> Ask ClearCare (Q&amp;A)
+        <button id="tabBtn2" onclick="switchTab(2)" class="display-serif text-base pb-3 px-3 hover:text-white flex items-center gap-2 whitespace-nowrap transition font-medium">
+          <i class="fas fa-comments text-sm text-[#a1a1a0]"></i> Ask ClearCare (Q&amp;A)
         </button>
-        <button id="tabBtn3" onclick="switchTab(3)" class="pb-3 px-3 hover:text-zinc-200 flex items-center gap-2 whitespace-nowrap transition">
-          <i class="fas fa-microscope text-sm"></i> RAG Inspector
+        <button id="tabBtn3" onclick="switchTab(3)" class="display-serif text-base pb-3 px-3 hover:text-white flex items-center gap-2 whitespace-nowrap transition font-medium">
+          <i class="fas fa-microscope text-sm text-[#a1a1a0]"></i> RAG Inspector
         </button>
-        <button id="tabBtn4" onclick="switchTab(4)" class="pb-3 px-3 hover:text-zinc-200 flex items-center gap-2 whitespace-nowrap transition">
-          <i class="fas fa-diagram-project text-sm"></i> Pipeline &amp; Architecture
+        <button id="tabBtn4" onclick="switchTab(4)" class="display-serif text-base pb-3 px-3 hover:text-white flex items-center gap-2 whitespace-nowrap transition font-medium">
+          <i class="fas fa-diagram-project text-sm text-[#a1a1a0]"></i> Pipeline &amp; Architecture
         </button>
       </div>
 
@@ -280,81 +318,82 @@
         <!-- ============================================================= -->
         <div id="tab1" class="space-y-4">
           
-          <!-- Clinical Case Benchmark Selector (3 Mock Reports) -->
-          <div class="space-y-2 mb-3">
+                    <!-- Clinical Case Benchmark Selector (3 Mock Reports) -->
+          <div class="space-y-2 mb-4">
             <div class="flex items-center justify-between">
-              <label class="block text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                <i class="fas fa-flask text-zinc-300"></i> Select Clinical Mock Case (Click to Load):
+              <label class="display-serif text-sm font-medium text-white flex items-center gap-2">
+                <i class="fas fa-flask text-[#6ee3ad] text-xs"></i> Select Clinical Mock Case (Click to Load):
               </label>
-              <span class="text-[11px] text-zinc-400 font-medium">3 Pre-configured Scenarios</span>
+              <span class="text-[11px] text-[#a1a1a0] font-normal">3 Pre-configured Scenarios</span>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               
               <!-- Mock Card 1 -->
-              <div onclick="loadSample('annual_checkup')" id="mockCard_annual_checkup" class="mock-card text-left p-3 rounded-xl border-2 border-white bg-[#2a3246] shadow-md transition group cursor-pointer active:scale-98 relative">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="font-bold text-xs text-white flex items-center gap-1.5">
+              <div onclick="loadSample('annual_checkup')" id="mockCard_annual_checkup" class="mock-card text-left p-3.5 rounded-xl border border-[#6ee3ad]/70 bg-[#141414] shadow-sm transition group cursor-pointer active:scale-98 relative">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-medium text-xs text-white flex items-center gap-1.5">
                     <span>🩺</span> Case 1: Checkup
                   </span>
-                  <span class="text-[9px] font-bold text-amber-300 bg-amber-950/90 border border-amber-800/80 px-1.5 py-0.5 rounded">CMP + Lipid</span>
+                  <span class="text-[10px] font-mono font-medium text-[#f59e0b] bg-[#1a1508] border border-[#3d2f0a] px-2 py-0.5 rounded-full">CMP + Lipid</span>
                 </div>
-                <p class="text-[11px] text-zinc-300 leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
-                <div class="mt-2 pt-1.5 border-t border-zinc-700/60 flex items-center justify-between text-[10px]">
-                  <span class="text-zinc-400">Click to select</span>
-                  <button type="button" onclick="event.stopPropagation(); loadSample('annual_checkup', true)" class="text-white hover:text-zinc-200 font-semibold flex items-center gap-1 bg-[#262c3e] hover:bg-[#323a52] px-2 py-0.5 rounded transition">
-                    <i class="fas fa-bolt text-amber-400 text-[9px]"></i> Translate
+                <p class="text-[11px] text-[#a1a1a0] leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
+                <div class="mt-2.5 pt-2 border-t border-[#1d1d1d] flex items-center justify-between text-[10px]">
+                  <span class="text-[#666665]">Click to select</span>
+                  <button type="button" onclick="event.stopPropagation(); loadSample('annual_checkup', true)" class="pill-btn text-white hover:text-[#6ee3ad] font-medium flex items-center gap-1 bg-[#1a1a1a] hover:bg-[#242424] border border-[#2a2a2a] px-2.5 py-0.5 rounded-full transition">
+                    <i class="fas fa-bolt text-[#6ee3ad] text-[9px]"></i> Translate
                   </button>
                 </div>
               </div>
 
               <!-- Mock Card 2 -->
-              <div onclick="loadSample('cardiac_discharge')" id="mockCard_cardiac_discharge" class="mock-card text-left p-3 rounded-xl border border-[#313a4e] bg-[#1f2434] hover:bg-[#2a3246] hover:border-zinc-400 shadow-sm transition group cursor-pointer active:scale-98 relative">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="font-bold text-xs text-white flex items-center gap-1.5">
+              <div onclick="loadSample('cardiac_discharge')" id="mockCard_cardiac_discharge" class="mock-card text-left p-3.5 rounded-xl border border-[#1d1d1d] bg-[#0b0b0b] hover:bg-[#121212] hover:border-[#2a2a2a] shadow-sm transition group cursor-pointer active:scale-98 relative">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-medium text-xs text-white flex items-center gap-1.5">
                     <span>❤️</span> Case 2: Stent
                   </span>
-                  <span class="text-[9px] font-bold text-rose-300 bg-rose-950/90 border border-rose-800/80 px-1.5 py-0.5 rounded">Cardiology DAPT</span>
+                  <span class="text-[10px] font-mono font-medium text-[#f87171] bg-[#1a0a0a] border border-[#3d1414] px-2 py-0.5 rounded-full">Cardiology DAPT</span>
                 </div>
-                <p class="text-[11px] text-zinc-300 leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
-                <div class="mt-2 pt-1.5 border-t border-zinc-700/60 flex items-center justify-between text-[10px]">
-                  <span class="text-zinc-400">Click to select</span>
-                  <button type="button" onclick="event.stopPropagation(); loadSample('cardiac_discharge', true)" class="text-white hover:text-zinc-200 font-semibold flex items-center gap-1 bg-[#262c3e] hover:bg-[#323a52] px-2 py-0.5 rounded transition">
-                    <i class="fas fa-bolt text-rose-400 text-[9px]"></i> Translate
+                <p class="text-[11px] text-[#a1a1a0] leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
+                <div class="mt-2.5 pt-2 border-t border-[#1d1d1d] flex items-center justify-between text-[10px]">
+                  <span class="text-[#666665]">Click to select</span>
+                  <button type="button" onclick="event.stopPropagation(); loadSample('cardiac_discharge', true)" class="pill-btn text-white hover:text-[#6ee3ad] font-medium flex items-center gap-1 bg-[#1a1a1a] hover:bg-[#242424] border border-[#2a2a2a] px-2.5 py-0.5 rounded-full transition">
+                    <i class="fas fa-bolt text-[#6ee3ad] text-[9px]"></i> Translate
                   </button>
                 </div>
               </div>
 
               <!-- Mock Card 3 -->
-              <div onclick="loadSample('kidney_diabetic')" id="mockCard_kidney_diabetic" class="mock-card text-left p-3 rounded-xl border border-[#313a4e] bg-[#1f2434] hover:bg-[#2a3246] hover:border-zinc-400 shadow-sm transition group cursor-pointer active:scale-98 relative">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="font-bold text-xs text-white flex items-center gap-1.5">
+              <div onclick="loadSample('kidney_diabetic')" id="mockCard_kidney_diabetic" class="mock-card text-left p-3.5 rounded-xl border border-[#1d1d1d] bg-[#0b0b0b] hover:bg-[#121212] hover:border-[#2a2a2a] shadow-sm transition group cursor-pointer active:scale-98 relative">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-medium text-xs text-white flex items-center gap-1.5">
                     <span>🧪</span> Case 3: Kidney
                   </span>
-                  <span class="text-[9px] font-bold text-indigo-300 bg-indigo-950/90 border border-indigo-800/80 px-1.5 py-0.5 rounded">Renal eGFR</span>
+                  <span class="text-[10px] font-mono font-medium text-[#818cf8] bg-[#0f1026] border border-[#1e224d] px-2 py-0.5 rounded-full">Renal eGFR</span>
                 </div>
-                <p class="text-[11px] text-zinc-300 leading-tight">Creatinine (1.62), eGFR (48), Low K+ (3.3)</p>
-                <div class="mt-2 pt-1.5 border-t border-zinc-700/60 flex items-center justify-between text-[10px]">
-                  <span class="text-zinc-400">Click to select</span>
-                  <button type="button" onclick="event.stopPropagation(); loadSample('kidney_diabetic', true)" class="text-white hover:text-zinc-200 font-semibold flex items-center gap-1 bg-[#262c3e] hover:bg-[#323a52] px-2 py-0.5 rounded transition">
-                    <i class="fas fa-bolt text-indigo-400 text-[9px]"></i> Translate
+                <p class="text-[11px] text-[#a1a1a0] leading-tight">Creatinine (1.62), eGFR (48), Low K+ (3.3)</p>
+                <div class="mt-2.5 pt-2 border-t border-[#1d1d1d] flex items-center justify-between text-[10px]">
+                  <span class="text-[#666665]">Click to select</span>
+                  <button type="button" onclick="event.stopPropagation(); loadSample('kidney_diabetic', true)" class="pill-btn text-white hover:text-[#6ee3ad] font-medium flex items-center gap-1 bg-[#1a1a1a] hover:bg-[#242424] border border-[#2a2a2a] px-2.5 py-0.5 rounded-full transition">
+                    <i class="fas fa-bolt text-[#6ee3ad] text-[9px]"></i> Translate
                   </button>
                 </div>
               </div>
 
             </div>
           </div>
+          </div>
 
           <div class="relative">
-            <textarea id="reportText" rows="7" placeholder="Paste medical document text here (e.g., Blood tests, Complete Blood Count, Metabolic Panel, Lipid Panel, or hospital discharge instructions)..." class="w-full text-xs sm:text-sm font-mono p-3.5 bg-[#181d29] border border-[#313a4e] text-zinc-100 rounded-xl focus:ring-1 focus:ring-white focus:border-white focus:bg-[#151924] outline-none leading-relaxed transition resize-y"></textarea>
+            <textarea id="reportText" rows="7" placeholder="Paste medical document text here (e.g., Blood tests, Complete Blood Count, Metabolic Panel, Lipid Panel, or hospital discharge instructions)..." class="w-full text-xs sm:text-sm font-mono p-4 bg-[#060606] border border-[#1d1d1d] text-[#f9f8f9] rounded-xl focus:border-[#6ee3ad]/60 focus:ring-1 focus:ring-[#6ee3ad]/30 focus:bg-[#030303] outline-none leading-relaxed transition resize-y"></textarea>
           </div>
 
           <!-- Action Buttons Bar -->
           <div class="flex items-center justify-between gap-3 pt-1">
             <div class="flex items-center gap-2.5">
-              <button onclick="translateReport()" id="translateBtn" class="bg-white hover:bg-zinc-200 text-black font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg transition-all flex items-center gap-2 active:scale-95">
+              <button onclick="translateReport()" id="translateBtn" class="pill-btn bg-[#1c1c1c] hover:bg-[#282828] text-[#fcfcfd] border border-[#333333] font-medium text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-md transition flex items-center gap-2 active:scale-95">
                 <i class="fas fa-wand-magic-sparkles text-xs"></i> Translate &amp; Explain Report
               </button>
-              <button onclick="clearReportInput()" class="bg-[#222838] hover:bg-[#2c3447] text-zinc-300 text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-[#313a4e] font-medium transition active:scale-95">
+              <button onclick="clearReportInput()" class="pill-btn bg-[#111111] hover:bg-[#1a1a1a] text-[#a1a1a0] hover:text-[#f9f8f9] text-xs sm:text-sm px-4 py-2.5 rounded-full border border-[#222222] font-medium transition active:scale-95">
                 Clear
               </button>
             </div>
@@ -368,17 +407,17 @@
           </div>
 
           <!-- Result Area -->
-          <div id="resultContainer" class="hidden pt-4 border-t border-[#313a4e] space-y-4">
+          <div id="resultContainer" class="hidden pt-4 border-t border-[#1d1d1d] space-y-4">
             
             <!-- Result Action Header -->
-            <div class="flex items-center justify-between pb-2 border-b border-[#2d364a]">
+            <div class="flex items-center justify-between pb-2 border-b border-[#1d1d1d]">
               <div class="flex items-center gap-2">
                 <h3 class="text-sm font-bold text-white flex items-center gap-2">
                   <span>📋</span> ClearCare Clinical Translation &amp; Patient Guidance
                 </h3>
                 <span id="engineBadge" class="hidden sm:inline text-[10px] font-mono text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-2 py-0.5 rounded-full">Grounded Clinical Engine</span>
               </div>
-              <button onclick="copyTranslationResult()" class="text-xs bg-[#222838] hover:bg-[#2c3447] text-zinc-300 px-3 py-1.5 rounded-lg border border-[#313a4e] font-medium transition flex items-center gap-1.5 active:scale-95">
+              <button onclick="copyTranslationResult()" class="pill-btn text-xs bg-[#111111] hover:bg-[#1a1a1a] text-[#a1a1a0] hover:text-white px-3.5 py-1.5 rounded-full border border-[#222222] font-medium transition flex items-center gap-1.5 active:scale-95">
                 <i class="far fa-copy text-xs"></i> <span>Copy Translation</span>
               </button>
             </div>
@@ -387,12 +426,12 @@
             <div id="resultOutput" class="markdown-body text-zinc-200 text-sm"></div>
 
             <!-- Evidence Drawer -->
-            <div id="evidenceDrawer" class="bg-[#181d29] border border-[#313a4e] rounded-xl p-4 mt-4">
+            <div id="evidenceDrawer" class="bg-[#080808] border border-[#1d1d1d] rounded-xl p-4 mt-4">
               <div class="flex items-center justify-between mb-3">
                 <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
                   <i class="fas fa-book-medical text-white"></i> Verified Evidence Guidelines Retrieved &amp; Grounded
                 </h4>
-                <span id="evidenceCountBadge" class="text-[10px] font-bold bg-[#1e2334] text-white px-2 py-0.5 rounded-full">0 matched</span>
+                <span id="evidenceCountBadge" class="text-[10px] font-bold bg-[#141414] text-white px-2 py-0.5 rounded-full">0 matched</span>
               </div>
               <div id="evidenceList" class="space-y-2.5 text-xs"></div>
             </div>
@@ -405,18 +444,18 @@
         <div id="tab2" class="hidden flex flex-col h-[560px]">
           
           <!-- Suggested Question Chips -->
-          <div class="pb-3 border-b border-[#2d364a] flex items-center gap-1.5 overflow-x-auto text-[11px]">
+          <div class="pb-3 border-b border-[#1d1d1d] flex items-center gap-1.5 overflow-x-auto text-[11px]">
             <span class="text-zinc-400 font-medium shrink-0">Try asking:</span>
-            <button onclick="askPresetQuestion('What does a normal eGFR level mean, and what causes it to decline?')" class="bg-[#222838] hover:bg-[#2c3447] text-zinc-300 px-2.5 py-1 rounded-full border border-[#313a4e] transition shrink-0 font-medium">What is eGFR?</button>
-            <button onclick="askPresetQuestion('What causes elevated ALT liver enzymes, and are there benign reasons like exercise?')" class="bg-[#222838] hover:bg-[#2c3447] text-zinc-300 px-2.5 py-1 rounded-full border border-[#313a4e] transition shrink-0 font-medium">Why is ALT high?</button>
-            <button onclick="askPresetQuestion('Can I stop taking Plavix or Aspirin after having a cardiac stent placed?')" class="bg-[#222838] hover:bg-[#2c3447] text-zinc-300 px-2.5 py-1 rounded-full border border-[#313a4e] transition shrink-0 font-medium">Can I stop Plavix?</button>
-            <button onclick="askPresetQuestion('What are optimal target LDL cholesterol levels according to ACC/AHA guidelines?')" class="bg-[#222838] hover:bg-[#2c3447] text-zinc-300 px-2.5 py-1 rounded-full border border-[#313a4e] transition shrink-0 font-medium">LDL Goals</button>
-            <button onclick="askPresetQuestion('Do any of my current medications need dosage adjustment based on these numbers?')" class="bg-[#222838] hover:bg-[#2c3447] text-zinc-300 px-2.5 py-1 rounded-full border border-[#313a4e] transition shrink-0 font-medium">Medication Adjustments?</button>
+            <button onclick="askPresetQuestion('What does a normal eGFR level mean, and what causes it to decline?')" class="pill-btn bg-[#111111] hover:bg-[#1a1a1a] text-[#a1a1a0] hover:text-white text-[11px] px-3 py-1 rounded-full border border-[#222222] transition shrink-0 font-medium">What is eGFR?</button>
+            <button onclick="askPresetQuestion('What causes elevated ALT liver enzymes, and are there benign reasons like exercise?')" class="pill-btn bg-[#111111] hover:bg-[#1a1a1a] text-[#a1a1a0] hover:text-white text-[11px] px-3 py-1 rounded-full border border-[#222222] transition shrink-0 font-medium">Why is ALT high?</button>
+            <button onclick="askPresetQuestion('Can I stop taking Plavix or Aspirin after having a cardiac stent placed?')" class="pill-btn bg-[#111111] hover:bg-[#1a1a1a] text-[#a1a1a0] hover:text-white text-[11px] px-3 py-1 rounded-full border border-[#222222] transition shrink-0 font-medium">Can I stop Plavix?</button>
+            <button onclick="askPresetQuestion('What are optimal target LDL cholesterol levels according to ACC/AHA guidelines?')" class="pill-btn bg-[#111111] hover:bg-[#1a1a1a] text-[#a1a1a0] hover:text-white text-[11px] px-3 py-1 rounded-full border border-[#222222] transition shrink-0 font-medium">LDL Goals</button>
+            <button onclick="askPresetQuestion('Do any of my current medications need dosage adjustment based on these numbers?')" class="pill-btn bg-[#111111] hover:bg-[#1a1a1a] text-[#a1a1a0] hover:text-white text-[11px] px-3 py-1 rounded-full border border-[#222222] transition shrink-0 font-medium">Medication Adjustments?</button>
           </div>
 
           <!-- Chat Conversation Area -->
           <div id="chatMessages" class="flex-1 overflow-y-auto space-y-4 py-4 pr-1">
-            <div class="bg-[#222838] border border-[#343e54] rounded-2xl p-4 text-xs text-zinc-300 flex gap-3 shadow-2xs">
+            <div class="bg-[#141414] border border-[#222222] rounded-2xl p-4 text-xs text-zinc-300 flex gap-3 shadow-2xs">
               <div class="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 text-white flex items-center justify-center shrink-0">
                 <i class="fas fa-stethoscope"></i>
               </div>
@@ -431,9 +470,9 @@
           </div>
 
           <!-- Chat Input Bar -->
-          <div class="pt-3 border-t border-[#313a4e] flex gap-2">
-            <input type="text" id="chatInput" placeholder="Type a clinical question (e.g., 'What causes elevated ALT?' or 'Normal eGFR?')..." onkeypress="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-xs sm:text-sm px-3.5 py-2.5 bg-[#181d29] border border-[#313a4e] text-zinc-100 rounded-xl focus:ring-1 focus:ring-white focus:border-white focus:bg-[#151924] outline-none transition">
-            <button onclick="sendChatMessage()" class="bg-white hover:bg-zinc-200 text-black font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm shadow-lg transition flex items-center gap-1.5 active:scale-95">
+          <div class="pt-3 border-t border-[#1d1d1d] flex gap-2">
+            <input type="text" id="chatInput" placeholder="Type a clinical question (e.g., 'What causes elevated ALT?' or 'Normal eGFR?')..." onkeypress="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-xs sm:text-sm px-4 py-2.5 bg-[#060606] border border-[#1d1d1d] text-[#f9f8f9] rounded-xl focus:border-[#6ee3ad]/60 focus:ring-1 focus:ring-[#6ee3ad]/30 focus:bg-[#030303] outline-none transition">
+            <button onclick="sendChatMessage()" class="pill-btn bg-[#1c1c1c] hover:bg-[#282828] text-[#fcfcfd] border border-[#333] font-medium px-6 py-2.5 rounded-full shadow-md active:scale-95 text-xs sm:text-sm shadow-lg transition flex items-center gap-1.5 active:scale-95">
               <span>Send</span> <i class="fas fa-paper-plane text-xs"></i>
             </button>
           </div>
@@ -443,29 +482,29 @@
         <!-- TAB 3: RAG Inspector -->
         <!-- ============================================================= -->
         <div id="tab3" class="hidden space-y-5">
-          <div class="flex items-center justify-between pb-2 border-b border-[#313a4e]">
+          <div class="flex items-center justify-between pb-2 border-b border-[#1d1d1d]">
             <div>
               <h3 class="text-sm font-bold text-white flex items-center gap-2">
                 <i class="fas fa-microscope text-white"></i> RAG Engine Transparency Inspector
               </h3>
               <p class="text-xs text-zinc-400">Live inspection of vector cosine similarity scores, chunk metadata, and augmented LLM prompt.</p>
             </div>
-            <span class="text-xs font-mono bg-[#222838] text-zinc-300 px-2 py-0.5 rounded border border-[#313a4e]">HNSW Graph</span>
+            <span class="text-xs font-mono bg-[#141414] text-zinc-300 px-2 py-0.5 rounded border border-[#1d1d1d]">HNSW Graph</span>
           </div>
 
           <div id="inspectorChunks" class="space-y-3">
-            <div class="p-6 text-center text-xs text-zinc-400 bg-[#181d29] rounded-xl border border-dashed border-[#343e54]">
+            <div class="p-6 text-center text-xs text-zinc-400 bg-[#080808] rounded-xl border border-dashed border-[#222222]">
               <i class="fas fa-magnifying-glass text-zinc-400 text-xl mb-2 block"></i>
               No query executed yet. Run a translation in Tab 1 or ask a question in Tab 2 to inspect retrieved vector chunks.
             </div>
           </div>
 
-          <div id="inspectorPromptSection" class="hidden pt-4 border-t border-[#313a4e] space-y-2">
+          <div id="inspectorPromptSection" class="hidden pt-4 border-t border-[#1d1d1d] space-y-2">
             <div class="flex items-center justify-between">
               <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
                 <i class="fas fa-terminal text-white"></i> Raw Augmented Prompt Sent to LLM
               </h4>
-              <button onclick="copyRawPrompt()" class="text-[11px] text-zinc-300 hover:text-white bg-[#222838] hover:bg-[#2c3447] px-2.5 py-1 rounded font-mono border border-[#313a4e] transition flex items-center gap-1">
+              <button onclick="copyRawPrompt()" class="text-[11px] text-zinc-300 hover:text-white bg-[#141414] hover:bg-[#202020] px-2.5 py-1 rounded font-mono border border-[#1d1d1d] transition flex items-center gap-1">
                 <i class="far fa-copy"></i> Copy Prompt
               </button>
             </div>
@@ -477,19 +516,19 @@
         <div id="tab4" class="hidden space-y-6">
           
           <!-- Architecture Header -->
-          <div class="bg-gradient-to-r from-black via-zinc-900 to-black rounded-2xl p-6 text-white shadow-md relative overflow-hidden border border-zinc-800">
-            <div class="relative z-10 space-y-2">
-              <div class="inline-flex items-center gap-1.5 bg-[#222838] text-zinc-300 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-zinc-700">
-                <i class="fas fa-heart-pulse text-emerald-400"></i> ClearCare AI Made Simple
+          <div class="bg-[#0b0b0b] border border-[#1d1d1d] rounded-2xl p-6 sm:p-7 text-white shadow-md relative overflow-hidden">
+            <div class="relative z-10 space-y-2.5">
+              <div class="inline-flex items-center gap-1.5 bg-[#121815] text-[#6ee3ad] text-[11px] font-medium px-2.5 py-0.5 rounded-full border border-[#1b3528]">
+                <i class="fas fa-heart-pulse text-xs"></i> ClearCare AI Architecture
               </div>
-              <h2 class="text-lg sm:text-xl font-bold tracking-tight">How ClearCare AI Works: Step-by-Step in Simple Terms</h2>
-              <p class="text-xs sm:text-sm text-zinc-300 max-w-3xl leading-relaxed">
+              <h2 class="display-serif text-2xl sm:text-3xl font-medium tracking-tight text-white leading-snug">How ClearCare AI Works: Step-by-Step in Simple Terms</h2>
+              <p class="text-xs sm:text-sm text-[#a1a1a0] max-w-3xl leading-relaxed">
                 When you paste a blood test or ask a medical question, ClearCare runs an 8-step safety pipeline. 
                 Instead of guessing from the internet, it finds real hospital rules, checks every test one by one, 
                 and explains everything in friendly, easy-to-read English.
               </p>
             </div>
-            <div class="absolute -right-8 -bottom-8 opacity-10 text-white text-9xl pointer-events-none">
+            <div class="absolute -right-8 -bottom-8 opacity-5 text-white text-9xl pointer-events-none">
               <i class="fas fa-stethoscope"></i>
             </div>
           </div>
@@ -500,35 +539,35 @@
               <i class="fas fa-route text-white"></i> The 8 Simple Steps (Click Any Step to Learn More)
             </h3>
             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
-              <button onclick="scrollToStage('stage1')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
+              <button onclick="scrollToStage(\'stage1\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#161616] border border-[#1d1d1d] hover:border-[#2a2a2a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-white uppercase">Step 01</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Real Rules</span>
               </button>
-              <button onclick="scrollToStage('stage2')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
+              <button onclick="scrollToStage(\'stage2\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#161616] border border-[#1d1d1d] hover:border-[#2a2a2a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-white uppercase">Step 02</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Neat Pieces</span>
               </button>
-              <button onclick="scrollToStage('stage3')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
+              <button onclick="scrollToStage(\'stage3\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#161616] border border-[#1d1d1d] hover:border-[#2a2a2a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-white uppercase">Step 03</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-white truncate">Word Meaning</span>
               </button>
-              <button onclick="scrollToStage('stage4')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
+              <button onclick="scrollToStage(\'stage4\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#161616] border border-[#1d1d1d] hover:border-[#2a2a2a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-emerald-400 uppercase">Step 04</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Quick Search</span>
               </button>
-              <button onclick="scrollToStage('stage5')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
+              <button onclick="scrollToStage(\'stage5\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#161616] border border-[#1d1d1d] hover:border-[#2a2a2a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-amber-400 uppercase">Step 05</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Check Each Test</span>
               </button>
-              <button onclick="scrollToStage('stage6')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
+              <button onclick="scrollToStage(\'stage6\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#161616] border border-[#1d1d1d] hover:border-[#2a2a2a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-amber-400 uppercase">Step 06</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-amber-300 truncate">Shield Filter</span>
               </button>
-              <button onclick="scrollToStage('stage7')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
+              <button onclick="scrollToStage(\'stage7\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#161616] border border-[#1d1d1d] hover:border-[#2a2a2a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-indigo-400 uppercase">Step 07</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-indigo-300 truncate">Safe AI Brain</span>
               </button>
-              <button onclick="scrollToStage('stage8')" class="p-2.5 bg-[#222838] hover:bg-[#2c3447] border border-[#343e54] rounded-xl text-left transition group">
+              <button onclick="scrollToStage(\'stage8\')" class="p-2.5 bg-[#0e0e0e] hover:bg-[#161616] border border-[#1d1d1d] hover:border-[#2a2a2a] rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-emerald-400 uppercase">Step 08</span>
                 <span class="block font-semibold text-xs text-zinc-200 group-hover:text-emerald-300 truncate">Patient Report</span>
               </button>
@@ -536,7 +575,7 @@
           </div>
 
           <!-- Flow Architecture Visualizer Diagram -->
-          <div class="border border-[#313a4e] rounded-2xl p-5 bg-[#181d29] shadow-xs space-y-4">
+          <div class="border border-[#1d1d1d] rounded-2xl p-5 bg-[#060606] shadow-sm space-y-4">
             <div class="flex items-center justify-between">
               <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
                 <i class="fas fa-sitemap text-white"></i> How Information Moves Through ClearCare
@@ -549,7 +588,7 @@
               <div class="min-w-[700px] flex items-center justify-between text-xs font-semibold text-zinc-300">
                 
                 <!-- Step 1 -->
-                <div class="flex-1 bg-[#222838] border border-[#343e54] p-2.5 rounded-xl shadow-md text-center">
+                <div class="flex-1 bg-[#0e0e0e] border border-[#1d1d1d] p-2.5 rounded-xl text-center">
                   <span class="text-white font-bold block text-[10px]">STEP 1</span>
                   <i class="fas fa-book-medical text-white my-1 text-sm"></i>
                   <span class="block text-zinc-200">Trusted Books</span>
@@ -558,7 +597,7 @@
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 2 -->
-                <div class="flex-1 bg-[#222838] border border-[#343e54] p-2.5 rounded-xl shadow-md text-center">
+                <div class="flex-1 bg-[#0e0e0e] border border-[#1d1d1d] p-2.5 rounded-xl text-center">
                   <span class="text-white font-bold block text-[10px]">STEP 2</span>
                   <i class="fas fa-scissors text-white my-1 text-sm"></i>
                   <span class="block text-zinc-200">Neat Pieces</span>
@@ -567,7 +606,7 @@
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 3 -->
-                <div class="flex-1 bg-[#222838] border border-[#343e54] p-2.5 rounded-xl shadow-md text-center">
+                <div class="flex-1 bg-[#0e0e0e] border border-[#1d1d1d] p-2.5 rounded-xl text-center">
                   <span class="text-white font-bold block text-[10px]">STEP 3</span>
                   <i class="fas fa-brain text-white my-1 text-sm"></i>
                   <span class="block text-zinc-200">Word Meaning</span>
@@ -576,7 +615,7 @@
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 4 -->
-                <div class="flex-1 bg-[#101923] border border-emerald-900/60 p-2.5 rounded-xl shadow-md text-center">
+                <div class="flex-1 bg-[#0e0e0e] border border-[#1d1d1d] p-2.5 rounded-xl text-center">
                   <span class="text-emerald-400 font-bold block text-[10px]">STEP 4</span>
                   <i class="fas fa-database text-emerald-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">ChromaDB</span>
@@ -585,7 +624,7 @@
                 <div class="px-1 text-amber-400 font-bold text-sm">&harr;</div>
 
                 <!-- Step 5 -->
-                <div class="flex-1 bg-[#1a1715] border border-amber-900/60 p-2.5 rounded-xl shadow-md text-center">
+                <div class="flex-1 bg-[#0e0e0e] border border-[#1d1d1d] p-2.5 rounded-xl text-center">
                   <span class="text-amber-400 font-bold block text-[10px]">STEP 5</span>
                   <i class="fas fa-list-check text-amber-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">Check All</span>
@@ -594,7 +633,7 @@
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 6 -->
-                <div class="flex-1 bg-[#1a1715] border border-amber-900/60 p-2.5 rounded-xl shadow-md text-center">
+                <div class="flex-1 bg-[#0e0e0e] border border-[#1d1d1d] p-2.5 rounded-xl text-center">
                   <span class="text-amber-400 font-bold block text-[10px]">STEP 6</span>
                   <i class="fas fa-shield text-amber-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">Shield</span>
@@ -603,7 +642,7 @@
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 7 -->
-                <div class="flex-1 bg-[#141629] border border-indigo-900/60 p-2.5 rounded-xl shadow-md text-center">
+                <div class="flex-1 bg-[#0e0e0e] border border-[#1d1d1d] p-2.5 rounded-xl text-center">
                   <span class="text-indigo-300 font-bold block text-[10px]">STEP 7</span>
                   <i class="fas fa-lock text-indigo-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">Safe Brain</span>
@@ -612,7 +651,7 @@
                 <div class="px-1 text-zinc-400 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 8 -->
-                <div class="flex-1 bg-[#101923] border border-emerald-900/60 p-2.5 rounded-xl shadow-md text-center">
+                <div class="flex-1 bg-[#0e0e0e] border border-[#1d1d1d] p-2.5 rounded-xl text-center">
                   <span class="text-emerald-400 font-bold block text-[10px]">STEP 8</span>
                   <i class="fas fa-file-waveform text-emerald-400 my-1 text-sm"></i>
                   <span class="block text-zinc-200">Patient Guide</span>
@@ -627,12 +666,12 @@
           <div class="space-y-4">
             
             <!-- STAGE 1 CARD -->
-            <div id="stage1" class="clinical-card p-5 border-l-4 border-l-white">
+            <div id="stage1" class="clinical-card p-6 border border-[#1d1d1d]">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Step 01 &bull; Trusted Medical Rules</span>
+                <span class="text-[10px] font-mono text-[#6ee3ad] uppercase bg-[#121815] border border-[#1b3528] px-2.5 py-0.5 rounded-full">Step 01 &bull; Trusted Medical Rules</span>
                 <span class="text-xs font-mono text-zinc-400">5 Official Guidelines</span>
               </div>
-              <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+              <h4 class="display-serif text-base sm:text-lg font-medium text-white mb-1.5 flex items-center gap-2">
                 <span>📚</span> Trusted Medical Guidelines (No Random Internet Guessing)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
@@ -642,23 +681,23 @@
                 and <strong>NIH MedlinePlus</strong>. If a rule is not proven by doctors, ClearCare never touches it.
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-xs">
-                <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
+                <div class="p-2 bg-[#080808] rounded-lg border border-[#1d1d1d]">
                   <span class="font-bold text-zinc-200 block">1. Blood Chemistry (CMP)</span>
                   <span class="text-zinc-400 text-[11px]">Kidney health (BUN, Creatinine, eGFR), Liver enzymes (ALT, AST), and Blood Sugar.</span>
                 </div>
-                <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
+                <div class="p-2 bg-[#080808] rounded-lg border border-[#1d1d1d]">
                   <span class="font-bold text-zinc-200 block">2. Complete Blood Count (CBC)</span>
                   <span class="text-zinc-400 text-[11px]">Red cells (anemia check), White cells (infection defense), and Platelets (blood clotting).</span>
                 </div>
-                <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
+                <div class="p-2 bg-[#080808] rounded-lg border border-[#1d1d1d]">
                   <span class="font-bold text-zinc-200 block">3. Cholesterol & Heart Panel</span>
                   <span class="text-zinc-400 text-[11px]">Total cholesterol, protective HDL ("good"), bad LDL targets (&lt;100 or &lt;70), and Triglycerides.</span>
                 </div>
-                <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a]">
+                <div class="p-2 bg-[#080808] rounded-lg border border-[#1d1d1d]">
                   <span class="font-bold text-zinc-200 block">4. Thyroid Energy Panel</span>
                   <span class="text-zinc-400 text-[11px]">TSH and T4 hormones that manage your daily energy, weight, and metabolism.</span>
                 </div>
-                <div class="p-2 bg-[#181d29] rounded-lg border border-[#2d364a] sm:col-span-2">
+                <div class="p-2 bg-[#080808] rounded-lg border border-[#1d1d1d] sm:col-span-2">
                   <span class="font-bold text-zinc-200 block">5. Heart Stent Discharge Guide</span>
                   <span class="text-zinc-400 text-[11px]">Why taking blood-thinning pills (Aspirin + Plavix) every day is mandatory, plus what symptoms require immediate emergency care.</span>
                 </div>
@@ -666,12 +705,12 @@
             </div>
 
             <!-- STAGE 2 CARD -->
-            <div id="stage2" class="clinical-card p-5 border-l-4 border-l-white">
+            <div id="stage2" class="clinical-card p-6 border border-[#1d1d1d]">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Step 02 &bull; Smart Cutting</span>
+                <span class="text-[10px] font-mono text-[#6ee3ad] uppercase bg-[#121815] border border-[#1b3528] px-2.5 py-0.5 rounded-full">Step 02 &bull; Smart Cutting</span>
                 <span class="text-xs font-mono text-zinc-400">700 characters + Heading Tag</span>
               </div>
-              <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+              <h4 class="display-serif text-base sm:text-lg font-medium text-white mb-1.5 flex items-center gap-2">
                 <span>✂️</span> Smart Topic Cutting (Never Losing the Context)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
@@ -686,12 +725,12 @@
             </div>
 
             <!-- STAGE 3 CARD -->
-            <div id="stage3" class="clinical-card p-5 border-l-4 border-l-white">
+            <div id="stage3" class="clinical-card p-6 border border-[#1d1d1d]">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-white uppercase bg-[#1e2334] px-2 py-0.5 rounded-full">Step 03 &bull; Word Meaning</span>
+                <span class="text-[10px] font-mono text-[#6ee3ad] uppercase bg-[#121815] border border-[#1b3528] px-2.5 py-0.5 rounded-full">Step 03 &bull; Word Meaning</span>
                 <span class="text-xs font-mono text-zinc-400">384 Meaning Numbers &bull; 100% Private</span>
               </div>
-              <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+              <h4 class="display-serif text-base sm:text-lg font-medium text-white mb-1.5 flex items-center gap-2">
                 <span>🧠</span> Understanding Medical Meaning (Not Just Keywords)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
@@ -702,12 +741,12 @@
             </div>
 
             <!-- STAGE 4 CARD -->
-            <div id="stage4" class="clinical-card p-5 border-l-4 border-l-emerald-500">
+            <div id="stage4" class="clinical-card p-6 border border-[#1d1d1d]">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Step 04 &bull; Fast Search</span>
+                <span class="text-[10px] font-mono text-[#6ee3ad] uppercase bg-[#121815] border border-[#1b3528] px-2.5 py-0.5 rounded-full">Step 04 &bull; Fast Search</span>
                 <span class="text-xs font-mono text-zinc-400">ChromaDB Local Library</span>
               </div>
-              <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+              <h4 class="display-serif text-base sm:text-lg font-medium text-white mb-1.5 flex items-center gap-2">
                 <span>🗄️</span> Instant Guideline Search (ChromaDB)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-2">
@@ -717,12 +756,12 @@
             </div>
 
             <!-- STAGE 5 CARD -->
-            <div id="stage5" class="clinical-card p-5 border-l-4 border-l-amber-500">
+            <div id="stage5" class="clinical-card p-6 border border-[#1d1d1d]">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Step 05 &bull; Thorough Checking</span>
+                <span class="text-[10px] font-mono text-[#6ee3ad] uppercase bg-[#121815] border border-[#1b3528] px-2.5 py-0.5 rounded-full">Step 05 &bull; Thorough Checking</span>
                 <span class="text-xs font-mono text-zinc-400">Checking Every Test</span>
               </div>
-              <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+              <h4 class="display-serif text-base sm:text-lg font-medium text-white mb-1.5 flex items-center gap-2">
                 <span>🔎</span> Checking Every Test Individually (No Missing Numbers)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
@@ -745,12 +784,12 @@
             </div>
 
             <!-- STAGE 6 CARD -->
-            <div id="stage6" class="clinical-card p-5 border-l-4 border-l-amber-500">
+            <div id="stage6" class="clinical-card p-6 border border-[#1d1d1d]">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-amber-300 uppercase bg-amber-950/80 border border-amber-800/80 px-2 py-0.5 rounded-full">Step 06 &bull; Relevance Shield</span>
+                <span class="text-[10px] font-mono text-[#6ee3ad] uppercase bg-[#121815] border border-[#1b3528] px-2.5 py-0.5 rounded-full">Step 06 &bull; Relevance Shield</span>
                 <span class="text-xs font-mono text-zinc-400">Drops Weak Matches (&lt; 25%)</span>
               </div>
-              <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+              <h4 class="display-serif text-base sm:text-lg font-medium text-white mb-1.5 flex items-center gap-2">
                 <span>🎯</span> The Relevance Shield (Throwing Out Wrong Clues)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-2">
@@ -760,31 +799,31 @@
             </div>
 
             <!-- STAGE 7 CARD -->
-            <div id="stage7" class="clinical-card p-5 border-l-4 border-l-indigo-500">
+            <div id="stage7" class="clinical-card p-6 border border-[#1d1d1d]">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-indigo-300 uppercase bg-indigo-950/80 border border-indigo-800/80 px-2 py-0.5 rounded-full">Step 07 &bull; Careful AI Brain</span>
+                <span class="text-[10px] font-mono text-[#6ee3ad] uppercase bg-[#121815] border border-[#1b3528] px-2.5 py-0.5 rounded-full">Step 07 &bull; Careful AI Brain</span>
                 <span class="text-xs font-mono text-zinc-400">Llama 3.3 / Groq &bull; Strict Safety Locks</span>
               </div>
-              <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+              <h4 class="display-serif text-base sm:text-lg font-medium text-white mb-1.5 flex items-center gap-2">
                 <span>⚡</span> Safe, Guardrailed AI Brain (Llama 3.3 on Groq)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
                 Our AI brain reads your question alongside the verified hospital rules we found. We set 4 unbreakable safety locks:
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
+                <div class="p-2.5 bg-[#080808] rounded-lg border border-[#1d1d1d]">
                   <span class="font-bold text-white block">1. No Guessing Diseases</span>
                   <span class="text-zinc-300 text-[11px]">It will never tell you "You have a disease". It explains what the number means and advises talking with your doctor.</span>
                 </div>
-                <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
+                <div class="p-2.5 bg-[#080808] rounded-lg border border-[#1d1d1d]">
                   <span class="font-bold text-white block">2. Simple, Harmless Causes First</span>
                   <span class="text-zinc-300 text-[11px]">It always explains harmless causes first (like dehydration, exercise, or diet) so you don't panic needlessly.</span>
                 </div>
-                <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
+                <div class="p-2.5 bg-[#080808] rounded-lg border border-[#1d1d1d]">
                   <span class="font-bold text-white block">3. Clear Guideline Source Tags</span>
                   <span class="text-zinc-300 text-[11px]">Every statement is tagged with <code>[Source X]</code> so you can see the real medical guideline behind it.</span>
                 </div>
-                <div class="p-2.5 bg-[#181d29] rounded-lg border border-[#2d364a]">
+                <div class="p-2.5 bg-[#080808] rounded-lg border border-[#1d1d1d]">
                   <span class="font-bold text-white block">4. Medication Safety Lock</span>
                   <span class="text-zinc-300 text-[11px]">It is strictly locked from ever telling a patient to stop taking prescribed medicines like Plavix or blood thinners.</span>
                 </div>
@@ -792,31 +831,31 @@
             </div>
 
             <!-- STAGE 8 CARD -->
-            <div id="stage8" class="clinical-card p-5 border-l-4 border-l-emerald-500">
+            <div id="stage8" class="clinical-card p-6 border border-[#1d1d1d]">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-emerald-300 uppercase bg-emerald-950/80 border border-emerald-800/80 px-2 py-0.5 rounded-full">Step 08 &bull; Easy Patient Guide</span>
+                <span class="text-[10px] font-mono text-[#6ee3ad] uppercase bg-[#121815] border border-[#1b3528] px-2.5 py-0.5 rounded-full">Step 08 &bull; Easy Patient Guide</span>
                 <span class="text-xs font-mono text-zinc-400">Plain 8th-Grade English</span>
               </div>
-              <h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+              <h4 class="display-serif text-base sm:text-lg font-medium text-white mb-1.5 flex items-center gap-2">
                 <span>🌟</span> Clear, Friendly Patient Summary (Traffic Lights &amp; Doctor Questions)
               </h4>
               <p class="text-xs text-zinc-300 leading-relaxed mb-3">
                 Instead of sending you home with scary, confusing medical jargon, ClearCare creates a friendly, easy-to-read report with three simple parts:
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-                <div class="p-3 bg-[#181d29] rounded-xl border border-[#2d364a]">
+                <div class="p-3 bg-[#080808] rounded-xl border border-[#1d1d1d]">
                   <div class="flex items-center gap-1.5 mb-1 text-white font-bold">
                     <span>🟢 🟡 🔴</span> Traffic-Light Signals
                   </div>
                   <p class="text-zinc-400 text-[11px]">Green for normal, Yellow for borderline shifts, and Red for numbers to discuss with your doctor.</p>
                 </div>
-                <div class="p-3 bg-[#181d29] rounded-xl border border-[#2d364a]">
+                <div class="p-3 bg-[#080808] rounded-xl border border-[#1d1d1d]">
                   <div class="flex items-center gap-1.5 mb-1 text-white font-bold">
                     <i class="fas fa-heart text-rose-500"></i> Plain English Words
                   </div>
                   <p class="text-zinc-400 text-[11px]">Explains medical concepts in everyday English so you understand what is going on in your body.</p>
                 </div>
-                <div class="p-3 bg-[#181d29] rounded-xl border border-[#2d364a]">
+                <div class="p-3 bg-[#080808] rounded-xl border border-[#1d1d1d]">
                   <div class="flex items-center gap-1.5 mb-1 text-white font-bold">
                     <i class="fas fa-clipboard-check text-white"></i> Doctor Questions
                   </div>
@@ -828,18 +867,18 @@
           </div>
 
           <!-- Architecture Comparison Table (Simple Terms) -->
-          <div class="border border-[#313a4e] rounded-2xl p-5 bg-[#181d29] shadow-md space-y-3">
+          <div class="border border-[#1d1d1d] rounded-2xl p-5 bg-[#080808] shadow-md space-y-3">
             <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
               <i class="fas fa-scale-balanced text-white"></i> Why ClearCare RAG is Safer Than Regular AI
             </h4>
             <div class="overflow-x-auto">
               <table class="w-full text-xs text-left border-collapse">
                 <thead>
-                  <tr class="border-b border-[#313a4e] text-zinc-300 bg-[#1f2434]">
+                  <tr class="border-b border-[#1d1d1d] text-zinc-300 bg-[#0f0f0f]">
                     <th class="py-2.5 px-3 font-semibold">Important Feature</th>
                     <th class="py-2.5 px-3 font-semibold">Regular AI (ChatGPT / Gemini)</th>
                     <th class="py-2.5 px-3 font-semibold">Medical Fine-Tuned AI</th>
-                    <th class="py-2.5 px-3 font-semibold text-white bg-[#222838]">ClearCare RAG</th>
+                    <th class="py-2.5 px-3 font-semibold text-white bg-[#141414]">ClearCare RAG</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-[#1b1f2c] text-zinc-300">
@@ -847,37 +886,37 @@
                     <td class="py-2.5 px-3 font-medium text-white">Risk of Making Up Facts</td>
                     <td class="py-2.5 px-3 text-rose-400 font-medium">High (guesses wrong normal ranges)</td>
                     <td class="py-2.5 px-3 text-amber-400 font-medium">Medium (mixes up guidelines)</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Zero (locked to real doctor rules)</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#080808]">Zero (locked to real doctor rules)</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-white">Can You Check the Sources?</td>
                     <td class="py-2.5 px-3">No (it cannot point to exact pages)</td>
                     <td class="py-2.5 px-3">No (hidden inside AI memory)</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Yes (every answer has [Source X])</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#080808]">Yes (every answer has [Source X])</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-white">Reading 15 Blood Tests at Once</td>
                     <td class="py-2.5 px-3 text-rose-400">Fails (blurs numbers together)</td>
                     <td class="py-2.5 px-3 text-amber-400">Inconsistent</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Accurate (checks every test one by one)</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#080808]">Accurate (checks every test one by one)</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-white">Language Style</td>
                     <td class="py-2.5 px-3">Often uses dense medical jargon</td>
                     <td class="py-2.5 px-3">Complex doctor language</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Simple, friendly 8th-grade English</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#080808]">Simple, friendly 8th-grade English</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-white">Safety Locks for Medications</td>
                     <td class="py-2.5 px-3 text-rose-400">None (can give dangerous advice)</td>
                     <td class="py-2.5 px-3 text-amber-400">Partial</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Strict (never alters prescriptions)</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#080808]">Strict (never alters prescriptions)</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-white">Private &amp; Free to Run</td>
                     <td class="py-2.5 px-3">Costs money &amp; sends data away</td>
                     <td class="py-2.5 px-3">Needs expensive cloud servers</td>
-                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#181d29]">Runs fast, free tier, private on device</td>
+                    <td class="py-2.5 px-3 text-emerald-400 font-bold bg-[#080808]">Runs fast, free tier, private on device</td>
                   </tr>
                 </tbody>
               </table>
@@ -1533,21 +1572,21 @@
 
           if (card) {
             if (isMatch) {
-              card.classList.remove('border-[#313a4e]', 'bg-[#1f2434]');
-              card.classList.add('border-2', 'border-white', 'bg-[#2a3246]');
+              card.classList.remove('border-[#1d1d1d]', 'bg-[#0b0b0b]');
+              card.classList.add('border-[#6ee3ad]/70', 'bg-[#141414]');
             } else {
-              card.classList.remove('border-2', 'border-white', 'bg-[#2a3246]');
-              card.classList.add('border', 'border-[#313a4e]', 'bg-[#1f2434]');
+              card.classList.remove('border-[#6ee3ad]/70', 'bg-[#141414]');
+              card.classList.add('border-[#1d1d1d]', 'bg-[#0b0b0b]');
             }
           }
 
           if (sideCard) {
             if (isMatch) {
-              sideCard.classList.remove('border-[#313a4e]');
-              sideCard.classList.add('border-2', 'border-white');
+              sideCard.classList.remove('border-[#1d1d1d]', 'bg-[#0b0b0b]');
+              sideCard.classList.add('border-[#6ee3ad]/70', 'bg-[#141414]');
             } else {
-              sideCard.classList.remove('border-2', 'border-white');
-              sideCard.classList.add('border', 'border-[#313a4e]');
+              sideCard.classList.remove('border-[#6ee3ad]/70', 'bg-[#141414]');
+              sideCard.classList.add('border-[#1d1d1d]', 'bg-[#0b0b0b]');
             }
           }
         });
@@ -1572,8 +1611,8 @@
       ['annual_checkup', 'cardiac_discharge', 'kidney_diabetic'].forEach(k => {
         const card = document.getElementById(`mockCard_${k}`);
         if (card) {
-          card.classList.remove('border-2', 'border-white', 'bg-[#2a3246]');
-          card.classList.add('border', 'border-[#313a4e]', 'bg-[#1f2434]');
+          card.classList.remove('border-[#6ee3ad]/70', 'bg-[#141414]');
+          card.classList.add('border-[#1d1d1d]', 'bg-[#0b0b0b]');
         }
       });
       showToast("Cleared report text");
@@ -1676,13 +1715,13 @@
       const evidenceList = document.getElementById('evidenceList');
       document.getElementById('evidenceCountBadge').innerText = `${retrieved.length} guidelines matched`;
       evidenceList.innerHTML = retrieved.map((c, i) => 
-        `<div class="p-3 bg-[#222838] rounded-xl border border-[#313a4e]">
+        `<div class="p-3 bg-[#141414] rounded-xl border border-[#1d1d1d]">
           <div class="flex justify-between items-center font-semibold text-zinc-200 mb-1">
             <span class="text-xs font-bold text-zinc-100">[Source ${i+1}] ${c.source}</span>
             <span class="text-xs font-bold text-white bg-zinc-800 border border-zinc-700 px-2 py-0.5 rounded-full">${Math.round(c.similarity*100)}% match</span>
           </div>
           <p class="text-[11px] text-zinc-400 font-medium mb-1">Section: ${c.section}</p>
-          <p class="text-zinc-300 text-xs leading-relaxed bg-[#181d29] p-2.5 rounded-lg border border-[#1e2230] font-sans">${c.text.substring(0, 200)}...</p>
+          <p class="text-zinc-300 text-xs leading-relaxed bg-[#080808] p-2.5 rounded-lg border border-[#1e2230] font-sans">${c.text.substring(0, 200)}...</p>
         </div>`
       ).join('');
 
@@ -1715,10 +1754,10 @@
       const chatContainer = document.getElementById('chatMessages');
       const apiKey = apiKeyInput.value.trim();
 
-      // User Bubble
+      // User Bubble (Piano Black Raised Surface)
       chatContainer.innerHTML += `
         <div class="flex justify-end">
-          <div class="bg-white text-zinc-950 font-semibold rounded-2xl px-4 py-2.5 max-w-[80%] text-xs sm:text-sm shadow-md">
+          <div class="bg-[#161616] border border-[#2a2a2a] text-[#f9f8f9] rounded-2xl px-4 py-2.5 max-w-[80%] text-xs sm:text-sm shadow-sm">
             ${marked.parse(question)}
           </div>
         </div>`;
@@ -1755,13 +1794,13 @@
         answerText = synthesizeClinicalGuidance(question, retrieved, "chat");
       }
 
-      // Assistant Bubble
+      // Assistant Bubble (Piano Black Surface with Mint Accent Avatar)
       chatContainer.innerHTML += `
         <div class="flex justify-start gap-2.5">
-          <div class="w-7 h-7 rounded-full bg-zinc-800 border border-zinc-700 text-white flex items-center justify-center shrink-0 text-xs mt-1">
+          <div class="w-7 h-7 rounded-full bg-[#121212] border border-[#262626] text-[#6ee3ad] flex items-center justify-center shrink-0 text-xs mt-1">
             <i class="fas fa-stethoscope"></i>
           </div>
-          <div class="bg-[#222838] border border-[#313a4e] text-zinc-200 rounded-2xl px-4 py-3 max-w-[85%] text-xs sm:text-sm shadow-md markdown-body">
+          <div class="bg-[#0b0b0b] border border-[#1d1d1d] text-[#e5e5e4] rounded-2xl px-4 py-3 max-w-[85%] text-xs sm:text-sm shadow-sm markdown-body">
             ${marked.parse(answerText)}
           </div>
         </div>`;
@@ -1779,7 +1818,7 @@
     function updateInspector() {
       const container = document.getElementById('inspectorChunks');
       if (!lastRetrievedChunks || lastRetrievedChunks.length === 0) {
-        container.innerHTML = `<div class="p-6 text-center text-xs text-zinc-400 bg-[#181d29] rounded-xl border border-dashed border-[#343e54]">No chunks retrieved yet.</div>`;
+        container.innerHTML = `<div class="p-6 text-center text-xs text-zinc-400 bg-[#080808] rounded-xl border border-dashed border-[#222222]">No chunks retrieved yet.</div>`;
         return;
       }
 
@@ -1787,13 +1826,13 @@
         <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-2">Retrieved Vector Chunks (${lastRetrievedChunks.length} items passing threshold)</h4>
         <div class="space-y-3">
           ${lastRetrievedChunks.map((c, i) => `
-            <div class="border border-[#313a4e] rounded-xl p-3.5 bg-[#222838] text-xs shadow-md">
+            <div class="border border-[#1d1d1d] rounded-xl p-3.5 bg-[#0b0b0b] text-xs shadow-sm">
               <div class="flex justify-between items-center mb-1.5">
-                <span class="font-bold text-white">Chunk #${i+1} &bull; ${c.source}</span>
-                <span class="font-bold text-white bg-zinc-800 border border-zinc-700 px-2 py-0.5 rounded-full text-[11px]">${Math.round(c.similarity*100)}% Match</span>
+                <span class="font-medium text-white display-serif text-sm">Chunk #${i+1} &bull; ${c.source}</span>
+                <span class="font-mono text-[#6ee3ad] bg-[#121815] border border-[#1b3528] px-2 py-0.5 rounded-full text-[10px]">${Math.round(c.similarity*100)}% Match</span>
               </div>
-              <p class="text-zinc-400 text-[11px] mb-2 font-medium">Section: ${c.section}</p>
-              <pre class="bg-[#181d29] p-3 rounded-lg border border-[#1e2230] text-zinc-300 whitespace-pre-wrap font-sans text-xs leading-relaxed">${c.text}</pre>
+              <p class="text-[#a1a1a0] text-[11px] mb-2 font-normal">Section: ${c.section}</p>
+              <pre class="bg-[#060606] p-3 rounded-lg border border-[#1d1d1d] text-[#d6d6d5] whitespace-pre-wrap font-mono text-xs leading-relaxed">${c.text}</pre>
             </div>
           `).join('')}
         </div>
