@@ -1,0 +1,254 @@
+[
+  {
+    "id": "lipid_cholesterol_panel_chunk_0",
+    "text": "# Clinical Reference Guide: Lipid Panel & Cardiovascular Health Markers\n*Source: American College of Cardiology (ACC) / American Heart Association (AHA) Multisociety Guideline on the Management of Blood Cholesterol*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Lipid Panel\nThe Lipid Panel is a blood screening test that measures concentrations of fat molecules (lipids) in the bloodstream to calculate cardiovascular risk for heart attack, atherosclerosis, and stroke.\n\n---\n\n## 2. Cholesterol Fractions & Diagnostic Targets\n\n### Total Cholesterol\n- **Desirable:** Less than 200 mg/dL\n- **Borderline High:** 200 to 239 mg/dL\n- **High:** 240 mg/dL or higher",
+    "source": "lipid_cholesterol_panel.md",
+    "section": "Total Cholesterol",
+    "char_count": 699
+  },
+  {
+    "id": "lipid_cholesterol_panel_chunk_1",
+    "text": "Cholesterol\n- **Desirable:** Less than 200 mg/dL\n- **Borderline High:** 200 to 239 mg/dL\n- **High:** 240 mg/dL or higher\n- **Clinical Note:** Total cholesterol reflects LDL + HDL + 20% of Triglycerides. High total cholesterol alone is not an absolute disease diagnosis, but a signal to calculate composite 10-year atherosclerotic cardiovascular disease (ASCVD) risk.\n\n### Low-Density Lipoprotein (LDL-C) \u2014 \"Bad Cholesterol\"\n- **Optimal:** Less than 100 mg/dL\n- **Optimal for High-Risk Individuals (History of CAD, Stents, Diabetes):** Less than 70 mg/dL (or < 55 mg/dL for very high risk)\n- **Near Optimal / Above Optimal:** 100 to 129 mg/dL\n- **Borderline High:** 130 to 159 mg/dL",
+    "source": "lipid_cholesterol_panel.md",
+    "section": "Low-Density Lipoprotein (LDL-C) \u2014 \"Bad Cholesterol\"",
+    "char_count": 681
+  },
+  {
+    "id": "lipid_cholesterol_panel_chunk_2",
+    "text": "5 mg/dL for very high risk)\n- **Near Optimal / Above Optimal:** 100 to 129 mg/dL\n- **Borderline High:** 130 to 159 mg/dL\n- **High:** 160 to 189 mg/dL\n- **Very High:** 190 mg/dL or higher (Often flags familial hypercholesterolemia genetic screening)\n- **Pathophysiology:** Excess LDL particles deposit into coronary and carotid arterial walls, forming inflammatory plaques that can rupture and cause myocardial infarction (heart attack) or ischemic stroke.\n\n### High-Density Lipoprotein (HDL-C) \u2014 \"Good Cholesterol\"\n- **Desirable (Protective):**\n  - Adult Males: Greater than 40 mg/dL (preferably > 50 mg/dL)\n  - Adult Females: Greater than 50 mg/dL (preferably > 60 mg/dL)",
+    "source": "lipid_cholesterol_panel.md",
+    "section": "High-Density Lipoprotein (HDL-C) \u2014 \"Good Cholesterol\"",
+    "char_count": 672
+  },
+  {
+    "id": "lipid_cholesterol_panel_chunk_3",
+    "text": "lt Males: Greater than 40 mg/dL (preferably > 50 mg/dL)\n  - Adult Females: Greater than 50 mg/dL (preferably > 60 mg/dL)\n- **Low HDL (< 40 mg/dL):** An independent risk factor for coronary artery disease.\n- **How to raise HDL:** Aerobic exercise, quitting smoking, consuming healthy monounsaturated fats (olive oil, avocados, nuts).\n\n### Triglycerides\n- **Normal:** Less than 150 mg/dL\n- **Borderline High:** 150 to 199 mg/dL\n- **High:** 200 to 499 mg/dL\n- **Very High (Severe Hypertriglyceridemia):** 500 mg/dL or higher\n- **Critical Risk:** Levels above 500-1000 mg/dL increase risk of acute pancreatitis.",
+    "source": "lipid_cholesterol_panel.md",
+    "section": "Triglycerides",
+    "char_count": 607
+  },
+  {
+    "id": "lipid_cholesterol_panel_chunk_4",
+    "text": "yceridemia):** 500 mg/dL or higher\n- **Critical Risk:** Levels above 500-1000 mg/dL increase risk of acute pancreatitis.\n- **Common Lifestyle Drivers:** Excessive refined sugar/simple carbohydrates, alcohol intake, obesity, untreated hypothyroidism, or uncontrolled diabetes.\n\n---\n\n## 3. Glycated Hemoglobin (HbA1c) \u2014 Diabetic Marker\n- **Normal (Non-Diabetic):** Below 5.7%\n- **Prediabetes:** 5.7% to 6.4%\n- **Diabetes Diagnostic Threshold:** 6.5% or higher\n- **Clinical Action for Prediabetes:** 5-7% intentional body weight loss, 150 minutes/week of moderate physical activity (brisk walking), reduction of sugar-sweetened beverages.",
+    "source": "lipid_cholesterol_panel.md",
+    "section": "3. Glycated Hemoglobin (HbA1c) \u2014 Diabetic Marker",
+    "char_count": 635
+  },
+  {
+    "id": "thyroid_tsh_panel_chunk_0",
+    "text": "# Clinical Reference Guide: Thyroid Function Panel & Endocrine Markers\n*Source: American Thyroid Association (ATA) & Endocrine Society Guidelines*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Thyroid Panel\nThe thyroid is a butterfly-shaped gland located in the lower front of the neck. It produces hormones that regulate metabolism, heart rate, body temperature, and energy consumption throughout the body.\n\n---\n\n## 2. Primary Thyroid Biomarkers\n\n### Thyroid Stimulating Hormone (TSH)\n- **Standard Reference Range:** 0.45 to 4.50 mIU/L (uIU/mL)",
+    "source": "thyroid_tsh_panel.md",
+    "section": "Thyroid Stimulating Hormone (TSH)",
+    "char_count": 588
+  },
+  {
+    "id": "thyroid_tsh_panel_chunk_1",
+    "text": "ry Thyroid Biomarkers\n\n### Thyroid Stimulating Hormone (TSH)\n- **Standard Reference Range:** 0.45 to 4.50 mIU/L (uIU/mL)\n- **What it measures:** A pituitary hormone that tells the thyroid gland how much thyroid hormone to produce. TSH has an *inverse* relationship with thyroid activity (like a thermostat).\n- **High TSH (> 4.50 mIU/L) \u2014 Underactive Thyroid (Hypothyroidism):**\n  - The pituitary is shouting at the thyroid because circulating thyroid hormone is too low.\n  - **Common Symptoms:** Chronic fatigue, weight gain despite normal diet, cold intolerance, constipation, brain fog, brittle nails, hair thinning, depression.",
+    "source": "thyroid_tsh_panel.md",
+    "section": "Thyroid Stimulating Hormone (TSH)",
+    "char_count": 630
+  },
+  {
+    "id": "thyroid_tsh_panel_chunk_2",
+    "text": "e, weight gain despite normal diet, cold intolerance, constipation, brain fog, brittle nails, hair thinning, depression.\n  - **Most Common Cause:** Hashimoto's thyroiditis (autoimmune destruction of thyroid tissue).\n  - **Subclinical Hypothyroidism:** TSH is mildly elevated (4.5 - 10.0 mIU/L) while Free T4 remains in normal range. Often monitored unless symptomatic or pregnant.\n- **Low TSH (< 0.40 mIU/L) \u2014 Overactive Thyroid (Hyperthyroidism):**\n  - The pituitary stops signaling because the body is flooded with excess thyroid hormone.\n  - **Common Symptoms:** Rapid heart rate (tachycardia), anxiety, tremors, heat intolerance, unexplained weight loss, diarrhea, insomnia.",
+    "source": "thyroid_tsh_panel.md",
+    "section": "Thyroid Stimulating Hormone (TSH)",
+    "char_count": 678
+  },
+  {
+    "id": "thyroid_tsh_panel_chunk_3",
+    "text": "toms:** Rapid heart rate (tachycardia), anxiety, tremors, heat intolerance, unexplained weight loss, diarrhea, insomnia.\n  - **Most Common Cause:** Graves' disease or toxic multinodular goiter.\n\n### Free Thyroxine (Free T4)\n- **Standard Reference Range:** 0.8 to 1.8 ng/dL\n- **Significance:** The active, unbound form of T4 circulating in the blood. Free T4 directly reflects the hormone available to body tissues.\n- **Low Free T4 + High TSH:** Confirms overt primary hypothyroidism. Treatment typically involves oral Levothyroxine (Synthroid), taken on an empty stomach 30-60 minutes before breakfast with a full glass of water.\n\n### Free Triiodothyronine (Free T3)",
+    "source": "thyroid_tsh_panel.md",
+    "section": "Free Triiodothyronine (Free T3)",
+    "char_count": 666
+  },
+  {
+    "id": "thyroid_tsh_panel_chunk_4",
+    "text": "aken on an empty stomach 30-60 minutes before breakfast with a full glass of water.\n\n### Free Triiodothyronine (Free T3)\n- **Standard Reference Range:** 2.3 to 4.2 pg/mL\n- **Significance:** The most biologically potent active thyroid hormone, largely converted from T4 in peripheral tissues (liver and kidneys).",
+    "source": "thyroid_tsh_panel.md",
+    "section": "Free Triiodothyronine (Free T3)",
+    "char_count": 311
+  },
+  {
+    "id": "discharge_care_protocols_chunk_0",
+    "text": "# Clinical Reference Guide: Hospital Discharge Protocols & Patient Recovery Instructions\n*Source: Joint Commission Hospital Quality & Patient Safety Measures, CMS Discharge Guidelines*\n*Target Audience: Post-Hospitalization Patient Guidance & Nursing Review*\n\n## 1. General Post-Discharge Recovery Principles\nHospital discharge represents a vulnerable transition period. Adverse events occur in approximately 20% of patients within 30 days of leaving the hospital, with medication discrepancies and unrecognized infection being the leading causes.\n\n---\n\n## 2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)",
+    "source": "discharge_care_protocols.md",
+    "section": "2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)",
+    "char_count": 634
+  },
+  {
+    "id": "discharge_care_protocols_chunk_1",
+    "text": "fection being the leading causes.\n\n---\n\n## 2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)\nPatients and caregivers must immediately seek emergency evaluation if any of the following occur:\n- **Cardiovascular / Pulmonary:**\n  - Sudden, crushing chest pain or pressure radiating to the jaw, neck, left arm, or back.\n  - Acute severe shortness of breath or sudden inability to speak in full sentences.\n  - Coughing up pink frothy sputum or frank blood.\n  - Sudden fainting (syncope) or loss of consciousness.\n- **Neurological (Signs of Stroke - FAST):**\n  - Sudden facial droop, arm weakness or numbness, or slurred/incomprehensible speech.",
+    "source": "discharge_care_protocols.md",
+    "section": "2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)",
+    "char_count": 667
+  },
+  {
+    "id": "discharge_care_protocols_chunk_2",
+    "text": "gical (Signs of Stroke - FAST):**\n  - Sudden facial droop, arm weakness or numbness, or slurred/incomprehensible speech.\n  - Sudden severe \"thunderclap\" headache unlike any previous headache.\n- **Thromboembolic (Blood Clot / DVT / PE):**\n  - Asymmetric swelling, intense warmth, redness, and tenderness in one calf or thigh.\n\n---\n\n## 3. Urgent Warning Signs Requiring Same-Day Clinic Contact\n- **Infection Markers:**\n  - Temperature >= 100.4\u00b0F (38.0\u00b0C) or chills.\n  - Surgical incision showing expanding erythema (redness spreading > 1 inch from incision edge), warmth, increased swelling, or purulent (yellow/green/foul-smelling) drainage.\n- **Fluid & Gastrointestinal:**",
+    "source": "discharge_care_protocols.md",
+    "section": "3. Urgent Warning Signs Requiring Same-Day Clinic Contact",
+    "char_count": 672
+  },
+  {
+    "id": "discharge_care_protocols_chunk_3",
+    "text": "on edge), warmth, increased swelling, or purulent (yellow/green/foul-smelling) drainage.\n- **Fluid & Gastrointestinal:**\n  - Inability to keep fluids down for > 24 hours due to nausea or vomiting.\n  - Rapid unexplained weight gain (> 3 lbs in 24 hours or 5 lbs in 1 week), especially in heart failure patients (flags fluid retention).\n  - Dark, tarry, black stools (melena) or bright red rectal bleeding.\n\n---\n\n## 4. Medication Reconciliation & Safe Administration Rules\n- **Dual Antiplatelet Therapy (DAPT) Post-Cardiac Stent:**",
+    "source": "discharge_care_protocols.md",
+    "section": "4. Medication Reconciliation & Safe Administration Rules",
+    "char_count": 529
+  },
+  {
+    "id": "discharge_care_protocols_chunk_4",
+    "text": "## 4. Medication Reconciliation & Safe Administration Rules\n- **Dual Antiplatelet Therapy (DAPT) Post-Cardiac Stent:**\n  - If a coronary stent was placed, medications like Aspirin plus Clopidogrel (Plavix), Ticagrelor (Brilinta), or Prasugrel MUST NEVER be stopped abruptly without consulting the interventional cardiologist. Abrupt cessation carries a high risk of catastrophic acute stent thrombosis.\n- **Pain Management (Opioids vs. NSAIDs):**\n  - Do not exceed 3,000 mg of Acetaminophen (Tylenol) in 24 hours from all sources combined (many prescription opioid combination pills, such as Norco or Percocet, already contain 325 mg of Acetaminophen).",
+    "source": "discharge_care_protocols.md",
+    "section": "4. Medication Reconciliation & Safe Administration Rules",
+    "char_count": 652
+  },
+  {
+    "id": "discharge_care_protocols_chunk_5",
+    "text": "mbined (many prescription opioid combination pills, such as Norco or Percocet, already contain 325 mg of Acetaminophen).\n  - Avoid NSAIDs (Ibuprofen, Naproxen) if patient has kidney disease, history of stomach ulcers, or is taking blood thinners.\n- **Antibiotic Stewardship:**\n  - Complete the full prescribed course of antibiotics even if feeling 100% improved, unless instructed otherwise by a physician.\n\n---\n\n## 5. Activity Restrictions & Wound Care\n- **Lifting Restrictions:** No lifting objects heavier than 10 lbs (roughly a gallon of milk) for 2 to 4 weeks post-abdominal or cardiac surgery.",
+    "source": "discharge_care_protocols.md",
+    "section": "5. Activity Restrictions & Wound Care",
+    "char_count": 599
+  },
+  {
+    "id": "discharge_care_protocols_chunk_6",
+    "text": "** No lifting objects heavier than 10 lbs (roughly a gallon of milk) for 2 to 4 weeks post-abdominal or cardiac surgery.\n- **Showering vs. Bathing:** Showering with mild soap and gentle patting dry is generally permitted after 48 hours; do NOT submerge incision in baths, pools, or hot tubs until cleared by the surgeon.",
+    "source": "discharge_care_protocols.md",
+    "section": "5. Activity Restrictions & Wound Care",
+    "char_count": 320
+  },
+  {
+    "id": "cbc_blood_count_chunk_0",
+    "text": "# Clinical Reference Guide: Complete Blood Count (CBC) with Differential\n*Source: NIH National Heart, Lung, and Blood Institute (NHLBI) & CDC Reference Lab*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Complete Blood Count\nThe Complete Blood Count (CBC) evaluates cellular components circulating in blood: Red Blood Cells (oxygen transport), White Blood Cells (immune defense), and Platelets (blood clotting).\n\n---\n\n## 2. Red Blood Cell Indices (Anemia & Oxygen Delivery)\n\n### Red Blood Cell Count (RBC)\n- **Standard Reference Range:**\n  - Adult Males: 4.35 to 5.65 million cells/mcL\n  - Adult Females: 3.92 to 5.13 million cells/mcL",
+    "source": "cbc_blood_count.md",
+    "section": "Red Blood Cell Count (RBC)",
+    "char_count": 677
+  },
+  {
+    "id": "cbc_blood_count_chunk_1",
+    "text": "ard Reference Range:**\n  - Adult Males: 4.35 to 5.65 million cells/mcL\n  - Adult Females: 3.92 to 5.13 million cells/mcL\n- **Low Count:** Anemia, active blood loss, bone marrow suppression, nutritional deficiencies (Iron, B12, Folate).\n- **High Count (Erythrocytosis):** Chronic low oxygen (smoking, COPD, sleep apnea), high altitude, polycythemia vera, or hemoconcentration due to dehydration.\n\n### Hemoglobin (Hgb)\n- **Standard Reference Range:**\n  - Adult Males: 13.2 to 16.6 g/dL\n  - Adult Females: 11.6 to 15.0 g/dL\n- **Mild Anemia (10.0 - 11.5 g/dL):** May cause mild fatigue, pale skin, slight shortness of breath with strenuous exertion.",
+    "source": "cbc_blood_count.md",
+    "section": "Hemoglobin (Hgb)",
+    "char_count": 645
+  },
+  {
+    "id": "cbc_blood_count_chunk_2",
+    "text": "Mild Anemia (10.0 - 11.5 g/dL):** May cause mild fatigue, pale skin, slight shortness of breath with strenuous exertion.\n- **Moderate to Severe Anemia (< 8.0 g/dL):** Palpitations, dizziness, resting shortness of breath. Requires physician evaluation.\n- **Critical Threshold (< 7.0 g/dL):** Typically warrants hospital admission and packed red blood cell transfusion evaluation.\n\n### Hematocrit (Hct)\n- **Standard Reference Range:**\n  - Adult Males: 38.3% to 48.6%\n  - Adult Females: 35.5% to 44.9%\n- **Definition:** The percentage of total blood volume made up of red blood cells (typically ~3 times the hemoglobin level).\n\n### Mean Corpuscular Volume (MCV)",
+    "source": "cbc_blood_count.md",
+    "section": "Mean Corpuscular Volume (MCV)",
+    "char_count": 658
+  },
+  {
+    "id": "cbc_blood_count_chunk_3",
+    "text": "al blood volume made up of red blood cells (typically ~3 times the hemoglobin level).\n\n### Mean Corpuscular Volume (MCV)\n- **Standard Reference Range:** 80 to 96 fL (femtoliters)\n- **Microcytic (MCV < 80 fL):** Small red cells. Primary causes: Iron deficiency anemia, Thalassemia trait, Anemia of chronic disease.\n- **Normocytic (MCV 80 - 96 fL):** Acute blood loss, kidney failure, early nutritional deficiency.\n- **Macrocytic (MCV > 100 fL):** Large red cells. Primary causes: Vitamin B12 deficiency, Folate deficiency, alcoholism, liver disease, hypothyroid state, certain chemotherapies.\n\n---\n\n## 3. White Blood Cells & Differential (Immune System)\n\n### Total White Blood Cell Count (WBC)",
+    "source": "cbc_blood_count.md",
+    "section": "Total White Blood Cell Count (WBC)",
+    "char_count": 692
+  },
+  {
+    "id": "cbc_blood_count_chunk_4",
+    "text": "ain chemotherapies.\n\n---\n\n## 3. White Blood Cells & Differential (Immune System)\n\n### Total White Blood Cell Count (WBC)\n- **Standard Reference Range:** 4,000 to 11,000 cells/mcL (4.0 - 11.0 x 10^3 / mcL)\n- **Leukocytosis (WBC > 11,000):** Bacterial infection, acute viral infection, systemic inflammation, severe physical/emotional stress, steroid medication (e.g. Prednisone). Mild elevation (11,000 - 14,000) during or right after an upper respiratory infection or dental work is common and reactive.\n- **Leukopenia (WBC < 4,000):** Viral infections (such as influenza, COVID-19, HIV), autoimmune diseases (lupus), bone marrow disorders, or drug side effects.",
+    "source": "cbc_blood_count.md",
+    "section": "Total White Blood Cell Count (WBC)",
+    "char_count": 662
+  },
+  {
+    "id": "cbc_blood_count_chunk_5",
+    "text": "infections (such as influenza, COVID-19, HIV), autoimmune diseases (lupus), bone marrow disorders, or drug side effects.\n- **Critical Threshold (< 1,500):** Substantial risk of opportunistic infection; requires isolation precautions.\n\n### Neutrophils (Absolute & Percentage)\n- **Standard Reference Range:** 40% to 70% (1,500 - 7,500 cells/mcL)\n- **Role:** First responders against bacterial infections. \"Left shift\" or presence of immature bands suggests acute bacterial response.\n\n### Lymphocytes\n- **Standard Reference Range:** 20% to 40% (1,000 - 4,800 cells/mcL)",
+    "source": "cbc_blood_count.md",
+    "section": "Lymphocytes",
+    "char_count": 566
+  },
+  {
+    "id": "cbc_blood_count_chunk_6",
+    "text": "suggests acute bacterial response.\n\n### Lymphocytes\n- **Standard Reference Range:** 20% to 40% (1,000 - 4,800 cells/mcL)\n- **Role:** Combat viral pathogens (T cells, B cells, NK cells). Elevated during mononucleosis, viral illnesses, or chronic lymphocytic conditions.\n\n### Eosinophils\n- **Standard Reference Range:** 1% to 4% (50 - 500 cells/mcL)\n- **Elevated in:** Allergic conditions (asthma, eczema, hay fever), parasitic infections, eosinophilic esophagitis, or drug reactions.\n\n---\n\n## 4. Platelets (Coagulation & Clotting)\n\n### Platelet Count\n- **Standard Reference Range:** 150,000 to 450,000 cells/mcL\n- **Thrombocytopenia (Low Platelets < 150,000):**",
+    "source": "cbc_blood_count.md",
+    "section": "Platelet Count",
+    "char_count": 660
+  },
+  {
+    "id": "cbc_blood_count_chunk_7",
+    "text": "let Count\n- **Standard Reference Range:** 150,000 to 450,000 cells/mcL\n- **Thrombocytopenia (Low Platelets < 150,000):**\n  - **100,000 - 149,000:** Mild; often asymptomatic, common in viral recovery or gestational thrombocytopenia.\n  - **50,000 - 99,000:** Moderate; minor bruising, petechiae, prolonged bleeding from cuts.\n  - **< 20,000:** Severe; high risk of spontaneous mucosal or intracranial bleeding. Urgent medical management needed.\n- **Thrombocytosis (High Platelets > 450,000):** Reactive (post-infection, iron deficiency, post-splenectomy) or primary essential thrombocythemia.",
+    "source": "cbc_blood_count.md",
+    "section": "Platelet Count",
+    "char_count": 590
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_0",
+    "text": "# Clinical Reference Guide: Comprehensive Metabolic Panel (CMP)\n*Source: NIH MedlinePlus & Clinical Chemistry Reference Standards (AACC)*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Comprehensive Metabolic Panel\nThe Comprehensive Metabolic Panel (CMP) is a blood test consisting of 14 separate measurements. It evaluates kidney function, liver function, blood sugar levels, electrolyte balance, and acid/base balance in the blood.\n\n---\n\n## 2. Kidney Function Biomarkers\n\n### Blood Urea Nitrogen (BUN)\n- **Standard Reference Range:** 7 to 20 mg/dL",
+    "source": "metabolic_panel_cmp.md",
+    "section": "Blood Urea Nitrogen (BUN)",
+    "char_count": 591
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_1",
+    "text": "ood.\n\n---\n\n## 2. Kidney Function Biomarkers\n\n### Blood Urea Nitrogen (BUN)\n- **Standard Reference Range:** 7 to 20 mg/dL\n- **What it measures:** The amount of nitrogen in the blood that comes from the waste product urea, produced in the liver and eliminated by the kidneys.\n- **High Levels (Azotemia):** May indicate impaired renal filtration, acute kidney injury, congestive heart failure, high protein intake, gastrointestinal bleeding, or severe dehydration. Dehydration is the most frequent benign cause of mildly elevated BUN with a normal creatinine.\n- **Low Levels:** Seen in severe liver disease, malnutrition, low-protein diets, or overhydration.\n\n### Serum Creatinine",
+    "source": "metabolic_panel_cmp.md",
+    "section": "Serum Creatinine",
+    "char_count": 677
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_2",
+    "text": "- **Low Levels:** Seen in severe liver disease, malnutrition, low-protein diets, or overhydration.\n\n### Serum Creatinine\n- **Standard Reference Range:** 0.6 to 1.3 mg/dL (adult males: 0.7 - 1.3 mg/dL; adult females: 0.5 - 1.1 mg/dL)\n- **What it measures:** A breakdown byproduct of creatine phosphate in skeletal muscle tissue. Because healthy kidneys filter creatinine at a constant rate, it is the primary direct indicator of renal filtering capability.\n- **High Levels:** Indicates reduced glomerular filtration, intrinsic kidney disease, urinary tract obstruction, or intense strenuous weightlifting (temporary).\n- **Low Levels:** Decreased muscle mass, myasthenia gravis, or advanced age.",
+    "source": "metabolic_panel_cmp.md",
+    "section": "Estimated Glomerular Filtration Rate (eGFR)",
+    "char_count": 693
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_3",
+    "text": "tense strenuous weightlifting (temporary).\n- **Low Levels:** Decreased muscle mass, myasthenia gravis, or advanced age.\n\n### Estimated Glomerular Filtration Rate (eGFR)\n- **Standard Reference Range:** Greater than 60 mL/min/1.73 m\u00b2 (Normal baseline: 90 - 120 mL/min/1.73 m\u00b2)\n- **Interpretation:**\n  - **> 90 mL/min:** Normal kidney function.\n  - **60 - 89 mL/min:** Mildly decreased kidney filtration; common with normal aging if no protein is in the urine.\n  - **45 - 59 mL/min (Stage 3a CKD):** Moderate reduction in kidney function. Requires physician review, medication adjustments, and hydration assessment.",
+    "source": "metabolic_panel_cmp.md",
+    "section": "Estimated Glomerular Filtration Rate (eGFR)",
+    "char_count": 612
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_4",
+    "text": "):** Moderate reduction in kidney function. Requires physician review, medication adjustments, and hydration assessment.\n  - **15 - 29 mL/min (Stage 4 CKD):** Severe kidney impairment. Immediate nephrology referral required.\n  - **< 15 mL/min:** Kidney failure.\n\n---\n\n## 3. Electrolytes & Fluid Balance\n\n### Sodium (Na+)\n- **Standard Reference Range:** 135 to 145 mEq/L\n- **High (Hypernatremia):** Inadequate water intake, excessive sweating, diuretic therapy, diabetes insipidus.",
+    "source": "metabolic_panel_cmp.md",
+    "section": "Sodium (Na+)",
+    "char_count": 480
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_5",
+    "text": "145 mEq/L\n- **High (Hypernatremia):** Inadequate water intake, excessive sweating, diuretic therapy, diabetes insipidus.\n- **Low (Hyponatremia):** Excess water retention, heart failure, cirrhosis, SIADH, vomiting/diarrhea. Mild hyponatremia (130-134 mEq/L) often presents with mild fatigue, nausea, or headache. Severe drops (< 125 mEq/L) are medical emergencies.\n\n### Potassium (K+)\n- **Standard Reference Range:** 3.5 to 5.2 mEq/L\n- **High (Hyperkalemia):** Kidney dysfunction, ACE inhibitors, ARBs, potassium-sparing diuretics, tissue trauma. Levels above 6.0 mEq/L can cause fatal cardiac arrhythmias and require urgent attention.",
+    "source": "metabolic_panel_cmp.md",
+    "section": "Potassium (K+)",
+    "char_count": 634
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_6",
+    "text": "aring diuretics, tissue trauma. Levels above 6.0 mEq/L can cause fatal cardiac arrhythmias and require urgent attention.\n- **Low (Hypokalemia):** Diuretics (\"water pills\"), prolonged vomiting, diarrhea, insufficient dietary intake. Can cause muscle cramps, weakness, and cardiac palpitations.\n\n### Carbon Dioxide / Bicarbonate (CO2)\n- **Standard Reference Range:** 22 to 29 mEq/L\n- **What it measures:** The buffering capacity of blood and metabolic acid-base status.\n\n### Calcium\n- **Standard Reference Range:** 8.5 to 10.2 mg/dL\n- **Clinical Significance:** Crucial for bone health, neuromuscular transmission, and cardiac contractility. Regulated by parathyroid hormone (PTH) and Vitamin D.\n\n---",
+    "source": "metabolic_panel_cmp.md",
+    "section": "4. Blood Sugar / Glycemic Marker",
+    "char_count": 698
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_7",
+    "text": "alth, neuromuscular transmission, and cardiac contractility. Regulated by parathyroid hormone (PTH) and Vitamin D.\n\n---\n\n## 4. Blood Sugar / Glycemic Marker\n\n### Fasting Blood Glucose\n- **Standard Reference Range:** 70 to 99 mg/dL (after an 8-hour overnight fast)\n- **Impaired Fasting Glucose (Prediabetes):** 100 to 125 mg/dL\n- **Diabetes Diagnostic Threshold:** 126 mg/dL or higher on two separate occasions\n- **Hypoglycemia (< 70 mg/dL):** Causes shakiness, sweating, anxiety, confusion. Immediate carbohydrate ingestion required.\n\n---\n\n## 5. Liver Function & Protein Biomarkers\n\n### Alanine Aminotransferase (ALT)\n- **Standard Reference Range:** 7 to 56 U/L",
+    "source": "metabolic_panel_cmp.md",
+    "section": "Alanine Aminotransferase (ALT)",
+    "char_count": 661
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_8",
+    "text": "# 5. Liver Function & Protein Biomarkers\n\n### Alanine Aminotransferase (ALT)\n- **Standard Reference Range:** 7 to 56 U/L\n- **Significance:** Enzyme primarily found in liver cells (hepatocytes). Released into the bloodstream during liver inflammation or injury.\n- **Mild Elevation (1x to 3x normal):** Non-alcoholic fatty liver disease (NAFLD), alcohol consumption, vigorous unaccustomed exercise, statin medications, or acetaminophen use.\n- **Marked Elevation (> 10x normal):** Acute viral hepatitis, ischemic liver injury, or toxin ingestion.\n\n### Aspartate Aminotransferase (AST)\n- **Standard Reference Range:** 10 to 40 U/L",
+    "source": "metabolic_panel_cmp.md",
+    "section": "Aspartate Aminotransferase (AST)",
+    "char_count": 626
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_9",
+    "text": "mic liver injury, or toxin ingestion.\n\n### Aspartate Aminotransferase (AST)\n- **Standard Reference Range:** 10 to 40 U/L\n- **Significance:** Found in liver, heart, and skeletal muscle. An AST/ALT ratio > 2.0 often suggests alcohol-induced liver stress.\n\n### Alkaline Phosphatase (ALP)\n- **Standard Reference Range:** 44 to 147 U/L\n- **Significance:** Found in bile ducts and bone. High ALP with elevated GGT indicates biliary blockage; high ALP with normal GGT suggests bone remodeling/growth.\n\n### Total Bilirubin\n- **Standard Reference Range:** 0.2 to 1.2 mg/dL",
+    "source": "metabolic_panel_cmp.md",
+    "section": "Total Bilirubin",
+    "char_count": 563
+  },
+  {
+    "id": "metabolic_panel_cmp_chunk_10",
+    "text": "P with normal GGT suggests bone remodeling/growth.\n\n### Total Bilirubin\n- **Standard Reference Range:** 0.2 to 1.2 mg/dL\n- **Significance:** Byproduct of red blood cell breakdown. Levels > 2.5 mg/dL cause jaundice (yellowing of eyes and skin). Mild isolated elevation (1.3 - 2.0 mg/dL) with normal liver enzymes is commonly Gilbert's syndrome, a benign genetic trait.\n\n### Albumin & Total Protein\n- **Albumin Reference Range:** 3.4 to 5.4 g/dL\n- **Significance:** Main protein produced by the liver, maintains oncotic pressure. Low albumin may reflect chronic illness, malnutrition, nephrotic syndrome, or chronic liver disease.",
+    "source": "metabolic_panel_cmp.md",
+    "section": "Albumin & Total Protein",
+    "char_count": 628
+  }
+]

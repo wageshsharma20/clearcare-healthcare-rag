@@ -28,3 +28,4 @@ chroma_db/
 
 # App logs
 *.log
+.vercel
