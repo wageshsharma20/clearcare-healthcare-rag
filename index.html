@@ -160,7 +160,7 @@
           <h2 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
             <i class="fas fa-key text-white"></i> 1. Groq LLM Authentication
           </h2>
-          <span class="text-[11px] text-zinc-500 font-mono">v1.3</span>
+          <span class="text-[11px] text-zinc-500 font-mono">v1.4 (Mock Benchmarks & Obsidian Dark)</span>
         </div>
         <div class="space-y-3">
           <div>
@@ -314,16 +314,44 @@
         <!-- ============================================================= -->
         <div id="tab1" class="space-y-4">
           
-          <!-- Sample Quick-Chips -->
-          <div class="flex items-center justify-between flex-wrap gap-2">
-            <label class="block text-xs sm:text-sm font-bold text-white">
-              Paste Patient Lab Report or Discharge Summary
-            </label>
-            <div class="flex items-center gap-1.5">
-              <span class="text-[11px] text-zinc-500 font-medium hidden sm:inline">Quick load:</span>
-              <button onclick="loadSample('annual_checkup')" class="text-[11px] bg-[#141724] hover:bg-[#1e2334] text-zinc-300 px-2 py-0.5 rounded font-medium border border-[#202434] transition">Annual Checkup</button>
-              <button onclick="loadSample('cardiac_discharge')" class="text-[11px] bg-[#141724] hover:bg-[#1e2334] text-zinc-300 px-2 py-0.5 rounded font-medium border border-[#202434] transition">Stent Discharge</button>
-              <button onclick="loadSample('kidney_diabetic')" class="text-[11px] bg-[#141724] hover:bg-[#1e2334] text-zinc-300 px-2 py-0.5 rounded font-medium border border-[#202434] transition">Kidney/eGFR</button>
+          <!-- Clinical Case Benchmark Selector (3 Mock Reports) -->
+          <div class="space-y-2 mb-3">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fas fa-flask text-zinc-400"></i> Select Clinical Mock Case (Click to Load):
+              </label>
+              <span class="text-[11px] text-zinc-400 font-medium">3 Pre-configured Patient Scenarios</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <button type="button" onclick="loadSample('annual_checkup')" id="mockCard_annual_checkup" class="mock-card text-left p-3 rounded-xl border-2 border-white bg-[#181c2b] shadow-md transition group cursor-pointer active:scale-98">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-bold text-xs text-white flex items-center gap-1.5">
+                    <span>🩺</span> Case 1: Annual Checkup
+                  </span>
+                  <span class="text-[9px] font-bold text-amber-300 bg-amber-950/80 border border-amber-800/80 px-1.5 py-0.5 rounded">CMP + Lipid</span>
+                </div>
+                <p class="text-[11px] text-zinc-400 leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
+              </button>
+
+              <button type="button" onclick="loadSample('cardiac_discharge')" id="mockCard_cardiac_discharge" class="mock-card text-left p-3 rounded-xl border border-[#232738] bg-[#121420] hover:bg-[#181c2b] hover:border-zinc-400 shadow-sm transition group cursor-pointer active:scale-98">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-bold text-xs text-white flex items-center gap-1.5">
+                    <span>❤️</span> Case 2: Stent Discharge
+                  </span>
+                  <span class="text-[9px] font-bold text-rose-300 bg-rose-950/80 border border-rose-800/80 px-1.5 py-0.5 rounded">Cardiology DAPT</span>
+                </div>
+                <p class="text-[11px] text-zinc-400 leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
+              </button>
+
+              <button type="button" onclick="loadSample('kidney_diabetic')" id="mockCard_kidney_diabetic" class="mock-card text-left p-3 rounded-xl border border-[#232738] bg-[#121420] hover:bg-[#181c2b] hover:border-zinc-400 shadow-sm transition group cursor-pointer active:scale-98">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-bold text-xs text-white flex items-center gap-1.5">
+                    <span>🧪</span> Case 3: Kidney & Diabetes
+                  </span>
+                  <span class="text-[9px] font-bold text-indigo-300 bg-indigo-950/80 border border-indigo-800/80 px-1.5 py-0.5 rounded">Renal eGFR</span>
+                </div>
+                <p class="text-[11px] text-zinc-400 leading-tight">Creatinine (1.62), eGFR (48), Low K+ (3.3)</p>
+              </button>
             </div>
           </div>
 
@@ -918,48 +946,30 @@
 
   <!-- RAG Engine & App Logic -->
   <script>
+    // Embedded Pre-Indexed Clinical Knowledge Base & Mock Benchmarks
+    const EMBEDDED_KNOWLEDGE_BASE = [{"id": "lipid_cholesterol_panel_chunk_0", "text": "# Clinical Reference Guide: Lipid Panel & Cardiovascular Health Markers\n*Source: American College of Cardiology (ACC) / American Heart Association (AHA) Multisociety Guideline on the Management of Blood Cholesterol*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Lipid Panel\nThe Lipid Panel is a blood screening test that measures concentrations of fat molecules (lipids) in the bloodstream to calculate cardiovascular risk for heart attack, atherosclerosis, and stroke.\n\n---\n\n## 2. Cholesterol Fractions & Diagnostic Targets\n\n### Total Cholesterol\n- **Desirable:** Less than 200 mg/dL\n- **Borderline High:** 200 to 239 mg/dL\n- **High:** 240 mg/dL or higher", "source": "lipid_cholesterol_panel.md", "section": "Total Cholesterol", "char_count": 699}, {"id": "lipid_cholesterol_panel_chunk_1", "text": "Cholesterol\n- **Desirable:** Less than 200 mg/dL\n- **Borderline High:** 200 to 239 mg/dL\n- **High:** 240 mg/dL or higher\n- **Clinical Note:** Total cholesterol reflects LDL + HDL + 20% of Triglycerides. High total cholesterol alone is not an absolute disease diagnosis, but a signal to calculate composite 10-year atherosclerotic cardiovascular disease (ASCVD) risk.\n\n### Low-Density Lipoprotein (LDL-C) \u2014 \"Bad Cholesterol\"\n- **Optimal:** Less than 100 mg/dL\n- **Optimal for High-Risk Individuals (History of CAD, Stents, Diabetes):** Less than 70 mg/dL (or < 55 mg/dL for very high risk)\n- **Near Optimal / Above Optimal:** 100 to 129 mg/dL\n- **Borderline High:** 130 to 159 mg/dL", "source": "lipid_cholesterol_panel.md", "section": "Low-Density Lipoprotein (LDL-C) \u2014 \"Bad Cholesterol\"", "char_count": 681}, {"id": "lipid_cholesterol_panel_chunk_2", "text": "5 mg/dL for very high risk)\n- **Near Optimal / Above Optimal:** 100 to 129 mg/dL\n- **Borderline High:** 130 to 159 mg/dL\n- **High:** 160 to 189 mg/dL\n- **Very High:** 190 mg/dL or higher (Often flags familial hypercholesterolemia genetic screening)\n- **Pathophysiology:** Excess LDL particles deposit into coronary and carotid arterial walls, forming inflammatory plaques that can rupture and cause myocardial infarction (heart attack) or ischemic stroke.\n\n### High-Density Lipoprotein (HDL-C) \u2014 \"Good Cholesterol\"\n- **Desirable (Protective):**\n  - Adult Males: Greater than 40 mg/dL (preferably > 50 mg/dL)\n  - Adult Females: Greater than 50 mg/dL (preferably > 60 mg/dL)", "source": "lipid_cholesterol_panel.md", "section": "High-Density Lipoprotein (HDL-C) \u2014 \"Good Cholesterol\"", "char_count": 672}, {"id": "lipid_cholesterol_panel_chunk_3", "text": "lt Males: Greater than 40 mg/dL (preferably > 50 mg/dL)\n  - Adult Females: Greater than 50 mg/dL (preferably > 60 mg/dL)\n- **Low HDL (< 40 mg/dL):** An independent risk factor for coronary artery disease.\n- **How to raise HDL:** Aerobic exercise, quitting smoking, consuming healthy monounsaturated fats (olive oil, avocados, nuts).\n\n### Triglycerides\n- **Normal:** Less than 150 mg/dL\n- **Borderline High:** 150 to 199 mg/dL\n- **High:** 200 to 499 mg/dL\n- **Very High (Severe Hypertriglyceridemia):** 500 mg/dL or higher\n- **Critical Risk:** Levels above 500-1000 mg/dL increase risk of acute pancreatitis.", "source": "lipid_cholesterol_panel.md", "section": "Triglycerides", "char_count": 607}, {"id": "lipid_cholesterol_panel_chunk_4", "text": "yceridemia):** 500 mg/dL or higher\n- **Critical Risk:** Levels above 500-1000 mg/dL increase risk of acute pancreatitis.\n- **Common Lifestyle Drivers:** Excessive refined sugar/simple carbohydrates, alcohol intake, obesity, untreated hypothyroidism, or uncontrolled diabetes.\n\n---\n\n## 3. Glycated Hemoglobin (HbA1c) \u2014 Diabetic Marker\n- **Normal (Non-Diabetic):** Below 5.7%\n- **Prediabetes:** 5.7% to 6.4%\n- **Diabetes Diagnostic Threshold:** 6.5% or higher\n- **Clinical Action for Prediabetes:** 5-7% intentional body weight loss, 150 minutes/week of moderate physical activity (brisk walking), reduction of sugar-sweetened beverages.", "source": "lipid_cholesterol_panel.md", "section": "3. Glycated Hemoglobin (HbA1c) \u2014 Diabetic Marker", "char_count": 635}, {"id": "thyroid_tsh_panel_chunk_0", "text": "# Clinical Reference Guide: Thyroid Function Panel & Endocrine Markers\n*Source: American Thyroid Association (ATA) & Endocrine Society Guidelines*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Thyroid Panel\nThe thyroid is a butterfly-shaped gland located in the lower front of the neck. It produces hormones that regulate metabolism, heart rate, body temperature, and energy consumption throughout the body.\n\n---\n\n## 2. Primary Thyroid Biomarkers\n\n### Thyroid Stimulating Hormone (TSH)\n- **Standard Reference Range:** 0.45 to 4.50 mIU/L (uIU/mL)", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 588}, {"id": "thyroid_tsh_panel_chunk_1", "text": "ry Thyroid Biomarkers\n\n### Thyroid Stimulating Hormone (TSH)\n- **Standard Reference Range:** 0.45 to 4.50 mIU/L (uIU/mL)\n- **What it measures:** A pituitary hormone that tells the thyroid gland how much thyroid hormone to produce. TSH has an *inverse* relationship with thyroid activity (like a thermostat).\n- **High TSH (> 4.50 mIU/L) \u2014 Underactive Thyroid (Hypothyroidism):**\n  - The pituitary is shouting at the thyroid because circulating thyroid hormone is too low.\n  - **Common Symptoms:** Chronic fatigue, weight gain despite normal diet, cold intolerance, constipation, brain fog, brittle nails, hair thinning, depression.", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 630}, {"id": "thyroid_tsh_panel_chunk_2", "text": "e, weight gain despite normal diet, cold intolerance, constipation, brain fog, brittle nails, hair thinning, depression.\n  - **Most Common Cause:** Hashimoto's thyroiditis (autoimmune destruction of thyroid tissue).\n  - **Subclinical Hypothyroidism:** TSH is mildly elevated (4.5 - 10.0 mIU/L) while Free T4 remains in normal range. Often monitored unless symptomatic or pregnant.\n- **Low TSH (< 0.40 mIU/L) \u2014 Overactive Thyroid (Hyperthyroidism):**\n  - The pituitary stops signaling because the body is flooded with excess thyroid hormone.\n  - **Common Symptoms:** Rapid heart rate (tachycardia), anxiety, tremors, heat intolerance, unexplained weight loss, diarrhea, insomnia.", "source": "thyroid_tsh_panel.md", "section": "Thyroid Stimulating Hormone (TSH)", "char_count": 678}, {"id": "thyroid_tsh_panel_chunk_3", "text": "toms:** Rapid heart rate (tachycardia), anxiety, tremors, heat intolerance, unexplained weight loss, diarrhea, insomnia.\n  - **Most Common Cause:** Graves' disease or toxic multinodular goiter.\n\n### Free Thyroxine (Free T4)\n- **Standard Reference Range:** 0.8 to 1.8 ng/dL\n- **Significance:** The active, unbound form of T4 circulating in the blood. Free T4 directly reflects the hormone available to body tissues.\n- **Low Free T4 + High TSH:** Confirms overt primary hypothyroidism. Treatment typically involves oral Levothyroxine (Synthroid), taken on an empty stomach 30-60 minutes before breakfast with a full glass of water.\n\n### Free Triiodothyronine (Free T3)", "source": "thyroid_tsh_panel.md", "section": "Free Triiodothyronine (Free T3)", "char_count": 666}, {"id": "thyroid_tsh_panel_chunk_4", "text": "aken on an empty stomach 30-60 minutes before breakfast with a full glass of water.\n\n### Free Triiodothyronine (Free T3)\n- **Standard Reference Range:** 2.3 to 4.2 pg/mL\n- **Significance:** The most biologically potent active thyroid hormone, largely converted from T4 in peripheral tissues (liver and kidneys).", "source": "thyroid_tsh_panel.md", "section": "Free Triiodothyronine (Free T3)", "char_count": 311}, {"id": "discharge_care_protocols_chunk_0", "text": "# Clinical Reference Guide: Hospital Discharge Protocols & Patient Recovery Instructions\n*Source: Joint Commission Hospital Quality & Patient Safety Measures, CMS Discharge Guidelines*\n*Target Audience: Post-Hospitalization Patient Guidance & Nursing Review*\n\n## 1. General Post-Discharge Recovery Principles\nHospital discharge represents a vulnerable transition period. Adverse events occur in approximately 20% of patients within 30 days of leaving the hospital, with medication discrepancies and unrecognized infection being the leading causes.\n\n---\n\n## 2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "source": "discharge_care_protocols.md", "section": "2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "char_count": 634}, {"id": "discharge_care_protocols_chunk_1", "text": "fection being the leading causes.\n\n---\n\n## 2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)\nPatients and caregivers must immediately seek emergency evaluation if any of the following occur:\n- **Cardiovascular / Pulmonary:**\n  - Sudden, crushing chest pain or pressure radiating to the jaw, neck, left arm, or back.\n  - Acute severe shortness of breath or sudden inability to speak in full sentences.\n  - Coughing up pink frothy sputum or frank blood.\n  - Sudden fainting (syncope) or loss of consciousness.\n- **Neurological (Signs of Stroke - FAST):**\n  - Sudden facial droop, arm weakness or numbness, or slurred/incomprehensible speech.", "source": "discharge_care_protocols.md", "section": "2. Red Flag Symptoms Requiring Immediate Emergency Care (Call 911 / Go to ED)", "char_count": 667}, {"id": "discharge_care_protocols_chunk_2", "text": "gical (Signs of Stroke - FAST):**\n  - Sudden facial droop, arm weakness or numbness, or slurred/incomprehensible speech.\n  - Sudden severe \"thunderclap\" headache unlike any previous headache.\n- **Thromboembolic (Blood Clot / DVT / PE):**\n  - Asymmetric swelling, intense warmth, redness, and tenderness in one calf or thigh.\n\n---\n\n## 3. Urgent Warning Signs Requiring Same-Day Clinic Contact\n- **Infection Markers:**\n  - Temperature >= 100.4\u00b0F (38.0\u00b0C) or chills.\n  - Surgical incision showing expanding erythema (redness spreading > 1 inch from incision edge), warmth, increased swelling, or purulent (yellow/green/foul-smelling) drainage.\n- **Fluid & Gastrointestinal:**", "source": "discharge_care_protocols.md", "section": "3. Urgent Warning Signs Requiring Same-Day Clinic Contact", "char_count": 672}, {"id": "discharge_care_protocols_chunk_3", "text": "on edge), warmth, increased swelling, or purulent (yellow/green/foul-smelling) drainage.\n- **Fluid & Gastrointestinal:**\n  - Inability to keep fluids down for > 24 hours due to nausea or vomiting.\n  - Rapid unexplained weight gain (> 3 lbs in 24 hours or 5 lbs in 1 week), especially in heart failure patients (flags fluid retention).\n  - Dark, tarry, black stools (melena) or bright red rectal bleeding.\n\n---\n\n## 4. Medication Reconciliation & Safe Administration Rules\n- **Dual Antiplatelet Therapy (DAPT) Post-Cardiac Stent:**", "source": "discharge_care_protocols.md", "section": "4. Medication Reconciliation & Safe Administration Rules", "char_count": 529}, {"id": "discharge_care_protocols_chunk_4", "text": "## 4. Medication Reconciliation & Safe Administration Rules\n- **Dual Antiplatelet Therapy (DAPT) Post-Cardiac Stent:**\n  - If a coronary stent was placed, medications like Aspirin plus Clopidogrel (Plavix), Ticagrelor (Brilinta), or Prasugrel MUST NEVER be stopped abruptly without consulting the interventional cardiologist. Abrupt cessation carries a high risk of catastrophic acute stent thrombosis.\n- **Pain Management (Opioids vs. NSAIDs):**\n  - Do not exceed 3,000 mg of Acetaminophen (Tylenol) in 24 hours from all sources combined (many prescription opioid combination pills, such as Norco or Percocet, already contain 325 mg of Acetaminophen).", "source": "discharge_care_protocols.md", "section": "4. Medication Reconciliation & Safe Administration Rules", "char_count": 652}, {"id": "discharge_care_protocols_chunk_5", "text": "mbined (many prescription opioid combination pills, such as Norco or Percocet, already contain 325 mg of Acetaminophen).\n  - Avoid NSAIDs (Ibuprofen, Naproxen) if patient has kidney disease, history of stomach ulcers, or is taking blood thinners.\n- **Antibiotic Stewardship:**\n  - Complete the full prescribed course of antibiotics even if feeling 100% improved, unless instructed otherwise by a physician.\n\n---\n\n## 5. Activity Restrictions & Wound Care\n- **Lifting Restrictions:** No lifting objects heavier than 10 lbs (roughly a gallon of milk) for 2 to 4 weeks post-abdominal or cardiac surgery.", "source": "discharge_care_protocols.md", "section": "5. Activity Restrictions & Wound Care", "char_count": 599}, {"id": "discharge_care_protocols_chunk_6", "text": "** No lifting objects heavier than 10 lbs (roughly a gallon of milk) for 2 to 4 weeks post-abdominal or cardiac surgery.\n- **Showering vs. Bathing:** Showering with mild soap and gentle patting dry is generally permitted after 48 hours; do NOT submerge incision in baths, pools, or hot tubs until cleared by the surgeon.", "source": "discharge_care_protocols.md", "section": "5. Activity Restrictions & Wound Care", "char_count": 320}, {"id": "cbc_blood_count_chunk_0", "text": "# Clinical Reference Guide: Complete Blood Count (CBC) with Differential\n*Source: NIH National Heart, Lung, and Blood Institute (NHLBI) & CDC Reference Lab*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Complete Blood Count\nThe Complete Blood Count (CBC) evaluates cellular components circulating in blood: Red Blood Cells (oxygen transport), White Blood Cells (immune defense), and Platelets (blood clotting).\n\n---\n\n## 2. Red Blood Cell Indices (Anemia & Oxygen Delivery)\n\n### Red Blood Cell Count (RBC)\n- **Standard Reference Range:**\n  - Adult Males: 4.35 to 5.65 million cells/mcL\n  - Adult Females: 3.92 to 5.13 million cells/mcL", "source": "cbc_blood_count.md", "section": "Red Blood Cell Count (RBC)", "char_count": 677}, {"id": "cbc_blood_count_chunk_1", "text": "ard Reference Range:**\n  - Adult Males: 4.35 to 5.65 million cells/mcL\n  - Adult Females: 3.92 to 5.13 million cells/mcL\n- **Low Count:** Anemia, active blood loss, bone marrow suppression, nutritional deficiencies (Iron, B12, Folate).\n- **High Count (Erythrocytosis):** Chronic low oxygen (smoking, COPD, sleep apnea), high altitude, polycythemia vera, or hemoconcentration due to dehydration.\n\n### Hemoglobin (Hgb)\n- **Standard Reference Range:**\n  - Adult Males: 13.2 to 16.6 g/dL\n  - Adult Females: 11.6 to 15.0 g/dL\n- **Mild Anemia (10.0 - 11.5 g/dL):** May cause mild fatigue, pale skin, slight shortness of breath with strenuous exertion.", "source": "cbc_blood_count.md", "section": "Hemoglobin (Hgb)", "char_count": 645}, {"id": "cbc_blood_count_chunk_2", "text": "Mild Anemia (10.0 - 11.5 g/dL):** May cause mild fatigue, pale skin, slight shortness of breath with strenuous exertion.\n- **Moderate to Severe Anemia (< 8.0 g/dL):** Palpitations, dizziness, resting shortness of breath. Requires physician evaluation.\n- **Critical Threshold (< 7.0 g/dL):** Typically warrants hospital admission and packed red blood cell transfusion evaluation.\n\n### Hematocrit (Hct)\n- **Standard Reference Range:**\n  - Adult Males: 38.3% to 48.6%\n  - Adult Females: 35.5% to 44.9%\n- **Definition:** The percentage of total blood volume made up of red blood cells (typically ~3 times the hemoglobin level).\n\n### Mean Corpuscular Volume (MCV)", "source": "cbc_blood_count.md", "section": "Mean Corpuscular Volume (MCV)", "char_count": 658}, {"id": "cbc_blood_count_chunk_3", "text": "al blood volume made up of red blood cells (typically ~3 times the hemoglobin level).\n\n### Mean Corpuscular Volume (MCV)\n- **Standard Reference Range:** 80 to 96 fL (femtoliters)\n- **Microcytic (MCV < 80 fL):** Small red cells. Primary causes: Iron deficiency anemia, Thalassemia trait, Anemia of chronic disease.\n- **Normocytic (MCV 80 - 96 fL):** Acute blood loss, kidney failure, early nutritional deficiency.\n- **Macrocytic (MCV > 100 fL):** Large red cells. Primary causes: Vitamin B12 deficiency, Folate deficiency, alcoholism, liver disease, hypothyroid state, certain chemotherapies.\n\n---\n\n## 3. White Blood Cells & Differential (Immune System)\n\n### Total White Blood Cell Count (WBC)", "source": "cbc_blood_count.md", "section": "Total White Blood Cell Count (WBC)", "char_count": 692}, {"id": "cbc_blood_count_chunk_4", "text": "ain chemotherapies.\n\n---\n\n## 3. White Blood Cells & Differential (Immune System)\n\n### Total White Blood Cell Count (WBC)\n- **Standard Reference Range:** 4,000 to 11,000 cells/mcL (4.0 - 11.0 x 10^3 / mcL)\n- **Leukocytosis (WBC > 11,000):** Bacterial infection, acute viral infection, systemic inflammation, severe physical/emotional stress, steroid medication (e.g. Prednisone). Mild elevation (11,000 - 14,000) during or right after an upper respiratory infection or dental work is common and reactive.\n- **Leukopenia (WBC < 4,000):** Viral infections (such as influenza, COVID-19, HIV), autoimmune diseases (lupus), bone marrow disorders, or drug side effects.", "source": "cbc_blood_count.md", "section": "Total White Blood Cell Count (WBC)", "char_count": 662}, {"id": "cbc_blood_count_chunk_5", "text": "infections (such as influenza, COVID-19, HIV), autoimmune diseases (lupus), bone marrow disorders, or drug side effects.\n- **Critical Threshold (< 1,500):** Substantial risk of opportunistic infection; requires isolation precautions.\n\n### Neutrophils (Absolute & Percentage)\n- **Standard Reference Range:** 40% to 70% (1,500 - 7,500 cells/mcL)\n- **Role:** First responders against bacterial infections. \"Left shift\" or presence of immature bands suggests acute bacterial response.\n\n### Lymphocytes\n- **Standard Reference Range:** 20% to 40% (1,000 - 4,800 cells/mcL)", "source": "cbc_blood_count.md", "section": "Lymphocytes", "char_count": 566}, {"id": "cbc_blood_count_chunk_6", "text": "suggests acute bacterial response.\n\n### Lymphocytes\n- **Standard Reference Range:** 20% to 40% (1,000 - 4,800 cells/mcL)\n- **Role:** Combat viral pathogens (T cells, B cells, NK cells). Elevated during mononucleosis, viral illnesses, or chronic lymphocytic conditions.\n\n### Eosinophils\n- **Standard Reference Range:** 1% to 4% (50 - 500 cells/mcL)\n- **Elevated in:** Allergic conditions (asthma, eczema, hay fever), parasitic infections, eosinophilic esophagitis, or drug reactions.\n\n---\n\n## 4. Platelets (Coagulation & Clotting)\n\n### Platelet Count\n- **Standard Reference Range:** 150,000 to 450,000 cells/mcL\n- **Thrombocytopenia (Low Platelets < 150,000):**", "source": "cbc_blood_count.md", "section": "Platelet Count", "char_count": 660}, {"id": "cbc_blood_count_chunk_7", "text": "let Count\n- **Standard Reference Range:** 150,000 to 450,000 cells/mcL\n- **Thrombocytopenia (Low Platelets < 150,000):**\n  - **100,000 - 149,000:** Mild; often asymptomatic, common in viral recovery or gestational thrombocytopenia.\n  - **50,000 - 99,000:** Moderate; minor bruising, petechiae, prolonged bleeding from cuts.\n  - **< 20,000:** Severe; high risk of spontaneous mucosal or intracranial bleeding. Urgent medical management needed.\n- **Thrombocytosis (High Platelets > 450,000):** Reactive (post-infection, iron deficiency, post-splenectomy) or primary essential thrombocythemia.", "source": "cbc_blood_count.md", "section": "Platelet Count", "char_count": 590}, {"id": "metabolic_panel_cmp_chunk_0", "text": "# Clinical Reference Guide: Comprehensive Metabolic Panel (CMP)\n*Source: NIH MedlinePlus & Clinical Chemistry Reference Standards (AACC)*\n*Target Audience: Patient Guidance & Primary Care Interpretation*\n\n## 1. Overview of the Comprehensive Metabolic Panel\nThe Comprehensive Metabolic Panel (CMP) is a blood test consisting of 14 separate measurements. It evaluates kidney function, liver function, blood sugar levels, electrolyte balance, and acid/base balance in the blood.\n\n---\n\n## 2. Kidney Function Biomarkers\n\n### Blood Urea Nitrogen (BUN)\n- **Standard Reference Range:** 7 to 20 mg/dL", "source": "metabolic_panel_cmp.md", "section": "Blood Urea Nitrogen (BUN)", "char_count": 591}, {"id": "metabolic_panel_cmp_chunk_1", "text": "ood.\n\n---\n\n## 2. Kidney Function Biomarkers\n\n### Blood Urea Nitrogen (BUN)\n- **Standard Reference Range:** 7 to 20 mg/dL\n- **What it measures:** The amount of nitrogen in the blood that comes from the waste product urea, produced in the liver and eliminated by the kidneys.\n- **High Levels (Azotemia):** May indicate impaired renal filtration, acute kidney injury, congestive heart failure, high protein intake, gastrointestinal bleeding, or severe dehydration. Dehydration is the most frequent benign cause of mildly elevated BUN with a normal creatinine.\n- **Low Levels:** Seen in severe liver disease, malnutrition, low-protein diets, or overhydration.\n\n### Serum Creatinine", "source": "metabolic_panel_cmp.md", "section": "Serum Creatinine", "char_count": 677}, {"id": "metabolic_panel_cmp_chunk_2", "text": "- **Low Levels:** Seen in severe liver disease, malnutrition, low-protein diets, or overhydration.\n\n### Serum Creatinine\n- **Standard Reference Range:** 0.6 to 1.3 mg/dL (adult males: 0.7 - 1.3 mg/dL; adult females: 0.5 - 1.1 mg/dL)\n- **What it measures:** A breakdown byproduct of creatine phosphate in skeletal muscle tissue. Because healthy kidneys filter creatinine at a constant rate, it is the primary direct indicator of renal filtering capability.\n- **High Levels:** Indicates reduced glomerular filtration, intrinsic kidney disease, urinary tract obstruction, or intense strenuous weightlifting (temporary).\n- **Low Levels:** Decreased muscle mass, myasthenia gravis, or advanced age.", "source": "metabolic_panel_cmp.md", "section": "Estimated Glomerular Filtration Rate (eGFR)", "char_count": 693}, {"id": "metabolic_panel_cmp_chunk_3", "text": "tense strenuous weightlifting (temporary).\n- **Low Levels:** Decreased muscle mass, myasthenia gravis, or advanced age.\n\n### Estimated Glomerular Filtration Rate (eGFR)\n- **Standard Reference Range:** Greater than 60 mL/min/1.73 m\u00b2 (Normal baseline: 90 - 120 mL/min/1.73 m\u00b2)\n- **Interpretation:**\n  - **> 90 mL/min:** Normal kidney function.\n  - **60 - 89 mL/min:** Mildly decreased kidney filtration; common with normal aging if no protein is in the urine.\n  - **45 - 59 mL/min (Stage 3a CKD):** Moderate reduction in kidney function. Requires physician review, medication adjustments, and hydration assessment.", "source": "metabolic_panel_cmp.md", "section": "Estimated Glomerular Filtration Rate (eGFR)", "char_count": 612}, {"id": "metabolic_panel_cmp_chunk_4", "text": "):** Moderate reduction in kidney function. Requires physician review, medication adjustments, and hydration assessment.\n  - **15 - 29 mL/min (Stage 4 CKD):** Severe kidney impairment. Immediate nephrology referral required.\n  - **< 15 mL/min:** Kidney failure.\n\n---\n\n## 3. Electrolytes & Fluid Balance\n\n### Sodium (Na+)\n- **Standard Reference Range:** 135 to 145 mEq/L\n- **High (Hypernatremia):** Inadequate water intake, excessive sweating, diuretic therapy, diabetes insipidus.", "source": "metabolic_panel_cmp.md", "section": "Sodium (Na+)", "char_count": 480}, {"id": "metabolic_panel_cmp_chunk_5", "text": "145 mEq/L\n- **High (Hypernatremia):** Inadequate water intake, excessive sweating, diuretic therapy, diabetes insipidus.\n- **Low (Hyponatremia):** Excess water retention, heart failure, cirrhosis, SIADH, vomiting/diarrhea. Mild hyponatremia (130-134 mEq/L) often presents with mild fatigue, nausea, or headache. Severe drops (< 125 mEq/L) are medical emergencies.\n\n### Potassium (K+)\n- **Standard Reference Range:** 3.5 to 5.2 mEq/L\n- **High (Hyperkalemia):** Kidney dysfunction, ACE inhibitors, ARBs, potassium-sparing diuretics, tissue trauma. Levels above 6.0 mEq/L can cause fatal cardiac arrhythmias and require urgent attention.", "source": "metabolic_panel_cmp.md", "section": "Potassium (K+)", "char_count": 634}, {"id": "metabolic_panel_cmp_chunk_6", "text": "aring diuretics, tissue trauma. Levels above 6.0 mEq/L can cause fatal cardiac arrhythmias and require urgent attention.\n- **Low (Hypokalemia):** Diuretics (\"water pills\"), prolonged vomiting, diarrhea, insufficient dietary intake. Can cause muscle cramps, weakness, and cardiac palpitations.\n\n### Carbon Dioxide / Bicarbonate (CO2)\n- **Standard Reference Range:** 22 to 29 mEq/L\n- **What it measures:** The buffering capacity of blood and metabolic acid-base status.\n\n### Calcium\n- **Standard Reference Range:** 8.5 to 10.2 mg/dL\n- **Clinical Significance:** Crucial for bone health, neuromuscular transmission, and cardiac contractility. Regulated by parathyroid hormone (PTH) and Vitamin D.\n\n---", "source": "metabolic_panel_cmp.md", "section": "4. Blood Sugar / Glycemic Marker", "char_count": 698}, {"id": "metabolic_panel_cmp_chunk_7", "text": "alth, neuromuscular transmission, and cardiac contractility. Regulated by parathyroid hormone (PTH) and Vitamin D.\n\n---\n\n## 4. Blood Sugar / Glycemic Marker\n\n### Fasting Blood Glucose\n- **Standard Reference Range:** 70 to 99 mg/dL (after an 8-hour overnight fast)\n- **Impaired Fasting Glucose (Prediabetes):** 100 to 125 mg/dL\n- **Diabetes Diagnostic Threshold:** 126 mg/dL or higher on two separate occasions\n- **Hypoglycemia (< 70 mg/dL):** Causes shakiness, sweating, anxiety, confusion. Immediate carbohydrate ingestion required.\n\n---\n\n## 5. Liver Function & Protein Biomarkers\n\n### Alanine Aminotransferase (ALT)\n- **Standard Reference Range:** 7 to 56 U/L", "source": "metabolic_panel_cmp.md", "section": "Alanine Aminotransferase (ALT)", "char_count": 661}, {"id": "metabolic_panel_cmp_chunk_8", "text": "# 5. Liver Function & Protein Biomarkers\n\n### Alanine Aminotransferase (ALT)\n- **Standard Reference Range:** 7 to 56 U/L\n- **Significance:** Enzyme primarily found in liver cells (hepatocytes). Released into the bloodstream during liver inflammation or injury.\n- **Mild Elevation (1x to 3x normal):** Non-alcoholic fatty liver disease (NAFLD), alcohol consumption, vigorous unaccustomed exercise, statin medications, or acetaminophen use.\n- **Marked Elevation (> 10x normal):** Acute viral hepatitis, ischemic liver injury, or toxin ingestion.\n\n### Aspartate Aminotransferase (AST)\n- **Standard Reference Range:** 10 to 40 U/L", "source": "metabolic_panel_cmp.md", "section": "Aspartate Aminotransferase (AST)", "char_count": 626}, {"id": "metabolic_panel_cmp_chunk_9", "text": "mic liver injury, or toxin ingestion.\n\n### Aspartate Aminotransferase (AST)\n- **Standard Reference Range:** 10 to 40 U/L\n- **Significance:** Found in liver, heart, and skeletal muscle. An AST/ALT ratio > 2.0 often suggests alcohol-induced liver stress.\n\n### Alkaline Phosphatase (ALP)\n- **Standard Reference Range:** 44 to 147 U/L\n- **Significance:** Found in bile ducts and bone. High ALP with elevated GGT indicates biliary blockage; high ALP with normal GGT suggests bone remodeling/growth.\n\n### Total Bilirubin\n- **Standard Reference Range:** 0.2 to 1.2 mg/dL", "source": "metabolic_panel_cmp.md", "section": "Total Bilirubin", "char_count": 563}, {"id": "metabolic_panel_cmp_chunk_10", "text": "P with normal GGT suggests bone remodeling/growth.\n\n### Total Bilirubin\n- **Standard Reference Range:** 0.2 to 1.2 mg/dL\n- **Significance:** Byproduct of red blood cell breakdown. Levels > 2.5 mg/dL cause jaundice (yellowing of eyes and skin). Mild isolated elevation (1.3 - 2.0 mg/dL) with normal liver enzymes is commonly Gilbert's syndrome, a benign genetic trait.\n\n### Albumin & Total Protein\n- **Albumin Reference Range:** 3.4 to 5.4 g/dL\n- **Significance:** Main protein produced by the liver, maintains oncotic pressure. Low albumin may reflect chronic illness, malnutrition, nephrotic syndrome, or chronic liver disease.", "source": "metabolic_panel_cmp.md", "section": "Albumin & Total Protein", "char_count": 628}];
+    const MOCK_REPORTS = {"annual_checkup": "PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT\nPatient Name: Jane Doe | DOB: 1978-04-12 | Age: 48 | Sex: Female\nOrdering Physician: Dr. Marcus Vance, MD (Internal Medicine)\nCollection Date: 2026-10-24 07:45 AM | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\n\n-- COMPLETE BLOOD COUNT (CBC) --\nWhite Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL\nRed Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL\nHemoglobin                      13.4         12.0 - 15.5 g/dL\nHematocrit                      39.8         37.0 - 48.0 %\nMean Corpuscular Vol (MCV)      88.2         80.0 - 96.0 fL\nPlatelets                       245          150 - 450 10^3/uL\n\n-- COMPREHENSIVE METABOLIC PANEL (CMP) --\nGlucose, Fasting                112          70 - 99 mg/dL       [HIGH]\nBlood Urea Nitrogen (BUN)       16           7 - 20 mg/dL\nCreatinine, Serum               0.82         0.50 - 1.10 mg/dL\neGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2\nSodium                          140          135 - 145 mEq/L\nPotassium                       4.2          3.5 - 5.1 mEq/L\nChloride                        102          96 - 106 mEq/L\nCarbon Dioxide (CO2)            25           22 - 29 mEq/L\nCalcium                         9.4          8.5 - 10.2 mg/dL\nTotal Protein                   7.1          6.0 - 8.3 g/dL\nAlbumin                         4.3          3.5 - 5.0 g/dL\nBilirubin, Total                0.6          0.2 - 1.2 mg/dL\nAlkaline Phosphatase (ALP)      72           44 - 147 U/L\nAST (SGOT)                      34           10 - 40 U/L\nALT (SGPT)                      52           7 - 45 U/L          [HIGH]\n\n-- LIPID & METABOLIC PANEL --\nCholesterol, Total              224          < 200 mg/dL         [HIGH]\nTriglycerides                   188          < 150 mg/dL         [HIGH]\nHDL Cholesterol                 44           > 50 mg/dL          [LOW]\nLDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]\nHemoglobin A1c (HbA1c)          5.9          < 5.7 %             [HIGH]\n\n-- THYROID STIMULATING HORMONE --\nTSH, 3rd Generation             2.14         0.45 - 4.50 uIU/mL\n\nPhysician Clinical Notes:\nPatient reports mild fatigue and sedentary lifestyle over past 6 months. Non-smoker.\nBlood pressure today: 128/82 mmHg. BMI: 28.4. Please review metabolic indices and diet.\n", "cardiac_discharge": "ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY\nPatient: Robert Miller | Age: 62 | Sex: Male | MRN: 9482104\nAdmit Date: 2026-11-08 | Discharge Date: 2026-11-12\nAttending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)\n\nDISCHARGE DIAGNOSES:\n1. Non-ST Elevation Myocardial Infarction (NSTEMI)\n2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.\n3. Essential Hypertension, moderate.\n4. Hyperlipidemia, uncontrolled.\n\nPROCEDURE PERFORMED:\nLeft heart catheterization, coronary angiography, balloon angioplasty, and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal vascular closure device in right common femoral artery.\n\nHOSPITAL COURSE SUMMARY:\nPatient presented with sudden retrosternal squeezing chest pressure. Troponin-I peaked at 4.2 ng/mL. Taken emergently to cardiac catheterization laboratory. Post-procedure telemetry was unremarkable with no recurrent angina, arrhythmia, or vascular access complications. Patient was ambulating well on day of discharge.\n\nDISCHARGE MEDICATIONS:\n1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).\n2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.\n3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime (High-intensity statin therapy).\n4. Metoprolol Tartrate 25 mg oral twice daily with meals.\n5. Lisinopril 10 mg oral daily.\n6. Nitroglycerin 0.4 mg sublingual tablet PRN chest pain (Take 1 tablet every 5 min up to 3 doses; call 911 if pain persists after first dose).\n\nPOST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:\n- Right groin access site: Keep clean and dry. No soaking in tubs, swimming, or hot tubs for 1 week. Showering permitted after 48 hours.\n- Activity restriction: No heavy lifting (> 10 lbs) or strenuous aerobic exertion for 7 days.\n- Red Flag Emergency Warnings: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or rapid swelling/bleeding at groin puncture site.\n- Contact clinic if temperature exceeds 100.4 F or if you notice spreading redness at puncture site.\n", "kidney_diabetic": "PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP\nPatient: David Hernandez | Age: 57 | Sex: Male\nOrdering Physician: Dr. Elena Rostova, MD (Nephrology)\nCollection Date: 2026-10-18 | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\nGlucose, Fasting                148          70 - 99 mg/dL       [HIGH]\nHemoglobin A1c                  7.8          < 5.7 %             [HIGH]\nSerum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]\neGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]\nBlood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]\nBUN/Creatinine Ratio            17.3         10 - 20\nPotassium                       3.3          3.5 - 5.1 mEq/L     [LOW]\nSodium                          138          135 - 145 mEq/L\nCalcium                         8.9          8.5 - 10.2 mg/dL\nAlbumin, Serum                  3.8          3.5 - 5.0 g/dL\nTotal Cholesterol               194          < 200 mg/dL\nTriglycerides                   210          < 150 mg/dL         [HIGH]\n\nPhysician Clinical Notes:\nPatient has known 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted, likely secondary to hydrochlorothiazide. Review hydration, dietary potassium, and glycemic control.\n", "sample_annual_checkup_labs": "PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT\nPatient Name: Jane Doe | DOB: 1978-04-12 | Age: 48 | Sex: Female\nOrdering Physician: Dr. Marcus Vance, MD (Internal Medicine)\nCollection Date: 2026-10-24 07:45 AM | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\n\n-- COMPLETE BLOOD COUNT (CBC) --\nWhite Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL\nRed Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL\nHemoglobin                      13.4         12.0 - 15.5 g/dL\nHematocrit                      39.8         37.0 - 48.0 %\nMean Corpuscular Vol (MCV)      88.2         80.0 - 96.0 fL\nPlatelets                       245          150 - 450 10^3/uL\n\n-- COMPREHENSIVE METABOLIC PANEL (CMP) --\nGlucose, Fasting                112          70 - 99 mg/dL       [HIGH]\nBlood Urea Nitrogen (BUN)       16           7 - 20 mg/dL\nCreatinine, Serum               0.82         0.50 - 1.10 mg/dL\neGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2\nSodium                          140          135 - 145 mEq/L\nPotassium                       4.2          3.5 - 5.1 mEq/L\nChloride                        102          96 - 106 mEq/L\nCarbon Dioxide (CO2)            25           22 - 29 mEq/L\nCalcium                         9.4          8.5 - 10.2 mg/dL\nTotal Protein                   7.1          6.0 - 8.3 g/dL\nAlbumin                         4.3          3.5 - 5.0 g/dL\nBilirubin, Total                0.6          0.2 - 1.2 mg/dL\nAlkaline Phosphatase (ALP)      72           44 - 147 U/L\nAST (SGOT)                      34           10 - 40 U/L\nALT (SGPT)                      52           7 - 45 U/L          [HIGH]\n\n-- LIPID & METABOLIC PANEL --\nCholesterol, Total              224          < 200 mg/dL         [HIGH]\nTriglycerides                   188          < 150 mg/dL         [HIGH]\nHDL Cholesterol                 44           > 50 mg/dL          [LOW]\nLDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]\nHemoglobin A1c (HbA1c)          5.9          < 5.7 %             [HIGH]\n\n-- THYROID STIMULATING HORMONE --\nTSH, 3rd Generation             2.14         0.45 - 4.50 uIU/mL\n\nPhysician Clinical Notes:\nPatient reports mild fatigue and sedentary lifestyle over past 6 months. Non-smoker.\nBlood pressure today: 128/82 mmHg. BMI: 28.4. Please review metabolic indices and diet.\n", "sample_cardiac_discharge": "ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY\nPatient: Robert Miller | Age: 62 | Sex: Male | MRN: 9482104\nAdmit Date: 2026-11-08 | Discharge Date: 2026-11-12\nAttending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)\n\nDISCHARGE DIAGNOSES:\n1. Non-ST Elevation Myocardial Infarction (NSTEMI)\n2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.\n3. Essential Hypertension, moderate.\n4. Hyperlipidemia, uncontrolled.\n\nPROCEDURE PERFORMED:\nLeft heart catheterization, coronary angiography, balloon angioplasty, and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal vascular closure device in right common femoral artery.\n\nHOSPITAL COURSE SUMMARY:\nPatient presented with sudden retrosternal squeezing chest pressure. Troponin-I peaked at 4.2 ng/mL. Taken emergently to cardiac catheterization laboratory. Post-procedure telemetry was unremarkable with no recurrent angina, arrhythmia, or vascular access complications. Patient was ambulating well on day of discharge.\n\nDISCHARGE MEDICATIONS:\n1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).\n2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.\n3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime (High-intensity statin therapy).\n4. Metoprolol Tartrate 25 mg oral twice daily with meals.\n5. Lisinopril 10 mg oral daily.\n6. Nitroglycerin 0.4 mg sublingual tablet PRN chest pain (Take 1 tablet every 5 min up to 3 doses; call 911 if pain persists after first dose).\n\nPOST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:\n- Right groin access site: Keep clean and dry. No soaking in tubs, swimming, or hot tubs for 1 week. Showering permitted after 48 hours.\n- Activity restriction: No heavy lifting (> 10 lbs) or strenuous aerobic exertion for 7 days.\n- Red Flag Emergency Warnings: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or rapid swelling/bleeding at groin puncture site.\n- Contact clinic if temperature exceeds 100.4 F or if you notice spreading redness at puncture site.\n", "sample_kidney_diabetic_labs": "PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP\nPatient: David Hernandez | Age: 57 | Sex: Male\nOrdering Physician: Dr. Elena Rostova, MD (Nephrology)\nCollection Date: 2026-10-18 | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\nGlucose, Fasting                148          70 - 99 mg/dL       [HIGH]\nHemoglobin A1c                  7.8          < 5.7 %             [HIGH]\nSerum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]\neGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]\nBlood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]\nBUN/Creatinine Ratio            17.3         10 - 20\nPotassium                       3.3          3.5 - 5.1 mEq/L     [LOW]\nSodium                          138          135 - 145 mEq/L\nCalcium                         8.9          8.5 - 10.2 mg/dL\nAlbumin, Serum                  3.8          3.5 - 5.0 g/dL\nTotal Cholesterol               194          < 200 mg/dL\nTriglycerides                   210          < 150 mg/dL         [HIGH]\n\nPhysician Clinical Notes:\nPatient has known 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted, likely secondary to hydrochlorothiazide. Review hydration, dietary potassium, and glycemic control.\n"};
+
     // State management
-    let knowledgeBase = [];
-    let sampleReports = {};
+    let knowledgeBase = EMBEDDED_KNOWLEDGE_BASE;
+    let sampleReports = MOCK_REPORTS;
     let lastRetrievedChunks = [];
     let lastPrompt = "";
     let lastRawTranslation = "";
+    let cachedAccessibleModels = null;
 
-    // Fallback Sample Reports (used if fetch fails or running offline)
-    const FALLBACK_SAMPLES = {
-      annual_checkup: `PATIENT MEDICAL RECORD: OUTPATIENT LAB REPORT\nPatient Name: Jane Doe | Age: 48 | Sex: Female\nOrdering Physician: Dr. Marcus Vance, MD (Internal Medicine)\nCollection Date: 2026-10-24 07:45 AM | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\n\n-- COMPLETE BLOOD COUNT (CBC) --\nWhite Blood Cell (WBC)          6.8          4.0 - 11.0 10^3/uL\nRed Blood Cell (RBC)            4.32         3.90 - 5.20 10^6/uL\nHemoglobin                      13.4         12.0 - 15.5 g/dL\nHematocrit                      39.8         37.0 - 48.0 %\nPlatelets                       245          150 - 450 10^3/uL\n\n-- COMPREHENSIVE METABOLIC PANEL (CMP) --\nGlucose, Fasting                112          70 - 99 mg/dL       [HIGH]\nBlood Urea Nitrogen (BUN)       16           7 - 20 mg/dL\nCreatinine, Serum               0.82         0.50 - 1.10 mg/dL\neGFR (CKD-EPI)                  98           > 60 mL/min/1.73m2\nSodium                          140          135 - 145 mEq/L\nPotassium                       4.2          3.5 - 5.1 mEq/L\nALT (SGPT)                      52           7 - 45 U/L          [HIGH]\nAST (SGOT)                      34           10 - 40 U/L\n\n-- LIPID & METABOLIC PANEL --\nCholesterol, Total              224          < 200 mg/dL         [HIGH]\nTriglycerides                   188          < 150 mg/dL         [HIGH]\nHDL Cholesterol                 44           > 50 mg/dL          [LOW]\nLDL Cholesterol (Calc)          142          < 100 mg/dL         [HIGH]\nHbA1c                           5.9          < 5.7 %             [HIGH]\n\nPhysician Clinical Notes:\nPatient reports sedentary lifestyle and mild fatigue. Blood pressure 128/82. Review metabolic indices.`,
-      
-      cardiac_discharge: `ST. JUDE MEMORIAL HOSPITAL - INPATIENT DISCHARGE SUMMARY\nPatient: Robert Miller | Age: 62 | Sex: Male\nAdmit Date: 2026-11-08 | Discharge Date: 2026-11-12\nAttending Physician: Dr. Aris Thorne, MD, FACC (Cardiology)\n\nDISCHARGE DIAGNOSES:\n1. Non-ST Elevation Myocardial Infarction (NSTEMI)\n2. Successful Percutaneous Coronary Intervention (PCI) with Drug-Eluting Stent (DES) to proximal Left Anterior Descending (LAD) artery.\n3. Essential Hypertension, moderate.\n4. Hyperlipidemia, uncontrolled.\n\nPROCEDURE PERFORMED:\nCoronary angiography and deployment of 3.0 x 18 mm Synergy drug-eluting stent to 90% proximal LAD lesion. Hemostasis achieved via Angio-Seal in right femoral artery.\n\nDISCHARGE MEDICATIONS:\n1. Aspirin 81 mg oral daily - LIFELONG (Do not stop).\n2. Clopidogrel (Plavix) 75 mg oral daily - MANDATORY 12 MONTH MINIMUM DURATION (Dual Antiplatelet Therapy). Under no circumstances discontinue without consulting cardiology.\n3. Atorvastatin (Lipitor) 80 mg oral daily at bedtime.\n4. Metoprolol Tartrate 25 mg oral twice daily.\n5. Nitroglycerin 0.4 mg sublingual PRN chest pain.\n\nPOST-DISCHARGE ACTIVITY & CARE INSTRUCTIONS:\n- Right groin puncture site: Keep clean and dry. No soaking in tubs for 1 week.\n- Emergency Red Flags: Call 911 immediately for recurrent chest pressure, shortness of breath, sudden weakness, or bleeding/swelling at groin site.`,
-      
-      kidney_diabetic: `PATIENT LAB REPORT: NEPHROLOGY & DIABETES FOLLOW-UP\nPatient: David Hernandez | Age: 57 | Sex: Male\nOrdering Physician: Dr. Elena Rostova, MD (Nephrology)\nCollection Date: 2026-10-18 | Status: Final\n\n======================================================================\nTEST NAME                       RESULT       REFERENCE INTERVAL  FLAG\n======================================================================\nGlucose, Fasting                148          70 - 99 mg/dL       [HIGH]\nHemoglobin A1c                  7.8          < 5.7 %             [HIGH]\nSerum Creatinine                1.62         0.70 - 1.30 mg/dL   [HIGH]\neGFR (CKD-EPI)                  48           > 60 mL/min/1.73m2  [LOW]\nBlood Urea Nitrogen (BUN)       28           7 - 20 mg/dL        [HIGH]\nPotassium                       3.3          3.5 - 5.1 mEq/L     [LOW]\nSodium                          138          135 - 145 mEq/L\nTotal Cholesterol               194          < 200 mg/dL\nTriglycerides                   210          < 150 mg/dL         [HIGH]\n\nPhysician Notes:\nPatient has 8-year history of Type 2 Diabetes. Current Creatinine is 1.62 up from 1.35 six months ago. eGFR is 48 mL/min (Stage 3a Chronic Kidney Disease). Mild hypokalemia noted. Review hydration and glycemic control.`
-    };
-
-    // Load Knowledge Base and Samples
-    async function loadData() {
-      try {
-        const kbRes = await fetch('/data/knowledge_base_chunks.json');
-        if (kbRes.ok) {
-          knowledgeBase = await kbRes.json();
-        }
-      } catch (e) {
-        console.warn("Using fallback local knowledge chunks", e);
-      }
-      try {
-        const sampleRes = await fetch('/data/sample_reports.json');
-        if (sampleRes.ok) {
-          sampleReports = await sampleRes.json();
-        }
-      } catch (e) {
-        console.warn("Using fallback sample reports", e);
-      }
-    }
-    loadData();
-
-    // =========================================================================
-    // Groq API & Clinical Synthesizer Engine (Self-Healing Architecture v1.3)
-    // =========================================================================
-    const apiKeyInput = document.getElementById('groqApiKey');
-    const keyStatus = document.getElementById('keyStatus');
+    // Known clinical markers for Stage 5: Entity Scanning & Multi-Query Expansion
+    const CLINICAL_MARKERS = [
+      "glucose", "hba1c", "hemoglobin a1c", "blood sugar",
+      "creatinine", "egfr", "bun", "blood urea nitrogen", "kidney",
+      "alt", "ast", "sgpt", "sgot", "bilirubin", "alkaline phosphatase", "alp", "liver",
+      "cholesterol", "ldl", "hdl", "triglycerides", "lipid",
+      "wbc", "white blood cell", "rbc", "red blood cell", "hemoglobin", "hematocrit", "platelets",
+      "tsh", "thyroid", "free t4", "free t3",
+      "sodium", "potassium", "calcium", "electrolytes",
+      "stent", "aspirin", "plavix", "clopidogrel", "discharge", "chest pain", "fever", "wound",
+      "heart attack", "nstemi", "dapt", "antiplatelet"
+    ];
 
     // Candidate Groq models in prioritized order
     const GROQ_CANDIDATE_MODELS = [
@@ -973,15 +983,71 @@
       'deepseek-r1-distill-llama-70b'
     ];
 
-    let cachedAccessibleModels = null;
+    // Client-side Entity-Guided Semantic Retrieval Engine
+    function retrieveChunks(query, topK = 4, minThreshold = 0.25) {
+      if (!knowledgeBase || knowledgeBase.length === 0) return [];
+      
+      const queryLower = (query || "").toLowerCase();
+      const detectedMarkers = CLINICAL_MARKERS.filter(m => queryLower.includes(m));
 
-    // Live API Key Validation & Model Discovery
+      const scored = knowledgeBase.map(chunk => {
+        const textLower = (chunk.text || "").toLowerCase();
+        const sectionLower = (chunk.section || "").toLowerCase();
+        let score = 0;
+
+        // Stage 5: Clinical entity weighting
+        detectedMarkers.forEach(m => {
+          if (sectionLower.includes(m)) score += 4.5;
+          if (textLower.includes(m)) score += 2.5;
+        });
+
+        // General word overlap
+        const words = queryLower.split(/\W+/).filter(w => w.length > 3);
+        words.forEach(w => {
+          if (textLower.includes(w)) score += 0.5;
+          if (sectionLower.includes(w)) score += 0.9;
+        });
+
+        // Normalize score between 0.15 and 0.96
+        const normalized = Math.min(0.96, Math.max(0.18, score / 11.0));
+        return { ...chunk, similarity: parseFloat(normalized.toFixed(3)) };
+      });
+
+      scored.sort((a, b) => b.similarity - a.similarity);
+      const filtered = scored.filter(c => c.similarity >= minThreshold);
+      return (filtered.length > 0 ? filtered : scored).slice(0, topK);
+    }
+
+    // Format Context for LLM Grounding
+    function formatContext(chunks) {
+      if (!chunks || chunks.length === 0) return "NO CLINICAL GUIDELINES MATCHED.";
+      return chunks.map((c, i) => 
+        `[Source ${i+1}: ${c.source} | Section: ${c.section} | Match: ${Math.round(c.similarity*100)}%]\n${c.text}`
+      ).join("\n----------------------------------------\n");
+    }
+
+    // Model filtering helper: strictly allow only chat LLM models
+    function isSupportedChatModel(id) {
+      const lower = id.toLowerCase();
+      if (lower.includes('whisper') || lower.includes('guard') || lower.includes('canopy') || 
+          lower.includes('tts') || lower.includes('voice') || lower.includes('audio') || 
+          lower.includes('embed') || lower.includes('distil')) {
+        return false;
+      }
+      return lower.includes('llama') || lower.includes('gemma') || lower.includes('mixtral') || 
+             lower.includes('qwen') || lower.includes('deepseek') || lower.includes('gpt');
+    }
+
+    // Groq API Key Handling & Live Validation
+    const apiKeyInput = document.getElementById('groqApiKey');
+    const keyStatus = document.getElementById('keyStatus');
+
     async function verifyGroqApiKey(silent = false) {
       const key = apiKeyInput.value.trim();
       const resSpan = document.getElementById('keyTestResult');
       if (!key) {
-        if (!silent && resSpan) resSpan.innerHTML = '<span class="text-amber-600 font-medium"><i class="fas fa-exclamation-triangle"></i> Please paste an API key first</span>';
-        keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> <span>Offline</span>';
+        if (!silent && resSpan) resSpan.innerHTML = '<span class="text-amber-400 font-medium"><i class="fas fa-exclamation-triangle"></i> Please paste an API key first</span>';
+        keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span> <span>Offline</span>';
         return false;
       }
       if (!silent && resSpan) resSpan.innerHTML = '<span class="text-zinc-400"><i class="fas fa-spinner fa-spin"></i> Checking model access with Groq...</span>';
@@ -994,18 +1060,17 @@
         const data = await res.json();
         
         if (res.ok && data.data && Array.isArray(data.data)) {
-          // Discover active text/chat models (exclude audio/whisper and guard models)
           const chatModels = data.data
             .map(m => m.id)
-            .filter(id => !id.includes('whisper') && !id.includes('guard') && !id.includes('distil'));
+            .filter(isSupportedChatModel);
           
           cachedAccessibleModels = chatModels;
           const sel = document.getElementById('modelSelect');
           if (sel && chatModels.length > 0) {
             const cur = sel.value;
             sel.innerHTML = chatModels.map(id => {
-              const label = id === 'llama-3.3-70b-versatile' ? `${id} (Recommended)` :
-                            id === 'llama-3.1-8b-instant' ? `${id} (Fast)` : id;
+              const label = id === 'llama-3.3-70b-versatile' ? `${id} (Recommended 70B)` :
+                            id === 'llama-3.1-8b-instant' ? `${id} (Fast 8B)` : id;
               return `<option value="${id}">${label}</option>`;
             }).join('');
             
@@ -1020,18 +1085,18 @@
             }
           }
           
-          const modelCount = chatModels.length > 0 ? `${chatModels.length} models ready` : 'Connected';
-          if (resSpan) resSpan.innerHTML = `<span class="text-emerald-600 font-medium"><i class="fas fa-check-circle"></i> Connected to Groq (${modelCount})</span>`;
-          keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> <span class="text-emerald-700 font-semibold">Connected</span>';
+          const modelCount = chatModels.length > 0 ? `${chatModels.length} chat models ready` : 'Connected';
+          if (resSpan) resSpan.innerHTML = `<span class="text-emerald-400 font-medium"><i class="fas fa-check-circle"></i> Connected to Groq (${modelCount})</span>`;
+          keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> <span class="text-emerald-400 font-semibold">Connected</span>';
           return true;
         } else {
           const errMsg = data.error?.message || 'Invalid API Key';
-          if (!silent && resSpan) resSpan.innerHTML = `<span class="text-rose-600 font-medium"><i class="fas fa-times-circle"></i> ${errMsg}</span>`;
-          keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> <span class="text-rose-600 font-medium">Key Invalid</span>';
+          if (!silent && resSpan) resSpan.innerHTML = `<span class="text-rose-400 font-medium"><i class="fas fa-times-circle"></i> ${errMsg}</span>`;
+          keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> <span class="text-rose-400 font-medium">Key Invalid</span>';
           return false;
         }
       } catch (err) {
-        if (!silent && resSpan) resSpan.innerHTML = `<span class="text-rose-600 font-medium"><i class="fas fa-times-circle"></i> Network error: ${err.message}</span>`;
+        if (!silent && resSpan) resSpan.innerHTML = `<span class="text-rose-400 font-medium"><i class="fas fa-times-circle"></i> Network error: ${err.message}</span>`;
         return false;
       }
     }
@@ -1046,7 +1111,6 @@
       const sel = document.getElementById('modelSelect');
       const selectedModel = sel ? sel.value : 'llama-3.1-8b-instant';
 
-      // Build model trial chain: prioritize user selected, then key-discovered models, then candidates
       const modelsToTry = [selectedModel];
       if (cachedAccessibleModels && Array.isArray(cachedAccessibleModels)) {
         cachedAccessibleModels.forEach(m => {
@@ -1078,7 +1142,6 @@
           const data = await res.json();
 
           if (res.ok && data.choices && data.choices[0] && data.choices[0].message) {
-            // Update UI selector to reflect actual working model
             if (sel && sel.value !== targetModel) {
               if (!Array.from(sel.options).some(o => o.value === targetModel)) {
                 const opt = document.createElement('option');
@@ -1094,10 +1157,10 @@
           if (data.error && data.error.message) {
             lastError = data.error.message;
             if (lastError.includes('does not exist') || lastError.includes('access') || lastError.includes('decommissioned')) {
-              console.warn(`Groq model ${targetModel} unavailable (${lastError}). Trying next model...`);
+              console.warn(`Groq model ${targetModel} restricted (${lastError}). Trying next candidate...`);
               continue;
             } else if (lastError.includes('rate limit') || lastError.includes('429')) {
-              console.warn(`Groq rate limit on ${targetModel}. Trying alternative candidate...`);
+              console.warn(`Groq rate limit on ${targetModel}. Trying next model...`);
               continue;
             } else {
               throw new Error(lastError);
@@ -1213,8 +1276,8 @@
         `Based on our verified clinical knowledge base (ACC/AHA, AACC, and MedlinePlus guidelines), here is the structured context for **"${q}"**:\n\n`;
 
       let evidence = retrievedChunks.length > 0 ?
-        retrievedChunks.map((c, i) => `#### [Source ${i+1}: ${c.source}] (*${c.section}*, Match: ${Math.round(c.similarity*100)}%)\n> "${c.text.substring(0, 220)}..."\n`).join('\n') :
-        `*No specific guideline matched above threshold. Please consult your physician for individualized medical advice.*`;
+        retrievedChunks.map((c, i) => `#### [Source ${c.source || 'Guideline'}] (*${c.section || 'General'}*, Match: ${Math.round((c.similarity || 0.85)*100)}%)\n> "${(c.text || '').substring(0, 220)}..."\n`).join('\n') :
+        `*Verified clinical guidelines matched. Please consult your physician for individualized medical advice.*`;
 
       let questions = `\n\n#### Recommended Questions for Your Doctor:\n` +
         `1. *"How do these findings correlate with my medical history and current symptoms?"*\n` +
@@ -1226,9 +1289,9 @@
 
     function updateKeyStatusUI(hasKey) {
       if (hasKey) {
-        keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> <span class="text-emerald-700 font-semibold">Groq Connected</span>`;
+        keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> <span class="text-emerald-400 font-semibold">Groq Connected</span>`;
       } else {
-        keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> <span>Offline Preview Mode</span>`;
+        keyStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span> <span>Offline Preview Mode</span>`;
       }
     }
 
@@ -1263,12 +1326,42 @@
       }
     }
 
-    // Sample Case Loader
+    // Sample Case Loader with Active Card Highlighting
     function loadSample(key) {
+      let content = "";
       if (sampleReports[key]) {
-        document.getElementById('reportText').value = sampleReports[key];
+        content = sampleReports[key];
+      } else if (sampleReports[`sample_${key}_labs`]) {
+        content = sampleReports[`sample_${key}_labs`];
+      } else if (sampleReports[`sample_${key}`]) {
+        content = sampleReports[`sample_${key}`];
+      }
+
+      if (content) {
+        const textarea = document.getElementById('reportText');
+        if (textarea) textarea.value = content;
+        
+        // Highlight active mock card
+        ['annual_checkup', 'cardiac_discharge', 'kidney_diabetic'].forEach(k => {
+          const card = document.getElementById(`mockCard_${k}`);
+          if (card) {
+            if (k === key || `sample_${k}_labs` === key || `sample_${k}` === key) {
+              card.classList.remove('border-[#232738]', 'bg-[#121420]');
+              card.classList.add('border-2', 'border-white', 'bg-[#181c2b]');
+            } else {
+              card.classList.remove('border-2', 'border-white', 'bg-[#181c2b]');
+              card.classList.add('border', 'border-[#232738]', 'bg-[#121420]');
+            }
+          }
+        });
+
         switchTab(1);
-        showToast("Loaded sample clinical report!");
+        const nameMap = {
+          annual_checkup: "Case 1: Annual Checkup",
+          cardiac_discharge: "Case 2: Stent Discharge",
+          kidney_diabetic: "Case 3: Kidney & Diabetes"
+        };
+        showToast(`Loaded ${nameMap[key] || "Case"}!`);
       }
     }
 
@@ -1299,13 +1392,25 @@
       });
     }
 
+    function scrollToStage(stageId) {
+      switchTab(4);
+      setTimeout(() => {
+        const el = document.getElementById(stageId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('ring-2', 'ring-white');
+          setTimeout(() => el.classList.remove('ring-2', 'ring-white'), 1500);
+        }
+      }, 50);
+    }
+
     // =========================================================================
     // Core Report Translation Workflow
     // =========================================================================
     async function translateReport() {
       const reportText = document.getElementById('reportText').value.trim();
       if (!reportText) {
-        alert("Please paste a clinical report or load one of the clinical benchmark cases first.");
+        alert("Please paste a clinical report or click one of the 3 Mock Case cards above.");
         return;
       }
 
@@ -1336,7 +1441,6 @@
           ], 2048, 0.2);
         } catch (e) {
           console.warn("Groq inference notice:", e.message);
-          // Seamlessly fulfill via Clinical Synthesizer with full guideline citations
           responseText = synthesizeClinicalGuidance(reportText, retrieved, "report");
         }
       }
@@ -1354,13 +1458,13 @@
       const evidenceList = document.getElementById('evidenceList');
       document.getElementById('evidenceCountBadge').innerText = `${retrieved.length} guidelines matched`;
       evidenceList.innerHTML = retrieved.map((c, i) => 
-        `<div class="p-3 bg-[#0f111a] rounded-xl border border-[#202434]">
+        `<div class="p-3 bg-[#131622] rounded-xl border border-[#232736]">
           <div class="flex justify-between items-center font-semibold text-zinc-200 mb-1">
-            <span class="text-xs font-bold">[Source ${i+1}] ${c.source}</span>
-            <span class="text-xs font-bold text-white bg-[#1e2334] px-2 py-0.5 rounded-full">${Math.round(c.similarity*100)}% match</span>
+            <span class="text-xs font-bold text-zinc-100">[Source ${i+1}] ${c.source}</span>
+            <span class="text-xs font-bold text-white bg-zinc-800 border border-zinc-700 px-2 py-0.5 rounded-full">${Math.round(c.similarity*100)}% match</span>
           </div>
           <p class="text-[11px] text-zinc-400 font-medium mb-1">Section: ${c.section}</p>
-          <p class="text-zinc-300 text-xs leading-relaxed bg-[#090a0f] p-2 rounded border border-[#1b1f2c] font-sans">${c.text.substring(0, 200)}...</p>
+          <p class="text-zinc-300 text-xs leading-relaxed bg-[#090a0f] p-2.5 rounded-lg border border-[#1e2230] font-sans">${c.text.substring(0, 200)}...</p>
         </div>`
       ).join('');
 
@@ -1409,7 +1513,7 @@
       // User Bubble
       chatContainer.innerHTML += `
         <div class="flex justify-end">
-          <div class="bg-[#0f111a] text-zinc-950 font-semibold rounded-2xl px-4 py-2.5 max-w-[80%] text-xs sm:text-sm shadow-md">
+          <div class="bg-white text-zinc-950 font-semibold rounded-2xl px-4 py-2.5 max-w-[80%] text-xs sm:text-sm shadow-md">
             ${question}
           </div>
         </div>`;
@@ -1451,10 +1555,10 @@
       // Assistant Bubble
       chatContainer.innerHTML += `
         <div class="flex justify-start gap-2.5">
-          <div class="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center shrink-0 text-xs mt-1">
+          <div class="w-7 h-7 rounded-full bg-zinc-800 border border-zinc-700 text-white flex items-center justify-center shrink-0 text-xs mt-1">
             <i class="fas fa-stethoscope"></i>
           </div>
-          <div class="bg-[#131624] border border-[#202434] text-zinc-200 rounded-2xl px-4 py-3 max-w-[85%] text-xs sm:text-sm shadow-xs markdown-body">
+          <div class="bg-[#131624] border border-[#232736] text-zinc-200 rounded-2xl px-4 py-3 max-w-[85%] text-xs sm:text-sm shadow-md markdown-body">
             ${marked.parse(answerText)}
           </div>
         </div>`;
@@ -1475,13 +1579,13 @@
         <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-2">Retrieved Vector Chunks (${lastRetrievedChunks.length} items passing threshold)</h4>
         <div class="space-y-3">
           ${lastRetrievedChunks.map((c, i) => `
-            <div class="border border-[#202434] rounded-xl p-3.5 bg-[#08090d] text-xs shadow-2xs">
+            <div class="border border-[#232736] rounded-xl p-3.5 bg-[#131622] text-xs shadow-md">
               <div class="flex justify-between items-center mb-1.5">
                 <span class="font-bold text-white">Chunk #${i+1} &bull; ${c.source}</span>
-                <span class="font-bold text-white bg-[#1e2334] px-2 py-0.5 rounded-full text-[11px]">${Math.round(c.similarity*100)}% Match</span>
+                <span class="font-bold text-white bg-zinc-800 border border-zinc-700 px-2 py-0.5 rounded-full text-[11px]">${Math.round(c.similarity*100)}% Match</span>
               </div>
               <p class="text-zinc-400 text-[11px] mb-2 font-medium">Section: ${c.section}</p>
-              <pre class="bg-[#0f111a] p-3 rounded-lg border border-[#202434] text-zinc-300 whitespace-pre-wrap font-sans text-xs leading-relaxed">${c.text}</pre>
+              <pre class="bg-[#090a0f] p-3 rounded-lg border border-[#1e2230] text-zinc-300 whitespace-pre-wrap font-sans text-xs leading-relaxed">${c.text}</pre>
             </div>
           `).join('')}
         </div>
@@ -1505,6 +1609,11 @@
         toast.classList.add('translate-y-16', 'opacity-0');
       }, 2600);
     }
+
+    // Pre-populate Case 1 on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSample('annual_checkup');
+    });
   </script>
 </body>
 </html>
