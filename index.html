@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ClearCare AI — Evidence-Based Clinical Lab & Discharge Translator</title>
   
@@ -163,14 +166,20 @@
                 <i id="eyeIcon" class="fas fa-eye"></i>
               </button>
             </div>
-            <div class="mt-1.5 flex justify-between items-center text-[11px] text-slate-500">
-              <span id="keyStatus" class="flex items-center gap-1 text-slate-500">
-                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Offline Preview
-              </span>
-              <a href="https://console.groq.com/keys" target="_blank" class="text-slate-900 hover:text-slate-900 font-medium hover:underline flex items-center gap-1">
-                Get Instant Free Key <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
+            <div class="mt-2 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="verifyGroqApiKey()" id="verifyKeyBtn" class="text-[11px] bg-slate-900 hover:bg-black text-white px-2.5 py-1 rounded-md font-medium transition flex items-center gap-1 active:scale-95">
+                  <i class="fas fa-plug text-[9px]"></i> Test Key
+                </button>
+                <span id="keyStatus" class="flex items-center gap-1 text-[11px] text-slate-500">
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> <span>Offline</span>
+                </span>
+              </div>
+              <a href="https://console.groq.com/keys" target="_blank" class="text-[11px] text-slate-900 font-medium hover:underline flex items-center gap-1">
+                Get Free Key <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
               </a>
             </div>
+            <div id="keyTestResult" class="mt-1 text-[11px] empty:hidden"></div>
           </div>
 
           <div>
@@ -939,9 +948,82 @@
     }
     loadData();
 
-    // Groq API Key Handling
+    // Groq API Key Handling & Live Validation
     const apiKeyInput = document.getElementById('groqApiKey');
     const keyStatus = document.getElementById('keyStatus');
+
+    async function verifyGroqApiKey() {
+      const key = apiKeyInput.value.trim();
+      const resSpan = document.getElementById('keyTestResult');
+      if (!key) {
+        if (resSpan) resSpan.innerHTML = '<span class="text-amber-600 font-medium"><i class="fas fa-exclamation-triangle"></i> Please paste an API key first</span>';
+        keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> <span>Offline</span>';
+        return false;
+      }
+      if (resSpan) resSpan.innerHTML = '<span class="text-slate-500"><i class="fas fa-spinner fa-spin"></i> Testing key with Groq...</span>';
+      try {
+        const res = await fetch('https://api.groq.com/openai/v1/models', {
+          method: 'GET',
+          headers: { 'Authorization': `Bearer ${key}` }
+        });
+        const data = await res.json();
+        if (res.ok) {
+          if (resSpan) resSpan.innerHTML = '<span class="text-emerald-600 font-medium"><i class="fas fa-check-circle"></i> Connected to Groq (Llama 3.3 Ready)</span>';
+          keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> <span class="text-emerald-700 font-semibold">Connected</span>';
+          return true;
+        } else {
+          const errMsg = data.error?.message || 'Invalid API Key';
+          if (resSpan) resSpan.innerHTML = `<span class="text-rose-600 font-medium"><i class="fas fa-times-circle"></i> ${errMsg}</span>`;
+          keyStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> <span class="text-rose-600 font-medium">Key Invalid</span>';
+          return false;
+        }
+      } catch (err) {
+        if (resSpan) resSpan.innerHTML = `<span class="text-rose-600 font-medium"><i class="fas fa-times-circle"></i> Network error: ${err.message}</span>`;
+        return false;
+      }
+    }
+
+    // Unified Robust Groq API Caller
+    async function callGroqAPI(messages, maxTokens = 1024, temperature = 0.2) {
+      const apiKey = apiKeyInput.value.trim();
+      const model = document.getElementById('modelSelect').value;
+
+      if (!apiKey) {
+        throw new Error("NO_API_KEY");
+      }
+
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: messages,
+          temperature: temperature,
+          max_tokens: maxTokens
+        })
+      });
+
+      let data;
+      try {
+        data = await res.json();
+      } catch (e) {
+        throw new Error(`Failed to parse Groq response (HTTP ${res.status}: ${res.statusText})`);
+      }
+
+      if (!res.ok || data.error) {
+        const errorMsg = data.error?.message || `Groq API Error (HTTP ${res.status})`;
+        throw new Error(errorMsg);
+      }
+
+      if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+        throw new Error("Groq API returned an empty completion choice.");
+      }
+
+      return data.choices[0].message.content;
+    }
 
     function updateKeyStatusUI(hasKey) {
       if (hasKey) {
@@ -1103,37 +1185,30 @@
 
       if (apiKey) {
         try {
-          const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`
+          responseText = await callGroqAPI([
+            {
+              role: "system",
+              content: "You are ClearCare AI, an empathetic and highly knowledgeable healthcare communication assistant. Help patients understand medical lab results in plain, comforting, 8th-grade level English. Rely strictly on the PROVIDED CLINICAL GUIDELINES. Cite references using [Source X]. Never make absolute diagnoses. Explain benign causes (dehydration, exercise, diet). End with 'Questions to Ask Your Doctor' checklist and medical disclaimer."
             },
-            body: JSON.stringify({
-              model: model,
-              messages: [
-                {
-                  role: "system",
-                  content: "You are ClearCare AI, an empathetic and highly knowledgeable healthcare communication assistant. Help patients understand medical lab results in plain, comforting, 8th-grade level English. Rely strictly on the PROVIDED CLINICAL GUIDELINES. Cite references using [Source X]. Never make absolute diagnoses. Explain benign causes (dehydration, exercise, diet). End with 'Questions to Ask Your Doctor' checklist and medical disclaimer."
-                },
-                { role: "user", content: prompt }
-              ],
-              temperature: 0.2,
-              max_tokens: 2048
-            })
-          });
-
-          if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.error?.message || "Groq API error");
-          }
-
-          const data = await res.json();
-          responseText = data.choices[0].message.content;
+            { role: "user", content: prompt }
+          ], 2048, 0.2);
         } catch (e) {
-          responseText = `⚠️ **Groq API Error:** ${e.message}\nPlease verify your Groq API Key or run in preview mode.`;
+          if (e.message === "NO_API_KEY") {
+            // Fall through to offline preview
+          } else {
+            responseText = `⚠️ **Groq API Error:** ${e.message}\n\n` +
+              `> **Troubleshooting:**\n` +
+              `- Verify your key in the left sidebar using the **Test Key** button.\n` +
+              `- Ensure your API key starts with \`gsk_\` and has no extra spaces.\n` +
+              `- Or clear the API key box to run in **Offline Preview Mode** with full guideline grounding.\n\n` +
+              `---\n\n` +
+              `### 🩺 Retrieved Clinical Evidence for this Report:\n\n` +
+              retrieved.map((c, i) => `- **[Source ${i+1}: ${c.source}]** (*${c.section}*, Match: **${Math.round(c.similarity*100)}%**)\n  > "${c.text.substring(0, 180)}..."`).join('\n\n');
+          }
         }
-      } else {
+      }
+
+      if (!responseText) {
         // Offline Preview Mode
         responseText = `### 🩺 ClearCare Clinical Translation (Offline Preview Mode)\n\n` +
           `> **Note:** Enter a free Groq API Key in the left sidebar to generate real-time patient translations with **Llama 3.3 70B**!\n\n` +
@@ -1232,28 +1307,26 @@
 
       if (apiKey) {
         try {
-          const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({
-              model: model,
-              messages: [
-                { role: "system", content: "You are ClearCare AI, a clinical patient education assistant. Answer clearly and accurately using ONLY the provided clinical excerpts. Cite using [Source X]. Never recommend stopping prescribed medications without consulting a cardiologist or physician." },
-                { role: "user", content: prompt }
-              ],
-              temperature: 0.2,
-              max_tokens: 1024
-            })
-          });
-          const data = await res.json();
-          answerText = data.choices[0].message.content;
+          answerText = await callGroqAPI([
+            { role: "system", content: "You are ClearCare AI, a clinical patient education assistant. Answer clearly and accurately using ONLY the provided clinical excerpts. Cite using [Source X]. Never recommend stopping prescribed medications without consulting a cardiologist or physician." },
+            { role: "user", content: prompt }
+          ], 1024, 0.2);
         } catch (e) {
-          answerText = `⚠️ Groq Error: ${e.message}`;
+          if (e.message === "NO_API_KEY") {
+            // Fall through to offline preview
+          } else {
+            answerText = `⚠️ **Groq API Error:** ${e.message}\n\n` +
+              `**How to fix:**\n` +
+              `- Click **Test Key** in the left sidebar to verify your Groq API key.\n` +
+              `- Make sure your key starts with \`gsk_\` and has no extra spaces.\n` +
+              `- Get a free key at [console.groq.com/keys](https://console.groq.com/keys).\n\n` +
+              `*Meanwhile, here are the matching verified clinical guidelines for your question:*\n\n` +
+              retrieved.map((c, i) => `- **[Source ${i+1}: ${c.source}]** (*${c.section}*, ${Math.round(c.similarity*100)}% match):\n  > "${c.text.substring(0, 160)}..."`).join('\n\n');
+          }
         }
-      } else {
+      }
+
+      if (!answerText) {
         answerText = `**[Offline Preview Mode]**\n\nI matched **${retrieved.length} clinical guidelines**:\n` +
           retrieved.map((c, i) => `- **[Source ${i+1}: ${c.source}]** (*${c.section}*, ${Math.round(c.similarity*100)}% match): "${c.text.substring(0, 140)}..."`).join('\n') +
           `\n\n💡 *Enter a free Groq API key in the left sidebar for complete AI generated answers!*`;
