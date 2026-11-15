@@ -29,8 +29,8 @@
               100: '#e0f2fe',
               200: '#bae6fd',
               500: '#0ea5e9',
-              600: '#0284c7',
-              700: '#0369a1',
+              600: '#0f172a',
+              700: '#020617',
               800: '#075985',
               900: '#0c4a6e',
             }
@@ -48,7 +48,7 @@
     
     /* Modern Clinical Typography for Markdown Result Output */
     .markdown-body h1 { font-size: 1.45rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #0f172a; }
-    .markdown-body h2 { font-size: 1.25rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #0369a1; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+    .markdown-body h2 { font-size: 1.25rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
     .markdown-body h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.35rem; color: #1e293b; }
     .markdown-body h4 { font-size: 0.95rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; color: #334155; }
     .markdown-body p { margin-bottom: 0.75rem; line-height: 1.65; color: #334155; font-size: 0.9rem; }
@@ -60,15 +60,15 @@
     .markdown-body th { background: #f8fafc; font-weight: 600; color: #1e293b; border-bottom: 2px solid #cbd5e1; }
     .markdown-body tr:last-child td { border-bottom: none; }
     .markdown-body tr:hover td { background-color: #f8fafc; }
-    .markdown-body blockquote { border-left: 4px solid #0284c7; padding: 0.6rem 1rem; color: #475569; background: #f0f9ff; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 0.88rem; }
+    .markdown-body blockquote { border-left: 4px solid #0f172a; padding: 0.6rem 1rem; color: #475569; background: #f8fafc; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 0.88rem; }
     .markdown-body code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #0f172a; }
 
     /* Active Tab State */
     .tab-active { 
-      border-bottom: 2px solid #0284c7; 
-      color: #0284c7; 
+      border-bottom: 2px solid #0f172a; 
+      color: #0f172a; 
       font-weight: 600; 
-      background: #f0f9ff;
+      background: #f8fafc;
       border-radius: 8px 8px 0 0;
     }
 
@@ -106,13 +106,13 @@
     }
   </style>
 </head>
-<body class="bg-slate-50/70 text-slate-800 min-h-screen flex flex-col font-sans selection:bg-sky-100 selection:text-sky-900">
+<body class="bg-slate-50/70 text-slate-800 min-h-screen flex flex-col font-sans selection:bg-slate-200 selection:text-slate-950">
 
   <!-- Header -->
   <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3.5">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-cyan-500 flex items-center justify-center text-white shadow-sm shadow-sky-500/20">
+        <div class="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white shadow-sm shadow-slate-900/10">
           <i class="fas fa-heart-pulse text-lg"></i>
         </div>
         <div>
@@ -130,10 +130,7 @@
         <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="text-xs bg-slate-50 hover:bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium border border-slate-300/80 transition-all shadow-xs flex items-center gap-1.5 active:scale-95">
           <i class="fab fa-github text-slate-800"></i> <span class="hidden sm:inline">GitHub Repo</span>
         </a>
-        <a href="/docs/Mastering_RAG_and_ClearCare_Defense_Guide.pdf" download class="text-xs bg-sky-600 hover:bg-sky-700 text-white px-3.5 py-1.5 rounded-lg font-medium shadow-sm shadow-sky-600/20 transition-all flex items-center gap-1.5 active:scale-95">
-          <i class="fas fa-file-pdf"></i> <span class="hidden sm:inline">Defense Guide</span> PDF
-        </a>
-      </div>
+        </div>
     </div>
   </header>
 
@@ -153,7 +150,7 @@
       <div class="clinical-card p-5">
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-            <i class="fas fa-key text-sky-600"></i> 1. Groq LLM Authentication
+            <i class="fas fa-key text-slate-900"></i> 1. Groq LLM Authentication
           </h2>
           <span class="text-[11px] text-slate-400 font-mono">v1.2</span>
         </div>
@@ -161,7 +158,7 @@
           <div>
             <label class="block text-xs font-semibold text-slate-700 mb-1">Groq API Key (Free Tier)</label>
             <div class="relative">
-              <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-xs font-mono px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500 focus:bg-white focus:border-sky-500 outline-none transition">
+              <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-xs font-mono px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:bg-white focus:border-slate-900 outline-none transition">
               <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-600 text-xs">
                 <i id="eyeIcon" class="fas fa-eye"></i>
               </button>
@@ -170,7 +167,7 @@
               <span id="keyStatus" class="flex items-center gap-1 text-slate-500">
                 <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Offline Preview
               </span>
-              <a href="https://console.groq.com/keys" target="_blank" class="text-sky-600 hover:text-sky-700 font-medium hover:underline flex items-center gap-1">
+              <a href="https://console.groq.com/keys" target="_blank" class="text-slate-900 hover:text-slate-900 font-medium hover:underline flex items-center gap-1">
                 Get Instant Free Key <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
               </a>
             </div>
@@ -179,7 +176,7 @@
           <div>
             <label class="block text-xs font-semibold text-slate-700 mb-1">Inference Model</label>
             <div class="relative">
-              <select id="modelSelect" class="w-full text-xs font-medium px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500 focus:bg-white outline-none appearance-none cursor-pointer">
+              <select id="modelSelect" class="w-full text-xs font-medium px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-900 focus:bg-white outline-none appearance-none cursor-pointer">
                 <option value="llama-3.3-70b-versatile">Llama 3.3 70B Versatile (Recommended)</option>
                 <option value="llama-3.1-8b-instant">Llama 3.1 8B Instant (Ultra-fast)</option>
                 <option value="gemma2-9b-it">Gemma2 9B IT (Google DeepMind)</option>
@@ -193,12 +190,12 @@
       <!-- 2. Sample Patient Cases Card -->
       <div class="clinical-card p-5">
         <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <i class="fas fa-folder-open text-sky-600"></i> 2. Clinical Case Benchmarks
+          <i class="fas fa-folder-open text-slate-900"></i> 2. Clinical Case Benchmarks
         </h2>
         <div class="space-y-2.5">
-          <button onclick="loadSample('annual_checkup')" class="w-full text-left bg-slate-50/80 hover:bg-sky-50/70 hover:border-sky-300 border border-slate-200 p-3 rounded-xl transition group">
+          <button onclick="loadSample('annual_checkup')" class="w-full text-left bg-slate-50/80 hover:bg-slate-100/70 hover:border-slate-400 border border-slate-200 p-3 rounded-xl transition group">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-semibold text-xs text-slate-900 group-hover:text-sky-900 flex items-center gap-1.5">
+              <span class="font-semibold text-xs text-slate-900 group-hover:text-slate-900 flex items-center gap-1.5">
                 <span>🩺</span> Routine Annual Checkup
               </span>
               <span class="text-[10px] font-bold text-amber-700 bg-amber-100/80 px-1.5 py-0.5 rounded">CMP + Lipid</span>
@@ -206,9 +203,9 @@
             <p class="text-slate-500 text-[11px] leading-tight">Elevated LDL (142), Glucose (112), ALT (52)</p>
           </button>
 
-          <button onclick="loadSample('cardiac_discharge')" class="w-full text-left bg-slate-50/80 hover:bg-sky-50/70 hover:border-sky-300 border border-slate-200 p-3 rounded-xl transition group">
+          <button onclick="loadSample('cardiac_discharge')" class="w-full text-left bg-slate-50/80 hover:bg-slate-100/70 hover:border-slate-400 border border-slate-200 p-3 rounded-xl transition group">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-semibold text-xs text-slate-900 group-hover:text-sky-900 flex items-center gap-1.5">
+              <span class="font-semibold text-xs text-slate-900 group-hover:text-slate-900 flex items-center gap-1.5">
                 <span>❤️</span> Post-PCI Stent Discharge
               </span>
               <span class="text-[10px] font-bold text-rose-700 bg-rose-100/80 px-1.5 py-0.5 rounded">Cardiology DAPT</span>
@@ -216,9 +213,9 @@
             <p class="text-slate-500 text-[11px] leading-tight">LAD Stent, Mandatory Plavix DAPT, Red Flags</p>
           </button>
 
-          <button onclick="loadSample('kidney_diabetic')" class="w-full text-left bg-slate-50/80 hover:bg-sky-50/70 hover:border-sky-300 border border-slate-200 p-3 rounded-xl transition group">
+          <button onclick="loadSample('kidney_diabetic')" class="w-full text-left bg-slate-50/80 hover:bg-slate-100/70 hover:border-slate-400 border border-slate-200 p-3 rounded-xl transition group">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-semibold text-xs text-slate-900 group-hover:text-sky-900 flex items-center gap-1.5">
+              <span class="font-semibold text-xs text-slate-900 group-hover:text-slate-900 flex items-center gap-1.5">
                 <span>🧪</span> Kidney & Diabetes Monitor
               </span>
               <span class="text-[10px] font-bold text-indigo-700 bg-indigo-100/80 px-1.5 py-0.5 rounded">Renal eGFR</span>
@@ -231,34 +228,34 @@
       <!-- 3. Retrieval Parameters Tuning -->
       <div class="clinical-card p-5">
         <h2 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3.5 flex items-center gap-2">
-          <i class="fas fa-sliders text-sky-600"></i> 3. RAG Retrieval Parameters
+          <i class="fas fa-sliders text-slate-900"></i> 3. RAG Retrieval Parameters
         </h2>
         <div class="space-y-4">
           <div>
             <div class="flex justify-between items-center text-xs mb-1.5">
               <span class="font-semibold text-slate-700">Top-K Retrieved Chunks</span>
-              <span id="topKVal" class="font-mono font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded text-xs">4</span>
+              <span id="topKVal" class="font-mono font-bold text-slate-900 bg-slate-200 px-2 py-0.5 rounded text-xs">4</span>
             </div>
-            <input type="range" id="topKSlider" min="2" max="8" value="4" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600" oninput="document.getElementById('topKVal').innerText = this.value">
+            <input type="range" id="topKSlider" min="2" max="8" value="4" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900" oninput="document.getElementById('topKVal').innerText = this.value">
             <span class="text-[10px] text-slate-400">Controls evidence density passed to the LLM</span>
           </div>
 
           <div>
             <div class="flex justify-between items-center text-xs mb-1.5">
               <span class="font-semibold text-slate-700">Cosine Similarity Threshold</span>
-              <span id="thresholdVal" class="font-mono font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded text-xs">30%</span>
+              <span id="thresholdVal" class="font-mono font-bold text-slate-900 bg-slate-200 px-2 py-0.5 rounded text-xs">30%</span>
             </div>
-            <input type="range" id="thresholdSlider" min="15" max="60" value="30" step="5" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600" oninput="document.getElementById('thresholdVal').innerText = this.value + '%'">
+            <input type="range" id="thresholdSlider" min="15" max="60" value="30" step="5" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900" oninput="document.getElementById('thresholdVal').innerText = this.value + '%'">
             <span class="text-[10px] text-slate-400">Hallucination firewall: drops irrelevant guideline chunks</span>
           </div>
         </div>
       </div>
 
       <!-- 4. Knowledge Base Status Card -->
-      <div class="clinical-card p-4 bg-gradient-to-br from-slate-50 to-sky-50/40">
+      <div class="clinical-card p-4 bg-slate-50 border border-slate-200">
         <div class="flex justify-between items-center mb-2">
           <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-            <i class="fas fa-database text-sky-600"></i> Vector Knowledge Base
+            <i class="fas fa-database text-slate-900"></i> Vector Knowledge Base
           </span>
           <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200">
             36 Chunks &bull; 384-d
@@ -267,7 +264,7 @@
         <p class="text-[11px] text-slate-600 leading-relaxed mb-2.5">
           Indexed from <strong>5 authoritative clinical guidelines</strong> (ACC/AHA, AACC, MedlinePlus, Joint Commission).
         </p>
-        <button onclick="switchTab(4)" class="w-full text-center text-xs text-sky-700 bg-white hover:bg-sky-50 border border-sky-200 py-1.5 rounded-lg font-medium transition shadow-xs flex items-center justify-center gap-1.5">
+        <button onclick="switchTab(4)" class="w-full text-center text-xs text-slate-900 bg-white hover:bg-slate-100 border border-slate-300 py-1.5 rounded-lg font-medium transition shadow-xs flex items-center justify-center gap-1.5">
           <span>Explore 8-Stage Pipeline Architecture</span> <i class="fas fa-arrow-right text-[10px]"></i>
         </button>
       </div>
@@ -288,7 +285,7 @@
         <button id="tabBtn3" onclick="switchTab(3)" class="pb-3 px-3 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap transition">
           <i class="fas fa-microscope text-sm"></i> RAG Inspector
         </button>
-        <button id="tabBtn4" onclick="switchTab(4)" class="pb-3 px-3 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap transition text-sky-700">
+        <button id="tabBtn4" onclick="switchTab(4)" class="pb-3 px-3 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap transition text-slate-900">
           <i class="fas fa-diagram-project text-sm"></i> Pipeline & Architecture
         </button>
       </div>
@@ -315,13 +312,13 @@
           </div>
 
           <div class="relative">
-            <textarea id="reportText" rows="7" placeholder="Paste medical document text here (e.g., Blood tests, Complete Blood Count, Metabolic Panel, Lipid Panel, or hospital discharge instructions)..." class="w-full text-xs sm:text-sm font-mono p-3.5 bg-slate-50/50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:bg-white focus:border-sky-500 outline-none leading-relaxed transition resize-y"></textarea>
+            <textarea id="reportText" rows="7" placeholder="Paste medical document text here (e.g., Blood tests, Complete Blood Count, Metabolic Panel, Lipid Panel, or hospital discharge instructions)..." class="w-full text-xs sm:text-sm font-mono p-3.5 bg-slate-50/50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-slate-900 focus:bg-white focus:border-slate-900 outline-none leading-relaxed transition resize-y"></textarea>
           </div>
 
           <!-- Action Buttons Bar -->
           <div class="flex items-center justify-between gap-3 pt-1">
             <div class="flex items-center gap-2.5">
-              <button onclick="translateReport()" id="translateBtn" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-sm shadow-sky-600/20 transition-all flex items-center gap-2 active:scale-95">
+              <button onclick="translateReport()" id="translateBtn" class="bg-slate-900 hover:bg-black text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-sm shadow-slate-900/10 transition-all flex items-center gap-2 active:scale-95">
                 <i class="fas fa-wand-magic-sparkles text-xs"></i> Translate & Explain Report
               </button>
               <button onclick="clearReportInput()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-slate-200 font-medium transition active:scale-95">
@@ -333,7 +330,7 @@
 
           <!-- Loading Spinner -->
           <div id="loadingIndicator" class="hidden py-10 text-center space-y-3">
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-3 border-sky-600 border-t-transparent"></div>
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-3 border-slate-900 border-t-transparent"></div>
             <p class="text-xs sm:text-sm text-slate-600 font-medium">Scanning clinical biomarkers, resolving multi-query expansion, and generating grounded translation...</p>
           </div>
 
@@ -346,7 +343,7 @@
                 <span>📋</span> ClearCare Clinical Translation & Patient Guidance
               </h3>
               <div class="flex items-center gap-2">
-                <button onclick="copyTranslationResult()" class="text-xs bg-slate-100 hover:bg-sky-50 hover:text-sky-700 hover:border-sky-300 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 font-medium transition flex items-center gap-1.5 shadow-2xs active:scale-95">
+                <button onclick="copyTranslationResult()" class="text-xs bg-slate-100 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-400 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 font-medium transition flex items-center gap-1.5 shadow-2xs active:scale-95">
                   <i id="copyIcon" class="far fa-copy"></i>
                   <span id="copyBtnText">Copy Translation</span>
                 </button>
@@ -359,9 +356,9 @@
             <div id="evidenceDrawer" class="bg-slate-50/80 border border-slate-200 rounded-xl p-4 mt-4">
               <div class="flex items-center justify-between mb-3">
                 <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <i class="fas fa-book-medical text-sky-600"></i> Verified Evidence Guidelines Retrieved & Grounded
+                  <i class="fas fa-book-medical text-slate-900"></i> Verified Evidence Guidelines Retrieved & Grounded
                 </h4>
-                <span id="evidenceCountBadge" class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">0 matched</span>
+                <span id="evidenceCountBadge" class="text-[10px] font-bold bg-slate-200 text-slate-900 px-2 py-0.5 rounded-full">0 matched</span>
               </div>
               <div id="evidenceList" class="space-y-2.5 text-xs"></div>
             </div>
@@ -376,16 +373,16 @@
           <!-- Suggested Question Chips -->
           <div class="pb-3 border-b border-slate-100 flex items-center gap-1.5 overflow-x-auto text-[11px]">
             <span class="text-slate-400 font-medium shrink-0">Try asking:</span>
-            <button onclick="askPresetQuestion('What does a normal eGFR level mean, and what causes it to decline?')" class="bg-slate-100 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">What is eGFR?</button>
-            <button onclick="askPresetQuestion('What causes elevated ALT liver enzymes, and are there benign reasons like exercise?')" class="bg-slate-100 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">Why is ALT high?</button>
-            <button onclick="askPresetQuestion('Can I stop taking Plavix or Aspirin after having a cardiac stent placed?')" class="bg-slate-100 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">Can I stop Plavix?</button>
-            <button onclick="askPresetQuestion('What are optimal target LDL cholesterol levels according to ACC/AHA guidelines?')" class="bg-slate-100 hover:bg-sky-50 hover:text-sky-800 hover:border-sky-300 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">LDL Goals</button>
+            <button onclick="askPresetQuestion('What does a normal eGFR level mean, and what causes it to decline?')" class="bg-slate-100 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-400 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">What is eGFR?</button>
+            <button onclick="askPresetQuestion('What causes elevated ALT liver enzymes, and are there benign reasons like exercise?')" class="bg-slate-100 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-400 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">Why is ALT high?</button>
+            <button onclick="askPresetQuestion('Can I stop taking Plavix or Aspirin after having a cardiac stent placed?')" class="bg-slate-100 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-400 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">Can I stop Plavix?</button>
+            <button onclick="askPresetQuestion('What are optimal target LDL cholesterol levels according to ACC/AHA guidelines?')" class="bg-slate-100 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-400 text-slate-700 px-2.5 py-1 rounded-full border border-slate-200 transition shrink-0 font-medium">LDL Goals</button>
           </div>
 
           <!-- Chat Conversation Area -->
           <div id="chatMessages" class="flex-1 overflow-y-auto space-y-4 py-4 pr-1">
-            <div class="bg-sky-50/70 border border-sky-200/80 rounded-2xl p-4 text-xs text-slate-700 flex gap-3 shadow-2xs">
-              <div class="w-8 h-8 rounded-full bg-sky-600 text-white flex items-center justify-center shrink-0">
+            <div class="bg-slate-100/70 border border-slate-300/80 rounded-2xl p-4 text-xs text-slate-700 flex gap-3 shadow-2xs">
+              <div class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center shrink-0">
                 <i class="fas fa-stethoscope"></i>
               </div>
               <div class="space-y-1">
@@ -400,8 +397,8 @@
 
           <!-- Chat Input Bar -->
           <div class="pt-3 border-t border-slate-200 flex gap-2">
-            <input type="text" id="chatInput" placeholder="Type a clinical question (e.g., 'What causes elevated ALT?' or 'Normal eGFR?')..." onkeypress="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-xs sm:text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:bg-white outline-none transition">
-            <button onclick="sendChatMessage()" class="bg-sky-600 hover:bg-sky-700 text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-sm active:scale-95">
+            <input type="text" id="chatInput" placeholder="Type a clinical question (e.g., 'What causes elevated ALT?' or 'Normal eGFR?')..." onkeypress="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-xs sm:text-sm px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-slate-900 focus:bg-white outline-none transition">
+            <button onclick="sendChatMessage()" class="bg-slate-900 hover:bg-black text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-sm active:scale-95">
               <span>Send</span> <i class="fas fa-paper-plane text-xs"></i>
             </button>
           </div>
@@ -414,7 +411,7 @@
           <div class="flex items-center justify-between pb-2 border-b border-slate-200">
             <div>
               <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <i class="fas fa-microscope text-sky-600"></i> RAG Engine Transparency Inspector
+                <i class="fas fa-microscope text-slate-900"></i> RAG Engine Transparency Inspector
               </h3>
               <p class="text-xs text-slate-500">Live inspection of vector cosine similarity scores, chunk metadata, and augmented LLM prompt.</p>
             </div>
@@ -431,7 +428,7 @@
           <div id="inspectorPromptSection" class="hidden pt-4 border-t border-slate-200 space-y-2">
             <div class="flex items-center justify-between">
               <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-                <i class="fas fa-terminal text-sky-600"></i> Raw Augmented Prompt Sent to LLM
+                <i class="fas fa-terminal text-slate-900"></i> Raw Augmented Prompt Sent to LLM
               </h4>
               <button onclick="copyRawPrompt()" class="text-[11px] text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded font-mono border border-slate-200 transition flex items-center gap-1">
                 <i class="far fa-copy"></i> Copy Prompt
@@ -447,13 +444,13 @@
         <div id="tab4" class="hidden space-y-6">
           
           <!-- Architecture Header -->
-          <div class="bg-gradient-to-r from-sky-900 via-sky-800 to-slate-900 rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
+          <div class="bg-gradient-to-r from-black via-slate-900 to-zinc-900 rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
             <div class="relative z-10 space-y-2">
-              <div class="inline-flex items-center gap-1.5 bg-sky-500/20 text-sky-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-sky-400/30">
+              <div class="inline-flex items-center gap-1.5 bg-white/10 text-slate-200 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-slate-700">
                 <i class="fas fa-diagram-project"></i> End-to-End System Design
               </div>
               <h2 class="text-lg sm:text-xl font-bold tracking-tight">ClearCare RAG: 8-Stage Clinical Pipeline Architecture</h2>
-              <p class="text-xs sm:text-sm text-sky-100/90 max-w-3xl leading-relaxed">
+              <p class="text-xs sm:text-sm text-slate-300 max-w-3xl leading-relaxed">
                 A multi-stage, deterministic pipeline engineered specifically for clinical reliability. Solves the multi-analyte 
                 <strong>Vector Blur</strong> problem, filters out irrelevant context via cosine thresholding, and delivers verifiable, 
                 citation-grounded translations without hallucination.
@@ -467,20 +464,20 @@
           <!-- Interactive 8-Stage Pipeline Stepper Bar -->
           <div>
             <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-              <i class="fas fa-route text-sky-600"></i> Interactive Pipeline Stages (Click Any Stage to Inspect)
+              <i class="fas fa-route text-slate-900"></i> Interactive Pipeline Stages (Click Any Stage to Inspect)
             </h3>
             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
-              <button onclick="scrollToStage('stage1')" class="p-2.5 bg-sky-50/70 hover:bg-sky-100/80 border border-sky-200 rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-sky-700 uppercase">Stage 01</span>
-                <span class="block font-semibold text-xs text-slate-800 group-hover:text-sky-900 truncate">Ingestion</span>
+              <button onclick="scrollToStage('stage1')" class="p-2.5 bg-slate-100/70 hover:bg-slate-200/80 border border-slate-300 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-slate-900 uppercase">Stage 01</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-slate-900 truncate">Ingestion</span>
               </button>
-              <button onclick="scrollToStage('stage2')" class="p-2.5 bg-sky-50/70 hover:bg-sky-100/80 border border-sky-200 rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-sky-700 uppercase">Stage 02</span>
-                <span class="block font-semibold text-xs text-slate-800 group-hover:text-sky-900 truncate">Chunking</span>
+              <button onclick="scrollToStage('stage2')" class="p-2.5 bg-slate-100/70 hover:bg-slate-200/80 border border-slate-300 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-slate-900 uppercase">Stage 02</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-slate-900 truncate">Chunking</span>
               </button>
-              <button onclick="scrollToStage('stage3')" class="p-2.5 bg-sky-50/70 hover:bg-sky-100/80 border border-sky-200 rounded-xl text-left transition group">
-                <span class="block text-[10px] font-bold text-sky-700 uppercase">Stage 03</span>
-                <span class="block font-semibold text-xs text-slate-800 group-hover:text-sky-900 truncate">Embeddings</span>
+              <button onclick="scrollToStage('stage3')" class="p-2.5 bg-slate-100/70 hover:bg-slate-200/80 border border-slate-300 rounded-xl text-left transition group">
+                <span class="block text-[10px] font-bold text-slate-900 uppercase">Stage 03</span>
+                <span class="block font-semibold text-xs text-slate-800 group-hover:text-slate-900 truncate">Embeddings</span>
               </button>
               <button onclick="scrollToStage('stage4')" class="p-2.5 bg-emerald-50/70 hover:bg-emerald-100/80 border border-emerald-200 rounded-xl text-left transition group">
                 <span class="block text-[10px] font-bold text-emerald-700 uppercase">Stage 04</span>
@@ -509,7 +506,7 @@
           <div class="border border-slate-200 rounded-2xl p-5 bg-gradient-to-b from-white to-slate-50/50 shadow-xs space-y-4">
             <div class="flex items-center justify-between">
               <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-                <i class="fas fa-sitemap text-sky-600"></i> End-to-End Information Flow
+                <i class="fas fa-sitemap text-slate-900"></i> End-to-End Information Flow
               </h4>
               <span class="text-[11px] text-slate-500 font-mono">Offline Ingestion ➔ Online Inference</span>
             </div>
@@ -519,27 +516,27 @@
               <div class="min-w-[700px] flex items-center justify-between text-xs font-semibold text-slate-700">
                 
                 <!-- Step 1 -->
-                <div class="flex-1 bg-white border border-sky-200 p-2.5 rounded-xl shadow-2xs text-center">
-                  <span class="text-sky-600 font-bold block text-[10px]">STAGE 1</span>
-                  <i class="fas fa-file-shield text-sky-600 my-1 text-sm"></i>
+                <div class="flex-1 bg-white border border-slate-300 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-slate-900 font-bold block text-[10px]">STAGE 1</span>
+                  <i class="fas fa-file-shield text-slate-900 my-1 text-sm"></i>
                   <span class="block text-slate-800">5 Guidelines</span>
                   <span class="text-[10px] text-slate-400 font-normal">AHA, ACC, AACC</span>
                 </div>
                 <div class="px-1 text-slate-300 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 2 -->
-                <div class="flex-1 bg-white border border-sky-200 p-2.5 rounded-xl shadow-2xs text-center">
-                  <span class="text-sky-600 font-bold block text-[10px]">STAGE 2</span>
-                  <i class="fas fa-scissors text-sky-600 my-1 text-sm"></i>
+                <div class="flex-1 bg-white border border-slate-300 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-slate-900 font-bold block text-[10px]">STAGE 2</span>
+                  <i class="fas fa-scissors text-slate-900 my-1 text-sm"></i>
                   <span class="block text-slate-800">Chunking</span>
                   <span class="text-[10px] text-slate-400 font-normal">700c + 120ov</span>
                 </div>
                 <div class="px-1 text-slate-300 font-bold text-sm">&rarr;</div>
 
                 <!-- Step 3 -->
-                <div class="flex-1 bg-white border border-sky-200 p-2.5 rounded-xl shadow-2xs text-center">
-                  <span class="text-sky-600 font-bold block text-[10px]">STAGE 3</span>
-                  <i class="fas fa-brain text-sky-600 my-1 text-sm"></i>
+                <div class="flex-1 bg-white border border-slate-300 p-2.5 rounded-xl shadow-2xs text-center">
+                  <span class="text-slate-900 font-bold block text-[10px]">STAGE 3</span>
+                  <i class="fas fa-brain text-slate-900 my-1 text-sm"></i>
                   <span class="block text-slate-800">Embeddings</span>
                   <span class="text-[10px] text-slate-400 font-normal">MiniLM 384-d</span>
                 </div>
@@ -597,9 +594,9 @@
           <div class="space-y-4">
             
             <!-- STAGE 1 CARD -->
-            <div id="stage1" class="clinical-card p-5 border-l-4 border-l-sky-500">
+            <div id="stage1" class="clinical-card p-5 border-l-4 border-l-slate-900">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-sky-700 uppercase bg-sky-100 px-2 py-0.5 rounded-full">Stage 01 &bull; Ingestion Pipeline</span>
+                <span class="text-[10px] font-bold text-slate-900 uppercase bg-slate-200 px-2 py-0.5 rounded-full">Stage 01 &bull; Ingestion Pipeline</span>
                 <span class="text-xs font-mono text-slate-400">5 Curated Documents</span>
               </div>
               <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
@@ -635,9 +632,9 @@
             </div>
 
             <!-- STAGE 2 CARD -->
-            <div id="stage2" class="clinical-card p-5 border-l-4 border-l-sky-500">
+            <div id="stage2" class="clinical-card p-5 border-l-4 border-l-slate-900">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-sky-700 uppercase bg-sky-100 px-2 py-0.5 rounded-full">Stage 02 &bull; Preprocessing</span>
+                <span class="text-[10px] font-bold text-slate-900 uppercase bg-slate-200 px-2 py-0.5 rounded-full">Stage 02 &bull; Preprocessing</span>
                 <span class="text-xs font-mono text-slate-400">700 chars / 120 overlap</span>
               </div>
               <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
@@ -649,7 +646,7 @@
                 (<code># [Document > Section]</code>) to every generated chunk.
               </p>
               <div class="bg-slate-900 text-slate-200 p-3 rounded-xl font-mono text-xs space-y-1">
-                <div class="text-sky-400 text-[11px]"># Heading-Aware Structure Injected into Every Chunk:</div>
+                <div class="text-slate-500 text-[11px]"># Heading-Aware Structure Injected into Every Chunk:</div>
                 <div class="text-emerald-400"># Document: metabolic_panel_cmp.md &gt; Section: Kidney Function &amp; Filtration</div>
                 <div class="text-slate-300">Serum Creatinine reference interval: 0.6 - 1.3 mg/dL. Elevated creatinine indicates impaired glomerular filtration, but transient elevations can occur with dehydration, high-protein intake, or intense resistance exercise...</div>
               </div>
@@ -659,9 +656,9 @@
             </div>
 
             <!-- STAGE 3 CARD -->
-            <div id="stage3" class="clinical-card p-5 border-l-4 border-l-sky-500">
+            <div id="stage3" class="clinical-card p-5 border-l-4 border-l-slate-900">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-sky-700 uppercase bg-sky-100 px-2 py-0.5 rounded-full">Stage 03 &bull; Semantic Vector Space</span>
+                <span class="text-[10px] font-bold text-slate-900 uppercase bg-slate-200 px-2 py-0.5 rounded-full">Stage 03 &bull; Semantic Vector Space</span>
                 <span class="text-xs font-mono text-slate-400">384 Dimensions &bull; ~14ms CPU</span>
               </div>
               <h4 class="text-sm font-bold text-slate-900 mb-1 flex items-center gap-2">
@@ -673,7 +670,7 @@
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                 <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-                  <span class="font-bold text-slate-800 block text-[11px] uppercase text-sky-700">Patient Colloquialism</span>
+                  <span class="font-bold text-slate-800 block text-[11px] uppercase text-slate-900">Patient Colloquialism</span>
                   <span class="font-medium text-slate-700">"My blood sugar was high"</span>
                 </div>
                 <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200 text-center flex flex-col justify-center items-center">
@@ -681,7 +678,7 @@
                   <span class="text-[10px] text-slate-400 font-mono">Dense Vector Proximity</span>
                 </div>
                 <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-                  <span class="font-bold text-slate-800 block text-[11px] uppercase text-sky-700">Clinical Guideline Anchor</span>
+                  <span class="font-bold text-slate-800 block text-[11px] uppercase text-slate-900">Clinical Guideline Anchor</span>
                   <span class="font-medium text-slate-700">"Elevated Fasting Plasma Glucose / Hyperglycemia"</span>
                 </div>
               </div>
@@ -752,7 +749,7 @@
               </p>
               <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs font-mono text-slate-700">
                 <div class="text-[11px] text-slate-500 mb-1">// Standardized Context Assembly Passed to LLM:</div>
-                <div class="text-sky-700 font-bold">[Source 1: lipid_cholesterol_panel.md | Section: LDL-C Targets | Match: 88%]</div>
+                <div class="text-slate-900 font-bold">[Source 1: lipid_cholesterol_panel.md | Section: LDL-C Targets | Match: 88%]</div>
                 <div class="text-slate-600 text-[11px]">Optimal LDL for high-risk CAD/stent patients is &lt; 70 mg/dL...</div>
               </div>
             </div>
@@ -772,19 +769,19 @@
               </p>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-                  <span class="font-bold text-slate-800 block text-sky-800">1. Absolute Diagnosis Prohibition</span>
+                  <span class="font-bold text-slate-800 block text-slate-900">1. Absolute Diagnosis Prohibition</span>
                   <span class="text-slate-600 text-[11px]">Cannot state "You have chronic kidney disease"; must state "Creatinine is above reference interval; warrants doctor follow-up".</span>
                 </div>
                 <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-                  <span class="font-bold text-slate-800 block text-sky-800">2. Mandatory Benign Causes</span>
+                  <span class="font-bold text-slate-800 block text-slate-900">2. Mandatory Benign Causes</span>
                   <span class="text-slate-600 text-[11px]">Must explain hydration, exercise, and diet causes first to prevent unnecessary patient panic.</span>
                 </div>
                 <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-                  <span class="font-bold text-slate-800 block text-sky-800">3. Strict Citation Attribution</span>
+                  <span class="font-bold text-slate-800 block text-slate-900">3. Strict Citation Attribution</span>
                   <span class="text-slate-600 text-[11px]">Every statement must explicitly reference <code>[Source X]</code> from the retrieved guideline chunks.</span>
                 </div>
                 <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
-                  <span class="font-bold text-slate-800 block text-sky-800">4. Medication Safety Lock</span>
+                  <span class="font-bold text-slate-800 block text-slate-900">4. Medication Safety Lock</span>
                   <span class="text-slate-600 text-[11px]">Strictly prohibited from suggesting stopping prescribed therapies (e.g., Plavix / Aspirin DAPT).</span>
                 </div>
               </div>
@@ -817,7 +814,7 @@
                 </div>
                 <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <div class="flex items-center gap-1.5 mb-1 text-slate-900 font-bold">
-                    <i class="fas fa-clipboard-check text-sky-600"></i> Doctor Checklist
+                    <i class="fas fa-clipboard-check text-slate-900"></i> Doctor Checklist
                   </div>
                   <p class="text-slate-500 text-[11px]">Generates targeted questions for the patient to ask at their next clinical appointment.</p>
                 </div>
@@ -829,7 +826,7 @@
           <!-- Architecture Comparison Table -->
           <div class="border border-slate-200 rounded-2xl p-5 bg-white shadow-xs space-y-3">
             <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-              <i class="fas fa-scale-balanced text-sky-600"></i> Comparative Architectural Analysis
+              <i class="fas fa-scale-balanced text-slate-900"></i> Comparative Architectural Analysis
             </h4>
             <div class="overflow-x-auto">
               <table class="w-full text-xs text-left border-collapse">
@@ -838,7 +835,7 @@
                     <th class="py-2.5 px-3 font-semibold">Architectural Dimension</th>
                     <th class="py-2.5 px-3 font-semibold">Standard Generic LLM</th>
                     <th class="py-2.5 px-3 font-semibold">Fine-Tuned Medical LLM</th>
-                    <th class="py-2.5 px-3 font-semibold text-sky-700 bg-sky-50/70">ClearCare Multi-Stage RAG</th>
+                    <th class="py-2.5 px-3 font-semibold text-slate-900 bg-slate-100/70">ClearCare Multi-Stage RAG</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-slate-600">
@@ -846,31 +843,31 @@
                     <td class="py-2.5 px-3 font-medium text-slate-900">Hallucination Risk</td>
                     <td class="py-2.5 px-3 text-rose-600 font-medium">High (invents normal ranges)</td>
                     <td class="py-2.5 px-3 text-amber-600 font-medium">Medium (memorization drift)</td>
-                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-sky-50/30">Zero (grounded strictly in guidelines)</td>
+                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-slate-100/40">Zero (grounded strictly in guidelines)</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-slate-900">Traceability & Citations</td>
                     <td class="py-2.5 px-3">None (black-box generation)</td>
                     <td class="py-2.5 px-3">None (weights cannot cite text)</td>
-                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-sky-50/30">100% Traceable ([Source X] anchors)</td>
+                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-slate-100/40">100% Traceable ([Source X] anchors)</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-slate-900">Multi-Analyte Lab Panels</td>
                     <td class="py-2.5 px-3">Suffers from Vector Blur</td>
                     <td class="py-2.5 px-3">Prone to cross-test interference</td>
-                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-sky-50/30">Resolved via Entity Scanning</td>
+                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-slate-100/40">Resolved via Entity Scanning</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-slate-900">Guideline Updates</td>
                     <td class="py-2.5 px-3">Requires foundation retraining</td>
                     <td class="py-2.5 px-3">Requires expensive fine-tuning</td>
-                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-sky-50/30">Instantaneous (drop new .md file)</td>
+                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-slate-100/40">Instantaneous (drop new .md file)</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 px-3 font-medium text-slate-900">Privacy & PHI Protection</td>
                     <td class="py-2.5 px-3">Sends all data to cloud APIs</td>
                     <td class="py-2.5 px-3">Requires centralized storage</td>
-                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-sky-50/30">Local 384-d vectors + private LPUs</td>
+                    <td class="py-2.5 px-3 text-emerald-700 font-bold bg-slate-100/40">Local 384-d vectors + private LPUs</td>
                   </tr>
                 </tbody>
               </table>
@@ -897,10 +894,9 @@
         <span class="font-semibold text-slate-800">ClearCare AI</span> &bull; <span>Clinical AI Engineering</span>
       </div>
       <div class="flex items-center gap-3">
-        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="hover:text-sky-600 transition">GitHub Repository</a>
+        <a href="https://github.com/wageshsharma20/clearcare-healthcare-rag" target="_blank" class="hover:text-black transition">GitHub Repository</a>
         <span>&bull;</span>
-        <a href="/docs/Mastering_RAG_and_ClearCare_Defense_Guide.pdf" download class="hover:text-sky-600 transition">Defense Guide PDF</a>
-      </div>
+        </div>
     </div>
   </footer>
 
@@ -995,8 +991,8 @@
         const el = document.getElementById(stageId);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          el.classList.add('ring-2', 'ring-sky-500');
-          setTimeout(() => el.classList.remove('ring-2', 'ring-sky-500'), 1500);
+          el.classList.add('ring-2', 'ring-slate-900');
+          setTimeout(() => el.classList.remove('ring-2', 'ring-slate-900'), 1500);
         }
       }, 50);
     }
@@ -1164,7 +1160,7 @@
         `<div class="p-3 bg-white rounded-xl border border-slate-200">
           <div class="flex justify-between items-center font-semibold text-slate-800 mb-1">
             <span class="text-xs font-bold">[Source ${i+1}] ${c.source}</span>
-            <span class="text-xs font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-full">${Math.round(c.similarity*100)}% match</span>
+            <span class="text-xs font-bold text-slate-900 bg-slate-200 px-2 py-0.5 rounded-full">${Math.round(c.similarity*100)}% match</span>
           </div>
           <p class="text-[11px] text-slate-500 font-medium mb-1">Section: ${c.section}</p>
           <p class="text-slate-600 text-xs leading-relaxed bg-slate-50 p-2 rounded border border-slate-100 font-sans">${c.text.substring(0, 200)}...</p>
@@ -1214,7 +1210,7 @@
       // User Bubble
       chatContainer.innerHTML += `
         <div class="flex justify-end">
-          <div class="bg-sky-600 text-white rounded-2xl px-4 py-2.5 max-w-[80%] text-xs sm:text-sm shadow-xs font-medium">
+          <div class="bg-slate-900 text-white rounded-2xl px-4 py-2.5 max-w-[80%] text-xs sm:text-sm shadow-xs font-medium">
             ${question}
           </div>
         </div>`;
@@ -1266,7 +1262,7 @@
       // Assistant Bubble
       chatContainer.innerHTML += `
         <div class="flex justify-start gap-2.5">
-          <div class="w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center shrink-0 text-xs mt-1">
+          <div class="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center shrink-0 text-xs mt-1">
             <i class="fas fa-stethoscope"></i>
           </div>
           <div class="bg-slate-100/90 border border-slate-200 text-slate-800 rounded-2xl px-4 py-3 max-w-[85%] text-xs sm:text-sm shadow-xs markdown-body">
@@ -1293,7 +1289,7 @@
             <div class="border border-slate-200 rounded-xl p-3.5 bg-slate-50/70 text-xs shadow-2xs">
               <div class="flex justify-between items-center mb-1.5">
                 <span class="font-bold text-slate-900">Chunk #${i+1} &bull; ${c.source}</span>
-                <span class="font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-full text-[11px]">${Math.round(c.similarity*100)}% Match</span>
+                <span class="font-bold text-slate-900 bg-slate-200 px-2 py-0.5 rounded-full text-[11px]">${Math.round(c.similarity*100)}% Match</span>
               </div>
               <p class="text-slate-500 text-[11px] mb-2 font-medium">Section: ${c.section}</p>
               <pre class="bg-white p-3 rounded-lg border border-slate-200 text-slate-700 whitespace-pre-wrap font-sans text-xs leading-relaxed">${c.text}</pre>

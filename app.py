@@ -44,9 +44,9 @@ st.markdown("""
         padding: 0 16px;
     }
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        color: #0284C7;
-        border-bottom: 3px solid #0284C7;
-        background: #F0F9FF;
+        color: #0F172A;
+        border-bottom: 3px solid #0F172A;
+        background: #F8FAFC;
     }
     
     /* Stage cards & clinical containers */
@@ -59,7 +59,7 @@ st.markdown("""
         margin-bottom: 16px;
     }
     .clinical-card:hover {
-        border-color: #BAE6FD;
+        border-color: #CBD5E1;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }
     
@@ -72,9 +72,9 @@ st.markdown("""
         letter-spacing: 0.05em;
         padding: 3px 10px;
         border-radius: 9999px;
-        background: #E0F2FE;
-        color: #0369A1;
-        border: 1px solid #BAE6FD;
+        background: #0F172A;
+        color: #FFFFFF;
+        border: 1px solid #0F172A;
         margin-bottom: 8px;
     }
     
@@ -311,7 +311,7 @@ with col_h1:
 with col_h2:
     st.markdown("""
     <div style="text-align: right; padding-top: 15px;">
-        <span class="metric-pill" style="color: #0284C7; border-color: #BAE6FD; background: #F0F9FF;">
+        <span class="metric-pill" style="color: #0284C7; border-color: #CBD5E1; background: #F0F9FF;">
             🟢 RAG Online
         </span>
     </div>
@@ -532,9 +532,9 @@ with tab_pipeline:
             S7 --> S8["8. Patient Output<br/>(Traffic Lights + Doctor Checklist)"]
         end
 
-        style S1 fill:#E0F2FE,stroke:#0284C7,color:#0F172A
-        style S2 fill:#E0F2FE,stroke:#0284C7,color:#0F172A
-        style S3 fill:#E0F2FE,stroke:#0284C7,color:#0F172A
+        style S1 fill:#F8FAFC,stroke:#0F172A,color:#0F172A
+        style S2 fill:#F8FAFC,stroke:#0F172A,color:#0F172A
+        style S3 fill:#F8FAFC,stroke:#0F172A,color:#0F172A
         style S4 fill:#DCFCE7,stroke:#16A34A,color:#0F172A
         style S5 fill:#FEF3C7,stroke:#D97706,color:#0F172A
         style S6 fill:#FEF3C7,stroke:#D97706,color:#0F172A
