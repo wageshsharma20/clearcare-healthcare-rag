@@ -130,15 +130,29 @@ Please provide a compassionate, structured translation following the system rule
         # Step 2: Generation
         if self.client:
             try:
-                response = self.client.chat.completions.create(
-                    model=self.model_name,
-                    messages=[
-                        {"role": "system", "content": REPORT_TRANSLATION_SYSTEM_PROMPT},
-                        {"role": "user", "content": user_prompt}
-                    ],
-                    temperature=0.2,   # Low temperature for strict, factual adherence
-                    max_tokens=2048,
-                )
+                try:
+                    response = self.client.chat.completions.create(
+                        model=self.model_name,
+                        messages=[
+                            {"role": "system", "content": REPORT_TRANSLATION_SYSTEM_PROMPT},
+                            {"role": "user", "content": user_prompt}
+                        ],
+                        temperature=0.2,
+                        max_tokens=2048,
+                    )
+                except Exception as model_err:
+                    if "does not exist" in str(model_err) or "access" in str(model_err):
+                        response = self.client.chat.completions.create(
+                            model="llama-3.1-8b-instant",
+                            messages=[
+                                {"role": "system", "content": REPORT_TRANSLATION_SYSTEM_PROMPT},
+                                {"role": "user", "content": user_prompt}
+                            ],
+                            temperature=0.2,
+                            max_tokens=2048,
+                        )
+                    else:
+                        raise model_err
                 generated_text = response.choices[0].message.content
             except Exception as e:
                 generated_text = f"⚠️ Groq API Error: {str(e)}\nPlease verify your Groq API Key."
@@ -193,12 +207,23 @@ Please provide an answer in plain, reassuring language with citations to the sou
         # Step 2: Generation
         if self.client:
             try:
-                response = self.client.chat.completions.create(
-                    model=self.model_name,
-                    messages=messages,
-                    temperature=0.2,
-                    max_tokens=1024,
-                )
+                try:
+                    response = self.client.chat.completions.create(
+                        model=self.model_name,
+                        messages=messages,
+                        temperature=0.2,
+                        max_tokens=1024,
+                    )
+                except Exception as model_err:
+                    if "does not exist" in str(model_err) or "access" in str(model_err):
+                        response = self.client.chat.completions.create(
+                            model="llama-3.1-8b-instant",
+                            messages=messages,
+                            temperature=0.2,
+                            max_tokens=1024,
+                        )
+                    else:
+                        raise model_err
                 generated_text = response.choices[0].message.content
             except Exception as e:
                 generated_text = f"⚠️ Groq API Error: {str(e)}\nPlease verify your Groq API Key."

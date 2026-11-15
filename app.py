@@ -235,8 +235,9 @@ with st.sidebar:
 
     model_option = st.selectbox(
         "Groq Model",
-        options=["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "gemma2-9b-it"],
-        index=0
+        options=["llama-3.1-8b-instant", "llama-3.3-70b-versatile", "gemma2-9b-it"],
+        index=0,
+        help="llama-3.1-8b-instant is universally enabled across all free Groq tiers."
     )
     rag_chain.model_name = model_option
 
